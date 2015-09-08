@@ -1,4 +1,6 @@
 # GearService
+[![Build Status](https://travis-ci.org/Nandtel/GearService.svg?branch=master)](https://travis-ci.org/Nandtel/GearService)
+
 Demo application witch is a king of CRM. SteamService is compact and easy-to-use solution to collect your sales. Presents opportunities to work with customers through interaction with checks: easy and dynamic sorting on client-side by angularJS, safe and quick storing data in reliable databases, analytics you need to find bottlenecks in your pipeline. You become faster and more responsible with SteamSevice.
 
 # Technologies
