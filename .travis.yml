@@ -2,4 +2,3 @@ language: java
 jdk:
   - oraclejdk8
 gradle check
-script: sbt test
