@@ -1,0 +1,244 @@
+<section layout="column" class="content-block">
+
+  <form name="filterForm" id="filterForm"class="material-block md-whiteframe-z1">
+
+    <md-toolbar>
+      <h2 class="md-toolbar-tools">
+        <span translate>Filters</span>
+      </h2>
+
+      <md-button type="button" class="md-icon-button in-tool-bar" ng-click="resetFilter()">
+        <md-icon md-font-set="material-icons">delete</md-icon>
+      </md-button>
+    </md-toolbar>
+
+    <md-list class="dates-field" layout="row" layout-align="center center">
+
+      <md-list-item class="md-2-line two-dates-field" layout="row" layout-align="center center">
+        <md-button type="button" ng-click="introducedFromPicker($event)">
+          <md-content layout="row" layout-align="start center">
+            <md-icon md-font-set="material-icons">event</md-icon>
+            <p>{{ 'IntroducedFrom' | translate}}</p>
+            <span>{{filter.introducedFrom | amDateFormat:'lll'}}</span>
+          </md-content>
+        </md-button>
+      </md-list-item>
+
+      <md-list-item class="md-2-line two-dates-field" layout="row" layout-align="center center">
+        <md-button type="button" ng-click="introducedToPicker($event)">
+          <md-content layout="row" layout-align="start center">
+            <md-icon md-font-set="material-icons">event</md-icon>
+            <p>{{ 'IntroducedTo' | translate}}</p>
+            <span>{{filter.introducedTo | amDateFormat:'lll'}}</span>
+          </md-content>
+        </md-button>
+      </md-list-item>
+
+    </md-list>
+
+    <md-divider></md-divider>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+      <md-input-container flex="10">
+        <label translate>Id</label>
+        <input ng-model="filter.id">
+      </md-input-container>
+
+      <md-autocomplete flex="90"
+      md-search-text="filter.nameOfCustomer"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {nameOfCustomer : filter.nameOfCustomer} | unique:'nameOfCustomer'"
+      md-item-text="cheque.nameOfCustomer"
+      md-floating-label="{{'Customer' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.nameOfCustomer" md-highlight-flags="^i"> {{cheque.nameOfCustomer}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+      <md-autocomplete flex="40"
+      md-search-text="filter.nameOfProduct"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {nameOfProduct : filter.nameOfProduct} | unique:'nameOfProduct'"
+      md-item-text="cheque.nameOfProduct"
+      md-floating-label="{{'Name of Product' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.nameOfProduct" md-highlight-flags="^i"> {{cheque.nameOfProduct}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+      <md-autocomplete flex="30"
+      md-search-text="filter.model"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {model : filter.model} | unique:'model'"
+      md-item-text="cheque.model"
+      md-floating-label="{{'Model' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{cheque.model}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+      <md-autocomplete flex="30"
+      md-search-text="filter.serialNumber"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {serialNumber : filter.serialNumber} | unique:'serialNumber'"
+      md-item-text="cheque.serialNumber"
+      md-floating-label="{{'Serial Number' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{cheque.serialNumber}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+      <md-autocomplete flex="100"
+      md-search-text="filter.purchaserName"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {purchaserName : filter.purchaserName} | unique:'purchaserName'"
+      md-item-text="cheque.purchaserName"
+      md-floating-label="{{'Purchaser' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.purchaserName" md-highlight-flags="^i"> {{cheque.purchaserName}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+      <md-autocomplete flex="50"
+      md-search-text="filter.inspectorName"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {inspectorName : filter.inspectorName} | unique:'inspectorName'"
+      md-item-text="cheque.inspectorName"
+      md-floating-label="{{'Inspector' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.inspectorName" md-highlight-flags="^i"> {{cheque.inspectorName}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+      <md-autocomplete flex="50"
+      md-search-text="filter.masterName"
+      md-min-length="1"
+      md-search-text-change=""
+      md-items="cheque in cheques | filter: {masterName : filter.masterName} | unique:'masterName'"
+      md-item-text="cheque.masterName"
+      md-floating-label="{{'Master' | translate}}"
+      md-autofocus="false">
+        <md-item-template>
+          <span md-highlight-text="filter.masterName" md-highlight-flags="^i"> {{cheque.masterName}} </span>
+        </md-item-template>
+      </md-autocomplete>
+
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+      <md-select ng-model="filter.guarantee" placeholder="{{'Guarantee' | translate}}" flex="33">
+        <md-option value="!!">{{'Has guarantee' | translate}}</md-option>
+        <md-option value="!!!">{{'Has no guarantee' | translate}}</md-option>
+      </md-select>
+
+      <md-select ng-model="filter.ready" placeholder="{{'Ready' | translate}}" flex="33">
+        <md-option value="!!">{{'Ready' | translate}}</md-option>
+        <md-option value="!!!">{{'Not ready' | translate}}</md-option>
+      </md-select>
+
+      <md-select ng-model="filter.issued" placeholder="{{'Issued' | translate}}" flex="33">
+        <md-option value="!!">{{'Issued' | translate}}</md-option>
+        <md-option value="!!!">{{'Not issued' | translate}}</md-option>
+      </md-select>
+
+    </md-content>
+
+  </form>
+
+  <div class="material-block md-whiteframe-z1">
+
+    <md-toolbar>
+      <h2 class="md-toolbar-tools">
+        <span translate>Checks</span>
+      </h2>
+    </md-toolbar>
+
+    <md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>
+
+    <md-data-table-container>
+      <table md-data-table id="table">
+        <thead md-order="filter.order" md-trigger="onOrderChange">
+          <tr>
+            <th name="{{'Id'| translate}}" order-by="id"></th>
+            <th name="{{'Customer'| translate}}" order-by="nameOfCustomer"></th>
+            <th name="{{'Introduced'| translate}}" order-by="introduced"></th>
+            <th name="{{'Name of Product'| translate}}" order-by="nameOfProduct"></th>
+            <th name="{{'Model'| translate}}" order-by="model"></th>
+            <th name="{{'Serial Number'| translate}}" order-by="serialNumber"></th>
+            <th name="{{'Purchaser'| translate}}" order-by="purchaserName"></th>
+            <th name="{{'Inspector'| translate}}" order-by="inspectorName"></th>
+            <th name="{{'Master'| translate}}" order-by="masterName"></th>
+            <th name="{{'Guarantee'| translate}}" order-by="guarantee"></th>
+            <th name="{{'Ready'| translate}}" order-by="ready"></th>
+            <th name="{{'Issued'| translate}}" order-by="issued"></th>
+
+          </tr>
+        </thead>
+        <tbody md-auto-select>
+          <tr ng-repeat="cheque in filteredCheques = (cheques
+				| filterByID: filter.id
+				| filterByDateRange:filter.introducedFrom :filter.introducedTo
+				| filter:{
+								nameOfCustomer:   filter.nameOfCustomer,
+								introduced:       filter.introduced,
+								nameOfProduct:    filter.nameOfProduct,
+								model:            filter.model,
+								serialNumber:     filter.serialNumber,
+								purchaserName:    filter.purchaserName,
+								inspectorName:    filter.inspectorName,
+								masterName:       filter.masterName,
+								ready:            filter.ready,
+								issued:           filter.issued,
+								guarantee:        filter.guarantee})
+				| orderBy: filter.order
+				| limitTo: filter.limit: (filter.page - 1) * filter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
+            <td>{{cheque.id}}</td>
+            <td>{{cheque.nameOfCustomer}}</td>
+            <td>{{cheque.introduced | amDateFormat:'DD.MM.YYYY'}}</td>
+            <td>{{cheque.nameOfProduct}}</td>
+            <td>{{cheque.model}}</td>
+            <td>{{cheque.serialNumber}}</td>
+            <td>{{cheque.purchaserName}}</td>
+            <td>{{cheque.inspectorName}}</td>
+            <td>{{cheque.masterName}}</td>
+            <td>{{cheque.guarantee | amDateFormat:'DD.MM.YYYY'}}</td>
+            <td>{{cheque.ready | amDateFormat:'DD.MM.YYYY'}}</td>
+            <td>{{cheque.issued | amDateFormat:'DD.MM.YYYY'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-data-table-container>
+
+    <md-data-table-toolbar layout-align="end">
+      <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="filter.limit" md-page="filter.page" md-total="{{filteredCheques.length}}" md-trigger="onPageChange"></md-data-table-pagination>
+    </md-data-table-toolbar>
+
+  </div>
+
+</section>
