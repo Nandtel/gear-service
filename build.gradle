@@ -16,7 +16,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
 idea {
@@ -30,6 +30,7 @@ jar {
     baseName = 'GearService'
     version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -50,6 +51,17 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
+task stage {
+    dependsOn installDist
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
+
+stage.dependsOn(copyToLib)

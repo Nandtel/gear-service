@@ -77,6 +77,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$mdDialog', 'd
          * Method necessary for md-data-table
          */
         $scope.onPageChange = function() {};
+
         /**
          * Method necessary for md-data-table
          */
