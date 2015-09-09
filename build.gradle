@@ -38,7 +38,6 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-data-rest"
@@ -51,17 +50,6 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
-task stage {
-    dependsOn installDist
-}
-
-task copyToLib(type: Copy) {
-    into "$buildDir/lib"
-    from(configurations.compile)
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
-
-stage.dependsOn(copyToLib)
