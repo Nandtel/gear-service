@@ -5,57 +5,9 @@
  * @author Dmitry
  * @since 04.09.2015
  */
-app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '$filter', '$compile', '$mdDialog', '$mdToast', 'gettextCatalog', 'dialogTemplate',
-    function ($scope, $stateParams, $http, $state, $filter, $compile, $mdDialog, $mdToast, gettextCatalog, dialogTemplate) {
+app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '$filter', '$compile', '$mdToast', 'gettextCatalog',
+    function ($scope, $stateParams, $http, $state, $filter, $compile, $mdToast, gettextCatalog) {
         $scope.cheque = {kits: []};
-
-        /**
-         * Method factory makeDialog with values of model and displayMode create function for date-time-pickers methods
-         * @param model is parameter name for cheque object
-         * @param displayMode is parameter for oriental of date-time-picker
-         * @returns function for date-time-pickers methods
-         */
-        function makeDialog(model, displayMode) {
-            return function(event) {
-                $mdDialog.show({
-                    template: dialogTemplate(model, displayMode),
-                    targetEvent: event,
-                    controller: 'DialogController',
-                    scope: $scope.$new()
-                })
-                    .then(function(answer) {
-                        $scope.cheque[model] = moment(answer).format("YYYY-MM-DDTHH:mm:ssZZ");
-                    });
-            };
-        }
-
-        /**
-         * Method introducedPicker create service md-dialog from angular-material for fill cheque.introduced with date
-         * @param event, that gets from click on date-field
-         * It adds to cheque object field with name introduced and date from md-dialog-date-time-picker
-         */
-        $scope.introducedPicker = makeDialog('introduced', 'full');
-
-        /**
-         * Method guaranteePicker create service md-dialog from angular-material for fill cheque.guarantee with date
-         * @param event, that gets from click on date-field
-         * It adds to cheque object field with name guarantee and date from md-dialog-date-time-picker
-         */
-        $scope.guaranteePicker = makeDialog('guarantee', 'date');
-
-        /**
-         * Method readyPicker create service md-dialog from angular-material for fill cheque.ready with date
-         * @param event, that gets from click on date-field
-         * It adds to cheque object field with name ready and date from md-dialog-date-time-picker
-         */
-        $scope.readyPicker = makeDialog('ready', 'date');
-
-        /**
-         * Method issuedPicker create service md-dialog from angular-material for fill cheque.issued with date
-         * @param event, that gets from click on date-field
-         * It adds to cheque object field with name issued and date from md-dialog-date-time-picker
-         */
-        $scope.issuedPicker = makeDialog('issued', 'date');
 
         /**
          * Method getCheque request from serve-side one cheque with detail information
@@ -65,6 +17,8 @@ app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '
             $http.get('/cheques/' + $stateParams.chequeId).success(function (response) {
                 $scope.cheque = response;
             });
+            $scope.cheque.guarantee = new Date();
+            console.log($scope.cheque.guarantee);
         };
 
         /**

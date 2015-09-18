@@ -5,12 +5,13 @@
  * @author Dmitry
  * @since 04.09.2015
  */
-app.controller("MainController", ['$scope', '$http', '$timeout', '$mdDialog', 'dialogTemplate', 'gettextCatalog',
-    function ($scope, $http, $timeout, $mdDialog, dialogTemplate, gettextCatalog) {
+app.controller("MainController", ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog',
+    function ($scope, $http, $timeout, $mdDialog, gettextCatalog) {
         $scope.filterForm = {};
         $scope.cleanFilter = {
             order: '-id', limit: 15, page: 1, nameOfCustomer: "", nameOfProduct: "", model: "", serialNumber: "",
-            purchaserName: "", inspectorName: "", masterName: ""
+            purchaserName: "", inspectorName: "", masterName: "", introducedFrom: undefined,
+            introducedTo: undefined
         };
         $scope.label = {
             text: gettextCatalog.getString('Rows per page:'),
@@ -37,40 +38,6 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$mdDialog', 'd
         $scope.resetFilter = function() {
             $scope.filter = angular.copy($scope.cleanFilter);
             $scope.filterForm.$setPristine();
-        };
-
-        /**
-         * Method introducedFromPicker create service md-dialog from angular-material for fill introducedFrom with date
-         * @param event, that gets from click on date-field
-         * It adds to filters object field with name introducedFrom and date from md-dialog-date-time-picker
-         */
-        $scope.introducedFromPicker = function(event) {
-            $mdDialog.show({
-                template: dialogTemplate('filter.introducedFrom', 'full'),
-                targetEvent: event,
-                controller: 'DialogController',
-                scope: $scope.$new()
-            })
-                .then(function(answer) {
-                    $scope.filter.introducedFrom = moment(answer).format("YYYY-MM-DDTHH:mm:ssZZ");
-                });
-        };
-
-        /**
-         * Method introducedToPicker create service md-dialog from angular-material for fill introducedTo with date
-         * @param event, that gets from click on date-field
-         * It adds to filters object field with name introducedTo date from md-dialog-date-time-picker
-         */
-        $scope.introducedToPicker = function(event) {
-            $mdDialog.show({
-                template: dialogTemplate('filter.introducedTo', 'full'),
-                targetEvent: event,
-                controller: 'DialogController',
-                scope: $scope.$new()
-            })
-                .then(function(answer) {
-                    $scope.filter.introducedTo = moment(answer).format("YYYY-MM-DDTHH:mm:ssZZ");
-                });
         };
 
         /**

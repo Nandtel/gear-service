@@ -14,51 +14,29 @@
 
     </md-toolbar>
 
-    <md-list class="dates-field" layout="row" layout-align="center center">
+    <md-content class="dates-field" layout="row" layout-align="space-around start" flex>
 
-      <md-list-item class="md-2-line four-date-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="introducedPicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'Introduced' | translate}}</p>
-            <span>{{cheque.introduced | amDateFormat:'lll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'Introduced' | translate}}</p>
+        <date-time-picker ng-model="cheque.introduced"></date-time-picker>
+      </md-content>
 
-      <md-list-item class="md-2-line four-date-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="guaranteePicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'Guarantee' | translate}}</p>
-            <span>{{cheque.guarantee | amDateFormat:'ll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'Guarantee' | translate}}</p>
+        <date-picker ng-model="cheque.guarantee"></date-picker>
+      </md-content>
 
-      <md-list-item class="md-2-line four-date-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="readyPicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'Ready' | translate}}</p>
-            <span>{{cheque.ready | amDateFormat:'ll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'Ready' | translate}}</p>
+        <date-picker ng-model="cheque.ready"></date-picker>
+      </md-content>
 
-      <md-list-item class="md-2-line four-date-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="issuedPicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'Issued' | translate}}</p>
-            <span>{{cheque.issued | amDateFormat:'ll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'Issued' | translate}}</p>
+        <date-picker ng-model="cheque.issued"></date-picker>
+      </md-content>
 
-    </md-list>
-
-    <md-divider></md-divider>
+    </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
       <md-input-container flex="75">
@@ -165,7 +143,7 @@
 
       <md-content layout-padding layout-align="center start">
 
-        <form name="diagnostics" ng-submit="saveDiagnostic()" layout="row">
+        <form name="diagnostics" ng-submit="saveDiagnostic()" layout="row" class="comments">
           <md-input-container flex="90">
             <textarea flex ng-model="diagnostic.text" columns="1" aria-label="diagnostic" required></textarea>
           </md-input-container>
@@ -209,7 +187,7 @@
 
       <md-content layout-padding layout-align="center start">
 
-        <form name="notes" ng-submit="saveNote()" layout="row">
+        <form name="notes" ng-submit="saveNote()" layout="row" class="comments">
           <md-input-container flex="90">
             <textarea flex ng-model="note.text" columns="1" aria-label="note" required></textarea>
           </md-input-container>
@@ -243,5 +221,7 @@
 
     </md-content>
   </div>
+
+  <pre>{{cheque | json}}</pre>
 
 </section>

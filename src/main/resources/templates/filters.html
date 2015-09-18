@@ -1,6 +1,6 @@
 <section layout="column" class="content-block">
 
-  <form name="filterForm" id="filterForm"class="material-block md-whiteframe-z1">
+  <form name="filterForm" id="filterForm" class="material-block md-whiteframe-z1">
 
     <md-toolbar>
       <h2 class="md-toolbar-tools">
@@ -12,31 +12,19 @@
       </md-button>
     </md-toolbar>
 
-    <md-list class="dates-field" layout="row" layout-align="center center">
+    <md-content class="dates-field" layout="row" layout-align="space-around end" flex>
 
-      <md-list-item class="md-2-line two-dates-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="introducedFromPicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'IntroducedFrom' | translate}}</p>
-            <span>{{filter.introducedFrom | amDateFormat:'lll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'IntroducedFrom' | translate}}</p>
+        <date-time-picker ng-model="filter.introducedFrom"></date-time-picker>
+      </md-content>
 
-      <md-list-item class="md-2-line two-dates-field" layout="row" layout-align="center center">
-        <md-button type="button" ng-click="introducedToPicker($event)">
-          <md-content layout="row" layout-align="start center">
-            <md-icon md-font-set="material-icons">event</md-icon>
-            <p>{{ 'IntroducedTo' | translate}}</p>
-            <span>{{filter.introducedTo | amDateFormat:'lll'}}</span>
-          </md-content>
-        </md-button>
-      </md-list-item>
+      <md-content layout="column" layout-align="end center">
+        <p>{{ 'IntroducedTo' | translate}}</p>
+        <date-time-picker ng-model="filter.introducedTo"></date-time-picker>
+      </md-content>
 
-    </md-list>
-
-    <md-divider></md-divider>
+    </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
@@ -240,5 +228,7 @@
     </md-data-table-toolbar>
 
   </div>
+
+  <pre>{{filter | json}}</pre>
 
 </section>

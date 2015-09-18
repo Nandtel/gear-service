@@ -83,45 +83,19 @@ table[md-data-table] > thead:not([md-table-progress]) > tr > th:last-child {
 
 /* Dates fields in filters, create and edit*/
 
-md-list.dates-field .four-date-field {
-     /*width: 20%;*/
-     width: 23%;
+md-content.dates-field {
+    margin-top: 20px;
 }
-md-list.dates-field .four-date-field:first-child {
-    /*width: 20%;*/
-    width: 31%;
-}
-md-list.dates-field .two-dates-field {
-    /*width: 20%;*/
-    width: 50%;
-}
-md-list.dates-field md-list-item button.md-button {
-    text-transform: none;
-    text-align: start;
-    padding: 0;
-}
-md-list.dates-field md-list-item button.md-button md-content md-icon {
-    margin: auto 0 auto 0.5em;
-}
-/*md-list.dates-field md-list-item button.md-button md-content div.compact {*/
-    /*padding: 10px 0.5em;*/
-    /*min-height: 4em;*/
-    /*min-width: 10em;*/
-/*}*/
-md-list.dates-field md-list-item button.md-button md-content p {
+md-content.dates-field md-content p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     color: rgba(0,0,0,0.26);
-    margin: 1em 0.5em;
-
+    margin: 0;
 }
 
-md-list.dates-field md-list-item button.md-button md-content span {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    margin: 1em 0.5em 1em 0;
+.md-calendar-month td{
+    font-size: 13px;
 }
 
 /* Select field in filters*/
@@ -161,9 +135,8 @@ md-list-item.md-3-line > .md-no-style .md-list-item-text p {
     margin: 0 5em 0 0;
 }
 
-/* Datetimepicker in firefox */
+/* Comments block in edit*/
 
-.time-date>.buttons {
-    position: absolute;
-    left: 59%;
+form.comments md-input-container {
+    padding-bottom: 0;
 }
