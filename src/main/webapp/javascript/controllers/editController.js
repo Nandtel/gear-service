@@ -5,9 +5,9 @@
  * @author Dmitry
  * @since 04.09.2015
  */
-app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '$filter', '$compile', '$mdToast', 'gettextCatalog',
-    function ($scope, $stateParams, $http, $state, $filter, $compile, $mdToast, gettextCatalog) {
-        $scope.cheque = {kits: []};
+app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '$filter', '$compile', '$mdToast', 'gettextCatalog', '$rootScope',
+    function ($scope, $stateParams, $http, $state, $filter, $compile, $mdToast, gettextCatalog, $rootScope) {
+        $scope.cheque = {kits: [], payments: []};
 
         /**
          * Method getCheque request from serve-side one cheque with detail information
@@ -17,8 +17,6 @@ app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '
             $http.get('/cheques/' + $stateParams.chequeId).success(function (response) {
                 $scope.cheque = response;
             });
-            $scope.cheque.guarantee = new Date();
-            console.log($scope.cheque.guarantee);
         };
 
         /**
@@ -111,6 +109,41 @@ app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '
         $scope.addKit = function(text) {
             return {'text': text};
         };
+
+        $scope.addPayment = function() {
+            if($scope.cheque.payments === undefined)
+                $scope.cheque.payments = [];
+
+
+            $scope.cheque.payments.push({
+                description: undefined, cost: 0, currency: 'RUB'});
+        };
+
+        $scope.sumRUB = function() {
+            var sum = 0;
+            if($scope.cheque.payments != undefined)
+                $scope.cheque.payments.forEach(function(item) {
+                    if(item.cost != undefined && item.currency != undefined)
+                        sum += item.cost * $rootScope.rates[item.currency];
+                });
+            return sum;
+        };
+
+        $scope.currencies = function() {
+            return Object.keys($rootScope.rates);
+        };
+
+        $scope.delPayment = function(payment) {
+            $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
+        };
+
+        //$scope.sendPayments = function() {
+        //    $http.post('/cheques/' + $stateParams.chequeId + '/payments', $scope.cheque.payments)
+        //        .success(function() {});
+        //};
+
+        $scope.types = [ "Repair" , "ZIP", "Deliver"];
+        $scope.masters = ['Kosoy', 'Valikozz'];
 
         $scope.getCheque();
     }

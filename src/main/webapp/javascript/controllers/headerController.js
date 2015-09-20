@@ -7,12 +7,28 @@
  * @author Dmitry
  * @since 04.09.2015
  */
-app.controller("HeaderController", ['$scope',
-    function ($scope) {
+app.controller("HeaderController", ['$scope', '$rootScope', '$http', '$mdToast',
+    function ($scope, $rootScope, $http, $mdToast) {
         $scope.data = {};
+        $rootScope.rates = {};
+
+        $scope.getCurrencyRate = function() {
+            $http.get('/currency-rates').success(function(resolve) {
+                $rootScope.rates = resolve;
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Rates is: USD " + $rootScope.rates["USD"] + ", UAH " + $rootScope.rates["UAH"])
+                        .position('top right')
+                        .hideDelay(700)
+                );
+            });
+        };
+
         $scope.$on('$stateChangeSuccess', function(event, toState) {
             $scope.data.selectedIndex = toState.data.selectedTab;
             $scope.data.disabledEdit = toState.data.disabledEdit;
         });
+
+        $scope.getCurrencyRate();
     }
 ]);

@@ -27,6 +27,14 @@ md-toolbar button.md-icon-button.md-button.in-tool-bar {
     color:white
 }
 
+md-toolbar button.md-icon-button.md-button.second-in-tool-bar {
+    position: absolute;
+    right: 4em;
+    top:0.4em;
+    background-color: #3F51B5;
+    color:white
+}
+
 /* Loading bar */
 
 #loading-bar .bar {
@@ -140,3 +148,28 @@ md-list-item.md-3-line > .md-no-style .md-list-item-text p {
 form.comments md-input-container {
     padding-bottom: 0;
 }
+
+/* Payment block in edit */
+md-content.payment md-list.comments-list md-input-container.topay label {
+    color: black;
+}
+md-content.payment md-list.comments-list md-input-container {
+    padding: 0 8px;
+}
+
+md-icon:focus {
+    outline: 0;
+}
+
+.payment md-list-item {
+    padding: 0 0 0 10px;
+}
+
+.payment md-list-item:first-child {
+    margin-top: 1.5rem;
+}
+
+.payment md-list-item:last-child {
+    margin-bottom: 1.5rem;
+}
+

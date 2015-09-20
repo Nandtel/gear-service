@@ -73,6 +73,10 @@ public class Cheque {
     @JsonManagedReference
     private Set<Note> notes;
 
+    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @JsonManagedReference
+    private Set<Payment> payments;
+
     /**
      * Method withRandomData handle current Cheque object filling it with random data and return this edited object
      * @return this Cheque object after editing
@@ -152,5 +156,7 @@ public class Cheque {
     public Set<Diagnostic> getDiagnostics() {return diagnostics;}
     public void setNotes(Set<Note> notes) {this.notes = notes;}
     public Set<Note> getNotes() {return notes;}
+    public Set<Payment> getPayments() {return payments;}
+    public void setPayments(Set<Payment> payments) {this.payments = payments;}
 
 }

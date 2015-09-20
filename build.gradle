@@ -45,6 +45,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1"
     compile "net.sourceforge.nekohtml:nekohtml:1.9.15"
+    compile "org.jsoup:jsoup:1.8.3"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"
     testCompile "org.springframework.boot:spring-boot-starter-test"

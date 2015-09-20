@@ -7,15 +7,20 @@ import com.gearservice.model.Note;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.DiagnosticRepository;
 import com.gearservice.model.repositories.NoteRepository;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.FormElement;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.Objects;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Class Application is controller, that handles all request from client-side
@@ -210,6 +215,22 @@ public class Application {
     public ModelAndView addCheques() {
         IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
         return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/currency-rates", method = RequestMethod.GET)
+    public Map<String, Float> getCurrencyRates() throws IOException {
+        Map<String, Float> currencyRate = new HashMap<>();
+        currencyRate.put("RUB", 1F);
+
+        Document doc = Jsoup.connect("http://minfindnr.ru/").get();
+        String[] elements = doc.select("li#text-12 font").text().split(" ");
+
+        for(int i = 0; i < elements.length;) {
+            currencyRate.put(elements[i++], (Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2);
+            i++;
+        }
+
+        return currencyRate;
     }
 
 }
