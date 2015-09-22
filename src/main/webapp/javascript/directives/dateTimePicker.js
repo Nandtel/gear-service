@@ -1,6 +1,6 @@
 app.directive('dateTimePicker', function() {
     return {
-        restrict: 'AE',
+        restrict: 'E',
         controller: ['$scope', function($scope) {
 
             $scope.$watch("datetime", function (newValue, oldValue) {

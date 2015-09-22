@@ -88,6 +88,8 @@ public class Application {
      */
     @RequestMapping("/edit")    public ModelAndView edit() {return new ModelAndView("edit");}
 
+    @RequestMapping("/print")    public ModelAndView print() {return new ModelAndView("print");}
+
     /**
      * Method getCheques call by client-side and return all cheques from database
      * Native query use for create partial object of Cheque — ChequeMin, that has only necessary for client-side fields

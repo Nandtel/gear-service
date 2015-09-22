@@ -29,8 +29,6 @@ app.controller("CreateController", ['$scope', '$http', '$state', '$filter', '$md
             if($scope.diagnostic != null)
                 $scope.cheque.diagnostics.push($scope.diagnostic);
 
-            $scope.cheque.guarantee = moment($scope.cheque.guarantee).format("YYYY-MM-DDTHH:mm:ssZZ");
-
             $http.post('/cheques', $scope.cheque)
                 .success(function() {
                     $state.go('cheque.filter');

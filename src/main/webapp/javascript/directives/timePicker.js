@@ -1,6 +1,6 @@
 app.directive('timePicker', function() {
   return {
-    restrict: 'AE',
+    restrict: 'E',
     controller: ['$scope', function($scope) {
 
       $scope.$watch("time", function (newValue, oldValue) {
@@ -29,7 +29,8 @@ app.directive('timePicker', function() {
       time: '=ngModel'
     },
     require: 'ngModel',
-    template: '<md-content layout="row" layout-align="center center" style="margin-left: 10px; font-size: 15px">' +
+    templateUrl:
+    '<md-content layout="row" layout-align="center center" style="margin-left: 10px; font-size: 15px">' +
     ' <md-input-container style="width: 1.5rem; padding: 8px 0 0 0;">' +
     '   <input type="text" ng-model="hours" maxlength="2" max="24" ng-model-options="{updateOn: \'blur\'}">' +
     ' </md-input-container>' +

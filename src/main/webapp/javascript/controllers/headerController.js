@@ -15,12 +15,6 @@ app.controller("HeaderController", ['$scope', '$rootScope', '$http', '$mdToast',
         $scope.getCurrencyRate = function() {
             $http.get('/currency-rates').success(function(resolve) {
                 $rootScope.rates = resolve;
-                $mdToast.show(
-                    $mdToast.simple()
-                        .content("Rates is: USD " + $rootScope.rates["USD"] + ", UAH " + $rootScope.rates["UAH"])
-                        .position('top right')
-                        .hideDelay(700)
-                );
             });
         };
 

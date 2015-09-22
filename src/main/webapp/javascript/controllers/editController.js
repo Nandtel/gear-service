@@ -7,7 +7,7 @@
  */
 app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '$filter', '$compile', '$mdToast', 'gettextCatalog', '$rootScope',
     function ($scope, $stateParams, $http, $state, $filter, $compile, $mdToast, gettextCatalog, $rootScope) {
-        $scope.cheque = {kits: [], payments: []};
+        $scope.cheque = {kits: [], payments: [], phone: "", email: ""};
 
         /**
          * Method getCheque request from serve-side one cheque with detail information
@@ -141,6 +141,10 @@ app.controller("EditController", ['$scope', '$stateParams', '$http', '$state', '
         //    $http.post('/cheques/' + $stateParams.chequeId + '/payments', $scope.cheque.payments)
         //        .success(function() {});
         //};
+
+        $scope.printCheque = function() {
+            window.print();
+        };
 
         $scope.types = [ "Repair" , "ZIP", "Deliver"];
         $scope.masters = ['Kosoy', 'Valikozz'];

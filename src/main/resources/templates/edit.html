@@ -8,6 +8,10 @@
         <span translate>Change cheque №</span> {{cheque.id}}
       </h2>
 
+      <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="printCheque()">
+        <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
+      </md-button>
+
       <md-button type="button" class="md-icon-button in-tool-bar delete-cheque" aria-label="deleteCheque" ng-click="deleteCheque()">
         <md-icon md-font-set="material-icons" aria-label="delete">delete</md-icon>
       </md-button>
@@ -145,11 +149,11 @@
       </h2>
 
       <md-button type="button" class="md-icon-button in-tool-bar" ng-click="addPayment()">
-        <md-icon md-font-set="material-icons" aria-label="delete">note_add</md-icon>
+        <md-icon md-font-set="material-icons">note_add</md-icon>
       </md-button>
 
-      <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="">
-        <md-icon md-font-set="material-icons" aria-label="delete">cached</md-icon>
+      <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="print()">
+        <md-icon md-font-set="material-icons">cached</md-icon>
       </md-button>
 
     </md-toolbar>
@@ -298,7 +302,10 @@
 
   </md-content>
 
-  <!--<pre>{{cheque | json}}</pre>-->
+</section>
 
-
+<section print-section print-only>
+  <print-cheque ng-model="cheque" specialization="'office'"></print-cheque>
+  <print-cheque ng-model="cheque" specialization="'tech'"></print-cheque>
+  <print-cheque ng-model="cheque" specialization="'client'"></print-cheque>
 </section>

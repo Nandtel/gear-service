@@ -1,0 +1,71 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    font-family: arial, sans-serif;
+}
+
+td {
+    padding: 3px;
+    width: 33%;
+    /*border: 1px solid black;*/
+}
+
+body {
+    -webkit-print-color-adjust:exact;
+}
+
+.cheque-number {
+    padding: 3px;
+}
+
+.grey {
+    background: #D9D9D9;
+}
+
+.center {
+    text-align: center;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+
+.narrowly td{
+     padding: 0;
+}
+
+.text {
+    margin: 3px 0;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.date {
+    position: absolute;
+    left: 75px;
+}
+
+.time {
+    position: absolute;
+    left: 135px;
+}
+
+.sign {
+    padding: 15px 0;
+}
+
+img {
+    width: 200px;
+}
+
+.right {
+    float: right;
+}
+
+.padding-top {
+   margin-top: 4px;
+}

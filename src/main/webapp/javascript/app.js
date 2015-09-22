@@ -7,7 +7,7 @@
  */
 var app =
     angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'mdDateTime',
-    'md.data.table', 'angular-loading-bar'])
+    'md.data.table', 'angular-loading-bar', 'AngularPrint'])
     .config(['$stateProvider', function($stateProvider){
         $stateProvider
             .state('cheque', {
