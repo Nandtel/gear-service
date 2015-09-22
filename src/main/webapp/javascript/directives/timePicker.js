@@ -29,8 +29,7 @@ app.directive('timePicker', function() {
       time: '=ngModel'
     },
     require: 'ngModel',
-    templateUrl:
-    '<md-content layout="row" layout-align="center center" style="margin-left: 10px; font-size: 15px">' +
+    template: '<md-content layout="row" layout-align="center center" style="margin-left: 10px; font-size: 15px">' +
     ' <md-input-container style="width: 1.5rem; padding: 8px 0 0 0;">' +
     '   <input type="text" ng-model="hours" maxlength="2" max="24" ng-model-options="{updateOn: \'blur\'}">' +
     ' </md-input-container>' +
