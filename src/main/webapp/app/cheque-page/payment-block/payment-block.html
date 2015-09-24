@@ -1,0 +1,77 @@
+<md-content layout-align="center start" class="md-whiteframe-z1 payment">
+
+    <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools">
+            <span translate>Payment</span>
+        <span translate>: {{sumRUB() | currency: 'RUB '}},{{sumRUB() / rates["UAH"] | currency: 'UAH '}},
+          {{sumRUB() / rates["USD"] | currency: 'USD '}}
+        </span>
+        </h2>
+
+        <md-button type="button" class="md-icon-button in-tool-bar" ng-click="addPayment()">
+            <md-icon md-font-set="material-icons">note_add</md-icon>
+        </md-button>
+
+        <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="print()">
+            <md-icon md-font-set="material-icons">cached</md-icon>
+        </md-button>
+
+    </md-toolbar>
+
+    <md-content layout-align="center start">
+
+        <md-list class="comments-list">
+            <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments">
+
+                <md-content layout="row" layout-align="center start" flex>
+
+                    <md-input-container flex="10">
+                        <label>Type</label>
+                        <md-select ng-model="payment.type">
+                            <md-option ng-repeat="type in types" value="{{type}}">{{type}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="25">
+                        <label translate>Description</label>
+                        <input ng-model="payment.description">
+                    </md-input-container>
+
+                    <md-input-container flex="15">
+                        <label>Master</label>
+                        <md-select ng-model="payment.master">
+                            <md-option ng-repeat="master in masters" value="{{master}}">{{master}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="10">
+                        <label translate>Cost</label>
+                        <input type="number" min="0" ng-model="payment.cost">
+                    </md-input-container>
+
+                    <md-input-container flex="10">
+                        <label>Currency</label>
+                        <md-select ng-model="payment.currency">
+                            <md-option ng-repeat="currency in currencies()" value="{{currency}}">{{currency}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="topay" flex="30">
+                        <label translate>
+                            {{payment.cost * rates[payment.currency] | currency: 'RUB '}},
+                            {{payment.cost * rates[payment.currency] / rates["UAH"] | currency: 'UAH '}},
+                            {{payment.cost * rates[payment.currency] / rates["USD"] | currency: 'USD '}}
+                        </label>
+                    </md-input-container>
+
+                    <md-button type="button" class="md-icon-button in-tool-bar md-secondary">
+                        <md-icon md-font-set="material-icons" ng-click="delPayment(payment)" aria-label="delete">delete</md-icon>
+                    </md-button>
+                </md-content>
+
+            </md-list-item>
+        </md-list>
+
+    </md-content>
+
+</md-content>

@@ -14,6 +14,7 @@
   ],
   "dependencies": {
     "angular": "~1.4.0",
+    "angular-cache": "~4.3.2",
     "angular-gettext": "~2.1.0",
     "angular-loading-bar": "~0.8.0",
     "angular-material": "~0.11.0",

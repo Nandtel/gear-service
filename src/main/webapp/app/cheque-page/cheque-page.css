@@ -1,0 +1,5 @@
+@media screen {
+    cheque-page:focus {
+        outline: none;
+    }
+}

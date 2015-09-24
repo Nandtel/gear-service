@@ -1,0 +1,90 @@
+@media screen {
+    .print-only{
+        display:none;
+    }
+}
+
+@media print{
+
+    ui-view[name="header"], section.content-block {
+        display: none;
+    }
+
+    body {
+        -webkit-print-color-adjust:exact;
+    }
+
+    .print-only{
+        visibility:visible;
+        display:initial;
+    }
+
+    print-cheque table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10px;
+        font-family: arial, sans-serif;
+    }
+
+    print-cheque td {
+        padding: 3px;
+        width: 33%;
+        /*border: 1px solid black;*/
+    }
+
+    print-cheque .cheque-number {
+        padding: 3px;
+    }
+
+    print-cheque .grey {
+        background: #D9D9D9;
+    }
+
+    print-cheque .center {
+        text-align: center;
+    }
+
+    print-cheque .border {
+        border: 1px solid black;
+    }
+
+
+    print-cheque .narrowly td{
+        padding: 0;
+    }
+
+    print-cheque .text {
+        margin: 3px 0;
+    }
+
+    print-cheque .bold {
+        font-weight:bold;
+    }
+
+    print-cheque .date {
+        position: absolute;
+        left: 85px;
+    }
+
+    print-cheque .time {
+        position: absolute;
+        left: 145px;
+    }
+
+    print-cheque .sign {
+        padding: 15px 0;
+    }
+
+    print-cheque img {
+        width: 200px;
+    }
+
+    print-cheque .right {
+        float: right;
+    }
+
+    print-cheque .padding-top {
+        margin-top: 4px;
+    }
+
+}

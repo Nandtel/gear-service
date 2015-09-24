@@ -1,0 +1,33 @@
+@media screen {
+    payment-block {
+        margin: 0.5rem 0;
+    }
+
+    payment-block:focus {
+        outline: none;
+    }
+
+    payment-block comments-block md-content.payment md-list.comments-list md-input-container.topay label {
+        color: black;
+    }
+
+    payment-block comments-block .payment md-list.comments-list md-input-container {
+        padding: 0 8px;
+    }
+
+    payment-block md-icon:focus {
+        outline: 0;
+    }
+
+    payment-block .payment md-list-item {
+        padding: 0 0 0 10px;
+    }
+
+    payment-block .payment md-list-item:first-child {
+        margin-top: 1.5rem;
+    }
+
+    payment-block .payment md-list-item:last-child {
+        margin-bottom: 1.5rem;
+    }
+}

@@ -65,32 +65,6 @@ public class Application {
     @RequestMapping("/")        public ModelAndView index() {return new ModelAndView("index");}
 
     /**
-     * Method header call by client-side and return header page
-     * @return header.html from templates
-     */
-    @RequestMapping("/header")  public ModelAndView header() {return new ModelAndView("header");}
-
-    /**
-     * Method filters call by client-side and return filters page
-     * @return filters.html from templates
-     */
-    @RequestMapping("/filters") public ModelAndView filters() {return new ModelAndView("filters");}
-
-    /**
-     * Method create call by client-side and return create page
-     * @return create.html from templates
-     */
-    @RequestMapping("/create")  public ModelAndView create() {return new ModelAndView("create");}
-
-    /**
-     * Method edit call by client-side and return edit page
-     * @return edit.html from templates
-     */
-    @RequestMapping("/edit")    public ModelAndView edit() {return new ModelAndView("edit");}
-
-    @RequestMapping("/print")    public ModelAndView print() {return new ModelAndView("print");}
-
-    /**
      * Method getCheques call by client-side and return all cheques from database
      * Native query use for create partial object of Cheque — ChequeMin, that has only necessary for client-side fields
      * Call with value "/cheques" and request method GET
@@ -110,9 +84,9 @@ public class Application {
      * @return redirect to main page
      */
     @RequestMapping(value = "/cheques", method = RequestMethod.POST)
-    public ModelAndView saveCheque(@RequestBody Cheque cheque) {
+    public Cheque saveCheque(@RequestBody Cheque cheque) {
         chequeRepository.save(cheque);
-        return new ModelAndView("redirect:/");
+        return chequeRepository.findFirstByOrderByIdDesc();
     }
 
     /**
@@ -126,18 +100,18 @@ public class Application {
         return chequeRepository.findOne(chequeID);
     }
 
-    /**
-     * Method editCheque call by client-side, when it needs to save one cheque after editing by user on client-side
-     * Call with value of request "/cheques/{chequeID}" and request method POST
-     * @param chequeID is ID of cheque in database, that client-side wants to save after editing
-     * @param cheque is data for Cheque.class
-     * @return redirect to main page
-     */
-    @RequestMapping(value = "/cheques/{chequeID}", method = RequestMethod.POST)
-    public ModelAndView editCheque(@PathVariable Long chequeID, @RequestBody Cheque cheque) {
-        chequeRepository.save(cheque);
-        return new ModelAndView("redirect:/");
-    }
+//    /**
+//     * Method editCheque call by client-side, when it needs to save one cheque after editing by user on client-side
+//     * Call with value of request "/cheques/{chequeID}" and request method POST
+//     * @param chequeID is ID of cheque in database, that client-side wants to save after editing
+//     * @param cheque is data for Cheque.class
+//     * @return redirect to main page
+//     */
+//    @RequestMapping(value = "/cheques/{chequeID}", method = RequestMethod.POST)
+//    public ModelAndView editCheque(@PathVariable Long chequeID, @RequestBody Cheque cheque) {
+//        chequeRepository.save(cheque);
+//        return new ModelAndView("redirect:/");
+//    }
 
     /**
      * Method deleteCheque call by client-side, when it needs to delete one cheque
@@ -158,7 +132,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants add a diagnostic comment
      * @param diagnostic is data for Diagnostic.class, that was create on client-side
      */
-    @RequestMapping(value = "/cheques/{chequeID}/diagnostic", method = RequestMethod.POST)
+    @RequestMapping(value = "/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
         diagnosticRepository.save(diagnostic.withDateTimeAndUser().withOwner(chequeRepository.findOne(chequeID)));
@@ -171,7 +145,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param diagnosticID is ID of diagnostic in database, that client-side wants to delete
      */
-    @RequestMapping(value = "/cheques/{chequeID}/diagnostic/{diagnosticID}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/cheques/{chequeID}/diagnostics/{diagnosticID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
         Cheque cheque = chequeRepository.findOne(chequeID);
@@ -186,7 +160,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param note is data for Note.class, that was create on client-side
      */
-    @RequestMapping(value = "/cheques/{chequeID}/note", method = RequestMethod.POST)
+    @RequestMapping(value = "/cheques/{chequeID}/notes", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
         noteRepository.save(note.withDateTimeAndUser().withOwner(chequeRepository.findOne(chequeID)));
@@ -199,7 +173,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param noteID is ID of node in database, that client-side wants to delete
      */
-    @RequestMapping(value = "/cheques/{chequeID}/note/{noteID}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/cheques/{chequeID}/notes/{noteID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {
         Cheque cheque = chequeRepository.findOne(chequeID);

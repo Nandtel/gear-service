@@ -1,0 +1,135 @@
+<form name="form" ng-submit="sendCheque()" novalidate autocomplete="off" class="md-whiteframe-z1">
+
+    <md-toolbar>
+        <h2 class="md-toolbar-tools">
+            <span ng-show="hasID">{{'Change cheque' | translate}} №{{cheque.id}}</span>
+            <span ng-hide="hasID">{{'Create New Check' | translate}}</span>
+        </h2>
+
+        <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="printCheque()" ng-show="hasID">
+            <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
+        </md-button>
+
+        <md-button type="button" class="md-icon-button in-tool-bar delete-cheque" ng-click="deleteCheque()" ng-show="hasID">
+            <md-icon md-font-set="material-icons" aria-label="delete">delete</md-icon>
+        </md-button>
+
+    </md-toolbar>
+
+    <md-content class="dates-field" layout="row" layout-align="space-around start" flex>
+
+        <md-content layout="column" layout-align="end center">
+            <p>{{ 'Introduced' | translate}}</p>
+            <date-time-picker ng-model="cheque.introduced"></date-time-picker>
+        </md-content>
+
+        <md-content layout="column" layout-align="end center">
+            <p>{{ 'Guarantee' | translate}}</p>
+            <date-picker ng-model="cheque.guarantee"></date-picker>
+        </md-content>
+
+        <md-content layout="column" layout-align="end center" ng-show="hasID">
+            <p>{{ 'Ready' | translate}}</p>
+            <date-picker ng-model="cheque.ready"></date-picker>
+        </md-content>
+
+        <md-content layout="column" layout-align="end center" ng-show="hasID">
+            <p>{{ 'Issued' | translate}}</p>
+            <date-picker ng-model="cheque.issued"></date-picker>
+        </md-content>
+
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex="75">
+            <label translate>Customer</label>
+            <input ng-model="cheque.nameOfCustomer" required>
+        </md-input-container>
+
+        <md-input-container flex="25">
+            <label translate>Repair Period</label>
+            <input type="number" min="1" max="99" ng-model="cheque.repairPeriod">
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex="40">
+            <label translate>Name of Product</label>
+            <input ng-model="cheque.nameOfProduct" required>
+        </md-input-container>
+
+        <md-input-container flex="30">
+            <label translate>Model</label>
+            <input ng-model="cheque.model" required>
+        </md-input-container>
+
+        <md-input-container flex="30">
+            <label translate>Serial Number</label>
+            <input ng-model="cheque.serialNumber" required>
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex>
+            <label translate>Malfunction</label>
+            <input ng-model="cheque.malfunction">
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex>
+            <label translate>Special Notes</label>
+            <input ng-model="cheque.specialNotes">
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex="30">
+            <label translate >Purchaser</label>
+            <input ng-model="cheque.purchaserName" required>
+        </md-input-container>
+
+        <md-input-container flex="35">
+            <label translate>Address</label>
+            <input ng-model="cheque.address">
+        </md-input-container>
+
+        <md-input-container flex="20">
+            <label translate>Phone</label>
+            <input ng-model="cheque.phone" ui-mask="+38 (999) 999 ‒  99 ‒  99" class="phone">
+        </md-input-container>
+
+        <md-input-container flex="15">
+            <label translate>Email</label>
+            <input ng-model="cheque.email">
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+        <md-input-container flex="50">
+            <label translate>Master</label>
+            <input ng-model="cheque.masterName" required>
+        </md-input-container>
+
+        <md-input-container flex="50">
+            <label translate>Inspector</label>
+            <input ng-model="cheque.inspectorName" required>
+        </md-input-container>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-align="center start">
+        <md-chips ng-model="cheque.kits" flex
+                  placeholder="{{'Kits' | translate}}"
+                  secondary-placeholder="{{'Kits' | translate}}"
+                  md-on-append="addKit($chip)">
+            <md-chip-template>{{$chip.text}}</md-chip-template>
+        </md-chips>
+    </md-content>
+
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
+        <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">
+            <span translate>Modify Check</span>
+        </md-button>
+    </md-content>
+
+</form>

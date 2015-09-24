@@ -1,0 +1,53 @@
+<md-content layout-align="center start" class="md-whiteframe-z1">
+
+    <md-toolbar>
+        <h2 class="md-toolbar-tools">{{title | translate}}</h2>
+    </md-toolbar>
+
+    <md-content layout-padding layout-align="center start">
+
+        <form name="form" ng-submit="saveComment()" layout="row">
+
+            <md-input-container flex="90">
+                <textarea flex ng-model="comment.text" rows="2" required></textarea>
+            </md-input-container>
+
+            <md-content layout="row" layout-sm="column" layout-align="center center" flex="10">
+                <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">
+                    <span translate>Send</span>
+                </md-button>
+            </md-content>
+
+        </form>
+
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <md-content layout-padding layout-align="center start">
+
+        <md-list class="comments-list">
+            <md-list-item class="md-3-line" ng-repeat="comment in cheque[title] | orderBy: '-time'">
+
+                <md-content layout="row" flex>
+                    <md-content class="md-list-item-text" flex="95">
+                        <h3>{{comment.user}}</h3>
+                        <h4>{{comment.time | amDateFormat:'lll'}}</h4>
+                        <p>{{comment.text}}</p>
+                    </md-content>
+
+                    <md-content layout="column" layout-align="center center" flex="5">
+                        <md-button>
+                            <md-icon md-font-set="material-icons" ng-click="deleteComment(comment.id)">delete</md-icon>
+                        </md-button>
+                    </md-content>
+
+                    <md-divider></md-divider>
+                </md-content>
+
+            </md-list-item>
+        </md-list>
+
+    </md-content>
+
+</md-content>
