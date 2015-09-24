@@ -7,8 +7,8 @@
  */
 var app =
     angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'mdDateTime',
-    'md.data.table', 'angular-loading-bar', 'AngularPrint', 'templates'])
-    .config(['$stateProvider', function($stateProvider){
+    'md.data.table', 'angular-loading-bar', 'templates', 'angular-cache'])
+    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('cheque', {
                 abstract: true,
@@ -43,17 +43,16 @@ var app =
                         $scope.chequeID = $stateParams.chequeId;
                     }],
                 template: '<cheque-page cheque-id="chequeID"></cheque-page>',
-                data: {'selectedTab': 1}
+                data: {'selectedTab': undefined}
             })
             .state('cheque.create', {
                 url: "^/cheque",
                 template: '<cheque-page></cheque-page>',
                 data: {'selectedTab': 1}
-            })
-    }])
-    .config(['$urlRouterProvider', function($urlRouterProvider){
-        $urlRouterProvider.when('', '/filter');
-        $urlRouterProvider.otherwise('/filter');
+            });
+
+            $urlRouterProvider.when('', '/filter');
+            $urlRouterProvider.otherwise('/filter');
     }])
     .config(['$mdThemingProvider', function($mdThemingProvider){
         $mdThemingProvider

@@ -100,19 +100,6 @@ public class Application {
         return chequeRepository.findOne(chequeID);
     }
 
-//    /**
-//     * Method editCheque call by client-side, when it needs to save one cheque after editing by user on client-side
-//     * Call with value of request "/cheques/{chequeID}" and request method POST
-//     * @param chequeID is ID of cheque in database, that client-side wants to save after editing
-//     * @param cheque is data for Cheque.class
-//     * @return redirect to main page
-//     */
-//    @RequestMapping(value = "/cheques/{chequeID}", method = RequestMethod.POST)
-//    public ModelAndView editCheque(@PathVariable Long chequeID, @RequestBody Cheque cheque) {
-//        chequeRepository.save(cheque);
-//        return new ModelAndView("redirect:/");
-//    }
-
     /**
      * Method deleteCheque call by client-side, when it needs to delete one cheque
      * Call with value of request "/cheques/{chequeID}" and request method DELETE
@@ -205,6 +192,8 @@ public class Application {
             currencyRate.put(elements[i++], (Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2);
             i++;
         }
+
+        System.out.println("In parse");
 
         return currencyRate;
     }

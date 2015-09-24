@@ -2,4 +2,23 @@
     filters-page:focus {
         outline: none;
     }
+
+    filters-page table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child,
+    filters-page table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child {
+        padding: 5px 5px 5px 15px;
+    }
+
+    filters-page table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:nth-child(n+2):nth-last-child(n+2),
+    filters-page table[md-data-table]:not([md-row-select]) > tbody > tr > td:nth-child(n+2):nth-last-child(n+2) {
+        padding: 5px 5px;
+    }
+
+    filters-page table[md-data-table] > tbody > tr > td:last-child,
+    filters-page table[md-data-table] > thead:not([md-table-progress]) > tr > th:last-child {
+        padding: 5px 5px 5px 5px;
+    }
+
+    filters-page #table[md-data-table] > tbody > tr > td {
+        cursor: pointer;
+    }
 }

@@ -8,17 +8,14 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("Header", ['$scope', '$rootScope', '$http',
-        function ($scope, $rootScope, $http) {
-            $rootScope.rates = {};
+    .controller("Header", ['$scope', 'currencyRatesService',
+        function ($scope, currencyRatesService) {
 
-            $scope.getCurrencyRate = function() {
-                $http.get('/currency-rates').success(function(resolve) {
-                    $rootScope.rates = resolve;
+            currencyRatesService.getCurrencyRates()
+                .then(function(rates) {
+                    $scope.rates = rates;
                 });
-            };
 
-            $scope.getCurrencyRate();
         }
     ])
     .directive('header', function() {
