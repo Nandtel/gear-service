@@ -3,13 +3,15 @@
   <form name="filterForm" id="filterForm" class="material-block md-whiteframe-z1">
 
     <md-toolbar>
-      <h2 class="md-toolbar-tools">
-        <span translate>Filters</span>
-      </h2>
-
-      <md-button type="button" class="md-icon-button in-tool-bar" ng-click="resetFilter()">
-        <md-icon md-font-set="material-icons">delete</md-icon>
-      </md-button>
+      <div class="md-toolbar-tools">
+        <h2>
+          <span translate>Filters</span>
+        </h2>
+        <span flex></span>
+        <md-button type="button" class="md-icon-button" ng-click="resetFilter()">
+          <md-icon md-font-set="material-icons">delete</md-icon>
+        </md-button>
+      </div>
     </md-toolbar>
 
     <md-content class="dates-field" layout="row" layout-align="space-around end" flex>
@@ -140,19 +142,24 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
-      <md-select ng-model="filter.guarantee" placeholder="{{'Guarantee' | translate}}" flex="33">
+      <md-select ng-model="filter.guarantee" placeholder="{{'Guarantee' | translate}}" flex="25">
         <md-option value="!!">{{'Has guarantee' | translate}}</md-option>
         <md-option value="!!!">{{'Has no guarantee' | translate}}</md-option>
       </md-select>
 
-      <md-select ng-model="filter.ready" placeholder="{{'Ready' | translate}}" flex="33">
+      <md-select ng-model="filter.ready" placeholder="{{'Ready' | translate}}" flex="25">
         <md-option value="!!">{{'Ready' | translate}}</md-option>
         <md-option value="!!!">{{'Not ready' | translate}}</md-option>
       </md-select>
 
-      <md-select ng-model="filter.issued" placeholder="{{'Issued' | translate}}" flex="33">
+      <md-select ng-model="filter.issued" placeholder="{{'Issued' | translate}}" flex="25">
         <md-option value="!!">{{'Issued' | translate}}</md-option>
         <md-option value="!!!">{{'Not issued' | translate}}</md-option>
+      </md-select>
+
+      <md-select ng-model="filter.paid" placeholder="{{'paid' | translate}}" flex="25">
+        <md-option value="!!">{{'paid' | translate}}</md-option>
+        <md-option value="!!!">{{'not paid' | translate}}</md-option>
       </md-select>
 
     </md-content>

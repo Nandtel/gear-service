@@ -20,6 +20,10 @@ angular.module("mainModule")
                 $http.post('/cheques', $scope.cheque)
                     .success(function(response) {
                         $scope.cheque = response;
+
+                        $scope.form.$setPristine();
+                        $scope.form.$setUntouched();
+
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(gettextCatalog.getString('Cheque') + ' ' + gettextCatalog.getString('added'))
@@ -73,6 +77,10 @@ angular.module("mainModule")
 
                 $scope.resetNewCheck();
             }
+
+            $scope.$watch('form.$dirty', function(newValue, oldValue) {
+                $scope.hasUnsavedChange = newValue;
+            });
 
         }
     ])

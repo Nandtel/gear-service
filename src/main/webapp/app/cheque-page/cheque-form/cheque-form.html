@@ -1,19 +1,26 @@
 <form name="form" ng-submit="sendCheque()" novalidate autocomplete="off" class="md-whiteframe-z1">
 
     <md-toolbar>
-        <h2 class="md-toolbar-tools">
-            <span ng-show="hasID">{{'Change cheque' | translate}} №{{cheque.id}}</span>
-            <span ng-hide="hasID">{{'Create New Check' | translate}}</span>
-        </h2>
+        <div class="md-toolbar-tools">
+            <h2>
+                <span ng-show="hasID">{{'Change cheque' | translate}} №{{cheque.id}}</span>
+                <span ng-hide="hasID">{{'Create New Check' | translate}}</span>
+            </h2>
 
-        <md-button type="button" class="md-icon-button second-in-tool-bar" ng-click="printCheque()" ng-show="hasID">
-            <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
-        </md-button>
+            <span flex></span>
 
-        <md-button type="button" class="md-icon-button in-tool-bar delete-cheque" ng-click="deleteCheque()" ng-show="hasID">
-            <md-icon md-font-set="material-icons" aria-label="delete">delete</md-icon>
-        </md-button>
+            <md-button type="button" class="md-icon-button md-warn" ng-show="hasUnsavedChange">
+                <md-icon md-font-set="material-icons">error_outline</md-icon>
+            </md-button>
 
+            <md-button type="button" class="md-icon-button" ng-click="printCheque()" ng-show="hasID">
+                <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
+            </md-button>
+
+            <md-button type="button" class="md-icon-button" ng-click="deleteCheque()" ng-show="hasID">
+                <md-icon md-font-set="material-icons">delete</md-icon>
+            </md-button>
+        </div>
     </md-toolbar>
 
     <md-content class="dates-field" layout="row" layout-align="space-around start" flex>
@@ -107,7 +114,7 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
         <md-input-container flex="50">
-            <label translate>Master</label>
+            <label translate>master</label>
             <input ng-model="cheque.masterName" required>
         </md-input-container>
 
@@ -126,6 +133,8 @@
         </md-chips>
     </md-content>
 
+    <payment-block ng-model="cheque" rates="rates" ng-show="hasID"></payment-block>
+
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
         <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">
             <span translate>Modify Check</span>
@@ -133,3 +142,5 @@
     </md-content>
 
 </form>
+
+<!--<pre>{{cheque | json}}</pre>-->

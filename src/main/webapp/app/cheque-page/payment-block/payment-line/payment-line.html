@@ -1,0 +1,42 @@
+<md-content layout="row" layout-align="center center" flex>
+
+    <md-input-container flex="15">
+        <label translate>type</label>
+        <md-select ng-model="payment.type" ng-disabled="paid">
+            <md-option ng-repeat="type in types" value="{{type}}">{{type | translate}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container flex="25">
+        <label translate>description</label>
+        <input ng-model="payment.description" ng-disabled="paid">
+    </md-input-container>
+
+    <md-input-container flex="10">
+        <label translate>master</label>
+        <md-select ng-model="payment.master" ng-disabled="paid">
+            <md-option ng-repeat="master in masters" value="{{master}}">{{master}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container flex="10">
+        <label translate>cost</label>
+        <input type="number" min="0" ng-model="payment.cost" ng-disabled="paid">
+    </md-input-container>
+
+    <md-input-container flex="10">
+        <label translate>currency</label>
+        <md-select ng-model="payment.currency" ng-disabled="paid">
+            <md-option ng-repeat="currency in currencies" value="{{currency}}">{{currency | uppercase}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <span flex="20" ng-class="{green: hasPrepayment, red: !hasPrepayment}">
+        {{toPay('rub') | currency: '&#x20bd;'}},
+        {{toPay('uah') | currency: '&#8372;'}},
+        {{toPay('usd') | currency: '$'}}
+    </span>
+
+</md-content>
+
+<!--<pre>{{payment | json}}</pre>-->

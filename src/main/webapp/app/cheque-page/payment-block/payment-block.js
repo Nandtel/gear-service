@@ -1,36 +1,46 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope',
-        function($scope) {
+    .controller('PaymentBlock', ['$scope', 'currencyRatesService',
+        function($scope, currencyRatesService) {
+            $scope.hasPrepayment = false;
 
             $scope.addPayment = function() {
+
                 if($scope.cheque.payments === undefined)
                     $scope.cheque.payments = [];
 
-                $scope.cheque.payments.push({description: undefined, cost: 0, currency: 'RUB'});
-            };
+                currencyRatesService.getCurrencyRates()
+                    .then(function(rates) {
 
-            $scope.currencies = function() {
-                return Object.keys($scope.rates);
+                        $scope.cheque.payments.push(
+                            {cost: 0, currency: 'rub',
+                                uah: rates['UAH'], usd: rates['USD'], eur: rates['EUR'], rub: rates['RUB']});
+
+                    });
             };
 
             $scope.delPayment = function(payment) {
                 $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
             };
 
-            $scope.sumRUB = function() {
+            $scope.sum = function(currency, withPrepayment) {
                 var sum = 0;
+                $scope.hasPrepayment = false;
+
                 if($scope.cheque.payments != undefined)
                     $scope.cheque.payments.forEach(function(item) {
-                        if(item.cost != undefined && item.currency != undefined)
-                            sum += item.cost * $scope.rates[item.currency];
+                        if(item.cost != undefined && item.currency != undefined) {
+                            if(item.type != 'prepayment')
+                                sum += item.cost * item[item.currency] / item[currency];
+                            else {
+                                $scope.hasPrepayment = true;
+                                if(withPrepayment)
+                                    sum -= item.cost * item[item.currency] / item[currency];
+                            }
+                        }
                     });
+
                 return sum;
             };
-
-
-            $scope.types = [ "Repair" , "ZIP", "Deliver"];
-            $scope.masters = ['Kosoy', 'Valikozz'];
-
         }
     ])
     .directive('paymentBlock', [function() {
@@ -38,8 +48,7 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'PaymentBlock',
             scope: {
-                cheque: '=ngModel',
-                rates: '=rates'
+                cheque: '=ngModel'
             },
             require: 'ngModel',
             templateUrl: 'app/cheque-page/payment-block/payment-block.html'

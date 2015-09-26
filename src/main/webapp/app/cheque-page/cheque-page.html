@@ -1,7 +1,6 @@
 <section layout="column" class="content-block">
 
     <cheque-form ng-model="cheque" has-id="hasID"></cheque-form>
-    <payment-block ng-model="cheque" rates="rates" ng-show="hasID"></payment-block>
 
     <comments-block ng-model="cheque" title="'diagnostics'" ng-show="hasID"></comments-block>
     <comments-block ng-model="cheque" title="'notes'" ng-show="hasID"></comments-block>

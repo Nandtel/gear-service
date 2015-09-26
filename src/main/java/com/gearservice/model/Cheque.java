@@ -43,6 +43,7 @@ public class Cheque {
     private String email;
     private String inspectorName;
     private String masterName;
+    private int prediction;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
@@ -60,6 +61,7 @@ public class Cheque {
     private boolean withoutRepair;
     private boolean actNG;
     private boolean actVO;
+    private boolean paid;
 
     @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
     @JsonManagedReference
@@ -150,6 +152,10 @@ public class Cheque {
     public OffsetDateTime getReady() {return ready;}
     public void setIssued(OffsetDateTime issued) {this.issued = issued;}
     public OffsetDateTime getIssued() {return issued;}
+    public boolean isPaid() {return paid;}
+    public void setPaid(boolean paid) {this.paid = paid;}
+    public int getPrediction() {return prediction;}
+    public void setPrediction(int prediction) {this.prediction = prediction;}
     public void setKits(Set<Kit> kits) {this.kits = kits;}
     public Set<Kit> getKits() {return kits;}
     public void setDiagnostics(Set<Diagnostic> diagnostics) {this.diagnostics = diagnostics;}

@@ -16,6 +16,13 @@ angular.module("mainModule")
                     $scope.rates = rates;
                 });
 
+            $scope.refreshCurrencyRates = function() {
+                console.log('1241241');
+                currencyRatesService.refreshCurrencyRates()
+                    .then(function(rates) {
+                        $scope.rates = rates;
+                    });
+            }
         }
     ])
     .directive('header', function() {

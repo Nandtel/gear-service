@@ -29,6 +29,15 @@ angular.module('mainModule')
                             deferred.resolve(data);
                         });
                     return deferred.promise;
+                },
+                refreshCurrencyRates: function() {
+                    var deferred = $q.defer();
+                    currencyRatesCache.remove('/currency-rates');
+                    $http.get('/currency-rates', {cache: currencyRatesCache})
+                        .success(function(data) {
+                            deferred.resolve(data);
+                        });
+                    return deferred.promise;
                 }
             }
         }

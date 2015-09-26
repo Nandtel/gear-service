@@ -43,7 +43,7 @@ var app =
                         $scope.chequeID = $stateParams.chequeId;
                     }],
                 template: '<cheque-page cheque-id="chequeID"></cheque-page>',
-                data: {'selectedTab': undefined}
+                data: {'selectedTab': 1}
             })
             .state('cheque.create', {
                 url: "^/cheque",
@@ -55,9 +55,20 @@ var app =
             $urlRouterProvider.otherwise('/filter');
     }])
     .config(['$mdThemingProvider', function($mdThemingProvider){
-        $mdThemingProvider
-            .theme('header', 'default')
-            .accentPalette('indigo');
+            $mdThemingProvider
+                .theme('payment')
+                .primaryPalette('grey', {'default':'50'})
+                .accentPalette('pink')
+                .warnPalette('red');
+
+            $mdThemingProvider
+                .theme('header')
+                .primaryPalette('grey', {'default': '900'})
+                .accentPalette('indigo');
+
+            //$mdThemingProvider
+            //    .theme('toolbar-bottom')
+            //    .backgroundPalette('grey', {'default': '200'});
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

@@ -14,22 +14,6 @@ section.content-block {
     margin: 0 0 1em 0;
 }
 
-md-toolbar button.md-icon-button.md-button.in-tool-bar {
-    position: absolute;
-    right: 1em;
-    top:0.4em;
-    background-color: #3F51B5;
-    color:white
-}
-
-md-toolbar button.md-icon-button.md-button.second-in-tool-bar {
-    position: absolute;
-    right: 4em;
-    top:0.4em;
-    background-color: #3F51B5;
-    color:white
-}
-
 /* Loading bar */
 
 #loading-bar .bar {
@@ -51,4 +35,9 @@ md-content.dates-field md-content p {
 
 .md-calendar-month td{
     font-size: 13px;
+}
+
+md-toolbar button.md-icon-button.md-button {
+    background-color: #3F51B5;
+    color:white
 }

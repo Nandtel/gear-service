@@ -1,14 +1,23 @@
-<md-content md-theme="header" layout="row" layout-align="center start">
+<md-content md-theme="header" layout="row" layout-align="start start">
 
-  <md-tabs md-selected="selectedTab" md-center-tabs="true" md-dynamic-height md-border-bottom flex>
-      <md-tab ui-sref="cheque.filter" id="filters">{{'Filters' | translate}}</md-tab>
-      <md-tab ui-sref="cheque.create">{{'cheque' | translate}}</md-tab>
-      <md-tab ng-click="getCurrencyRate()">
-          <div>USD: {{rates["USD"] | currency: '$'}}, UAH: {{rates["UAH"] | currency: "&#8372"}}</div>
-      </md-tab>
-      <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>
-      <md-tab ng-disabled="true">{{'profile' | translate}}</md-tab>
-      <md-tab ng-disabled="true">{{'login' | translate}}</md-tab>
-  </md-tabs>
+    <md-content flex="50">
+
+        <div ng-click="refreshCurrencyRates()">
+            USD: {{rates["USD"] | currency: '$'}}, UAH: {{rates["UAH"] | currency: "&#8372"}}
+        </div>
+
+    </md-content>
+
+    <md-tabs md-selected="selectedTab" md-center-tabs="true" md-dynamic-height md-border-bottom flex="50">
+        <md-tab ui-sref="cheque.filter" id="filters">{{'Filters' | translate}}</md-tab>
+        <md-tab ui-sref="cheque.create">{{'cheque' | translate}}</md-tab>
+        <!--<md-tab ng-click="refreshCurrencyRates()">-->
+        <!--<div>USD: {{rates["USD"] | currency: '$'}}, UAH: {{rates["UAH"] | currency: "&#8372"}}</div>-->
+        <!--</md-tab>-->
+        <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>
+        <md-tab ng-disabled="true">{{'profile' | translate}}</md-tab>
+        <md-tab ng-disabled="true">{{'login' | translate}}</md-tab>
+    </md-tabs>
 
 </md-content>
+<md-divider></md-divider>

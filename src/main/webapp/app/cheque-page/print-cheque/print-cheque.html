@@ -15,7 +15,7 @@
                     <span class="time" ng-show="spec.tech">{{cheque.introduced | amDateFormat:'HH:mm:ss'}}</span>
                 </div>
                 <div ng-show="!!cheque.guarantee" class="text">
-                    Дата продажи: <span class="date">18.09.2015</span>
+                    Дата продажи: <span class="date">{{cheque.guarantee | amDateFormat:'DD.MM.YYYY'}}</span>
                 </div>
                 <div>
                     <div ng-show="!!cheque.guarantee" class="text">
@@ -63,8 +63,8 @@
 
     <tr>
         <td class="border" colspan="2">Комплект: {{getKits()}}</td>
-        <td class="border" ng-show="!!cheque.guarantee"><span class="right">15000 р</span></td>
-        <td class="border" ng-hide="!!cheque.guarantee"><span class="right">Ориентировачная сумма ремонта: 15000 р</span></td>
+        <td class="border" ng-show="!!cheque.guarantee"><span class="right">{{cheque.prediction}} руб.</span></td>
+        <td class="border" ng-hide="!!cheque.guarantee"><span class="right">Ориентировачная сумма ремонта: {{cheque.prediction}} руб.</span></td>
 
     </tr>
 

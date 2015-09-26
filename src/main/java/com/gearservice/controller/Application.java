@@ -81,12 +81,18 @@ public class Application {
      * Method saveCheque call by client-side with data for cheque.class
      * Call with value "/cheque" and request method POST
      * @param cheque is data for Cheque.class, that was create on client-side
-     * @return redirect to main page
+     * @return Cheque, that added
      */
     @RequestMapping(value = "/cheques", method = RequestMethod.POST)
     public Cheque saveCheque(@RequestBody Cheque cheque) {
+        Long ID = cheque.getId();
+
         chequeRepository.save(cheque);
-        return chequeRepository.findFirstByOrderByIdDesc();
+
+        if(ID == null)
+            return chequeRepository.findFirstByOrderByIdDesc();
+        else
+            return chequeRepository.findOne(ID);
     }
 
     /**

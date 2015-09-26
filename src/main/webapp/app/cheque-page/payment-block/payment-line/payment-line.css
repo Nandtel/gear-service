@@ -1,0 +1,9 @@
+@media screen {
+    payment-line .red {
+        color: #B71C1C;
+    }
+
+    payment-line .green {
+        color: #1B5E20;
+    }
+}
