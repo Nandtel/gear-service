@@ -2,15 +2,12 @@ package com.gearservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
-import com.gearservice.model.samples.SampleData;
+import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -84,28 +81,28 @@ public class Cheque {
      * @return this Cheque object after editing
      */
     public Cheque withRandomData() {
-        this.setNameOfCustomer(SampleData.getRandomName());
-        this.setNameOfProduct(SampleData.getRandomProduct());
-        this.setRepairPeriod(SampleData.getRepairPeriod());
-        this.setIntroduced(SampleData.getRandomDate());
-        this.setModel(SampleData.getRandomModel());
-        this.setSerialNumber(SampleData.getRandomSerialNumber());
-        this.setMalfunction(SampleData.getRandomMalfunction());
-        this.setSpecialNotes(SampleData.getRandomSpecialNotes());
-        this.setPurchaserName(SampleData.getRandomName());
-        this.setAddress(SampleData.getRandomAddress());
-        this.setPhone(SampleData.getRandomPhone());
-        this.setEmail(SampleData.getRandomEmail());
-        this.setInspectorName(SampleData.getRandomName());
-        this.setMasterName(SampleData.getRandomName());
+        this.setNameOfCustomer(SampleDataService.getRandomName());
+        this.setNameOfProduct(SampleDataService.getRandomProduct());
+        this.setRepairPeriod(SampleDataService.getRepairPeriod());
+        this.setIntroduced(SampleDataService.getRandomDate());
+        this.setModel(SampleDataService.getRandomModel());
+        this.setSerialNumber(SampleDataService.getRandomSerialNumber());
+        this.setMalfunction(SampleDataService.getRandomMalfunction());
+        this.setSpecialNotes(SampleDataService.getRandomSpecialNotes());
+        this.setPurchaserName(SampleDataService.getRandomName());
+        this.setAddress(SampleDataService.getRandomAddress());
+        this.setPhone(SampleDataService.getRandomPhone());
+        this.setEmail(SampleDataService.getRandomEmail());
+        this.setInspectorName(SampleDataService.getRandomName());
+        this.setMasterName(SampleDataService.getRandomName());
 
-        this.setDiagnostics(SampleData.getSetConsistFrom(o -> new Diagnostic().withRandomData().withOwner(this)));
-        this.setNotes(SampleData.getSetConsistFrom(o -> new Note().withRandomData().withOwner(this)));
-        this.setKits(SampleData.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
+        this.setDiagnostics(SampleDataService.getSetConsistFrom(o -> new Diagnostic().withRandomData().withOwner(this)));
+        this.setNotes(SampleDataService.getSetConsistFrom(o -> new Note().withRandomData().withOwner(this)));
+        this.setKits(SampleDataService.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
 
-        this.setGuarantee(SampleData.getRandomDate());
-        this.setReady(SampleData.getRandomDate());
-        this.setIssued(SampleData.getRandomDate());
+        this.setGuarantee(SampleDataService.getRandomDate());
+        this.setReady(SampleDataService.getRandomDate());
+        this.setIssued(SampleDataService.getRandomDate());
 
         return this;
     }
@@ -164,5 +161,4 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
-
 }

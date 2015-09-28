@@ -10,6 +10,14 @@
         color: #3F51B5;
     }
 
+    header button.md-icon-button.md-button md-icon {
+        color: #3F51B5;
+    }
+
+    header p {
+        margin: 0;
+    }
+
     header #header {
         min-height: 0.7em;
     }
@@ -26,5 +34,9 @@
 
     header md-tabs[md-border-bottom] md-tabs-wrapper {
         border-style: none;
+    }
+
+    header md-content.currency-rates {
+        margin-left: 0.3rem;
     }
 }

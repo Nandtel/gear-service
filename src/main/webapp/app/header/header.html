@@ -1,19 +1,22 @@
 <md-content md-theme="header" layout="row" layout-align="start start">
 
-    <md-content flex="50">
+    <md-content layout="row" layout-align="center center" flex="50">
 
-        <div ng-click="refreshCurrencyRates()">
-            USD: {{rates["USD"] | currency: '$'}}, UAH: {{rates["UAH"] | currency: "&#8372"}}
-        </div>
+        <p>{{'current currency rates' | translate}} {{currencyDate()}}:</p>
+        <md-content layout="row" class="currency-rates">
+            <p>USD: {{rates["usd"] | currency: '$'}},</p>
+            <p>UAH: {{rates["uah"] | currency: "&#8372"}}</p>
+        </md-content>
+
+        <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">
+            <md-icon md-font-set="material-icons" aria-label="delete">refresh</md-icon>
+        </md-button>
 
     </md-content>
 
     <md-tabs md-selected="selectedTab" md-center-tabs="true" md-dynamic-height md-border-bottom flex="50">
         <md-tab ui-sref="cheque.filter" id="filters">{{'Filters' | translate}}</md-tab>
         <md-tab ui-sref="cheque.create">{{'cheque' | translate}}</md-tab>
-        <!--<md-tab ng-click="refreshCurrencyRates()">-->
-        <!--<div>USD: {{rates["USD"] | currency: '$'}}, UAH: {{rates["UAH"] | currency: "&#8372"}}</div>-->
-        <!--</md-tab>-->
         <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'profile' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'login' | translate}}</md-tab>

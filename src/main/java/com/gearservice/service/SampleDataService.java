@@ -1,4 +1,6 @@
-package com.gearservice.model.samples;
+package com.gearservice.service;
+
+import com.gearservice.model.samples.*;
 
 import java.time.OffsetDateTime;
 import java.util.Random;
@@ -15,7 +17,7 @@ import static java.util.stream.Collectors.toSet;
  * @author Dmitry
  * @since 04.09.2015
  */
-public class SampleData {
+public class SampleDataService {
     private static Random random = new Random();
 
     /**

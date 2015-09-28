@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
-import com.gearservice.model.samples.SampleData;
+import com.gearservice.service.SampleDataService;
 
 
 import javax.persistence.*;
@@ -48,9 +48,9 @@ public class Diagnostic {
      * @return this Diagnostic object after editing
      */
     public Diagnostic withRandomData() {
-        this.setText(SampleData.getRandomComment());
-        this.setTime(SampleData.getRandomDate());
-        this.setUser(SampleData.getRandomName());
+        this.setText(SampleDataService.getRandomComment());
+        this.setTime(SampleDataService.getRandomDate());
+        this.setUser(SampleDataService.getRandomName());
         return this;
     }
 

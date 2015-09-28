@@ -1,6 +1,7 @@
 package com.gearservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -17,17 +18,15 @@ public class Payment {
     private String master;
 
     private float cost;
-    private String currency;
-
-    private float eur;
-    private float uah;
-    private float usd;
-    private float rub;
+    private String currentCurrency;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cheque", referencedColumnName = "id")
     @JsonBackReference
     private Cheque paymentOwner;
+
+    @ManyToOne
+    Currency currency;
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
@@ -39,16 +38,10 @@ public class Payment {
     public void setMaster(String master) {this.master = master;}
     public float getCost() {return cost;}
     public void setCost(float cost) {this.cost = cost;}
-    public String getCurrency() {return currency;}
-    public void setCurrency(String currency) {this.currency = currency;}
-    public float getEur() {return eur;}
-    public void setEur(float eur) {this.eur = eur;}
-    public float getUah() {return uah;}
-    public void setUah(float uah) {this.uah = uah;}
-    public float getUsd() {return usd;}
-    public void setUsd(float usd) {this.usd = usd;}
-    public float getRub() {return rub;}
-    public void setRub(float rub) {this.rub = rub;}
     public Cheque getPaymentOwner() {return paymentOwner;}
     public void setPaymentOwner(Cheque paymentOwner) {this.paymentOwner = paymentOwner;}
+    public String getCurrentCurrency() {return currentCurrency;}
+    public void setCurrentCurrency(String currentCurrency) {this.currentCurrency = currentCurrency;}
+    public Currency getCurrency() {return currency;}
+    public void setCurrency(Currency currency) {this.currency = currency;}
 }

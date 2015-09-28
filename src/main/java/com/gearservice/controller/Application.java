@@ -1,16 +1,11 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.Cheque;
-import com.gearservice.model.ChequeMin;
-import com.gearservice.model.Diagnostic;
-import com.gearservice.model.Note;
+import com.gearservice.model.*;
+import com.gearservice.model.Currency;
 import com.gearservice.model.repositories.ChequeRepository;
+import com.gearservice.model.repositories.CurrencyRepository;
 import com.gearservice.model.repositories.DiagnosticRepository;
 import com.gearservice.model.repositories.NoteRepository;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.FormElement;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Class Application is controller, that handles all request from client-side
@@ -39,6 +34,9 @@ public class Application {
      */
     @Autowired
     ChequeRepository chequeRepository;
+
+    @Autowired
+    CurrencyRepository currencyRepository;
 
     /**
      * Connect to diagnostic repository from model/repositories
@@ -86,6 +84,7 @@ public class Application {
     @RequestMapping(value = "/cheques", method = RequestMethod.POST)
     public Cheque saveCheque(@RequestBody Cheque cheque) {
         Long ID = cheque.getId();
+
 
         chequeRepository.save(cheque);
 
@@ -187,21 +186,22 @@ public class Application {
     }
 
     @RequestMapping(value = "/currency-rates", method = RequestMethod.GET)
-    public Map<String, Float> getCurrencyRates() throws IOException {
-        Map<String, Float> currencyRate = new HashMap<>();
-        currencyRate.put("RUB", 1F);
+    public Currency getCurrencyRates() throws IOException {
+        Long now = LocalDate.now().toEpochDay();
 
-        Document doc = Jsoup.connect("http://minfindnr.ru/").get();
-        String[] elements = doc.select("li#text-12 font").text().split(" ");
+        if(!currencyRepository.exists(now))
+            currencyRepository.save(
+                    new Currency()
+                            .forToday()
+                            .withRUB()
+                            .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
 
-        for(int i = 0; i < elements.length;) {
-            currencyRate.put(elements[i++], (Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2);
-            i++;
-        }
+        return currencyRepository.findOne(now);
+    }
 
-        System.out.println("In parse");
-
-        return currencyRate;
+    @RequestMapping(value = "/rates", method = RequestMethod.GET)
+    public List<Currency> getCur() {
+        return currencyRepository.findAll();
     }
 
 }

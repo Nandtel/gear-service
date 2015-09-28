@@ -66,7 +66,7 @@ angular.module("mainModule")
             if(!$scope.hasID) {
 
                 $scope.cleanNewCheck = {repairPeriod: 99, introduced: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                    inspectorName: 'Администратор', kits: [], notes: [], diagnostics: []};
+                    inspectorName: 'Администратор', kits: [], notes: [], payments: [], diagnostics: []};
 
                 /**
                  * Method resetNewCheck reset cheque with default cleanNewCheque data

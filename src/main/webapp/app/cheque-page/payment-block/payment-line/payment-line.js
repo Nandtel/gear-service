@@ -12,13 +12,9 @@ angular.module("mainModule")
                 $scope.hasPrepayment = newValue === 'prepayment';
             });
 
-            //$scope.currencies = function() {
-            //    return Object.keys($scope.payment.currencyRates);
-            //};
-
             $scope.toPay = function(currency) {
                 return $scope.payment.cost *
-                    $scope.payment[$scope.payment.currency] / $scope.payment[currency];
+                    $scope.payment.currency[$scope.payment.currentCurrency] / $scope.payment.currency[currency];
             };
 
         }

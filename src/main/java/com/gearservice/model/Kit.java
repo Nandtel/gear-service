@@ -1,7 +1,7 @@
 package com.gearservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.gearservice.model.samples.SampleData;
+import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
 
@@ -37,7 +37,7 @@ public class Kit {
      * @return this Kit object after editing
      */
     public Kit withRandomData() {
-        this.setText(SampleData.getRandomKit());
+        this.setText(SampleDataService.getRandomKit());
         return this;
     }
 
