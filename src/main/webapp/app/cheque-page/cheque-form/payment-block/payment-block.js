@@ -47,6 +47,6 @@ angular.module("mainModule")
                 cheque: '=ngModel'
             },
             require: 'ngModel',
-            templateUrl: 'app/cheque-page/payment-block/payment-block.html'
+            templateUrl: 'app/cheque-page/cheque-form/payment-block/payment-block.html'
         }
     }]);
