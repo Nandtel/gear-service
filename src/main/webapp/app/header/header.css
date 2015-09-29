@@ -10,12 +10,14 @@
         color: #3F51B5;
     }
 
-    header button.md-icon-button.md-button md-icon {
-        color: #3F51B5;
+    header h4 {
+        margin: 0;
+        color: #797979;
+        font-weight: normal;
     }
 
-    header p {
-        margin: 0;
+    header button.md-icon-button.md-button md-icon {
+        color: #3F51B5;
     }
 
     header #header {

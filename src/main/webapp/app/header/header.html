@@ -2,10 +2,10 @@
 
     <md-content layout="row" layout-align="center center" flex="50">
 
-        <p>{{'current currency rates' | translate}} {{currencyDate()}}:</p>
+        <h4>{{'current currency rates' | translate}} {{currencyDate()}}:</h4>
         <md-content layout="row" class="currency-rates">
-            <p>USD: {{rates["usd"] | currency: '$'}},</p>
-            <p>UAH: {{rates["uah"] | currency: "&#8372"}}</p>
+            <h4>USD: {{rates["usd"] | currency: '$'}},</h4>
+            <h4>UAH: {{rates["uah"] | currency: "&#8372"}}</h4>
         </md-content>
 
         <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">

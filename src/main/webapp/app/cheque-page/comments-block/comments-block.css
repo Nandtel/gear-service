@@ -1,8 +1,4 @@
 @media screen {
-    comments-block {
-        margin: 0.5em 0;
-    }
-
     comments-block:focus {
         outline: none;
     }
@@ -11,16 +7,43 @@
         margin: 0 5em 0 0;
     }
 
+    comments-block form {
+        margin: 0;
+    }
+
     comments-block form md-input-container {
-        padding: 0 1rem;
+        padding: 1rem 3rem;
+        width: 90%
+    }
+
+    comments-block .bottom-toolbar {
+        background: #F6F6F6;
+        width: 100%;
+    }
+
+    comments-block .bottom-toolbar div.text {
+        font-size: 12px;
+        margin: 0.5rem;
+        color: #797979;
+    }
+
+    comments-block .bottom-toolbar div.md-ripple-container {
+        border-radius: 0;
     }
 
     comments-block .comments-list {
-        max-height: 40rem;
         overflow: auto;
     }
 
     comments-block md-list-item.md-3-line md-content.md-list-item-text {
         padding: 1rem;
+    }
+
+    comments-block form md-content button {
+        padding: 1rem;
+    }
+
+    comments-block md-icon:focus {
+        outline: none;
     }
 }

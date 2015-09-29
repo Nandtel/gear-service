@@ -1,7 +1,10 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http',
-        function($scope, $http) {
+    .controller('CommentsBlock', ['$scope', '$http', '$rootScope',
+        function($scope, $http, $rootScope) {
             $scope.comment = undefined;
+            $scope.add = 3;
+            $scope.limit = 3;
+            $scope.bottomButton = 'show more';
 
             /**
              * Method saveComment create new comment object and send it to server-side and then set status of this
@@ -34,6 +37,28 @@ angular.module("mainModule")
             $scope.getCheque = function() {
                 $http.get('/cheques/' + $scope.cheque.id)
                     .success(function (response) {$scope.cheque = response;});
+            };
+
+            $scope.addedLesserThanElem = function() {
+                return $scope.add < $scope.cheque[$scope.title].length;
+            };
+
+            var limitLesserThanElem = function() {
+                return $scope.limit < $scope.cheque[$scope.title].length;
+            };
+
+            $scope.limitComments = function() {
+                if(limitLesserThanElem())
+                    $scope.limit += $scope.add;
+                else
+                    $scope.limit = $scope.add;
+
+                if(!limitLesserThanElem())
+                    $scope.bottomButton = 'roll up';
+                else
+                    $scope.bottomButton = 'show more';
+
+                window.scrollTo(0, 1000);
             };
 
         }

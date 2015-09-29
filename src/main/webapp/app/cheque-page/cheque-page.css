@@ -3,6 +3,10 @@
         outline: none;
     }
 
+    cheque-page md-tab-item {
+        width: 50%;
+    }
+
     /* Chips in create and edit*/
 
     ::-webkit-input-placeholder {color: rgba(0,0,0,0.26);}
@@ -19,4 +23,9 @@
     .phone::-moz-placeholder          {color: rgba(0,0,0,0);}
     .phone:-moz-placeholder           {color: rgba(0,0,0,0);}
     .phone:-ms-input-placeholder      {color: rgba(0,0,0,0);}
+
+    cheque-page md-tabs {
+        background: #f6f6f6;
+        border: 1px solid #e1e1e1;
+    }
 }

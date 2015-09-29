@@ -48,78 +48,91 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex="75">
+        <md-input-container flex="75" class="md-icon-float">
             <label translate>Customer</label>
+            <md-icon md-font-set="material-icons">people</md-icon>
             <input ng-model="cheque.nameOfCustomer" required>
         </md-input-container>
 
-        <md-input-container flex="25">
+        <md-input-container flex="25" class="md-icon-float">
             <label translate>Repair Period</label>
+            <!--<md-icon md-font-set="material-icons"> filter_9_plus</md-icon>-->
             <input type="number" min="1" max="99" ng-model="cheque.repairPeriod">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex="40">
+        <md-input-container flex="40" class="md-icon-float">
             <label translate>Name of Product</label>
+            <md-icon md-font-set="material-icons">desktop_windows</md-icon>
             <input ng-model="cheque.nameOfProduct" required>
         </md-input-container>
 
-        <md-input-container flex="30">
+        <md-input-container flex="30" class="md-icon-float">
             <label translate>Model</label>
+            <!--<md-icon md-font-set="material-icons">laptop_windows</md-icon>-->
             <input ng-model="cheque.model" required>
         </md-input-container>
 
-        <md-input-container flex="30">
+        <md-input-container flex="30" class="md-icon-float">
             <label translate>Serial Number</label>
+            <!--<md-icon md-font-set="material-icons">border_outer</md-icon>-->
             <input ng-model="cheque.serialNumber" required>
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex>
+        <md-input-container flex class="md-icon-float">
             <label translate>Malfunction</label>
+            <md-icon md-font-set="material-icons">local_hospital</md-icon>
             <input ng-model="cheque.malfunction">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex>
+        <md-input-container flex class="md-icon-float">
             <label translate>Special Notes</label>
+            <md-icon md-font-set="material-icons">book</md-icon>
             <input ng-model="cheque.specialNotes">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex="30">
+        <md-input-container flex="30" class="md-icon-float">
             <label translate >Purchaser</label>
+            <md-icon md-font-set="material-icons">account_box</md-icon>
             <input ng-model="cheque.purchaserName" required>
         </md-input-container>
 
-        <md-input-container flex="35">
+        <md-input-container flex="30" class="md-icon-float">
             <label translate>Address</label>
+            <!--<md-icon md-font-set="material-icons">place</md-icon>-->
             <input ng-model="cheque.address">
         </md-input-container>
 
-        <md-input-container flex="20">
+        <md-input-container flex="20" class="md-icon-float">
             <label translate>Phone</label>
+            <!--<md-icon md-font-set="material-icons">call</md-icon>-->
             <input ng-model="cheque.phone" ui-mask="+38 (999) 999 ‒  99 ‒  99" class="phone">
         </md-input-container>
 
-        <md-input-container flex="15">
+        <md-input-container flex="20" class="md-icon-float">
             <label translate>Email</label>
+            <!--<md-icon md-font-set="material-icons">email</md-icon>-->
             <input ng-model="cheque.email">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex="50">
+        <md-input-container flex="50" class="md-icon-float">
             <label translate>master</label>
+            <md-icon md-font-set="material-icons">face</md-icon>
             <input ng-model="cheque.masterName" required>
         </md-input-container>
 
-        <md-input-container flex="50">
+        <md-input-container flex="50" class="md-icon-float">
             <label translate>Inspector</label>
+            <!--<md-icon md-font-set="material-icons">airline_seat_recline_normal</md-icon>-->
             <input ng-model="cheque.inspectorName" required>
         </md-input-container>
     </md-content>

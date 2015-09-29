@@ -2,8 +2,16 @@
 
     <cheque-form ng-model="cheque" has-id="hasID"></cheque-form>
 
-    <comments-block ng-model="cheque" title="'diagnostics'" ng-show="hasID"></comments-block>
-    <comments-block ng-model="cheque" title="'notes'" ng-show="hasID"></comments-block>
+    <md-content md-theme="tabs" ng-show="hasID" class="md-whiteframe-z1" id="com">
+        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" class="content-block">
+            <md-tab label="{{'diagnostics' | translate}}">
+                <comments-block ng-model="cheque" title="'diagnostics'"></comments-block>
+            </md-tab>
+            <md-tab label="{{'notes' | translate}}">
+                <comments-block ng-model="cheque" title="'notes'"></comments-block>
+            </md-tab>
+        </md-tabs>
+    </md-content>
 
 </section>
 

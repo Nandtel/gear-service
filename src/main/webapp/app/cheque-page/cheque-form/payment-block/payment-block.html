@@ -8,7 +8,7 @@
                     <span ng-show="cheque.paid" translate>paid</span>
                 </h2>
             </md-checkbox>
-            <span style="margin-left: 3rem"></span>
+            <span style="margin-left: 2rem"></span>
             <span ng-hide="hasPrepayment && !cheque.paid">{{'sum' | translate}}:</span>
             <span ng-show="hasPrepayment && !cheque.paid">{{'sum with prepayment' | translate}}:</span>
             <span style="margin-left: 1rem"></span>
@@ -18,7 +18,7 @@
                 {{sum('usd', hasPrepayment && !cheque.paid) | currency: '$'}}
             </span>
 
-            <span style="margin-left:5rem"></span>
+            <span style="margin-left:3rem"></span>
 
             <md-input-container md-theme="default" class="prediction">
                 <label translate>prediction</label>

@@ -66,9 +66,9 @@ var app =
                 .primaryPalette('grey', {'default': '900'})
                 .accentPalette('indigo');
 
-            //$mdThemingProvider
-            //    .theme('toolbar-bottom')
-            //    .backgroundPalette('grey', {'default': '200'});
+            $mdThemingProvider
+                .theme('tabs')
+                .accentPalette('indigo');
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

@@ -2,4 +2,8 @@
     md-datepicker {
         margin: 0 0.7rem;
     }
+
+    md-datepicker md-icon {
+        color: #3F51B5;
+    }
 }

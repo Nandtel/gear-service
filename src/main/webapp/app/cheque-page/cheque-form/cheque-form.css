@@ -2,4 +2,8 @@
     cheque-form:focus {
         outline: none;
     }
+
+    cheque-form md-input-container.md-icon-float md-icon {
+        color: #3F51B5;
+    }
 }
