@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$rootScope',
-        function($scope, $http, $rootScope) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document',
+        function($scope, $http, $document) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -48,6 +48,7 @@ angular.module("mainModule")
             };
 
             $scope.limitComments = function() {
+
                 if(limitLesserThanElem())
                     $scope.limit += $scope.add;
                 else
@@ -57,8 +58,6 @@ angular.module("mainModule")
                     $scope.bottomButton = 'roll up';
                 else
                     $scope.bottomButton = 'show more';
-
-                window.scrollTo(0, 1000);
             };
 
         }

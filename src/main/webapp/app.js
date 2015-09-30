@@ -5,9 +5,9 @@
  * @author Dmitry
  * @since 04.09.2015
  */
-var app =
-    angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial',
-    'md.data.table', 'angular-loading-bar', 'templates', 'angular-cache'])
+angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
+    'angular-loading-bar', 'templates', 'angular-cache', 'duScroll'])
+    .value('duScrollDuration', 3000)
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('cheque', {
