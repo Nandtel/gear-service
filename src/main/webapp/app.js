@@ -6,7 +6,7 @@
  * @since 04.09.2015
  */
 var app =
-    angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'mdDateTime',
+    angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial',
     'md.data.table', 'angular-loading-bar', 'templates', 'angular-cache'])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $stateProvider
@@ -68,6 +68,7 @@ var app =
 
             $mdThemingProvider
                 .theme('tabs')
+                .primaryPalette('grey', {'default': '900'})
                 .accentPalette('indigo');
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
