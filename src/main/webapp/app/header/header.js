@@ -11,29 +11,16 @@ angular.module("mainModule")
     .controller("Header", ['$scope', 'currencyRatesService', '$mdToast',
         function ($scope, currencyRatesService, $mdToast) {
 
-            $scope.currencyDate = function() {
-                return moment($scope.rates.id).format('ll');
-            };
-
-            currencyRatesService.getCurrencyRates()
-                .then(function(rates) {
-                    $scope.rates = rates;
-                });
+            currencyRatesService.getCurrencyRate();
 
             $scope.refreshCurrencyRates = function() {
-                console.log('1241241');
-                currencyRatesService.refreshCurrencyRates()
-                    .then(function(rates) {
-                        $scope.rates = rates;
+                currencyRatesService.refreshCurrencyRate();
 
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content('Currency rates refreshed')
-                                .position('top right')
-                                .hideDelay(700)
-                        );
-
-                    });
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Currency rates refreshed')
+                        .position('top right')
+                        .hideDelay(700));
             }
         }
     ])

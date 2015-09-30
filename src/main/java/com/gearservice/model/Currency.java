@@ -1,6 +1,8 @@
 package com.gearservice.model;
 
+import com.gearservice.model.repositories.CurrencyRepository;
 import org.jsoup.Jsoup;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

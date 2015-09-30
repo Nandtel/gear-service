@@ -185,23 +185,28 @@ public class Application {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/currency-rates", method = RequestMethod.GET)
+    @RequestMapping(value = "/currency-rate", method = RequestMethod.GET)
     public Currency getCurrencyRates() throws IOException {
         Long now = LocalDate.now().toEpochDay();
 
         if(!currencyRepository.exists(now))
-            currencyRepository.save(
-                    new Currency()
-                            .forToday()
-                            .withRUB()
-                            .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
+            currencyRepository.save(new Currency()
+                    .forToday()
+                    .withRUB()
+                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
 
         return currencyRepository.findOne(now);
     }
 
-    @RequestMapping(value = "/rates", method = RequestMethod.GET)
+    @RequestMapping(value = "/currency-rate-list", method = RequestMethod.GET)
     public List<Currency> getCur() {
         return currencyRepository.findAll();
+    }
+
+    @RequestMapping(value = "/currency-rate-list", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void setCur(@RequestBody List<Currency> list) {
+        currencyRepository.save(list);
     }
 
 }

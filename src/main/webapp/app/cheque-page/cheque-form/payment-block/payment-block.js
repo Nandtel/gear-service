@@ -1,18 +1,22 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope', 'currencyRatesService',
-        function($scope, currencyRatesService) {
+    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope',
+        function($scope, currencyRatesService, $rootScope) {
             $scope.hasPrepayment = false;
+
+            var getRates = function() {
+                currencyRatesService.refreshCurrencyRate();
+            };
 
             $scope.addPayment = function() {
 
                 if($scope.cheque.payments === undefined)
                     $scope.cheque.payments = [];
 
-                currencyRatesService.refreshCurrencyRates()
-                    .then(function(rates) {
-                        $scope.cheque.payments.push({cost: 0, currentCurrency: 'rub', currency: rates});
-                    });
+                currencyRatesService.refreshCurrencyRate();
+                $scope.cheque.payments.push({cost: 0, currentCurrency: 'rub', currency: $rootScope.currencyRates});
             };
+
+
 
             $scope.delPayment = function(payment) {
                 $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
@@ -37,6 +41,8 @@ angular.module("mainModule")
 
                 return sum;
             };
+
+            getRates();
         }
     ])
     .directive('paymentBlock', [function() {

@@ -49,6 +49,11 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 url: "^/cheque",
                 template: '<cheque-page></cheque-page>',
                 data: {'selectedTab': 1}
+            })
+            .state('cheque.profile', {
+                url: "^/profile",
+                template: '<profile-page></profile-page>',
+                data: {'selectedTab': 3}
             });
 
             $urlRouterProvider.when('', '/filter');

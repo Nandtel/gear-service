@@ -2,10 +2,10 @@
 
     <md-content layout="row" layout-align="center center" flex="50">
 
-        <h4>{{'current currency rates' | translate}} {{currencyDate()}}:</h4>
+        <h4>{{'current currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}:</h4>
         <md-content layout="row" class="currency-rates">
-            <h4>USD: {{rates["usd"] | currency: '$'}},</h4>
-            <h4>UAH: {{rates["uah"] | currency: "&#8372"}}</h4>
+            <h4>USD: {{$root.currencyRates["usd"] | currency: '$'}},</h4>
+            <h4>UAH: {{$root.currencyRates["uah"] | currency: "&#8372"}}</h4>
         </md-content>
 
         <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">
@@ -18,7 +18,7 @@
         <md-tab ui-sref="cheque.filter" id="filters">{{'Filters' | translate}}</md-tab>
         <md-tab ui-sref="cheque.create">{{'cheque' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>
-        <md-tab ng-disabled="true">{{'profile' | translate}}</md-tab>
+        <md-tab ui-sref="cheque.profile">{{'profile' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'login' | translate}}</md-tab>
     </md-tabs>
 

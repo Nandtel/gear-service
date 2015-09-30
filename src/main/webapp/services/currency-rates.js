@@ -1,6 +1,6 @@
 angular.module('mainModule')
-    .service('currencyRatesService', ['CacheFactory', '$http', '$q',
-        function(CacheFactory, $http, $q) {
+    .service('currencyRatesService', ['CacheFactory', '$http', '$q', '$rootScope',
+        function(CacheFactory, $http, $q, $rootScope) {
             var currencyRatesCache;
 
             if(!CacheFactory.get('currencyRatesCache')) {
@@ -16,28 +16,31 @@ angular.module('mainModule')
                         });
                     }
                 });
-
             }
 
             currencyRatesCache = CacheFactory.get('currencyRatesCache');
 
             return {
-                getCurrencyRates: function() {
+                getCurrencyRate: function() {
+                    $http.get('/currency-rate', {cache: currencyRatesCache})
+                        .success(function(data) {
+                            $rootScope.currencyRates = data;
+                        });
+                },
+                refreshCurrencyRate: function() {
+                    currencyRatesCache.remove('/currency-rate');
+                    this.getCurrencyRate();
+                },
+                getListOfCurrencyRates: function() {
                     var deferred = $q.defer();
-                    $http.get('/currency-rates', {cache: currencyRatesCache})
+                    $http.get('/currency-rate-list')
                         .success(function(data) {
                             deferred.resolve(data);
-                        });
+                    });
                     return deferred.promise;
                 },
-                refreshCurrencyRates: function() {
-                    var deferred = $q.defer();
-                    currencyRatesCache.remove('/currency-rates');
-                    $http.get('/currency-rates', {cache: currencyRatesCache})
-                        .success(function(data) {
-                            deferred.resolve(data);
-                        });
-                    return deferred.promise;
+                setListOfCurrencyRates: function(rates) {
+                    $http.post('/currency-rate-list', rates);
                 }
             }
         }
