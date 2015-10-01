@@ -1,0 +1,5 @@
+@media screen {
+    filter-form md-autocomplete[md-floating-label] md-input-container {
+        padding: 0;
+    }
+}

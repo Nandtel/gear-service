@@ -56,7 +56,6 @@
 
         <md-input-container flex="25" class="md-icon-float">
             <label translate>Repair Period</label>
-            <!--<md-icon md-font-set="material-icons"> filter_9_plus</md-icon>-->
             <input type="number" min="1" max="99" ng-model="cheque.repairPeriod">
         </md-input-container>
     </md-content>
@@ -70,13 +69,11 @@
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Model</label>
-            <!--<md-icon md-font-set="material-icons">laptop_windows</md-icon>-->
             <input ng-model="cheque.model" required>
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Serial Number</label>
-            <!--<md-icon md-font-set="material-icons">border_outer</md-icon>-->
             <input ng-model="cheque.serialNumber" required>
         </md-input-container>
     </md-content>
@@ -106,19 +103,16 @@
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Address</label>
-            <!--<md-icon md-font-set="material-icons">place</md-icon>-->
             <input ng-model="cheque.address">
         </md-input-container>
 
         <md-input-container flex="20" class="md-icon-float">
             <label translate>Phone</label>
-            <!--<md-icon md-font-set="material-icons">call</md-icon>-->
             <input ng-model="cheque.phone" ui-mask="(999) 999 ‒  99 ‒  99" class="phone">
         </md-input-container>
 
         <md-input-container flex="20" class="md-icon-float">
             <label translate>Email</label>
-            <!--<md-icon md-font-set="material-icons">email</md-icon>-->
             <input ng-model="cheque.email">
         </md-input-container>
     </md-content>
@@ -132,7 +126,6 @@
 
         <md-input-container flex="50" class="md-icon-float">
             <label translate>Inspector</label>
-            <!--<md-icon md-font-set="material-icons">airline_seat_recline_normal</md-icon>-->
             <input ng-model="cheque.inspectorName" required>
         </md-input-container>
     </md-content>
@@ -155,4 +148,3 @@
     </md-content>
 
 </form>
-<!--<pre>{{cheque | json}}</pre>-->

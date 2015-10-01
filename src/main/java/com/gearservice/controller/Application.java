@@ -198,6 +198,18 @@ public class Application {
         return currencyRepository.findOne(now);
     }
 
+    @RequestMapping(value = "/currency-rate-clean", method = RequestMethod.GET)
+    public Currency getCleanCurrencyRates() throws IOException {
+        Long now = LocalDate.now().toEpochDay();
+
+        currencyRepository.save(new Currency()
+                    .forToday()
+                    .withRUB()
+                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
+
+        return currencyRepository.findOne(now);
+    }
+
     @RequestMapping(value = "/currency-rate-list", method = RequestMethod.GET)
     public List<Currency> getCur() {
         return currencyRepository.findAll();

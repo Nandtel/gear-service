@@ -1,0 +1,166 @@
+<section class="content-block">
+    <form name="filterForm" id="filterForm" class="md-whiteframe-z1">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span translate>Filters</span>
+                </h2>
+                <span flex></span>
+                <md-button type="button" class="md-icon-button" ng-click="resetFilter()">
+                    <md-icon md-font-set="material-icons">delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-content class="dates-field" layout="row" layout-align="space-around end" flex>
+
+            <md-content layout="column" layout-align="end center">
+                <p>{{ 'IntroducedFrom' | translate}}</p>
+                <date-picker ng-model="filter.introducedFrom"></date-picker>
+            </md-content>
+
+            <md-content layout="column" layout-align="end center">
+                <p>{{ 'IntroducedTo' | translate}}</p>
+                <date-picker ng-model="filter.introducedTo"></date-picker>
+            </md-content>
+
+        </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+            <md-input-container flex="10">
+                <label translate>Id</label>
+                <input ng-model="filter.id">
+            </md-input-container>
+
+            <md-autocomplete flex="90"
+                             md-search-text="filter.nameOfCustomer"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {nameOfCustomer : filter.nameOfCustomer} | unique:'nameOfCustomer'"
+                             md-item-text="cheque.nameOfCustomer"
+                             md-floating-label="{{'Customer' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.nameOfCustomer" md-highlight-flags="^i"> {{cheque.nameOfCustomer}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+        </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+            <md-autocomplete flex="40"
+                             md-search-text="filter.nameOfProduct"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {nameOfProduct : filter.nameOfProduct} | unique:'nameOfProduct'"
+                             md-item-text="cheque.nameOfProduct"
+                             md-floating-label="{{'Name of Product' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.nameOfProduct" md-highlight-flags="^i"> {{cheque.nameOfProduct}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+            <md-autocomplete flex="30"
+                             md-search-text="filter.model"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {model : filter.model} | unique:'model'"
+                             md-item-text="cheque.model"
+                             md-floating-label="{{'Model' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{cheque.model}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+            <md-autocomplete flex="30"
+                             md-search-text="filter.serialNumber"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {serialNumber : filter.serialNumber} | unique:'serialNumber'"
+                             md-item-text="cheque.serialNumber"
+                             md-floating-label="{{'Serial Number' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{cheque.serialNumber}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+        </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+            <md-autocomplete flex="100"
+                             md-search-text="filter.purchaserName"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {purchaserName : filter.purchaserName} | unique:'purchaserName'"
+                             md-item-text="cheque.purchaserName"
+                             md-floating-label="{{'Purchaser' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.purchaserName" md-highlight-flags="^i"> {{cheque.purchaserName}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+        </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+            <md-autocomplete flex="50"
+                             md-search-text="filter.inspectorName"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {inspectorName : filter.inspectorName} | unique:'inspectorName'"
+                             md-item-text="cheque.inspectorName"
+                             md-floating-label="{{'Inspector' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.inspectorName" md-highlight-flags="^i"> {{cheque.inspectorName}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+            <md-autocomplete flex="50"
+                             md-search-text="filter.masterName"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="cheque in cheques | filter: {masterName : filter.masterName} | unique:'masterName'"
+                             md-item-text="cheque.masterName"
+                             md-floating-label="{{'master' | translate}}"
+                             md-autofocus="false">
+                <md-item-template>
+                    <span md-highlight-text="filter.masterName" md-highlight-flags="^i"> {{cheque.masterName}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+        </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+
+            <md-select ng-model="filter.guarantee" placeholder="{{'Guarantee' | translate}}" flex="25">
+                <md-option value="!!">{{'Has guarantee' | translate}}</md-option>
+                <md-option value="!!!">{{'Has no guarantee' | translate}}</md-option>
+            </md-select>
+
+            <md-select ng-model="filter.ready" placeholder="{{'Ready' | translate}}" flex="25">
+                <md-option value="!!">{{'Ready' | translate}}</md-option>
+                <md-option value="!!!">{{'Not ready' | translate}}</md-option>
+            </md-select>
+
+            <md-select ng-model="filter.issued" placeholder="{{'Issued' | translate}}" flex="25">
+                <md-option value="!!">{{'Issued' | translate}}</md-option>
+                <md-option value="!!!">{{'Not issued' | translate}}</md-option>
+            </md-select>
+
+            <md-select ng-model="filter.paid" placeholder="{{'paid' | translate}}" flex="25">
+                <md-option value="!!">{{'paid' | translate}}</md-option>
+                <md-option value="!!!">{{'not paid' | translate}}</md-option>
+            </md-select>
+
+        </md-content>
+    </form>
+</section>
+

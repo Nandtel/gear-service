@@ -1,17 +1,9 @@
-html {
-}
+html {}
 
 section.content-block {
-    position: relative;
-    padding: 0.5em 7em;
+    margin: 0.5rem 7rem;
     max-width: 1400px;
     min-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.material-block {
-    margin: 0 0 1em 0;
 }
 
 /* Loading bar */
