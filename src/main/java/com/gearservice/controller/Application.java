@@ -71,7 +71,7 @@ public class Application {
     @RequestMapping(value = "/cheques", method = RequestMethod.GET)
     public List<ChequeMin> getCheques() {
         return (List<ChequeMin>) em.createNativeQuery("SELECT id, name_of_customer, introduced, name_of_product, " +
-                "model, serial_number, purchaser_name, inspector_name, master_name, guarantee, ready, issued " +
+                "model, serial_number, purchaser_name, inspector_name, master_name, guarantee, ready, issued, paid " +
                 "FROM cheque", ChequeMin.class).getResultList();
     }
 

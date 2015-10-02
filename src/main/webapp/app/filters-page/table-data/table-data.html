@@ -42,7 +42,8 @@
 								masterName:       filter.masterName,
 								ready:            filter.ready,
 								issued:           filter.issued,
-								guarantee:        filter.guarantee})
+								guarantee:        filter.guarantee,
+								paid:             filter.paid})
 				| orderBy: filter.order
 				| limitTo: filter.limit: (filter.page - 1) * filter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td>{{cheque.id}}</td>
