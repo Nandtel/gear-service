@@ -34,7 +34,7 @@ public class Currency {
         return this;
     }
 
-    public Currency getFromServer(String link, String tag) throws IOException {
+    public Currency getFromServer(String link, String tag) {
         String[] elements = parseWebSite(link, tag);
 
         for(int i = 0; i < elements.length;) {
@@ -51,12 +51,19 @@ public class Currency {
         return this;
     }
 
-    private static String[] parseWebSite(String link, String tag) throws IOException {
-        return Jsoup.connect(link)
-                .get()
-                .select(tag)
-                .text()
-                .split(" ");
+    private static String[] parseWebSite(String link, String tag) {
+        try {
+            return Jsoup.connect(link)
+                    .cookie("realauth", "SvBD85dINu3")
+                    .get()
+                    .select(tag)
+                    .text()
+                    .split(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public String getId() {return LocalDate.ofEpochDay(id).toString();}
