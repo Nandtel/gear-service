@@ -22,7 +22,7 @@ angular.module("mainModule")
             var result = [];
 
             angular.forEach(items, function (item) {
-                introduced = moment(item.introduced).unix();
+                introduced = moment(item.introducedDate).unix();
                 if (dateFrom < introduced && introduced < dateTo)
                     result.push(item);
             });

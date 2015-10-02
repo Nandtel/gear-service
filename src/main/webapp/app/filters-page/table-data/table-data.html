@@ -33,31 +33,30 @@
 				| filterByDateRange:filter.introducedFrom :filter.introducedTo
 				| filter:{
 								nameOfCustomer:   filter.nameOfCustomer,
-								introduced:       filter.introduced,
 								nameOfProduct:    filter.nameOfProduct,
 								model:            filter.model,
 								serialNumber:     filter.serialNumber,
 								purchaserName:    filter.purchaserName,
 								inspectorName:    filter.inspectorName,
 								masterName:       filter.masterName,
-								ready:            filter.ready,
-								issued:           filter.issued,
-								guarantee:        filter.guarantee,
-								paid:             filter.paid})
+								hasReadyStatus:        filter.hasReadyStatus,
+								hasIssuedStatus:       filter.hasIssuedStatus,
+								hasGuaranteeStatus:    filter.hasGuaranteeStatus,
+								hasPaidStatus:         filter.hasPaidStatus})
 				| orderBy: filter.order
 				| limitTo: filter.limit: (filter.page - 1) * filter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td>{{cheque.id}}</td>
                 <td>{{cheque.nameOfCustomer}}</td>
-                <td>{{cheque.introduced | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td>{{cheque.introducedDate | amDateFormat:'DD.MM.YYYY'}}</td>
                 <td>{{cheque.nameOfProduct}}</td>
                 <td>{{cheque.model}}</td>
                 <td>{{cheque.serialNumber}}</td>
                 <td>{{cheque.purchaserName}}</td>
                 <td>{{cheque.inspectorName}}</td>
                 <td>{{cheque.masterName}}</td>
-                <td>{{cheque.guarantee | amDateFormat:'DD.MM.YYYY'}}</td>
-                <td>{{cheque.ready | amDateFormat:'DD.MM.YYYY'}}</td>
-                <td>{{cheque.issued | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td>{{cheque.guaranteeDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td>{{cheque.readyDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td>{{cheque.issuedDate | amDateFormat:'DD.MM.YYYY'}}</td>
             </tr>
             </tbody>
         </table>

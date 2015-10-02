@@ -2,4 +2,8 @@
     filter-form md-autocomplete[md-floating-label] md-input-container {
         padding: 0;
     }
+
+    filter-form md-content.dates-field md-content p {
+        margin: 1rem 0 0 0;
+    }
 }

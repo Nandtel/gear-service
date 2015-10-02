@@ -20,9 +20,10 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'DatePicker',
             scope: {
-                date: '=ngModel'
+                date: '=ngModel',
+                disabled: '=ngDisabled'
             },
-            require: 'ngModel',
+            require: ['ngModel', 'ngDisabled'],
             templateUrl: 'directives/date-picker/date-picker.html'
         }
     });

@@ -22,13 +22,13 @@ public class ChequeMin {
     private String nameOfCustomer;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime introduced;
+    private OffsetDateTime introducedDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime guarantee;
+    private OffsetDateTime guaranteeDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime ready;
+    private OffsetDateTime readyDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime issued;
+    private OffsetDateTime issuedDate;
 
     private String nameOfProduct;
     private String model;
@@ -38,14 +38,15 @@ public class ChequeMin {
     private String inspectorName;
     private String masterName;
 
-    private boolean paid;
+    private boolean hasGuaranteeStatus;
+    private boolean hasReadyStatus;
+    private boolean hasIssuedStatus;
+    private boolean hasPaidStatus;
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
     public String getNameOfCustomer() {return nameOfCustomer;}
     public void setNameOfCustomer(String nameOfCustomer) {this.nameOfCustomer = nameOfCustomer;}
-    public OffsetDateTime getIntroduced() {return introduced;}
-    public void setIntroduced(OffsetDateTime introduced) {this.introduced = introduced;}
     public String getNameOfProduct() {return nameOfProduct;}
     public void setNameOfProduct(String nameOfProduct) {this.nameOfProduct = nameOfProduct;}
     public String getModel() {return model;}
@@ -58,12 +59,20 @@ public class ChequeMin {
     public void setInspectorName(String inspectorName) {this.inspectorName = inspectorName;}
     public String getMasterName() {return masterName;}
     public void setMasterName(String masterName) {this.masterName = masterName;}
-    public OffsetDateTime getGuarantee() {return guarantee;}
-    public void setGuarantee(OffsetDateTime guarantee) {this.guarantee = guarantee;}
-    public OffsetDateTime getReady() {return ready;}
-    public void setReady(OffsetDateTime ready) {this.ready = ready;}
-    public OffsetDateTime getIssued() {return issued;}
-    public void setIssued(OffsetDateTime issued) {this.issued = issued;}
-    public boolean isPaid() {return paid;}
-    public void setPaid(boolean paid) {this.paid = paid;}
+    public void setIntroducedDate(OffsetDateTime introducedDate) {this.introducedDate = introducedDate;}
+    public OffsetDateTime getIntroducedDate() {return introducedDate;}
+    public void setGuaranteeDate(OffsetDateTime guaranteeDate) {this.guaranteeDate = guaranteeDate;}
+    public OffsetDateTime getGuaranteeDate() {return guaranteeDate;}
+    public void setReadyDate(OffsetDateTime readyDate) {this.readyDate = readyDate;}
+    public OffsetDateTime getReadyDate() {return readyDate;}
+    public void setIssuedDate(OffsetDateTime issuedDate) {this.issuedDate = issuedDate;}
+    public OffsetDateTime getIssuedDate() {return issuedDate;}
+    public boolean getHasPaidStatus() {return hasPaidStatus;}
+    public void setHasPaidStatus(boolean hasPaidStatus) {this.hasPaidStatus = hasPaidStatus;}
+    public boolean isHasGuaranteeStatus() {return hasGuaranteeStatus;}
+    public void setHasGuaranteeStatus(boolean hasGuaranteeStatus) {this.hasGuaranteeStatus = hasGuaranteeStatus;}
+    public boolean isHasReadyStatus() {return hasReadyStatus;}
+    public void setHasReadyStatus(boolean hasReadyStatus) {this.hasReadyStatus = hasReadyStatus;}
+    public boolean isHasIssuedStatus() {return hasIssuedStatus;}
+    public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
 }

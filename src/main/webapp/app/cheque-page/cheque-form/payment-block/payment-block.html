@@ -2,15 +2,15 @@
 
     <md-toolbar md-theme="payment">
         <div class="md-toolbar-tools">
-            <md-checkbox ng-model="cheque.paid" class="md-primary" md-theme="default">
+            <md-checkbox ng-model="cheque.hasPaidStatus" class="md-primary" md-theme="default">
                 <h2>
-                    <span ng-hide="cheque.paid" translate>payment</span>
-                    <span ng-show="cheque.paid" translate>paid</span>
+                    <span ng-hide="cheque.hasPaidStatus" translate>payment</span>
+                    <span ng-show="cheque.hasPaidStatus" translate>paid</span>
                 </h2>
             </md-checkbox>
             <span style="margin-left: 2rem"></span>
-            <span ng-hide="hasPrepayment && !cheque.paid">{{'sum' | translate}}:</span>
-            <span ng-show="hasPrepayment && !cheque.paid">{{'sum with prepayment' | translate}}:</span>
+            <span ng-hide="hasPrepayment && !cheque.hasPaidStatus">{{'sum' | translate}}:</span>
+            <span ng-show="hasPrepayment && !cheque.hasPaidStatus">{{'sum with prepayment' | translate}}:</span>
             <span style="margin-left: 1rem"></span>
             <span>
                 {{sum('rub', hasPrepayment && !cheque.paid) | currency: '&#x20bd;'}},
@@ -22,12 +22,12 @@
 
             <md-input-container md-theme="default" class="prediction">
                 <label translate>prediction</label>
-                <input type="number" min="0" ng-model="cheque.prediction" ng-disabled="cheque.paid">
+                <input type="number" min="0" ng-model="cheque.prediction" ng-disabled="cheque.hasPaidStatus">
             </md-input-container>
 
             <span flex></span>
 
-            <md-button type="button" class="md-icon-button" ng-click="addPayment()" ng-hide="cheque.paid">
+            <md-button type="button" class="md-icon-button" ng-click="addPayment()" ng-hide="cheque.hasPaidStatus">
                 <md-icon md-font-set="material-icons">note_add</md-icon>
             </md-button>
         </div>
@@ -39,9 +39,9 @@
             <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments | orderBy: '-id'">
 
                 <md-content layout="row" layout-align="center center" flex>
-                    <payment-line payment="payment" paid="cheque.paid" flex></payment-line>
+                    <payment-line payment="payment" paid="cheque.hasPaidStatus" flex></payment-line>
 
-                    <md-button class="md-icon-button" ng-hide="cheque.paid">
+                    <md-button class="md-icon-button" ng-hide="cheque.hasPaidStatus">
                         <md-icon md-font-set="material-icons" ng-click="delPayment(payment)">delete</md-icon>
                     </md-button>
                 </md-content>

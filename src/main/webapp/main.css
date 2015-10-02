@@ -1,7 +1,11 @@
 html {}
 
+section.content-block:first-child {
+    margin: 1rem 7rem 0 7rem;
+}
+
 section.content-block {
-    margin: 0.5rem 7rem;
+    margin: .25rem 7rem;
     max-width: 1400px;
     min-width: 800px;
 }
@@ -14,9 +18,6 @@ section.content-block {
 
 /* Dates fields in filters, create and edit*/
 
-md-content.dates-field {
-    margin-top: 20px;
-}
 md-content.dates-field md-content p {
     text-overflow: ellipsis;
     white-space: nowrap;

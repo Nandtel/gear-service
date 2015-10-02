@@ -26,23 +26,29 @@
     <md-content class="dates-field" layout="row" layout-align="space-around start" flex>
 
         <md-content layout="column" layout-align="end center">
-            <p>{{ 'Introduced' | translate}}</p>
-            <date-time-picker ng-model="cheque.introduced"></date-time-picker>
+            <p class="with-date">{{ 'Introduced' | translate}}</p>
+            <date-time-picker ng-model="cheque.introducedDate"></date-time-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center">
-            <p>{{ 'Guarantee' | translate}}</p>
-            <date-picker ng-model="cheque.guarantee"></date-picker>
+            <md-checkbox ng-model="cheque.hasGuaranteeStatus" class="md-primary with-date">
+                <p>{{ 'Guarantee' | translate}}</p>
+            </md-checkbox>
+            <date-picker ng-model="cheque.guaranteeDate" ng-disabled="!cheque.hasGuaranteeStatus"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <p>{{ 'Ready' | translate}}</p>
-            <date-picker ng-model="cheque.ready"></date-picker>
+            <md-checkbox ng-model="cheque.hasReadyStatus" class="md-primary with-date">
+                <p>{{ 'Ready' | translate}}</p>
+            </md-checkbox>
+            <date-picker ng-model="cheque.readyDate" ng-disabled="!cheque.hasReadyStatus"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <p>{{ 'Issued' | translate}}</p>
-            <date-picker ng-model="cheque.issued"></date-picker>
+            <md-checkbox ng-model="cheque.hasIssuedStatus" class="md-primary with-date">
+                <p>{{ 'Issued' | translate}}</p>
+            </md-checkbox>
+            <date-picker ng-model="cheque.issuedDate" ng-disabled="!cheque.hasIssuedStatus"></date-picker>
         </md-content>
 
     </md-content>

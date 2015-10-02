@@ -65,7 +65,7 @@ angular.module("mainModule")
 
             if(!$scope.hasID) {
 
-                $scope.cleanNewCheck = {repairPeriod: 99, introduced: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
+                $scope.cleanNewCheck = {repairPeriod: 99, introducedDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
                     inspectorName: 'Администратор', kits: [], notes: [], payments: [], diagnostics: []};
 
                 /**

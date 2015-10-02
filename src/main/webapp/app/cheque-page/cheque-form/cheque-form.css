@@ -6,4 +6,12 @@
     cheque-form md-input-container.md-icon-float md-icon {
         color: #3F51B5;
     }
+
+    cheque-form md-checkbox.with-date {
+        margin: 1rem 0 0 0;
+    }
+
+    cheque-form md-content.dates-field md-content p.with-date {
+        margin: 1.5rem 0 0 0;
+    }
 }

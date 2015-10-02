@@ -140,22 +140,22 @@
 
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
-            <md-select ng-model="filter.guarantee" placeholder="{{'Guarantee' | translate}}" flex="25">
-                <md-option value="!!">{{'Has guarantee' | translate}}</md-option>
-                <md-option value="!!!">{{'Has no guarantee' | translate}}</md-option>
+            <md-select ng-model="filter.hasGuaranteeStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
+                <md-option value="true">{{'Has guarantee' | translate}}</md-option>
+                <md-option value="false">{{'Has no guarantee' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.ready" placeholder="{{'Ready' | translate}}" flex="25">
-                <md-option value="!!">{{'Ready' | translate}}</md-option>
-                <md-option value="!!!">{{'Not ready' | translate}}</md-option>
+            <md-select ng-model="filter.hasReadyStatus" placeholder="{{'Ready' | translate}}" flex="25">
+                <md-option value="true">{{'Ready' | translate}}</md-option>
+                <md-option value="false">{{'Not ready' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.issued" placeholder="{{'Issued' | translate}}" flex="25">
-                <md-option value="!!">{{'Issued' | translate}}</md-option>
-                <md-option value="!!!">{{'Not issued' | translate}}</md-option>
+            <md-select ng-model="filter.hasIssuedStatus" placeholder="{{'Issued' | translate}}" flex="25">
+                <md-option value="true">{{'Issued' | translate}}</md-option>
+                <md-option value="false">{{'Not issued' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.paid" placeholder="{{'paid' | translate}}" flex="25">
+            <md-select ng-model="filter.hasPaidStatus" placeholder="{{'paid' | translate}}" flex="25">
                 <md-option value="true">{{'paid' | translate}}</md-option>
                 <md-option value="false">{{'not paid' | translate}}</md-option>
             </md-select>

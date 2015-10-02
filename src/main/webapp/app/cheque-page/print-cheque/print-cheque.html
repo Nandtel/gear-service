@@ -12,16 +12,16 @@
                 <img ng-show="spec.client" src="/images/logo.png">
                 <div class="date-field text">Дата приема:
                     <span class="date">{{cheque.introduced | amDateFormat:'DD.MM.YYYY'}}</span>
-                    <span class="time" ng-show="spec.tech">{{cheque.introduced | amDateFormat:'HH:mm:ss'}}</span>
+                    <span class="time" ng-show="spec.tech">{{cheque.introducedDate | amDateFormat:'HH:mm:ss'}}</span>
                 </div>
-                <div ng-show="!!cheque.guarantee" class="text">
-                    Дата продажи: <span class="date">{{cheque.guarantee | amDateFormat:'DD.MM.YYYY'}}</span>
+                <div ng-show="!!cheque.hasGuaranteeStatus" class="text">
+                    Дата продажи: <span class="date">{{cheque.guaranteeDate | amDateFormat:'DD.MM.YYYY'}}</span>
                 </div>
                 <div>
-                    <div ng-show="!!cheque.guarantee" class="text">
+                    <div ng-show="!!cheque.hasGuaranteeStatus" class="text">
                         Принято для подтверждения гарантийного статуса: {{cheque.nameOfCustomer}}
                     </div>
-                    <div ng-hide="!!cheque.guarantee" class="text">
+                    <div ng-hide="!!cheque.hasGuaranteeStatus" class="text">
                         Принято на диагностику: {{cheque.nameOfCustomer}}
                     </div>
                 </div>
@@ -63,8 +63,8 @@
 
     <tr>
         <td class="border" colspan="2">Комплект: {{getKits()}}</td>
-        <td class="border" ng-show="!!cheque.guarantee"><span class="right">{{cheque.prediction}} руб.</span></td>
-        <td class="border" ng-hide="!!cheque.guarantee"><span class="right">Ориентировачная сумма ремонта: {{cheque.prediction}} руб.</span></td>
+        <td class="border" ng-show="!!cheque.hasGuaranteeStatus"><span class="right">{{cheque.prediction}} руб.</span></td>
+        <td class="border" ng-hide="!!cheque.hasGuaranteeStatus"><span class="right">Ориентировачная сумма ремонта: {{cheque.prediction}} руб.</span></td>
 
     </tr>
 

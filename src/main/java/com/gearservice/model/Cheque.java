@@ -44,21 +44,25 @@ public class Cheque {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
-    private OffsetDateTime introduced;
+    private OffsetDateTime introducedDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
-    private OffsetDateTime guarantee;
+    private OffsetDateTime guaranteeDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
-    private OffsetDateTime ready;
+    private OffsetDateTime readyDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
-    private OffsetDateTime issued;
+    private OffsetDateTime issuedDate;
 
     private boolean withoutRepair;
     private boolean actNG;
     private boolean actVO;
-    private boolean paid;
+
+    private boolean hasGuaranteeStatus;
+    private boolean hasReadyStatus;
+    private boolean hasIssuedStatus;
+    private boolean hasPaidStatus;
 
     @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
     @JsonManagedReference
@@ -84,7 +88,7 @@ public class Cheque {
         this.setNameOfCustomer(SampleDataService.getRandomName());
         this.setNameOfProduct(SampleDataService.getRandomProduct());
         this.setRepairPeriod(SampleDataService.getRepairPeriod());
-        this.setIntroduced(SampleDataService.getRandomDate());
+        this.setIntroducedDate(SampleDataService.getRandomDate());
         this.setModel(SampleDataService.getRandomModel());
         this.setSerialNumber(SampleDataService.getRandomSerialNumber());
         this.setMalfunction(SampleDataService.getRandomMalfunction());
@@ -100,9 +104,9 @@ public class Cheque {
         this.setNotes(SampleDataService.getSetConsistFrom(o -> new Note().withRandomData().withOwner(this)));
         this.setKits(SampleDataService.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
 
-        this.setGuarantee(SampleDataService.getRandomDate());
-        this.setReady(SampleDataService.getRandomDate());
-        this.setIssued(SampleDataService.getRandomDate());
+        this.setGuaranteeDate(SampleDataService.getRandomDate());
+        this.setReadyDate(SampleDataService.getRandomDate());
+        this.setIssuedDate(SampleDataService.getRandomDate());
 
         return this;
     }
@@ -141,18 +145,24 @@ public class Cheque {
     public boolean isActNG() {return actNG;}
     public void setActVO(boolean actVO) {this.actVO = actVO;}
     public boolean isActVO() {return actVO;}
-    public void setIntroduced(OffsetDateTime introduced) {this.introduced = introduced;}
-    public OffsetDateTime getIntroduced() {return introduced;}
-    public void setGuarantee(OffsetDateTime guarantee) {this.guarantee = guarantee;}
-    public OffsetDateTime getGuarantee() {return guarantee;}
-    public void setReady(OffsetDateTime ready) {this.ready = ready;}
-    public OffsetDateTime getReady() {return ready;}
-    public void setIssued(OffsetDateTime issued) {this.issued = issued;}
-    public OffsetDateTime getIssued() {return issued;}
-    public boolean isPaid() {return paid;}
-    public void setPaid(boolean paid) {this.paid = paid;}
+    public void setIntroducedDate(OffsetDateTime introducedDate) {this.introducedDate = introducedDate;}
+    public OffsetDateTime getIntroducedDate() {return introducedDate;}
+    public void setGuaranteeDate(OffsetDateTime guaranteeDate) {this.guaranteeDate = guaranteeDate;}
+    public OffsetDateTime getGuaranteeDate() {return guaranteeDate;}
+    public void setReadyDate(OffsetDateTime readyDate) {this.readyDate = readyDate;}
+    public OffsetDateTime getReadyDate() {return readyDate;}
+    public void setIssuedDate(OffsetDateTime issuedDate) {this.issuedDate = issuedDate;}
+    public OffsetDateTime getIssuedDate() {return issuedDate;}
+    public boolean getHasPaidStatus() {return hasPaidStatus;}
+    public void setHasPaidStatus(boolean hasPaidStatus) {this.hasPaidStatus = hasPaidStatus;}
     public int getPrediction() {return prediction;}
     public void setPrediction(int prediction) {this.prediction = prediction;}
+    public boolean isHasGuaranteeStatus() {return hasGuaranteeStatus;}
+    public void setHasGuaranteeStatus(boolean hasGuaranteeStatus) {this.hasGuaranteeStatus = hasGuaranteeStatus;}
+    public boolean isHasReadyStatus() {return hasReadyStatus;}
+    public void setHasReadyStatus(boolean hasReadyStatus) {this.hasReadyStatus = hasReadyStatus;}
+    public boolean isHasIssuedStatus() {return hasIssuedStatus;}
+    public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
     public void setKits(Set<Kit> kits) {this.kits = kits;}
     public Set<Kit> getKits() {return kits;}
     public void setDiagnostics(Set<Diagnostic> diagnostics) {this.diagnostics = diagnostics;}
