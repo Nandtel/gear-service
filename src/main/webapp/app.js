@@ -80,6 +80,16 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 100;
     }])
+    .config(['$mdDateLocaleProvider',
+        function($mdDateLocaleProvider) {
+            // Example of a French localization.
+            $mdDateLocaleProvider.months = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
+            $mdDateLocaleProvider.shortMonths = 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_');
+            $mdDateLocaleProvider.days = 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_');
+            $mdDateLocaleProvider.shortDays = 'вс_пн_вт_ср_чт_пт_сб'.split('_');
+            // Can change week display to start on Monday.
+            $mdDateLocaleProvider.firstDayOfWeek = 1;
+    }])
     .run(['gettextCatalog', 'amMoment',
         function(gettextCatalog, amMoment){
             gettextCatalog.setCurrentLanguage('ru');
