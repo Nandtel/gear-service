@@ -4,8 +4,8 @@
 
         <h4>{{'current currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}:</h4>
         <md-content layout="row" class="currency-rates">
-            <h4>USD: {{$root.currencyRates["usd"] | currency: '$'}},</h4>
-            <h4>UAH: {{$root.currencyRates["uah"] | currency: "&#8372"}}</h4>
+            <h4>USD: {{$root.currencyRates["usd"] | currency: '&#x20bd;'}},</h4>
+            <h4>UAH: {{$root.currencyRates["uah"] | currency: "&#x20bd;"}}</h4>
         </md-content>
 
         <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">

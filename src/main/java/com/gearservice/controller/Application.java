@@ -187,26 +187,26 @@ public class Application {
     }
 
     @RequestMapping(value = "/currency-rate", method = RequestMethod.GET)
-    public Currency getCurrencyRates() throws IOException {
+    public Currency getCurrencyRates() {
         Long now = LocalDate.now().toEpochDay();
 
         if(!currencyRepository.exists(now))
             currencyRepository.save(new Currency()
                     .forToday()
                     .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
+                    .getFromServer("http://minfindnr.ru/", "li#text-9 font"));
 
         return currencyRepository.findOne(now);
     }
 
     @RequestMapping(value = "/currency-rate-clean", method = RequestMethod.GET)
-    public Currency getCleanCurrencyRates() throws IOException {
+    public Currency getCleanCurrencyRates() {
         Long now = LocalDate.now().toEpochDay();
 
         currencyRepository.save(new Currency()
                     .forToday()
                     .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
+                    .getFromServer("http://minfindnr.ru/", "li#text-9 font"));
 
         return currencyRepository.findOne(now);
     }

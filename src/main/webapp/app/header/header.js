@@ -8,8 +8,8 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast',
-        function ($scope, currencyRatesService, $mdToast) {
+    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope',
+        function ($scope, currencyRatesService, $mdToast, $rootScope) {
 
             currencyRatesService.getCurrencyRate();
 
@@ -21,7 +21,11 @@ angular.module("mainModule")
                         .content('Currency rates refreshed')
                         .position('top right')
                         .hideDelay(700));
-            }
+            };
+
+            $rootScope.$on('$routeChangeStart', function() {
+                console.log('Change the route');
+            });
         }
     ])
     .directive('header', function() {
