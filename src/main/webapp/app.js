@@ -8,56 +8,65 @@
 angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
     'angular-loading-bar', 'templates', 'angular-cache', 'duScroll'])
     .value('duScrollDuration', 3000)
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-        $stateProvider
-            .state('cheque', {
-                abstract: true,
-                url: "/cheques",
-                views: {
-                    "header": {
-                        controller:
-                            ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
-                                $scope.selectedTab = $state.current.data.selectedTab;
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+        function($stateProvider, $urlRouterProvider, $httpProvider){
 
-                                $rootScope.$on('$stateChangeSuccess',
-                                    function(event, toState, toParams, fromState, fromParams) {
-                                        $scope.selectedTab = toState.data.selectedTab;
-                                    });
-                        }],
-                        template: '<header selected-tab="selectedTab"></header>'
-                    },
-                    "content": {
-                        template: "<ui-view></ui-view>"
+            $stateProvider
+                .state('cheque', {
+                    abstract: true,
+                    url: "/cheques",
+                    views: {
+                        "header": {
+                            controller:
+                                ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
+                                    $scope.selectedTab = $state.current.data.selectedTab;
+
+                                    $rootScope.$on('$stateChangeSuccess',
+                                        function(event, toState, toParams, fromState, fromParams) {
+                                            $scope.selectedTab = toState.data.selectedTab;
+                                        });
+                                }],
+                            template: '<header selected-tab="selectedTab"></header>'
+                        },
+                        "content": {
+                            template: "<ui-view></ui-view>"
+                        }
                     }
-                }
-            })
-            .state('cheque.filter', {
-                url: "^/filter",
-                template: "<filters-page></filters-page>",
-                data: {'selectedTab': 0}
-            })
-            .state('cheque.edit', {
-                url: "^/cheque/{chequeId:[0-9]{1,10}}",
-                controller:
-                    ['$scope', '$stateParams', function($scope, $stateParams) {
-                        $scope.chequeID = $stateParams.chequeId;
-                    }],
-                template: '<cheque-page cheque-id="chequeID"></cheque-page>',
-                data: {'selectedTab': 1}
-            })
-            .state('cheque.create', {
-                url: "^/cheque",
-                template: '<cheque-page></cheque-page>',
-                data: {'selectedTab': 1}
-            })
-            .state('cheque.profile', {
-                url: "^/profile",
-                template: '<profile-page></profile-page>',
-                data: {'selectedTab': 3}
-            });
+                })
+                .state('cheque.filter', {
+                    url: "^/filter",
+                    template: "<filters-page></filters-page>",
+                    data: {'selectedTab': 0}
+                })
+                .state('cheque.edit', {
+                    url: "^/cheque/{chequeId:[0-9]{1,10}}",
+                    controller:
+                        ['$scope', '$stateParams', function($scope, $stateParams) {
+                            $scope.chequeID = $stateParams.chequeId;
+                        }],
+                    template: '<cheque-page cheque-id="chequeID"></cheque-page>',
+                    data: {'selectedTab': 1}
+                })
+                .state('cheque.create', {
+                    url: "^/cheque",
+                    template: '<cheque-page></cheque-page>',
+                    data: {'selectedTab': 1}
+                })
+                .state('cheque.profile', {
+                    url: "^/profile",
+                    template: '<profile-page></profile-page>',
+                    data: {'selectedTab': 3}
+                })
+                .state('cheque.login', {
+                    url: "^/login",
+                    template: '<login-page></login-page>',
+                    data: {'selectedTab': 5}
+                });
 
-            $urlRouterProvider.when('', '/filter');
+            //$urlRouterProvider.when('', '/filter');
             $urlRouterProvider.otherwise('/filter');
+
+            $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     }])
     .config(['$mdThemingProvider', function($mdThemingProvider){
             $mdThemingProvider
@@ -89,8 +98,9 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             // Can change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
-    .run(['gettextCatalog', 'amMoment',
-        function(gettextCatalog, amMoment){
+    .run(['gettextCatalog', 'amMoment', 'auth',
+        function(gettextCatalog, amMoment, auth){
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
+            auth.init();
     }]);

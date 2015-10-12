@@ -2,10 +2,7 @@ package com.gearservice.controller;
 
 import com.gearservice.model.*;
 import com.gearservice.model.Currency;
-import com.gearservice.model.repositories.ChequeRepository;
-import com.gearservice.model.repositories.CurrencyRepository;
-import com.gearservice.model.repositories.DiagnosticRepository;
-import com.gearservice.model.repositories.NoteRepository;
+import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.IntStream;
@@ -50,6 +48,9 @@ public class Application {
     @Autowired
     NoteRepository noteRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     /**
      * Connect to entity manager
      */
@@ -85,7 +86,6 @@ public class Application {
     @RequestMapping(value = "/cheques", method = RequestMethod.POST)
     public Cheque saveCheque(@RequestBody Cheque cheque) {
         Long ID = cheque.getId();
-
 
         chequeRepository.save(cheque);
 
@@ -194,7 +194,7 @@ public class Application {
             currencyRepository.save(new Currency()
                     .forToday()
                     .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-9 font"));
+                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
 
         return currencyRepository.findOne(now);
     }
@@ -206,7 +206,7 @@ public class Application {
         currencyRepository.save(new Currency()
                     .forToday()
                     .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-9 font"));
+                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
 
         return currencyRepository.findOne(now);
     }
@@ -222,4 +222,9 @@ public class Application {
         currencyRepository.save(list);
     }
 
+    @RequestMapping("/user")
+    @ResponseBody
+    public Principal user(Principal user) {
+        return user;
+    }
 }

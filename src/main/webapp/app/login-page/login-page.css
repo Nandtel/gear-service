@@ -1,0 +1,17 @@
+@media screen {
+    login-page section {
+        height: 70%;
+    }
+
+    login-page md-content.layout-padding {
+        padding: 8px 80px;
+    }
+
+    login-page form md-content.first{
+        padding-top: 30px;
+    }
+
+    login-page md-input-container.md-icon-float md-icon {
+        color: #3F51B5;
+    }
+}

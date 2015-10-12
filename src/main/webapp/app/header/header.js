@@ -8,8 +8,8 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope',
-        function ($scope, currencyRatesService, $mdToast, $rootScope) {
+    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope', 'auth',
+        function ($scope, currencyRatesService, $mdToast, $rootScope, auth) {
 
             currencyRatesService.getCurrencyRate();
 
@@ -26,6 +26,12 @@ angular.module("mainModule")
             $rootScope.$on('$routeChangeStart', function() {
                 console.log('Change the route');
             });
+
+            $scope.authenticated = function() {
+                return auth.authenticated;
+            };
+
+            $scope.logout = auth.logout;
         }
     ])
     .directive('header', function() {
