@@ -128,7 +128,10 @@ public class Application {
     @RequestMapping(value = "/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-        diagnosticRepository.save(diagnostic.withDateTimeAndUser().withOwner(chequeRepository.findOne(chequeID)));
+        diagnosticRepository.save(
+                diagnostic
+                        .withDateTimeAndUser()
+                        .withOwner(chequeRepository.findOne(chequeID)));
     }
 
     /**

@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller("LoginPage", ['$scope', '$rootScope', 'auth',
-        function($scope, $rootScope, auth) {
+    .controller("LoginPage", ['$scope', '$rootScope', 'auth', '$mdToast',
+        function($scope, $rootScope, auth, $mdToast) {
             $scope.credentials = {};
 
             $scope.authenticated = function() {
@@ -10,11 +10,19 @@ angular.module("mainModule")
             $scope.login = function() {
                 auth.authenticate($scope.credentials, function(authenticated) {
                     if (authenticated) {
-                        console.log("Login succeeded");
-                        $scope.error = false;
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Login succeeded")
+                                .position('top right')
+                                .hideDelay(700)
+                        );
                     } else {
-                        console.log("Login failed");
-                        $scope.error = true;
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Login failed")
+                                .position('top right')
+                                .hideDelay(700)
+                        );
                     }
                 })
             };
