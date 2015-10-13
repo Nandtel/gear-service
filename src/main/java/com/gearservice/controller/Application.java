@@ -174,6 +174,12 @@ public class Application {
     public Currency getCurrencyRates() {
         Long now = LocalDate.now().toEpochDay();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         if(!currencyRepository.exists(now))
             currencyRepository.save(new Currency()
                     .forToday()

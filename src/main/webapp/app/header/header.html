@@ -2,15 +2,17 @@
 
     <md-content layout="row" layout-align="center center" flex="50">
 
-        <h4>{{'current currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}:</h4>
-        <md-content layout="row" class="currency-rates">
-            <h4>USD: {{$root.currencyRates["usd"] | currency: '&#x20bd;'}},</h4>
-            <h4>UAH: {{$root.currencyRates["uah"] | currency: "&#x20bd;"}}</h4>
-        </md-content>
+        <span  layout="row" layout-align="center center" flex ng-show="!!$root.currencyRates.id">
+            <h4>{{'currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}</h4>
+            <md-content layout="row" class="currency-rates">
+                <h4>USD {{$root.currencyRates["usd"] | currency: '&#x20bd;'}},</h4>
+                <h4>UAH {{$root.currencyRates["uah"] | currency: "&#x20bd;"}}</h4>
+            </md-content>
 
-        <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">
-            <md-icon md-font-set="material-icons" aria-label="delete">refresh</md-icon>
-        </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">
+                <md-icon md-font-set="material-icons" aria-label="delete">refresh</md-icon>
+            </md-button>
+        </span>
 
     </md-content>
 
