@@ -15,9 +15,7 @@ angular.module('mainModule')
 				init: function() {
 
 					auth.authenticate({}, function(authenticated) {
-						if(authenticated)
-							$state.go(auth.desireState, auth.desireParams);
-						else
+						if(!authenticated)
 							$state.go(auth.loginState);
 					});
 
