@@ -14,7 +14,12 @@ angular.module('mainModule')
 
 				init: function() {
 
-					auth.authenticate({});
+					auth.authenticate({}, function(authenticated) {
+						if(authenticated)
+							$state.go(auth.desireState, auth.desireParams);
+						else
+							$state.go(auth.loginState);
+					});
 
 					$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 						if(toState.name === auth.loginState || auth.authenticated)
@@ -24,7 +29,6 @@ angular.module('mainModule')
 						auth.desireParams = toParams;
 
 						event.preventDefault();
-						$state.go(auth.loginState);
 					});
 				},
 
