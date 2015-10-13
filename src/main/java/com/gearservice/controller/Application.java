@@ -5,6 +5,10 @@ import com.gearservice.model.Currency;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,41 +31,18 @@ import java.util.stream.IntStream;
 @RestController
 public class Application {
 
-    /**
-     * Connect to cheque repository from model/repositories
-     */
-    @Autowired
-    ChequeRepository chequeRepository;
-
-    @Autowired
-    CurrencyRepository currencyRepository;
-
-    /**
-     * Connect to diagnostic repository from model/repositories
-     */
-    @Autowired
-    DiagnosticRepository diagnosticRepository;
-
-    /**
-     * Connect to note repository from model/repositories
-     */
-    @Autowired
-    NoteRepository noteRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    /**
-     * Connect to entity manager
-     */
-    @Autowired
-    EntityManager em;
+    @Autowired ChequeRepository chequeRepository;
+    @Autowired CurrencyRepository currencyRepository;
+    @Autowired DiagnosticRepository diagnosticRepository;
+    @Autowired NoteRepository noteRepository;
+    @Autowired UserRepository userRepository;
+    @Autowired EntityManager em;
 
     /**
      * Method index call by client-side and return index page
      * @return index.html from templates
      */
-    @RequestMapping("/")        public ModelAndView index() {return new ModelAndView("index");}
+    @RequestMapping("/") public ModelAndView index() {return new ModelAndView("index");}
 
     /**
      * Method getCheques call by client-side and return all cheques from database
