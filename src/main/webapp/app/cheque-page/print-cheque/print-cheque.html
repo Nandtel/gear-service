@@ -11,7 +11,7 @@
             <div class="text">
                 <img ng-show="spec.client" src="/images/logo.png">
                 <div class="date-field text">Дата приема:
-                    <span class="date">{{cheque.introduced | amDateFormat:'DD.MM.YYYY'}}</span>
+                    <span class="date">{{cheque.introducedDate | amDateFormat:'DD.MM.YYYY'}}</span>
                     <span class="time" ng-show="spec.tech">{{cheque.introducedDate | amDateFormat:'HH:mm:ss'}}</span>
                 </div>
                 <div ng-show="!!cheque.hasGuaranteeStatus" class="text">
