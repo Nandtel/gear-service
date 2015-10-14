@@ -21,7 +21,7 @@
         <md-tab ui-sref="cheque.create" ng-disabled="!authenticated()">{{'cheque' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>
         <md-tab ui-sref="cheque.profile" ng-disabled="!authenticated()">
-            {{$root.user.name}}
+            {{profileName()}}
         </md-tab>
         <md-tab ng-if="!authenticated()">{{'login' | translate}}</md-tab>
         <md-tab ng-if="authenticated()" ng-click="logout()">{{'logout' | translate}}</md-tab>

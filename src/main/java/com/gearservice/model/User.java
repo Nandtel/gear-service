@@ -11,12 +11,13 @@ import java.util.Set;
 public class User {
 
     @Id private String username;
-    @JsonIgnore private String password;
+//    @JsonIgnore
+    private String password;
     private boolean enabled;
     private String firstname;
     private String lastname;
 
-    @OneToMany(mappedBy = "username", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "username", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Authorities> authorities;
 

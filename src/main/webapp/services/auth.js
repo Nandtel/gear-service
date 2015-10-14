@@ -20,8 +20,6 @@ angular.module('mainModule')
 					});
 
 					$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-						console.log(toState);
-						console.log(toParams);
 
 						if(toState.name === auth.loginState || auth.authenticated)
 							return;

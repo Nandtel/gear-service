@@ -8,8 +8,8 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope', 'auth',
-        function ($scope, currencyRatesService, $mdToast, $rootScope, auth) {
+    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope', 'auth', 'gettextCatalog',
+        function ($scope, currencyRatesService, $mdToast, $rootScope, auth, gettextCatalog) {
 
             currencyRatesService.getCurrencyRate();
 
@@ -29,6 +29,13 @@ angular.module("mainModule")
 
             $scope.authenticated = function() {
                 return auth.authenticated;
+            };
+
+            $scope.profileName = function() {
+                if(!!$rootScope.user.principal && !!$rootScope.user.principal.firstname)
+                    return $rootScope.user.principal.firstname;
+
+                return gettextCatalog.getString('profile');
             };
 
             $scope.logout = auth.logout;

@@ -42,7 +42,7 @@ public class Application {
 
     /**
      * Method getCheques call by client-side and return all cheques from database
-     * Native query use for create partial object of Cheque � ChequeMin, that has only necessary for client-side fields
+     * Native query use for create partial object of Cheque — ChequeMin, that has only necessary for client-side fields
      * Call with value "/cheques" and request method GET
      * @return list of all cheques, that database has
      */
@@ -163,6 +163,12 @@ public class Application {
     @RequestMapping("/sample")
     public ModelAndView addCheques() {
         IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
+
+        User user = userRepository.findByUsername("admin");
+        user.setFirstname("Александр");
+        user.setLastname("Грешник");
+        userRepository.save(user);
+
         return new ModelAndView("redirect:/");
     }
 
