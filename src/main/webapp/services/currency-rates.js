@@ -22,25 +22,25 @@ angular.module('mainModule')
 
             return {
                 getCurrencyRate: function() {
-                    $http.get('/currency-rate', {cache: currencyRatesCache})
+                    $http.get('/api/currency-rate', {cache: currencyRatesCache})
                         .success(function(data) {
                             $rootScope.currencyRates = data;
                         });
                 },
                 refreshCurrencyRate: function() {
-                    currencyRatesCache.remove('/currency-rate');
+                    currencyRatesCache.remove('/api/currency-rate');
                     this.getCurrencyRate();
                 },
                 getListOfCurrencyRates: function() {
                     var deferred = $q.defer();
-                    $http.get('/currency-rate-list')
+                    $http.get('/api/currency-rate-list')
                         .success(function(data) {
                             deferred.resolve(data);
                     });
                     return deferred.promise;
                 },
                 setListOfCurrencyRates: function(rates) {
-                    $http.post('/currency-rate-list', rates);
+                    $http.post('/api/currency-rate-list', rates);
                 }
             }
         }

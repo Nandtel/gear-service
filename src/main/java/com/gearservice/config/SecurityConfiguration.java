@@ -47,8 +47,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE, "/cheques/{\\d+}").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/index", "/", "/login", "/javascript/**", "/stylesheets/**", "/currency-rate")
+                .antMatchers(HttpMethod.DELETE, "/api/cheques/{\\d+}").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/index.html", "/", "/login", "/javascript/**", "/stylesheets/**", "/api/currency-rate")
                 .permitAll().anyRequest().authenticated().and()
                 .logout().invalidateHttpSession(true).and()
                 .csrf().csrfTokenRepository(csrfTokenRepository()).and()

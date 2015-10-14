@@ -12,7 +12,7 @@ angular.module("mainModule")
          * It adds to cheque model all cheques, when gets them
          */
         $scope.getAllCheques = function() {
-            $http.get('/cheques').success(function(response) {
+            $http.get('/api/cheques').success(function(response) {
                 $scope.cheques = response;
             });
         };

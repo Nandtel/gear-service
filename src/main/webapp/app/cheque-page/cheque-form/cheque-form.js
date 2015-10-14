@@ -7,7 +7,7 @@ angular.module("mainModule")
              * It adds to cheque model cheque, when gets it
              */
             $scope.getCheque = function() {
-                $http.get('/cheques/' + $scope.cheque.id).success(function(response) {
+                $http.get('/api/cheques/' + $scope.cheque.id).success(function(response) {
                     $scope.cheque = response;
                 });
             };
@@ -17,7 +17,7 @@ angular.module("mainModule")
              * It show toast about delivery status
              */
             $scope.sendCheque = function() {
-                $http.post('/cheques', $scope.cheque)
+                $http.post('/api/cheques', $scope.cheque)
                     .success(function(response) {
                         $scope.cheque = response;
 
@@ -38,7 +38,7 @@ angular.module("mainModule")
              * It show toast about delivery status
              */
             $scope.deleteCheque = function() {
-                $http.delete('/cheques/' + $scope.cheque.id)
+                $http.delete('/api/cheques/' + $scope.cheque.id)
                     .success(function() {
                         $state.go('cheque.filter');
                         $mdToast.show(

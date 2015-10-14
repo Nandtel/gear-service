@@ -20,6 +20,9 @@ angular.module('mainModule')
 					});
 
 					$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+						console.log(toState);
+						console.log(toParams);
+
 						if(toState.name === auth.loginState || auth.authenticated)
 							return;
 
@@ -34,7 +37,7 @@ angular.module('mainModule')
 					var headers = credentials && credentials.username ?
 					{authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
 
-					$http.get('user', {headers: headers})
+					$http.get('/api/user', {headers: headers})
 						.success(function(data) {
 							$rootScope.user = data;
 							auth.authenticated = !!data.name;

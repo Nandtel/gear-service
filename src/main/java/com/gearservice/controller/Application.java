@@ -5,15 +5,10 @@ import com.gearservice.model.Currency;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
-import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
@@ -38,11 +33,12 @@ public class Application {
     @Autowired UserRepository userRepository;
     @Autowired EntityManager em;
 
-    /**
-     * Method index call by client-side and return index page
-     * @return index.html from templates
-     */
-    @RequestMapping("/") public ModelAndView index() {return new ModelAndView("index");}
+//    // Match everything without a suffix (so not a static resource)
+//    @RequestMapping(value = "/{[path:[^\\.]*}")
+//    public ModelAndView redirect() {
+//        // Forward to home page so that route is preserved.
+//        return new ModelAndView("forward:/");
+//    }
 
     /**
      * Method getCheques call by client-side and return all cheques from database
@@ -50,7 +46,7 @@ public class Application {
      * Call with value "/cheques" and request method GET
      * @return list of all cheques, that database has
      */
-    @RequestMapping(value = "/cheques", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
     public List<ChequeMin> getCheques() {
         return (List<ChequeMin>) em.createNativeQuery("SELECT id, name_of_customer, introduced_date, name_of_product, " +
                 "model, serial_number, purchaser_name, inspector_name, master_name, guarantee_date, ready_date, " +
@@ -64,7 +60,7 @@ public class Application {
      * @param cheque is data for Cheque.class, that was create on client-side
      * @return Cheque, that added
      */
-    @RequestMapping(value = "/cheques", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)
     public Cheque saveCheque(@RequestBody Cheque cheque) {
         Long ID = cheque.getId();
 
@@ -82,7 +78,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, that client-side wants
      * @return Cheque, that client-side was request
      */
-    @RequestMapping(value = "/cheques/{chequeID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.GET)
     public Cheque getCheque(@PathVariable Long chequeID) {
         return chequeRepository.findOne(chequeID);
     }
@@ -93,10 +89,10 @@ public class Application {
      * @param chequeID is ID of cheque in database, that client-side wants to delete
      * @return redirect to main page
      */
-    @RequestMapping(value = "/cheques/{chequeID}", method = RequestMethod.DELETE)
-    public ModelAndView deleteCheque(@PathVariable Long chequeID) {
+    @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCheque(@PathVariable Long chequeID) {
         chequeRepository.delete(chequeID);
-        return new ModelAndView("redirect:/");
     }
 
     /**
@@ -106,7 +102,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants add a diagnostic comment
      * @param diagnostic is data for Diagnostic.class, that was create on client-side
      */
-    @RequestMapping(value = "/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
         diagnosticRepository.save(
@@ -122,7 +118,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param diagnosticID is ID of diagnostic in database, that client-side wants to delete
      */
-    @RequestMapping(value = "/cheques/{chequeID}/diagnostics/{diagnosticID}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics/{diagnosticID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
         Cheque cheque = chequeRepository.findOne(chequeID);
@@ -137,7 +133,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param note is data for Note.class, that was create on client-side
      */
-    @RequestMapping(value = "/cheques/{chequeID}/notes", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
         noteRepository.save(note.withDateTimeAndUser().withOwner(chequeRepository.findOne(chequeID)));
@@ -150,7 +146,7 @@ public class Application {
      * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
      * @param noteID is ID of node in database, that client-side wants to delete
      */
-    @RequestMapping(value = "/cheques/{chequeID}/notes/{noteID}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/cheques/{chequeID}/notes/{noteID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {
         Cheque cheque = chequeRepository.findOne(chequeID);
@@ -170,7 +166,7 @@ public class Application {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/currency-rate", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/currency-rate", method = RequestMethod.GET)
     public Currency getCurrencyRates() {
         Long now = LocalDate.now().toEpochDay();
 
@@ -189,7 +185,7 @@ public class Application {
         return currencyRepository.findOne(now);
     }
 
-    @RequestMapping(value = "/currency-rate-clean", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/currency-rate-clean", method = RequestMethod.GET)
     public Currency getCleanCurrencyRates() {
         Long now = LocalDate.now().toEpochDay();
 
@@ -201,18 +197,18 @@ public class Application {
         return currencyRepository.findOne(now);
     }
 
-    @RequestMapping(value = "/currency-rate-list", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.GET)
     public List<Currency> getCur() {
         return currencyRepository.findAll();
     }
 
-    @RequestMapping(value = "/currency-rate-list", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void setCur(@RequestBody List<Currency> list) {
         currencyRepository.save(list);
     }
 
-    @RequestMapping("/user")
+    @RequestMapping("/api/user")
     @ResponseBody
     public Principal user(Principal user) {
         return user;

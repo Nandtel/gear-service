@@ -11,7 +11,7 @@ angular.module("mainModule")
              * form is Untouched and Pristine
              */
             $scope.saveComment = function() {
-                $http.post('/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
+                $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
                     .success(function() {
                         $scope.comment.text = undefined;
                         $scope.form.$setPristine();
@@ -26,7 +26,7 @@ angular.module("mainModule")
              * @param commentID - is id of comment, that necessary to delete
              */
             $scope.deleteComment = function(commentID) {
-                $http.delete('/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
+                $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
                     .success(function() {$scope.getCheque()});
             };
 
@@ -35,7 +35,7 @@ angular.module("mainModule")
              * It adds to cheque model cheque, when gets it
              */
             $scope.getCheque = function() {
-                $http.get('/cheques/' + $scope.cheque.id)
+                $http.get('/api/cheques/' + $scope.cheque.id)
                     .success(function (response) {$scope.cheque = response;});
             };
 

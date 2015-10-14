@@ -8,8 +8,9 @@
 angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
     'angular-loading-bar', 'templates', 'angular-cache', 'duScroll'])
     .value('duScrollDuration', 3000)
-    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-        function($stateProvider, $urlRouterProvider, $httpProvider){
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
+        function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+            //$locationProvider.html5Mode(true);
 
             $stateProvider
                 .state('cheque', {
