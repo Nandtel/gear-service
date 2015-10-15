@@ -1,6 +1,6 @@
-<md-content md-theme="header" layout="row" layout-align="start start">
+<md-content md-theme="header" layout="row" layout-align="center center">
 
-    <md-content layout-align="center center" flex="50">
+    <md-content layout-align="center center" flex="40">
 
         <span  layout="row" layout-align="center center" flex ng-show="!!$root.currencyRates.id">
             <h4>{{'currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}</h4>
@@ -16,7 +16,7 @@
 
     </md-content>
 
-    <md-tabs md-selected="selectedTab" md-center-tabs="true" md-dynamic-height md-border-bottom flex="50">
+    <md-tabs md-selected="selectedTab" class="at-right" md-dynamic-height md-border-bottom flex="60">
         <md-tab ui-sref="cheque.filter" id="filters" ng-disabled="!authenticated()">{{'Filters' | translate}}</md-tab>
         <md-tab ui-sref="cheque.create" ng-disabled="!authenticated()">{{'cheque' | translate}}</md-tab>
         <md-tab ng-disabled="true">{{'analytics' | translate}}</md-tab>

@@ -13,8 +13,7 @@ public class User {
     @Id private String username;
     @JsonIgnore private String password;
     private boolean enabled;
-    private String firstname;
-    private String lastname;
+    private String fullName;
 
     @OneToMany(mappedBy = "username", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -25,8 +24,7 @@ public class User {
     public User(User user) {
         super();
         this.username = user.getUsername();
-        this.firstname = user.getFirstname();
-        this.lastname = user.getLastname();
+        this.fullName = user.getFullName();
         this.password = user.getPassword();
         this.enabled = user.isEnabled();
         this.authorities = user.getAuthorities();
@@ -38,10 +36,9 @@ public class User {
     public void setPassword(String password) {this.password = password;}
     public boolean isEnabled() {return enabled;}
     public void setEnabled(boolean enabled) {this.enabled = enabled;}
-    public String getFirstname() {return firstname;}
-    public void setFirstname(String firstname) {this.firstname = firstname;}
-    public String getLastname() {return lastname;}
-    public void setLastname(String lastname) {this.lastname = lastname;}
+    public String getFullName() {return fullName;}
+    public void setFullName(String fullName) {this.fullName = fullName;}
+
     public Set<Authorities> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authorities> authorities) {this.authorities = authorities;}
 

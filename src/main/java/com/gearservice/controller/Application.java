@@ -165,8 +165,7 @@ public class Application {
         IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
 
         User user = userRepository.findByUsername("admin");
-        user.setFirstname("Александр");
-        user.setLastname("Грешник");
+        user.setFullName("Грешник А.Ж.");
         userRepository.save(user);
 
         return new ModelAndView("redirect:/");
