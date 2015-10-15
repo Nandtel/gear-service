@@ -28,4 +28,8 @@
         background: #f6f6f6;
         border: 1px solid #e1e1e1;
     }
+
+    cheque-page md-content.comments-block {
+        margin-bottom: 3rem;
+    }
 }

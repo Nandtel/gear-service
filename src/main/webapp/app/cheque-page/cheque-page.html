@@ -2,7 +2,7 @@
 
     <cheque-form ng-model="cheque" has-id="hasID"></cheque-form>
 
-    <md-content md-theme="tabs" ng-show="hasID" class="md-whiteframe-z1">
+    <md-content md-theme="tabs" ng-show="hasID" class="md-whiteframe-z1 comments-block">
         <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" class="content-block" md-theme="default">
             <md-tab label="{{'diagnostics' | translate}}">
                 <comments-block ng-model="cheque" title="'diagnostics'"></comments-block>

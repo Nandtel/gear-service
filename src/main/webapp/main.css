@@ -1,7 +1,7 @@
 html {}
 
 section.content-block:first-child {
-    margin: 1rem 7rem 0 7rem;
+    margin: 1rem 7rem;
 }
 
 section.content-block {
