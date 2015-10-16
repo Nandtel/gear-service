@@ -4,7 +4,6 @@ import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.ChequeMin;
 import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.cheque.Note;
-import com.gearservice.model.user.User;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
