@@ -163,11 +163,6 @@ public class Application {
     @RequestMapping("/sample")
     public ModelAndView addCheques() {
         IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
-
-        User user = userRepository.findByUsername("admin");
-        user.setFullName("Грешник А.Ж.");
-        userRepository.save(user);
-
         return new ModelAndView("redirect:/");
     }
 }
