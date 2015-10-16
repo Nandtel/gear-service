@@ -1,6 +1,6 @@
 package com.gearservice.model.repositories;
 
-import com.gearservice.model.Diagnostic;
+import com.gearservice.model.cheque.Diagnostic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

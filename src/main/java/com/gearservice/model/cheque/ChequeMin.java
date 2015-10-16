@@ -1,4 +1,4 @@
-package com.gearservice.model;
+package com.gearservice.model.cheque;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -1,6 +1,6 @@
 package com.gearservice.service;
 
-import com.gearservice.model.samples.*;
+import com.gearservice.model.cheque.samples.*;
 
 import java.time.OffsetDateTime;
 import java.util.Random;

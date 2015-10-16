@@ -40,10 +40,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()).and()
-                .jdbcAuthentication().dataSource(dataSource)
-                .withUser("user").password(passwordEncoder().encode("b")).roles("USER").and()
-                .withUser("admin").password(passwordEncoder().encode("b")).roles("USER", "ADMIN").and()
-                .withUser("sup").password(passwordEncoder().encode("b")).roles("SUPPLIER");
+                .jdbcAuthentication().dataSource(dataSource);
     }
 
     @Bean

@@ -1,0 +1,15 @@
+@media screen {
+    profile-page .day .md-item-text {
+        padding: 8px;
+        background: #f0f0f0;
+        border-radius: 3px;
+    }
+
+    profile-page .day .md-item-text h3 {
+        text-align: center;
+    }
+
+    profile-page .day {
+        padding: 0 10px;
+    }
+}

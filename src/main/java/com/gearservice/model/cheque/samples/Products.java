@@ -1,4 +1,4 @@
-package com.gearservice.model.samples;
+package com.gearservice.model.cheque.samples;
 
 /**
  * Enum Products contains samples of products

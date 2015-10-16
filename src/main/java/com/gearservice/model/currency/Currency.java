@@ -1,12 +1,11 @@
-package com.gearservice.model;
+package com.gearservice.model.currency;
 
-import com.gearservice.model.repositories.CurrencyRepository;
 import org.jsoup.Jsoup;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -15,10 +14,10 @@ public class Currency {
     @Id
     private Long id;
 
-    private float usd;
-    private float uah;
-    private float eur;
-    private float rub;
+    private BigDecimal usd;
+    private BigDecimal uah;
+    private BigDecimal eur;
+    private BigDecimal rub;
 
     public Currency() {
         this.id = LocalDate.now().toEpochDay();
@@ -30,7 +29,7 @@ public class Currency {
     }
 
     public Currency withRUB() {
-        this.rub = 1F;
+        this.rub = new BigDecimal("1");
         return this;
     }
 
@@ -40,11 +39,11 @@ public class Currency {
         for(int i = 0; i < elements.length;) {
             switch (elements[i++]) {
                 case "USD":
-                    this.setUsd((Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2); break;
+                    this.setUsd(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
                 case "UAH":
-                    this.setUah((Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2); break;
+                    this.setUah(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
                 case "EUR":
-                    this.setEur((Float.parseFloat(elements[i++]) + Float.parseFloat(elements[++i])) / 2); break;
+                    this.setEur(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
             }
             i++;
         }
@@ -66,14 +65,19 @@ public class Currency {
         return null;
     }
 
+    private static BigDecimal average(BigDecimal first, BigDecimal second) {
+        BigDecimal two = new BigDecimal("2");
+        return first.add(second).divide(two, 2, BigDecimal.ROUND_HALF_UP);
+    }
+
     public String getId() {return LocalDate.ofEpochDay(id).toString();}
     public void setId(String id) {this.id = LocalDate.parse(id).toEpochDay();}
-    public float getUsd() {return usd;}
-    public void setUsd(float usd) {this.usd = usd;}
-    public float getUah() {return uah;}
-    public void setUah(float uah) {this.uah = uah;}
-    public float getEur() {return eur;}
-    public void setEur(float eur) {this.eur = eur;}
-    public float getRub() {return rub;}
-    public void setRub(float rub) {this.rub = rub;}
+    public BigDecimal getUsd() {return usd;}
+    public void setUsd(BigDecimal usd) {this.usd = usd;}
+    public BigDecimal getUah() {return uah;}
+    public void setUah(BigDecimal uah) {this.uah = uah;}
+    public BigDecimal getEur() {return eur;}
+    public void setEur(BigDecimal eur) {this.eur = eur;}
+    public BigDecimal getRub() {return rub;}
+    public void setRub(BigDecimal rub) {this.rub = rub;}
 }

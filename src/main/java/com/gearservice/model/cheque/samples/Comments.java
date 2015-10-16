@@ -1,4 +1,4 @@
-package com.gearservice.model.samples;
+package com.gearservice.model.cheque.samples;
 
 /**
  * Enum Comments contains samples of comments

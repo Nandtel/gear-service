@@ -1,7 +1,10 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.*;
-import com.gearservice.model.Currency;
+import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.ChequeMin;
+import com.gearservice.model.cheque.Diagnostic;
+import com.gearservice.model.cheque.Note;
+import com.gearservice.model.user.User;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
-import java.security.Principal;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -27,7 +28,6 @@ import java.util.stream.IntStream;
 public class Application {
 
     @Autowired ChequeRepository chequeRepository;
-    @Autowired CurrencyRepository currencyRepository;
     @Autowired DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
     @Autowired UserRepository userRepository;
@@ -169,47 +169,5 @@ public class Application {
         userRepository.save(user);
 
         return new ModelAndView("redirect:/");
-    }
-
-    @RequestMapping(value = "/api/currency-rate", method = RequestMethod.GET)
-    public Currency getCurrencyRates() {
-        Long now = LocalDate.now().toEpochDay();
-
-        if(!currencyRepository.exists(now))
-            currencyRepository.save(new Currency()
-                    .forToday()
-                    .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
-
-        return currencyRepository.findOne(now);
-    }
-
-    @RequestMapping(value = "/api/currency-rate-clean", method = RequestMethod.GET)
-    public Currency getCleanCurrencyRates() {
-        Long now = LocalDate.now().toEpochDay();
-
-        currencyRepository.save(new Currency()
-                    .forToday()
-                    .withRUB()
-                    .getFromServer("http://minfindnr.ru/", "li#text-12 font"));
-
-        return currencyRepository.findOne(now);
-    }
-
-    @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.GET)
-    public List<Currency> getCur() {
-        return currencyRepository.findAll();
-    }
-
-    @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void setCur(@RequestBody List<Currency> list) {
-        currencyRepository.save(list);
-    }
-
-    @RequestMapping("/api/user")
-    @ResponseBody
-    public Principal user(Principal user) {
-        return user;
     }
 }

@@ -11,6 +11,15 @@ angular.module("mainModule")
                 currencyRatesService.setListOfCurrencyRates($scope.rates);
             };
 
+            $scope.getUsers = function() {
+                $http.get('/api/users')
+                    .success(function(data) {
+                        $scope.users = data;
+                    });
+            };
+
+            $scope.getUsers();
+
         }
     ])
     .directive('profilePage', function() {
