@@ -1,0 +1,19 @@
+<form name="day" class="md-item-text md-whiteframe-z1" layout="column" layout-align="center center" flex>
+    <h3>{{rate.id | amDateFormat: 'll'}}</h3>
+    <md-input-container>
+        <label>USD</label>
+        <input type="number" step="0.01" ng-model="rate.usd">
+    </md-input-container>
+    <md-input-container>
+        <label>UAH</label>
+        <input type="number" step="0.01" ng-model="rate.uah">
+    </md-input-container>
+    <md-input-container>
+        <label>EUR</label>
+        <input type="number" step="0.01" ng-model="rate.eur">
+    </md-input-container>
+
+    <md-button class="md-raised md-primary" type="submit" ng-click="sendRate()" ng-disabled="day.$pristine">
+        Save
+    </md-button>
+</form>

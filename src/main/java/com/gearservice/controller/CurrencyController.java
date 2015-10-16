@@ -42,7 +42,7 @@ public class CurrencyController {
     @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.GET)
     public List<Currency> getCur() {return currencyRepository.findTop4ByOrderByIdAsc();}
 
-    @RequestMapping(value = "/api/currency-rate-list", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/currency-rate", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void setCur(@RequestBody List<Currency> list) {currencyRepository.save(list);}
+    public void setCur(@RequestBody Currency currency) {currencyRepository.save(currency);}
 }

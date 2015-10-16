@@ -1,4 +1,4 @@
-package com.gearservice.model;
+package com.gearservice.model.authorization;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.gearservice.model;
+package com.gearservice.model.authorization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,7 +1,7 @@
 package com.gearservice.service;
 
-import com.gearservice.model.Authorities;
-import com.gearservice.model.User;
+import com.gearservice.model.authorization.Authorities;
+import com.gearservice.model.authorization.User;
 import com.gearservice.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -28,33 +28,15 @@
             </div>
         </md-toolbar>
 
-        <form ng-submit="setRates()" layout="column" layout-align="center center" layout-padding>
+        <md-content layout-padding>
 
-            <md-list layout="row">
-                <md-list-item class="day" ng-repeat="rate in rates" layout="row" layout-wrap>
-                    <div class="md-item-text md-whiteframe-z1" flex>
-                        <h3>{{rate.id | amDateFormat: 'll'}}</h3>
-                        <md-input-container>
-                            <label>USD</label>
-                            <input type="number" step="0.01" ng-model="rate.usd">
-                        </md-input-container>
-                        <md-input-container>
-                            <label>UAH</label>
-                            <input type="number" step="0.01" ng-model="rate.uah">
-                        </md-input-container>
-                        <md-input-container>
-                            <label>EUR</label>
-                            <input type="number" step="0.01" ng-model="rate.eur">
-                        </md-input-container>
-                    </div>
+            <md-list layout="row" layout-align="center center">
+                <md-list-item class="day" ng-repeat="rate in rates" layout-wrap layout="row" layout-align="center center">
+                    <currency-rate-day ng-model="rate"></currency-rate-day>
                 </md-list-item>
             </md-list>
 
-            <md-button class="md-raised md-primary" type="submit">
-                Save
-            </md-button>
-
-        </form>
+        </md-content>
 
     </md-content>
 
