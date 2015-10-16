@@ -79,10 +79,6 @@
         width: 200px;
     }
 
-    print-cheque .right {
-        float: right;
-    }
-
     print-cheque .padding-top {
         margin-top: 4px;
     }
