@@ -3,10 +3,6 @@
         outline: none;
     }
 
-    cheque-form form {
-        margin-bottom: 1rem;
-    }
-
     cheque-form md-input-container.md-icon-float md-icon {
         color: #3F51B5;
     }

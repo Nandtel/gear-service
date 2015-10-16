@@ -1,13 +1,13 @@
 html {}
 
-section.content-block:first-child {
-    margin: 1rem 7rem;
+.content-block:first-child {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
 }
 
-section.content-block {
-    margin: .25rem 7rem;
-    max-width: 1400px;
-    min-width: 800px;
+.content-block {
+    width: 1000px;
+    margin: .5rem 0;
 }
 
 /* Loading bar */

@@ -6,7 +6,7 @@
 
 @media print{
 
-    ui-view[name="header"], section.content-block {
+    ui-view[name="header"], section {
         display: none;
     }
 
