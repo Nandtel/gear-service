@@ -1,0 +1,5 @@
+@media screen {
+    user-details md-content.user-detail {
+        width: 100%;
+    }
+}

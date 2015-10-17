@@ -1,6 +1,8 @@
 angular.module("mainModule")
     .controller('ProfilePage', ['$scope', '$http', 'currencyRatesService',
         function ($scope, $http, currencyRatesService) {
+            var sampleUser =
+            {username: 'Name', fullName: 'FullName', enabled: true, authorities: [{authority:'ROLE_ENGINEER'}]};
 
             currencyRatesService.getListOfCurrencyRates()
                 .then(function(data) {
@@ -18,8 +20,11 @@ angular.module("mainModule")
                     });
             };
 
-            $scope.getUsers();
+            $scope.addUser = function() {
+                $scope.users.push(sampleUser);
+            };
 
+            $scope.getUsers();
         }
     ])
     .directive('profilePage', function() {

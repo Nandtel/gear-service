@@ -1,0 +1,53 @@
+<form name="userForm" layout-padding layout="column" layout-align="center center" flex>
+
+    <md-content layout="row" layout-align="start center" class="user-detail">
+
+        <md-content layout="column" layout-align="center start" flex="50">
+            <md-input-container>
+                <label translate>Username</label>
+                <input ng-model="user.username">
+            </md-input-container>
+
+            <md-input-container>
+                <label translate>FullName</label>
+                <input ng-model="user.fullName">
+            </md-input-container>
+
+            <md-input-container>
+                <label translate>New password</label>
+                <input ng-model="user.newPassword" type="password">
+            </md-input-container>
+        </md-content>
+
+        <md-content layout="column" layout-align="center start" flex="50">
+
+            <md-content layout-padding layout="row" layout-align="center start">
+                <md-chips ng-model="user.authorities" flex
+                          placeholder="{{'Authority' | translate}}"
+                          secondary-placeholder="{{'Authority' | translate}}"
+                          md-on-append="addAuthority($chip)">
+                    <md-chip-template>{{$chip.authority}}</md-chip-template>
+                </md-chips>
+            </md-content>
+
+            <md-checkbox ng-model="user.enabled" class="md-primary">
+                <p>{{ 'Enabled' | translate}}</p>
+            </md-checkbox>
+
+        </md-content>
+
+    </md-content>
+
+    <md-content layout="row" layout-align="start center" flex="100">
+
+        <md-button class="md-raised md-primary" ng-click="saveUser()" ng-disabled="userForm.$pristine">
+            {{'save' | translate}}
+        </md-button>
+
+        <md-button class="md-raised md-primary" ng-click="deleteUser()">
+            {{'delete' | translate}}
+        </md-button>
+
+    </md-content>
+
+</form>

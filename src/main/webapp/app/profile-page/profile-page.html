@@ -4,17 +4,20 @@
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2><span>Users</span></h2>
+                <h2>{{'users' | translate}}</h2>
+
+                <span flex></span>
+
+                <md-button type="button" class="md-icon-button" ng-click="addUser()">
+                    <md-icon md-font-set="material-icons">person_add</md-icon>
+                </md-button>
             </div>
         </md-toolbar>
 
         <md-content md-theme="header">
-            <md-tabs md-border-bottom md-autoselect>
-                <md-tab ng-repeat="user in users"
-                        label="{{user.fullName}}">
-                    <div>
-                        <pre>{{user | json}}</pre>
-                    </div>
+            <md-tabs md-border-bottom md-dynamic-height>
+                <md-tab ng-repeat="user in users | orderBy: 'username'" label="{{user.fullName}}">
+                    <user-details ng-model="user"></user-details>
                 </md-tab>
             </md-tabs>
         </md-content>
@@ -24,7 +27,7 @@
     <md-content class="content-block md-whiteframe-z1">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2><span>Currency rates</span></h2>
+                <h2>{{'currency rates' | translate}}</h2>
             </div>
         </md-toolbar>
 

@@ -3,10 +3,9 @@ package com.gearservice.controller;
 import com.gearservice.model.authorization.User;
 import com.gearservice.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,9 +21,25 @@ public class UserController {
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public List<User> getUsers() {return userRepository.findAll();}
 
-    @RequestMapping(value = "/api/users", method = RequestMethod.POST)
-    public List<User> setUsers(@RequestBody List<User> users) {
-        return userRepository.save(users);
+    @RequestMapping(value = "/api/user", method = RequestMethod.POST)
+    public void setUser(@RequestBody User user) {
+
+        if (user.getNewPassword() == null) {
+            User userForReplacement = userRepository.findOne(user.getUsername());
+            user.setPassword(userForReplacement.getPassword());
+        } else {
+            String password = user.getNewPassword();
+            user.setPassword(passwordEncoder().encode(password));
+        }
+
+        userRepository.save(user);
+    }
+
+    @RequestMapping(value = "/api/user/{userID}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable String userID) {userRepository.delete(userID);}
+
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

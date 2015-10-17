@@ -42,7 +42,8 @@ public class GearServiceApplication implements CommandLineRunner {
         admin.setPassword(passwordEncoder().encode("b"));
         admin.setFullName("Грешник А.А.");
         admin.setEnabled(true);
-        admin.setAuthorities(new HashSet<>(Arrays.asList(administrator.withUsername(admin))));
+        admin.setAuthorities(new HashSet<>(
+                Arrays.asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
         userRepository.save(admin);
 
         User kosoy = new User();
