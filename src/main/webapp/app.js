@@ -6,7 +6,7 @@
  * @since 04.09.2015
  */
 angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
-    'angular-loading-bar', 'templates', 'angular-cache', 'duScroll'])
+    'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'chart.js'])
     .value('duScrollDuration', 3000)
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
@@ -55,7 +55,7 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 })
                 .state('cheque.analytics', {
                     url: "^/analytics",
-                    template: '<div></div>',
+                    template: '<analytics-page></analytics-page>',
                     data: {'selectedTab': 2}
                 })
                 .state('cheque.profile', {
