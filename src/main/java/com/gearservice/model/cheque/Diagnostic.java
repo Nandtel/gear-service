@@ -23,18 +23,14 @@ public class Diagnostic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diagnostic_index")
     private Long id;
 
-    @Column(name = "diagnostic_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     private OffsetDateTime time;
 
-    @Column(name = "diagnostic_user")
     private String user;
 
-    @Column(name = "diagnostic_text")
     @Lob
     private String text;
 

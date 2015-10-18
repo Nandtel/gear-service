@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -136,6 +137,10 @@ public class ChequeService {
     public ModelAndView addSampleCheques() {
         IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
         return new ModelAndView("redirect:/");
+    }
+
+    public List<Cheque> attentionCheques() {
+        return chequeRepository.findByDiagnosticsIsNull();
     }
 
 }

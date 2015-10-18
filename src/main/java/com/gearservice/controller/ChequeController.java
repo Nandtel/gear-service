@@ -68,4 +68,9 @@ public class ChequeController {
         return new ModelAndView("redirect:/");
     }
 
+    @RequestMapping(value = "/attention", method = RequestMethod.GET)
+    public List<Cheque> attentionCheques() {
+        return chequeService.attentionCheques();
+    }
+
 }

@@ -3,6 +3,9 @@ package com.gearservice.model.repositories;
 import com.gearservice.model.cheque.Cheque;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.OffsetDateTime;
+import java.util.List;
+
 /**
  * Interface ChequeRepository with extending of jpa repository get all capabilities of Spring Boot JPA
  *
@@ -14,4 +17,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     Cheque findFirstByOrderByIdDesc();
+    List<Cheque> findByDiagnosticsIsNull();
 }

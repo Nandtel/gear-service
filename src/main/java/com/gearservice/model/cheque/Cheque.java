@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Class Cheque is model Entity, that consists all main data and bidirectional relationship with affiliated classes
  * for storing in database.
- * It has few date-field: introduced, guarantee, ready and issued — that handled with special serializer and json pattern.
+ * It has few date-field: introduced, guarantee, ready and issued ï¿½ that handled with special serializer and json pattern.
  * It has few bidirectional one-to-many relationship: kits, diagnostics and notes.
  *
  * @version 1.0

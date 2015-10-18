@@ -1,5 +1,8 @@
 package com.gearservice;
+import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.currency.Currency;
+import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.CurrencyRepository;
 import com.gearservice.model.repositories.UserRepository;
 import com.gearservice.model.authorization.Authorities;
@@ -13,8 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.stream.IntStream;
 
 /**
  * Class GearServiceApplication is main, configurable class of application.
@@ -29,6 +34,7 @@ public class GearServiceApplication implements CommandLineRunner {
 
     @Autowired UserRepository userRepository;
     @Autowired CurrencyRepository currencyRepository;
+    @Autowired ChequeRepository chequeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -72,24 +78,35 @@ public class GearServiceApplication implements CommandLineRunner {
 
         Currency yesterday = new Currency();
         yesterday.setId(LocalDate.now().minusDays(1).toString());
-        yesterday.setEur(new BigDecimal("0"));
-        yesterday.setUsd(new BigDecimal("0"));
-        yesterday.setUah(new BigDecimal("0"));
+        yesterday.setEur(new BigDecimal("70"));
+        yesterday.setUsd(new BigDecimal("70"));
+        yesterday.setUah(new BigDecimal("70"));
         currencyRepository.save(yesterday);
 
         Currency tomorrow = new Currency();
-        tomorrow.setId(LocalDate.now().plusDays(1).toString());
+        tomorrow.setId(LocalDate.now().minusDays(2).toString());
         tomorrow.setEur(new BigDecimal("100"));
         tomorrow.setUsd(new BigDecimal("100"));
         tomorrow.setUah(new BigDecimal("100"));
         currencyRepository.save(tomorrow);
 
         Currency dayBeforeYesterday = new Currency();
-        dayBeforeYesterday.setId(LocalDate.now().minusDays(2).toString());
+        dayBeforeYesterday.setId(LocalDate.now().minusDays(3).toString());
         dayBeforeYesterday.setEur(new BigDecimal("10"));
         dayBeforeYesterday.setUsd(new BigDecimal("10"));
         dayBeforeYesterday.setUah(new BigDecimal("10"));
         currencyRepository.save(dayBeforeYesterday);
+
+        OffsetDateTime now = OffsetDateTime.now();
+
+        IntStream.range(0, 5)
+                .forEach(i -> {
+                    Cheque cheque = new Cheque().withRandomData();
+                    cheque.setIntroducedDate(now.minusDays(i));
+                    chequeRepository.save(cheque);
+                });
+
+
     }
 
     public PasswordEncoder passwordEncoder() {
