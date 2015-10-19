@@ -143,4 +143,8 @@ public class ChequeService {
         return chequeRepository.findByDiagnosticsIsNull();
     }
 
+    public List<Cheque> attentionChequesByDelay() {
+        return chequeRepository.findChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
+    }
+
 }

@@ -1,0 +1,29 @@
+<section layout="column" layout-align="center center">
+
+
+    <md-content class="md-whiteframe-z1 content-block">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2><span translate>Tasks</span></h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+
+            <h1>New cheque</h1>
+            <div ng-repeat="cheque in attention" ui-sref="cheque.edit({chequeId:cheque.id})">
+                New cheque is id: {{cheque.id}}
+            </div>
+
+            <h1>Cheque with delay</h1>
+            <div ng-repeat="cheque in delay" ui-sref="cheque.edit({chequeId:cheque.id})">
+                Cheque with delay is id: {{cheque.id}}
+            </div>
+
+        </md-content>
+
+
+    </md-content>
+
+</section>

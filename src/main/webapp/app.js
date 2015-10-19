@@ -53,15 +53,20 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                     template: '<cheque-page></cheque-page>',
                     data: {'selectedTab': 1}
                 })
+                .state('cheque.dashboard', {
+                    url: "^/dashboard",
+                    template: '<dashboard></dashboard>',
+                    data: {'selectedTab': 2}
+                })
                 .state('cheque.analytics', {
                     url: "^/analytics",
                     template: '<analytics-page></analytics-page>',
-                    data: {'selectedTab': 2}
+                    data: {'selectedTab': 3}
                 })
                 .state('cheque.profile', {
                     url: "^/profile",
                     template: '<profile-page></profile-page>',
-                    data: {'selectedTab': 3}
+                    data: {'selectedTab': 4}
                 })
                 .state('cheque.login', {
                     url: "^/login",

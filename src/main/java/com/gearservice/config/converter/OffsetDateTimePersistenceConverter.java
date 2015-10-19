@@ -9,11 +9,11 @@ public class OffsetDateTimePersistenceConverter implements AttributeConverter<Of
 
     @Override
     public String convertToDatabaseColumn(OffsetDateTime entityValue) {
-        return entityValue.toString();
+        return entityValue != null ? entityValue.toString() : null;
     }
 
     @Override
     public OffsetDateTime convertToEntityAttribute(String databaseValue) {
-        return OffsetDateTime.parse(databaseValue);
+        return databaseValue != null ? OffsetDateTime.parse(databaseValue) : null;
     }
 }
