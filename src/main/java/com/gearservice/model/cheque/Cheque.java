@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
+import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
 import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
@@ -44,15 +45,19 @@ public class Cheque {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime introducedDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime guaranteeDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime readyDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime issuedDate;
 
     private boolean withoutRepair;

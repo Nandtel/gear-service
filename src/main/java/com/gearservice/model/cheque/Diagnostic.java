@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
+import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
 import com.gearservice.service.SampleDataService;
 
 
@@ -27,6 +28,7 @@ public class Diagnostic {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime time;
 
     private String user;
