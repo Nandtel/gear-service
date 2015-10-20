@@ -60,6 +60,7 @@ angular.module("mainModule")
             };
 
             $scope.printCheque = function() {
+                $scope.sendCheque();
                 window.print();
             };
 

@@ -5,24 +5,44 @@
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2><span translate>Tasks</span></h2>
+                <h2><span translate>{{'tasks' | translate}}</span></h2>
             </div>
         </md-toolbar>
 
-        <md-content layout-padding>
+        <md-content>
 
-            <h1>New cheque</h1>
-            <div ng-repeat="cheque in attention" ui-sref="cheque.edit({chequeId:cheque.id})">
-                New cheque is id: {{cheque.id}}
-            </div>
+            <md-list>
 
-            <h1>Cheque with delay</h1>
-            <div ng-repeat="cheque in delay" ui-sref="cheque.edit({chequeId:cheque.id})">
-                Cheque with delay is id: {{cheque.id}}
-            </div>
+                <span ng-show="attention.length > 0">
+                    <md-subheader class="md-no-sticky">{{'new cheques' | translate}}</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="cheque in attention">
+                        <div class="md-list-item-text" layout="column" ui-sref="cheque.edit({chequeId:cheque.id})">
+                            <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
+                            <h4 ng-show="cheque.hasGuaranteeStatus">Гарантия</h4>
+                            <h4 ng-hide="cheque.hasGuaranteeStatus">Не гарантия</h4>
+                            <p>{{'Customer' | translate}}: {{ cheque.nameOfCustomer }}</p>
+                            <p>{{'Name of Product' | translate}}: {{ cheque.nameOfProduct }}, {{cheque.model}}, {{cheque.serialNumber}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider ></md-divider>
+                </span>
+
+                <span ng-show="delay.length > 0">
+                    <md-subheader class="md-no-sticky">{{'cheques with delay' | translate}}</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="cheque in delay">
+                        <div class="md-list-item-text" layout="column" ui-sref="cheque.edit({chequeId:cheque.id})">
+                            <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
+                            <h4 ng-show="cheque.hasGuaranteeStatus">Гарантия</h4>
+                            <h4 ng-hide="cheque.hasGuaranteeStatus">Не гарантия</h4>
+                            <p>{{'Customer' | translate}}: {{ cheque.nameOfCustomer }}</p>
+                            <p>{{'Name of Product' | translate}}: {{ cheque.nameOfProduct }}, {{cheque.model}}, {{cheque.serialNumber}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider ></md-divider>
+                </span>
+            </md-list>
 
         </md-content>
-
 
     </md-content>
 

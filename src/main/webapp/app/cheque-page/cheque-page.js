@@ -16,17 +16,17 @@ angular.module("mainModule")
              * It adds to cheque model cheque, when gets it
              */
             $scope.getCheque = function(chequeID) {
-                $http.get('/api/cheques/' + chequeID).success(function (response) {
-                    $scope.cheque = response;
-                });
+                $http.get('/api/cheques/' + chequeID)
+                    .success(function (response) {
+                        $scope.cheque = response;
+                    });
             };
 
-            $scope.$watch('cheque.id', function (newValue, oldValue) {
-                $scope.hasID = !!newValue;
-            });
+            $scope.hasID = !!$scope.chequeID;
 
-            if(!!$scope.chequeID)
+            if($scope.hasID)
                 $scope.getCheque($scope.chequeID);
+
         }
     ])
     .directive('chequePage', function() {

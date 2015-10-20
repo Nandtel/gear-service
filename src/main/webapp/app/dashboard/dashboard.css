@@ -1,0 +1,16 @@
+@media screen {
+    dashboard div.md-list-item-text:hover {
+        background-color: #eee !important;
+        cursor: pointer;
+    }
+
+    dashboard md-list md-list-item.md-3-line {
+        margin: 1rem;
+        height: auto;
+    }
+
+    dashboard div.md-list-item-text {
+        padding: 0.5rem;
+    }
+
+}
