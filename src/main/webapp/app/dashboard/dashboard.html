@@ -20,6 +20,7 @@
                             <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
                             <h4 ng-show="cheque.hasGuaranteeStatus">Гарантия</h4>
                             <h4 ng-hide="cheque.hasGuaranteeStatus">Не гарантия</h4>
+                            <h4>{{'Introduced' | translate}}: {{ cheque.introducedDate |  amDateFormat:'DD.MM.YYYY'}}</h4>
                             <p>{{'Customer' | translate}}: {{ cheque.nameOfCustomer }}</p>
                             <p>{{'Name of Product' | translate}}: {{ cheque.nameOfProduct }}, {{cheque.model}}, {{cheque.serialNumber}}</p>
                         </div>
@@ -34,6 +35,7 @@
                             <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
                             <h4 ng-show="cheque.hasGuaranteeStatus">Гарантия</h4>
                             <h4 ng-hide="cheque.hasGuaranteeStatus">Не гарантия</h4>
+                            <h4>{{'Introduced' | translate}}: {{ cheque.introducedDate |  amDateFormat:'DD.MM.YYYY'}}</h4>
                             <p>{{'Customer' | translate}}: {{ cheque.nameOfCustomer }}</p>
                             <p>{{'Name of Product' | translate}}: {{ cheque.nameOfProduct }}, {{cheque.model}}, {{cheque.serialNumber}}</p>
                         </div>
