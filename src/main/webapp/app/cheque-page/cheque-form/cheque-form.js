@@ -7,9 +7,10 @@ angular.module("mainModule")
              * It adds to cheque model cheque, when gets it
              */
             $scope.getCheque = function() {
-                $http.get('/api/cheques/' + $scope.cheque.id).success(function(response) {
-                    $scope.cheque = response;
-                });
+                $http.get('/api/cheques/' + $scope.cheque.id)
+                    .success(function(response) {
+                        $scope.cheque = response;
+                    });
             };
 
             /**

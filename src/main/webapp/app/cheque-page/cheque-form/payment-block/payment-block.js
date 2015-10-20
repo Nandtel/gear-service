@@ -3,10 +3,6 @@ angular.module("mainModule")
         function($scope, currencyRatesService, $rootScope) {
             $scope.hasPrepayment = false;
 
-            var getRates = function() {
-                currencyRatesService.refreshCurrencyRate();
-            };
-
             $scope.addPayment = function() {
 
                 if($scope.cheque.payments === undefined)
@@ -41,8 +37,6 @@ angular.module("mainModule")
 
                 return sum;
             };
-
-            getRates();
         }
     ])
     .directive('paymentBlock', [function() {
