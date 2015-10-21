@@ -25,7 +25,7 @@ import java.util.Set;
 public class Cheque {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private int repairPeriod;
@@ -69,19 +69,19 @@ public class Cheque {
     private boolean hasIssuedStatus;
     private boolean hasPaidStatus;
 
-    @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Kit> kits;
 
-    @OneToMany(mappedBy = "diagnosticOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @OneToMany(mappedBy = "diagnosticOwner", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Diagnostic> diagnostics;
 
-    @OneToMany(mappedBy = "noteOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @OneToMany(mappedBy = "noteOwner", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Payment> payments;
 
@@ -176,4 +176,40 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
+
+    @Override
+    public String toString() {
+        return "Cheque{" +
+                "id=" + id +
+                ", repairPeriod=" + repairPeriod +
+                ", nameOfCustomer='" + nameOfCustomer + '\'' +
+                ", nameOfProduct='" + nameOfProduct + '\'' +
+                ", model='" + model + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", malfunction='" + malfunction + '\'' +
+                ", specialNotes='" + specialNotes + '\'' +
+                ", purchaserName='" + purchaserName + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", inspectorName='" + inspectorName + '\'' +
+                ", masterName='" + masterName + '\'' +
+                ", prediction=" + prediction +
+                ", introducedDate=" + introducedDate +
+                ", guaranteeDate=" + guaranteeDate +
+                ", readyDate=" + readyDate +
+                ", issuedDate=" + issuedDate +
+                ", withoutRepair=" + withoutRepair +
+                ", actNG=" + actNG +
+                ", actVO=" + actVO +
+                ", hasGuaranteeStatus=" + hasGuaranteeStatus +
+                ", hasReadyStatus=" + hasReadyStatus +
+                ", hasIssuedStatus=" + hasIssuedStatus +
+                ", hasPaidStatus=" + hasPaidStatus +
+                ", kits=" + kits +
+                ", diagnostics=" + diagnostics +
+                ", notes=" + notes +
+                ", payments=" + payments +
+                '}';
+    }
 }

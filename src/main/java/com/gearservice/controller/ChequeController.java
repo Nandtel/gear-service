@@ -74,7 +74,7 @@ public class ChequeController {
     }
 
     @RequestMapping(value = "/delay", method = RequestMethod.GET)
-    public List<Cheque> attentionChequesByDelay() {
+    public List<ChequeMin> attentionChequesByDelay() {
         return chequeService.attentionChequesByDelay();
     }
 

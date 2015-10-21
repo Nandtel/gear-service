@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,6 +32,7 @@ import java.util.stream.IntStream;
  * @since 04.09.2015
  */
 @SpringBootApplication
+@EnableTransactionManagement
 public class GearServiceApplication implements CommandLineRunner {
 
     @Autowired UserRepository userRepository;
@@ -105,8 +108,6 @@ public class GearServiceApplication implements CommandLineRunner {
                     cheque.setIntroducedDate(now.minusDays(i));
                     chequeRepository.save(cheque);
                 });
-
-
     }
 
     public PasswordEncoder passwordEncoder() {

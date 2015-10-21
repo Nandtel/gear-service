@@ -43,6 +43,32 @@ public class ChequeMin {
     private boolean hasIssuedStatus;
     private boolean hasPaidStatus;
 
+    public ChequeMin() {}
+
+    public ChequeMin(Long id, String nameOfCustomer, OffsetDateTime introducedDate, OffsetDateTime guaranteeDate,
+                     OffsetDateTime readyDate, OffsetDateTime issuedDate, String nameOfProduct, String model,
+                     String serialNumber, String purchaserName, String inspectorName, String masterName,
+                     boolean hasGuaranteeStatus, boolean hasReadyStatus, boolean hasIssuedStatus,
+                     boolean hasPaidStatus) {
+
+        this.id = id;
+        this.nameOfCustomer = nameOfCustomer;
+        this.introducedDate = introducedDate;
+        this.guaranteeDate = guaranteeDate;
+        this.readyDate = readyDate;
+        this.issuedDate = issuedDate;
+        this.nameOfProduct = nameOfProduct;
+        this.model = model;
+        this.serialNumber = serialNumber;
+        this.purchaserName = purchaserName;
+        this.inspectorName = inspectorName;
+        this.masterName = masterName;
+        this.hasGuaranteeStatus = hasGuaranteeStatus;
+        this.hasReadyStatus = hasReadyStatus;
+        this.hasIssuedStatus = hasIssuedStatus;
+        this.hasPaidStatus = hasPaidStatus;
+    }
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
     public String getNameOfCustomer() {return nameOfCustomer;}
@@ -75,4 +101,10 @@ public class ChequeMin {
     public void setHasReadyStatus(boolean hasReadyStatus) {this.hasReadyStatus = hasReadyStatus;}
     public boolean isHasIssuedStatus() {return hasIssuedStatus;}
     public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
+
+    @Override
+    public String toString() {
+        return "ChequeMin{" +
+                "id=" + id;
+    }
 }

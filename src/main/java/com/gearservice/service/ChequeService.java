@@ -10,6 +10,7 @@ import com.gearservice.model.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,10 +35,7 @@ public class ChequeService {
      * @return list of all cheques, that database has
      */
     public List<ChequeMin> getMinChequesList() {
-        return (List<ChequeMin>) em.createNativeQuery("SELECT id, name_of_customer, introduced_date, name_of_product, " +
-                "model, serial_number, purchaser_name, inspector_name, master_name, guarantee_date, ready_date, " +
-                "issued_date, has_paid_status, has_guarantee_status, has_ready_status, has_issued_status " +
-                "FROM cheque", ChequeMin.class).getResultList();
+        return chequeRepository.getListOfCompactCheques();
     }
 
     /**
@@ -143,8 +141,10 @@ public class ChequeService {
         return chequeRepository.findByDiagnosticsIsNull();
     }
 
-    public List<Cheque> attentionChequesByDelay() {
-        return chequeRepository.findChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
+    @Transactional(readOnly = true)
+    public List<ChequeMin> attentionChequesByDelay() {
+        Long[] IDs = chequeRepository.findIdOfChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
+        return chequeRepository.getListOfCompactChequesWithIDs(IDs);
     }
 
 }
