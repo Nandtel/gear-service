@@ -1,6 +1,6 @@
 package com.gearservice.service;
 
-import com.gearservice.model.authorization.Authorities;
+import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
 import com.gearservice.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService, UserDetailsManager {
         @Override public boolean isAccountNonLocked() {return true;}
         @Override public boolean isCredentialsNonExpired() {return true;}
         @Override public boolean isEnabled() {return super.isEnabled();}
-        @Override public Set<Authorities> getAuthorities() {return super.getAuthorities();}
+        @Override public Set<Authority> getAuthorities() {return super.getAuthorities();}
 
     }
 }

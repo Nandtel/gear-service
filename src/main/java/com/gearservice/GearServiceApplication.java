@@ -1,17 +1,15 @@
 package com.gearservice;
 import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.currency.Currency;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.CurrencyRepository;
 import com.gearservice.model.repositories.UserRepository;
-import com.gearservice.model.authorization.Authorities;
+import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -42,9 +40,9 @@ public class GearServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Authorities engineer = new Authorities("ROLE_ENGINEER");
-        Authorities secretary = new Authorities("ROLE_SECRETARY");
-        Authorities administrator = new Authorities("ROLE_ADMIN");
+        Authority engineer = new Authority("ROLE_ENGINEER");
+        Authority secretary = new Authority("ROLE_SECRETARY");
+        Authority administrator = new Authority("ROLE_ADMIN");
 
         User admin = new User();
         admin.setUsername("admin");

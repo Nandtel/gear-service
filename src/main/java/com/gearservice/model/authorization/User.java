@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 public class User {
 
     @Id private String username;
@@ -16,9 +16,13 @@ public class User {
     private boolean enabled;
     private String fullName;
 
-    @OneToMany(mappedBy = "username", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_authorities",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "authority"))
     @JsonManagedReference
-    private Set<Authorities> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 
     public User() {}
 
@@ -42,6 +46,6 @@ public class User {
     public String getFullName() {return fullName;}
     public void setFullName(String fullName) {this.fullName = fullName;}
 
-    public Set<Authorities> getAuthorities() {return authorities;}
-    public void setAuthorities(Set<Authorities> authorities) {this.authorities = authorities;}
+    public Set<Authority> getAuthorities() {return authorities;}
+    public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
 }
