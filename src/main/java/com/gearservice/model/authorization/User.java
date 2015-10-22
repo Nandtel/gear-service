@@ -8,10 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@JsonIdentityInfo(
-//        generator=ObjectIdGenerators.PropertyGenerator.class,
-//        property = "username",
-//        scope = Cheque.class)
 public class User {
 
     @Id private String username;
@@ -25,14 +21,15 @@ public class User {
             name = "user_authorities",
             joinColumns = @JoinColumn(name = "username"),
             inverseJoinColumns = @JoinColumn(name = "authority"))
-    @JsonManagedReference
     private Set<Authority> authorities = new HashSet<>();
 
-//    @OneToMany(mappedBy = "engineer")
-//    private Set<Cheque> chequesAsEngineer = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "secretary")
-//    private Set<Cheque> chequesAsSecretary = new HashSet<>();
+    @OneToMany(mappedBy = "engineer", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Cheque> chequesAsEngineer;
+
+    @OneToMany(mappedBy = "secretary", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Cheque> chequesAsSecretary;
 
     public User() {}
 
@@ -57,8 +54,8 @@ public class User {
     public void setFullname(String fullname) {this.fullname = fullname;}
     public Set<Authority> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
-//    public Set<Cheque> getChequesAsEngineer() {return chequesAsEngineer;}
-//    public void setChequesAsEngineer(Set<Cheque> chequesAsEngineer) {this.chequesAsEngineer = chequesAsEngineer;}
-//    public Set<Cheque> getChequesAsSecretary() {return chequesAsSecretary;}
-//    public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
+    public Set<Cheque> getChequesAsEngineer() {return chequesAsEngineer;}
+    public void setChequesAsEngineer(Set<Cheque> chequesAsEngineer) {this.chequesAsEngineer = chequesAsEngineer;}
+    public Set<Cheque> getChequesAsSecretary() {return chequesAsSecretary;}
+    public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
 }

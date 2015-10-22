@@ -88,13 +88,13 @@ public class Cheque {
     @JsonManagedReference
     private Set<Payment> payments;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "engineer", referencedColumnName = "username")
-//    private User engineer;
-//
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "secretary", referencedColumnName = "username")
-//    private User secretary;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "engineer", referencedColumnName = "username")
+    private User engineer;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "secretary", referencedColumnName = "username")
+    private User secretary;
 
     /**
      * Method withRandomData handle current Cheque object filling it with random data and return this edited object
@@ -187,44 +187,8 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
-//    public User getEngineer() {return engineer;}
-//    public void setEngineer(User engineer) {this.engineer = engineer;}
-//    public User getSecretary() {return secretary;}
-//    public void setSecretary(User secretary) {this.secretary = secretary;}
-
-    @Override
-    public String toString() {
-        return "Cheque{" +
-                "id=" + id +
-                ", repairPeriod=" + repairPeriod +
-                ", nameOfCustomer='" + nameOfCustomer + '\'' +
-                ", nameOfProduct='" + nameOfProduct + '\'' +
-                ", model='" + model + '\'' +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", malfunction='" + malfunction + '\'' +
-                ", specialNotes='" + specialNotes + '\'' +
-                ", purchaserName='" + purchaserName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", inspectorName='" + inspectorName + '\'' +
-                ", masterName='" + masterName + '\'' +
-                ", prediction=" + prediction +
-                ", introducedDate=" + introducedDate +
-                ", guaranteeDate=" + guaranteeDate +
-                ", readyDate=" + readyDate +
-                ", issuedDate=" + issuedDate +
-                ", withoutRepair=" + withoutRepair +
-                ", actNG=" + actNG +
-                ", actVO=" + actVO +
-                ", hasGuaranteeStatus=" + hasGuaranteeStatus +
-                ", hasReadyStatus=" + hasReadyStatus +
-                ", hasIssuedStatus=" + hasIssuedStatus +
-                ", hasPaidStatus=" + hasPaidStatus +
-                ", kits=" + kits +
-                ", diagnostics=" + diagnostics +
-                ", notes=" + notes +
-                ", payments=" + payments +
-                '}';
-    }
+    public User getEngineer() {return engineer;}
+    public void setEngineer(User engineer) {this.engineer = engineer;}
+    public User getSecretary() {return secretary;}
+    public void setSecretary(User secretary) {this.secretary = secretary;}
 }

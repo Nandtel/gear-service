@@ -28,7 +28,6 @@ public class Authority implements GrantedAuthority {
         return this;
     }
 
-//    public void setId(long id) {this.id = id;}
     public Set<User> getUsers() {return users;}
     public void setUsers(Set<User> username) {this.users = username;}
     public void setAuthority(String authority) {this.authority = authority;}

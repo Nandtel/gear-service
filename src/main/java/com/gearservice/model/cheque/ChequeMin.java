@@ -102,9 +102,4 @@ public class ChequeMin {
     public boolean isHasIssuedStatus() {return hasIssuedStatus;}
     public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
 
-    @Override
-    public String toString() {
-        return "ChequeMin{" +
-                "id=" + id;
-    }
 }
