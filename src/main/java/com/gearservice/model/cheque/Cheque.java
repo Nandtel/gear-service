@@ -1,10 +1,10 @@
 package com.gearservice.model.cheque;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
 import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
+import com.gearservice.model.authorization.User;
 import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
@@ -22,6 +22,9 @@ import java.util.Set;
  * @since 04.09.2015
  */
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Cheque {
 
     @Id
@@ -84,6 +87,14 @@ public class Cheque {
     @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Payment> payments;
+
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "engineer", referencedColumnName = "username")
+//    private User engineer;
+//
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "secretary", referencedColumnName = "username")
+//    private User secretary;
 
     /**
      * Method withRandomData handle current Cheque object filling it with random data and return this edited object
@@ -176,6 +187,10 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
+//    public User getEngineer() {return engineer;}
+//    public void setEngineer(User engineer) {this.engineer = engineer;}
+//    public User getSecretary() {return secretary;}
+//    public void setSecretary(User secretary) {this.secretary = secretary;}
 
     @Override
     public String toString() {

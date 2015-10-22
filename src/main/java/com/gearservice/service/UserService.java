@@ -53,7 +53,7 @@ public class UserService implements UserDetailsService, UserDetailsManager {
 
         private UserDetailsImpl(User user) {super(user);}
 
-        public String getFullName() {return super.getFullName();}
+        public String getFullname() {return super.getFullname();}
         @Override public String getPassword() {return super.getPassword();}
         @Override public String getUsername() {return super.getUsername();}
         @Override public boolean isAccountNonExpired() {return true;}

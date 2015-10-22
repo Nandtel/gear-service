@@ -16,7 +16,7 @@
 
         <md-content md-theme="header">
             <md-tabs md-border-bottom md-dynamic-height>
-                <md-tab ng-repeat="user in users | orderBy: 'username'" label="{{user.fullName}}">
+                <md-tab ng-repeat="user in users | orderBy: 'username'" label="{{user.fullname}}">
                     <user-details ng-model="user"></user-details>
                 </md-tab>
             </md-tabs>

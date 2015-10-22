@@ -47,7 +47,7 @@ public class GearServiceApplication implements CommandLineRunner {
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder().encode("b"));
-        admin.setFullName("Грешник А.А.");
+        admin.setFullname("Грешник А.А.");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(
                 Arrays.asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
@@ -56,7 +56,7 @@ public class GearServiceApplication implements CommandLineRunner {
         User kosoy = new User();
         kosoy.setUsername("kosoy");
         kosoy.setPassword(passwordEncoder().encode("b"));
-        kosoy.setFullName("Косойский Ж.Ж.");
+        kosoy.setFullname("Косойский Ж.Ж.");
         kosoy.setEnabled(true);
         kosoy.setAuthorities(new HashSet<>(Arrays.asList(engineer.withUsername(kosoy))));
         userRepository.save(kosoy);
@@ -64,7 +64,7 @@ public class GearServiceApplication implements CommandLineRunner {
         User valikozz = new User();
         valikozz.setUsername("valikozz");
         valikozz.setPassword(passwordEncoder().encode("b"));
-        valikozz.setFullName("Валикоззкий Ж.Ж.");
+        valikozz.setFullname("Валикоззкий Ж.Ж.");
         valikozz.setEnabled(true);
         valikozz.setAuthorities(new HashSet<>(Arrays.asList(engineer.withUsername(valikozz))));
         userRepository.save(valikozz);
@@ -72,7 +72,7 @@ public class GearServiceApplication implements CommandLineRunner {
         User svetka = new User();
         svetka.setUsername("svetka");
         svetka.setPassword(passwordEncoder().encode("b"));
-        svetka.setFullName("Светкаская Ж.Ж.");
+        svetka.setFullname("Светкаская Ж.Ж.");
         svetka.setEnabled(true);
         svetka.setAuthorities(new HashSet<>(Arrays.asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
@@ -104,6 +104,8 @@ public class GearServiceApplication implements CommandLineRunner {
                 .forEach(i -> {
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setIntroducedDate(now.minusDays(i));
+//                    cheque.setEngineer(admin);
+//                    cheque.setSecretary(admin);
                     chequeRepository.save(cheque);
                 });
     }

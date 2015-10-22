@@ -1,20 +1,24 @@
 package com.gearservice.model.authorization;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.gearservice.model.cheque.Cheque;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+//@JsonIdentityInfo(
+//        generator=ObjectIdGenerators.PropertyGenerator.class,
+//        property = "username",
+//        scope = Cheque.class)
 public class User {
 
     @Id private String username;
     @JsonIgnore private String password;
     @Transient private String newPassword;
     private boolean enabled;
-    private String fullName;
+    private String fullname;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -24,12 +28,18 @@ public class User {
     @JsonManagedReference
     private Set<Authority> authorities = new HashSet<>();
 
+//    @OneToMany(mappedBy = "engineer")
+//    private Set<Cheque> chequesAsEngineer = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "secretary")
+//    private Set<Cheque> chequesAsSecretary = new HashSet<>();
+
     public User() {}
 
     public User(User user) {
         super();
         this.username = user.getUsername();
-        this.fullName = user.getFullName();
+        this.fullname = user.getFullname();
         this.password = user.getPassword();
         this.enabled = user.isEnabled();
         this.authorities = user.getAuthorities();
@@ -43,9 +53,12 @@ public class User {
     public void setNewPassword(String newPassword) {this.newPassword = newPassword;}
     public boolean isEnabled() {return enabled;}
     public void setEnabled(boolean enabled) {this.enabled = enabled;}
-    public String getFullName() {return fullName;}
-    public void setFullName(String fullName) {this.fullName = fullName;}
-
+    public String getFullname() {return fullname;}
+    public void setFullname(String fullname) {this.fullname = fullname;}
     public Set<Authority> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
+//    public Set<Cheque> getChequesAsEngineer() {return chequesAsEngineer;}
+//    public void setChequesAsEngineer(Set<Cheque> chequesAsEngineer) {this.chequesAsEngineer = chequesAsEngineer;}
+//    public Set<Cheque> getChequesAsSecretary() {return chequesAsSecretary;}
+//    public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
 }
