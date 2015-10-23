@@ -85,7 +85,7 @@ public class ChequeService {
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
         diagnosticRepository.save(
                 diagnostic
-                        .withDateTimeAndUser()
+                        .withDateTime()
                         .withOwner(chequeRepository.findOne(chequeID)));
     }
 
@@ -110,7 +110,7 @@ public class ChequeService {
      * @param note is data for Note.class, that was create on client-side
      */
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
-        noteRepository.save(note.withDateTimeAndUser().withOwner(chequeRepository.findOne(chequeID)));
+        noteRepository.save(note.withDateTime().withOwner(chequeRepository.findOne(chequeID)));
     }
 
     /**

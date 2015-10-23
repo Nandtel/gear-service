@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
 import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
+import com.gearservice.model.authorization.User;
 import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "note_index")
     private Long id;
 
     @Column(name = "note_time")
@@ -32,10 +32,6 @@ public class Note {
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime time;
 
-    @Column(name = "note_user")
-    private String user;
-
-    @Column(name = "note_text")
     @Lob
     private String text;
 
@@ -44,6 +40,10 @@ public class Note {
     @JsonBackReference
     private Cheque noteOwner;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user", referencedColumnName = "username")
+    private User user;
+
     /**
      * Method withRandomData handle current Note object filling it with random data and return this edited object
      * @return this Note object after editing
@@ -51,7 +51,6 @@ public class Note {
     public Note withRandomData() {
         this.setText(SampleDataService.getRandomComment());
         this.setTime(SampleDataService.getRandomDate());
-        this.setUser(SampleDataService.getRandomName());
         return this;
     }
 
@@ -60,9 +59,13 @@ public class Note {
      * name to user, then return this edited object
      * @return this Note object after editing
      */
-    public Note withDateTimeAndUser() {
+    public Note withDateTime() {
         this.setTime(OffsetDateTime.now());
-        this.setUser("Администратор");
+        return this;
+    }
+
+    public Note withUser(User user) {
+        this.user = user;
         return this;
     }
 
@@ -82,8 +85,8 @@ public class Note {
     public String getText() {return text;}
     public void setTime(OffsetDateTime time) {this.time = time;}
     public OffsetDateTime getTime() {return time;}
-    public void setUser(String user) {this.user = user;}
-    public String getUser() {return user;}
+    public User getUser() {return user;}
+    public void setUser(User user) {this.user = user;}
     public void setNoteOwner(Cheque noteOwner) {this.noteOwner = noteOwner;}
     public Cheque getNoteOwner() {return noteOwner;}
 }

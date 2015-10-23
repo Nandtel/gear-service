@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
 import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
+import com.gearservice.model.authorization.User;
 import com.gearservice.service.SampleDataService;
 
 
@@ -31,8 +32,6 @@ public class Diagnostic {
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime time;
 
-    private String user;
-
     @Lob
     private String text;
 
@@ -41,6 +40,10 @@ public class Diagnostic {
     @JsonBackReference
     private Cheque diagnosticOwner;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user", referencedColumnName = "username")
+    private User user;
+
     /**
      * Method withRandomData handle current Diagnostic object filling it with random data and return this edited object
      * @return this Diagnostic object after editing
@@ -48,7 +51,6 @@ public class Diagnostic {
     public Diagnostic withRandomData() {
         this.setText(SampleDataService.getRandomComment());
         this.setTime(SampleDataService.getRandomDate());
-        this.setUser(SampleDataService.getRandomName());
         return this;
     }
 
@@ -57,9 +59,8 @@ public class Diagnostic {
      * name to user, then return this edited object
      * @return this Diagnostic object after editing
      */
-    public Diagnostic withDateTimeAndUser() {
+    public Diagnostic withDateTime() {
         this.setTime(OffsetDateTime.now());
-        this.setUser("Администратор");
         return this;
     }
 
@@ -73,15 +74,19 @@ public class Diagnostic {
         return this;
     }
 
+    public Diagnostic withUser(User user) {
+        this.user = user;
+        return this;
+    }
+
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
     public void setTime(OffsetDateTime time) {this.time = time;}
     public OffsetDateTime getTime() {return time;}
-    public void setUser(String user) {this.user = user;}
-    public String getUser() {return user;}
     public void setText(String text) {this.text = text;}
     public String getText() {return text;}
     public void setDiagnosticOwner(Cheque diagnosticOwner) {this.diagnosticOwner = diagnosticOwner;}
     public Cheque getDiagnosticOwner() {return diagnosticOwner;}
-
+    public User getUser() {return user;}
+    public void setUser(User user) {this.user = user;}
 }

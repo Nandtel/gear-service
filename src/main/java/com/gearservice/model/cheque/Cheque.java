@@ -116,14 +116,30 @@ public class Cheque {
         this.setInspectorName(SampleDataService.getRandomName());
         this.setMasterName(SampleDataService.getRandomName());
 
-        this.setDiagnostics(SampleDataService.getSetConsistFrom(o -> new Diagnostic().withRandomData().withOwner(this)));
-        this.setNotes(SampleDataService.getSetConsistFrom(o -> new Note().withRandomData().withOwner(this)));
         this.setKits(SampleDataService.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
 
         this.setGuaranteeDate(SampleDataService.getRandomDate());
         this.setReadyDate(SampleDataService.getRandomDate());
         this.setIssuedDate(SampleDataService.getRandomDate());
 
+        return this;
+    }
+
+    public Cheque withDiagnosticUser(User user) {
+        this.setDiagnostics(SampleDataService.getSetConsistFrom(
+                o -> new Diagnostic()
+                        .withRandomData()
+                        .withOwner(this)
+                        .withUser(user)));
+        return this;
+    }
+
+    public Cheque withNoteUser(User user) {
+        this.setNotes(SampleDataService.getSetConsistFrom(
+                o -> new Note()
+                        .withRandomData()
+                        .withOwner(this)
+                        .withUser(user)));
         return this;
     }
 

@@ -2,6 +2,7 @@ package com.gearservice.model.authorization;
 
 import com.fasterxml.jackson.annotation.*;
 import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.Diagnostic;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -31,6 +32,10 @@ public class User {
     @JsonIgnore
     private Set<Cheque> chequesAsSecretary;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Diagnostic> diagnosticsAsEngineer;
+
     public User() {}
 
     public User(User user) {
@@ -58,4 +63,6 @@ public class User {
     public void setChequesAsEngineer(Set<Cheque> chequesAsEngineer) {this.chequesAsEngineer = chequesAsEngineer;}
     public Set<Cheque> getChequesAsSecretary() {return chequesAsSecretary;}
     public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
+    public Set<Diagnostic> getDiagnosticsAsEngineer() {return diagnosticsAsEngineer;}
+    public void setDiagnosticsAsEngineer(Set<Diagnostic> diagnosticsAsEngineer) {this.diagnosticsAsEngineer = diagnosticsAsEngineer;}
 }

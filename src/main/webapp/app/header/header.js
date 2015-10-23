@@ -32,8 +32,8 @@ angular.module("mainModule")
             };
 
             $scope.profileName = function() {
-                if(!!$rootScope.user.principal && !!$rootScope.user.principal.fullName)
-                    return $rootScope.user.principal.fullName;
+                if(!!$rootScope.user.principal && !!$rootScope.user.principal.fullname)
+                    return $rootScope.user.principal.fullname;
 
                 return gettextCatalog.getString('profile');
             };

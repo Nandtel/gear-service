@@ -78,6 +78,4 @@ public class ChequeController {
         return chequeService.attentionChequesByDelay();
     }
 
-
-
 }

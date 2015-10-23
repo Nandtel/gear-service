@@ -107,6 +107,8 @@ public class GearServiceApplication implements CommandLineRunner {
                 .forEach(i -> {
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setIntroducedDate(now.minusDays(i));
+                    cheque.withDiagnosticUser(admin);
+                    cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
                     cheque.setSecretary(admin);
                     chequeRepository.save(cheque);

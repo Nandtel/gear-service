@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document',
-        function($scope, $http, $document) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope',
+        function($scope, $http, $document, $rootScope) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -11,6 +11,7 @@ angular.module("mainModule")
              * form is Untouched and Pristine
              */
             $scope.saveComment = function() {
+                $scope.comment.user = $rootScope.user.principal;
                 $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
                     .success(function() {
                         $scope.comment.text = undefined;
