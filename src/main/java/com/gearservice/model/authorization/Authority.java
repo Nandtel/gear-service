@@ -1,6 +1,6 @@
 package com.gearservice.model.authorization;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ public class Authority implements GrantedAuthority {
     private String authority;
 
     @ManyToMany(mappedBy = "authorities")
-    @JsonBackReference
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Authority() {}

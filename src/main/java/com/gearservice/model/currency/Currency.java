@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Currency {
 
     @Id
-    private Long id;
+    private String id;
 
     private BigDecimal usd;
     private BigDecimal uah;
@@ -20,11 +20,11 @@ public class Currency {
     private BigDecimal rub;
 
     public Currency() {
-        this.id = LocalDate.now().toEpochDay();
+        this.id = LocalDate.now().toString();
     }
 
     public Currency forToday() {
-        this.id = LocalDate.now().toEpochDay();
+        this.id = LocalDate.now().toString();
         return this;
     }
 
@@ -70,8 +70,8 @@ public class Currency {
         return first.add(second).divide(two, 2, BigDecimal.ROUND_HALF_UP);
     }
 
-    public String getId() {return LocalDate.ofEpochDay(id).toString();}
-    public void setId(String id) {this.id = LocalDate.parse(id).toEpochDay();}
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
     public BigDecimal getUsd() {return usd;}
     public void setUsd(BigDecimal usd) {this.usd = usd;}
     public BigDecimal getUah() {return uah;}

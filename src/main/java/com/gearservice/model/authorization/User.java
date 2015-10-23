@@ -16,7 +16,7 @@ public class User {
     private boolean enabled;
     private String fullname;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_authorities",
             joinColumns = @JoinColumn(name = "username"),

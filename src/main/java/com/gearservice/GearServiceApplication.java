@@ -50,7 +50,7 @@ public class GearServiceApplication implements CommandLineRunner {
         admin.setFullname("Грешник А.А.");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(
-                Arrays.asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
+        Arrays.asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
         userRepository.save(admin);
 
         User kosoy = new User();
@@ -82,6 +82,7 @@ public class GearServiceApplication implements CommandLineRunner {
         yesterday.setEur(new BigDecimal("70"));
         yesterday.setUsd(new BigDecimal("70"));
         yesterday.setUah(new BigDecimal("70"));
+        yesterday.withRUB();
         currencyRepository.save(yesterday);
 
         Currency tomorrow = new Currency();
@@ -89,6 +90,7 @@ public class GearServiceApplication implements CommandLineRunner {
         tomorrow.setEur(new BigDecimal("100"));
         tomorrow.setUsd(new BigDecimal("100"));
         tomorrow.setUah(new BigDecimal("100"));
+        tomorrow.withRUB();
         currencyRepository.save(tomorrow);
 
         Currency dayBeforeYesterday = new Currency();
@@ -96,6 +98,7 @@ public class GearServiceApplication implements CommandLineRunner {
         dayBeforeYesterday.setEur(new BigDecimal("10"));
         dayBeforeYesterday.setUsd(new BigDecimal("10"));
         dayBeforeYesterday.setUah(new BigDecimal("10"));
+        dayBeforeYesterday.withRUB();
         currencyRepository.save(dayBeforeYesterday);
 
         OffsetDateTime now = OffsetDateTime.now();

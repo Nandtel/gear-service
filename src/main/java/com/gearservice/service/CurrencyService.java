@@ -18,7 +18,7 @@ public class CurrencyService {
     }
 
     public Currency getCurrencyRates() {
-        Long now = LocalDate.now().toEpochDay();
+        String now = LocalDate.now().toString();
 
         if(!currencyRepository.exists(now))
             currencyRepository.save(new Currency()
@@ -30,7 +30,7 @@ public class CurrencyService {
     }
 
     public Currency getCleanCurrencyRates() {
-        Long now = LocalDate.now().toEpochDay();
+        String now = LocalDate.now().toString();
 
         currencyRepository.save(new Currency()
                 .forToday()
