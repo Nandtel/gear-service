@@ -1,0 +1,5 @@
+@media screen {
+    user-select md-input-container {
+        padding: 2px;
+    }
+}

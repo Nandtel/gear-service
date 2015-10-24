@@ -1,6 +1,6 @@
 @media screen {
     filter-form md-autocomplete[md-floating-label] md-input-container {
-        padding: 0;
+        padding: 2px;
     }
 
     filter-form md-content.dates-field md-content p {

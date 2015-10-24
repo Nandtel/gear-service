@@ -127,21 +127,8 @@
 
         <md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>
 
-        <md-input-container flex="50" class="left-margin">
-            <label>{{'master' | translate}}</label>
-            <md-select ng-model="cheque.engineer" md-on-open="loadUsers()" placeholder="{{'master' | translate}}">
-                <!--<md-option ng-value="cheque.engineer">{{cheque.engineer.fullname}}</md-option>-->
-                <md-option ng-value="engineer" ng-repeat="engineer in users">{{engineer.fullname}}</md-option>
-            </md-select>
-        </md-input-container>
-
-        <md-input-container flex="50">
-            <label>{{'Inspector' | translate}}</label>
-            <md-select ng-model="cheque.secretary" md-on-open="loadUsers()" placeholder="{{'Inspector' | translate}}">
-                <!--<md-option ng-value="cheque.secretary">{{cheque.secretary.fullname}}</md-option>-->
-                <md-option ng-value="secretary" ng-repeat="secretary in users">{{secretary.fullname}}</md-option>
-            </md-select>
-        </md-input-container>
+        <user-select ng-model="cheque.engineer" title="'master'" class="left-margin" flex="50"></user-select>
+        <user-select ng-model="cheque.secretary" title="'Inspector'" flex="50"></user-select>
 
     </md-content>
 

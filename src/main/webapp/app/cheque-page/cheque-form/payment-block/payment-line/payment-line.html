@@ -14,7 +14,7 @@
 
     <md-input-container flex="20">
         <label>{{'master' | translate}}</label>
-        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}">
+        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}" ng-disabled="paid">
             <md-option ng-value="payment.user">{{payment.user.fullname}}</md-option>
             <md-option ng-value="user" ng-repeat="user in users">{{user.fullname}}</md-option>
         </md-select>
