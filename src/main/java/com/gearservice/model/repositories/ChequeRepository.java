@@ -22,15 +22,20 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     List<Cheque> findByDiagnosticsIsNull();
 
     @Query("SELECT NEW ChequeMin(c.id, c.nameOfCustomer, c.introducedDate, c.guaranteeDate, c.readyDate, c.issuedDate," +
-            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, c.inspectorName, c.masterName," +
+            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, secretary.fullname, engineer.fullname," +
             "c.hasGuaranteeStatus, c.hasReadyStatus, c.hasIssuedStatus, c.hasPaidStatus) " +
-            "FROM Cheque c ")
+            "FROM Cheque c " +
+            "LEFT JOIN c.engineer engineer " +
+            "LEFT JOIN c.secretary secretary ")
     List<ChequeMin> getListOfCompactCheques();
 
     @Query("SELECT NEW ChequeMin(c.id, c.nameOfCustomer, c.introducedDate, c.guaranteeDate, c.readyDate, c.issuedDate," +
-            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, c.inspectorName, c.masterName," +
+            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, secretary.fullname, engineer.fullname, " +
             "c.hasGuaranteeStatus, c.hasReadyStatus, c.hasIssuedStatus, c.hasPaidStatus) " +
-            "FROM Cheque c WHERE c.id IN (?1)")
+            "FROM Cheque c " +
+            "LEFT JOIN c.engineer engineer " +
+            "LEFT JOIN c.secretary secretary " +
+            "WHERE c.id IN (?1)")
     List<ChequeMin> getListOfCompactChequesWithIDs(Long... IDs);
 
     @Query(value = "SELECT d1.cheque FROM diagnostic d1 LEFT JOIN diagnostic d2 " +

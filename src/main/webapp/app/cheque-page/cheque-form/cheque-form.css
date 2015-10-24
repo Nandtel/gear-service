@@ -14,4 +14,8 @@
     cheque-form md-content.dates-field md-content p.with-date {
         margin: 1.5rem 0 0 0;
     }
+
+    cheque-form .left-margin {
+        margin-left: 36px;
+    }
 }

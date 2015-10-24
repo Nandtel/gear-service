@@ -84,6 +84,12 @@ angular.module("mainModule")
                 $scope.hasUnsavedChange = newValue;
             });
 
+            $scope.loadUsers = function() {
+                $http.get('/api/users')
+                    .success(function(data) {
+                        $scope.users = data;
+                    });
+            }
         }
     ])
     .directive('chequeForm', [function() {

@@ -110,7 +110,7 @@ public class GearServiceApplication implements CommandLineRunner {
                     cheque.withDiagnosticUser(admin);
                     cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
-                    cheque.setSecretary(admin);
+                    cheque.setSecretary(svetka);
                     chequeRepository.save(cheque);
                 });
     }
