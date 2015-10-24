@@ -36,7 +36,7 @@
     <md-content layout-align="center start">
 
         <md-list class="comments-list">
-            <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments | orderBy: '-id'">
+            <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments | orderBy: 'id'">
 
                 <md-content layout="row" layout-align="center center" flex>
                     <payment-line payment="payment" paid="cheque.hasPaidStatus" flex></payment-line>

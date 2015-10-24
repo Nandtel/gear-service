@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentLine', ['$scope',
-        function($scope) {
+    .controller('PaymentLine', ['$scope', '$http',
+        function($scope, $http) {
             $scope.hasPrepayment = false;
 
             $scope.types = [ "repair" , "zip", "deliver", "prepayment"];
@@ -16,6 +16,13 @@ angular.module("mainModule")
                 return $scope.payment.cost *
                     $scope.payment.currency[$scope.payment.currentCurrency] / $scope.payment.currency[currency];
             };
+
+            $scope.loadUsers = function() {
+                $http.get('/api/users')
+                    .success(function(data) {
+                        $scope.users = data;
+                    });
+            }
 
         }
     ])

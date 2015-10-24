@@ -42,8 +42,6 @@ public class Cheque {
     private String address;
     private String phone;
     private String email;
-    private String inspectorName;
-    private String masterName;
     private int prediction;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
@@ -113,8 +111,6 @@ public class Cheque {
         this.setAddress(SampleDataService.getRandomAddress());
         this.setPhone(SampleDataService.getRandomPhone());
         this.setEmail(SampleDataService.getRandomEmail());
-        this.setInspectorName(SampleDataService.getRandomName());
-        this.setMasterName(SampleDataService.getRandomName());
 
         this.setKits(SampleDataService.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
 
@@ -167,10 +163,6 @@ public class Cheque {
     public String getPhone() {return phone;}
     public void setEmail(String email) {this.email = email;}
     public String getEmail() {return email;}
-    public void setInspectorName(String inspectorName) {this.inspectorName = inspectorName;}
-    public String getInspectorName() {return inspectorName;}
-    public void setMasterName(String masterName) {this.masterName = masterName;}
-    public String getMasterName() {return masterName;}
     public void setWithoutRepair(boolean withoutRepair) {this.withoutRepair = withoutRepair;}
     public boolean isWithoutRepair() {return withoutRepair;}
     public void setActNG(boolean actNG) {this.actNG = actNG;}

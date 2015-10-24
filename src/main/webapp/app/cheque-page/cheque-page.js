@@ -20,7 +20,6 @@ angular.module("mainModule")
                     .success(function (response) {
                         $scope.cheque = response;
                         $scope.hasID = true;
-                        console.log($scope.hasID);
                     });
             };
 

@@ -12,10 +12,11 @@
         <input ng-model="payment.description" ng-disabled="paid">
     </md-input-container>
 
-    <md-input-container flex="10">
-        <label translate>master</label>
-        <md-select ng-model="payment.master" ng-disabled="paid">
-            <md-option ng-repeat="master in masters" value="{{master}}">{{master}}</md-option>
+    <md-input-container flex="20">
+        <label>{{'master' | translate}}</label>
+        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}">
+            <md-option ng-value="payment.user">{{payment.user.fullname}}</md-option>
+            <md-option ng-value="user" ng-repeat="user in users">{{user.fullname}}</md-option>
         </md-select>
     </md-input-container>
 

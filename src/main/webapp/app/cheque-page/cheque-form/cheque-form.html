@@ -125,9 +125,10 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
+        <md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>
+
         <md-input-container flex="50" class="left-margin">
             <label>{{'master' | translate}}</label>
-            <md-icon md-font-set="material-icons">face</md-icon>
             <md-select ng-model="cheque.engineer" md-on-open="loadUsers()" placeholder="{{'master' | translate}}">
                 <!--<md-option ng-value="cheque.engineer">{{cheque.engineer.fullname}}</md-option>-->
                 <md-option ng-value="engineer" ng-repeat="engineer in users">{{engineer.fullname}}</md-option>

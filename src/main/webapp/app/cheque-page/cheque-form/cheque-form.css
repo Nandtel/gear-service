@@ -19,10 +19,11 @@
         margin-left: 36px;
     }
 
-    cheque-form .left-margin md-icon {
-        top: 17px;
-        left: -34px;
+    cheque-form md-icon.not-in-form {
+        top: 24px;
+        left: 11px;
         position: absolute;
+        color: #3F51B5;
     }
 
     cheque-form md-content.text-field {

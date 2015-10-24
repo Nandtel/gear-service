@@ -35,5 +35,12 @@
         padding-bottom: 0.6rem;
     }
 
+    payment-block md-list-item.md-3-line {
+        min-height: 58px;
+    }
+
+    payment-block md-input-container {
+        padding: 2px;
+    }
 
 }

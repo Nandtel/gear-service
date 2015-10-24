@@ -16,7 +16,6 @@ public class Payment {
 
     private String type;
     private String description;
-    private String master;
 
     private float cost;
     private String currentCurrency;
@@ -39,8 +38,6 @@ public class Payment {
     public void setType(String type) {this.type = type;}
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}
-    public String getMaster() {return master;}
-    public void setMaster(String master) {this.master = master;}
     public float getCost() {return cost;}
     public void setCost(float cost) {this.cost = cost;}
     public Cheque getPaymentOwner() {return paymentOwner;}

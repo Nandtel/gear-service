@@ -9,7 +9,11 @@ angular.module("mainModule")
                     $scope.cheque.payments = [];
 
                 currencyRatesService.refreshCurrencyRate();
-                $scope.cheque.payments.push({cost: 0, currentCurrency: 'rub', currency: $rootScope.currencyRates});
+                $scope.cheque.payments.push(
+                    {cost: 0,
+                        currentCurrency: 'rub',
+                        currency: $rootScope.currencyRates,
+                        user: $rootScope.user.principal});
             };
 
 
