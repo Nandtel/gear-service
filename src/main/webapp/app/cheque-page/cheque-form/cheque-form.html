@@ -53,7 +53,7 @@
 
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex="75" class="md-icon-float">
             <label translate>Customer</label>
             <md-icon md-font-set="material-icons">people</md-icon>
@@ -66,7 +66,7 @@
         </md-input-container>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex="40" class="md-icon-float">
             <label translate>Name of Product</label>
             <md-icon md-font-set="material-icons">desktop_windows</md-icon>
@@ -84,7 +84,7 @@
         </md-input-container>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex class="md-icon-float">
             <label translate>Malfunction</label>
             <md-icon md-font-set="material-icons">local_hospital</md-icon>
@@ -92,7 +92,7 @@
         </md-input-container>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex class="md-icon-float">
             <label translate>Special Notes</label>
             <md-icon md-font-set="material-icons">book</md-icon>
@@ -100,7 +100,7 @@
         </md-input-container>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex="30" class="md-icon-float">
             <label translate >Purchaser</label>
             <md-icon md-font-set="material-icons">account_box</md-icon>
@@ -123,25 +123,13 @@
         </md-input-container>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
-        <md-input-container flex="50" class="md-icon-float">
-            <label translate>master</label>
-            <md-icon md-font-set="material-icons">face</md-icon>
-            <input ng-model="cheque.masterName" required>
-        </md-input-container>
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
-        <md-input-container flex="50" class="md-icon-float">
-            <label translate>Inspector</label>
-            <input ng-model="cheque.inspectorName" required>
-        </md-input-container>
-    </md-content>
-
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="left-margin">
-
-        <md-input-container flex="50">
+        <md-input-container flex="50" class="left-margin">
             <label>{{'master' | translate}}</label>
+            <md-icon md-font-set="material-icons">face</md-icon>
             <md-select ng-model="cheque.engineer" md-on-open="loadUsers()" placeholder="{{'master' | translate}}">
-                <md-option ng-value="cheque.engineer">{{cheque.engineer.fullname}}</md-option>
+                <!--<md-option ng-value="cheque.engineer">{{cheque.engineer.fullname}}</md-option>-->
                 <md-option ng-value="engineer" ng-repeat="engineer in users">{{engineer.fullname}}</md-option>
             </md-select>
         </md-input-container>
@@ -149,7 +137,7 @@
         <md-input-container flex="50">
             <label>{{'Inspector' | translate}}</label>
             <md-select ng-model="cheque.secretary" md-on-open="loadUsers()" placeholder="{{'Inspector' | translate}}">
-                <md-option ng-value="cheque.secretary">{{cheque.secretary.fullname}}</md-option>
+                <!--<md-option ng-value="cheque.secretary">{{cheque.secretary.fullname}}</md-option>-->
                 <md-option ng-value="secretary" ng-repeat="secretary in users">{{secretary.fullname}}</md-option>
             </md-select>
         </md-input-container>
@@ -172,5 +160,8 @@
             <span translate>Modify Check</span>
         </md-button>
     </md-content>
+
+    <pre>{{cheque | json}}</pre>
+    <pre>{{users | json}}</pre>
 
 </form>

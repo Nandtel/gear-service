@@ -13,12 +13,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.0",
-    "angular-cache": "~4.3.2",
+    "angular": "~1.5.0",
     "angular-gettext": "~2.1.0",
     "angular-loading-bar": "~0.8.0",
-    "angular-material": "~0.11.0",
-    "angular-material-data-table": "~0.8.0",
+    "angular-material": "~1.0.0",
+    "angular-material-data-table": "latest",
     "angular-ui-router": "~0.2.15",
     "angular-ui-utils": "bower",
     "moment": "~2.10.3",
@@ -26,9 +25,10 @@
     "angular-scroll": "~0.7.2",
     "ng-directive-lazy-image": "afkl-lazy-image#~0.2.2",
     "angular-chart.js": "~0.8.4",
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "angular-cache": "4.4.2"
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.4"
+    "angular-mocks": "~1.5.0"
   }
 }

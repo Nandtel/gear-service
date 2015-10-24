@@ -19,8 +19,14 @@ angular.module("mainModule")
                 $http.get('/api/cheques/' + chequeID)
                     .success(function (response) {
                         $scope.cheque = response;
+                        $scope.hasID = true;
+                        console.log($scope.hasID);
                     });
             };
+
+            $scope.$watch('cheque.id', function (newValue, oldValue) {
+                $scope.hasID = !!newValue;
+            });
 
             $scope.hasID = !!$scope.chequeID;
 

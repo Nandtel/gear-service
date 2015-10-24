@@ -3,7 +3,7 @@
         outline: none;
     }
 
-    cheque-form md-input-container.md-icon-float md-icon {
+    cheque-form md-input-container md-icon {
         color: #3F51B5;
     }
 
@@ -17,5 +17,15 @@
 
     cheque-form .left-margin {
         margin-left: 36px;
+    }
+
+    cheque-form .left-margin md-icon {
+        top: 17px;
+        left: -34px;
+        position: absolute;
+    }
+
+    cheque-form md-content.text-field {
+        height: 78px;
     }
 }
