@@ -3,6 +3,7 @@ package com.gearservice.model.authorization;
 import com.fasterxml.jackson.annotation.*;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Diagnostic;
+import com.gearservice.model.cheque.Payment;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -36,6 +37,10 @@ public class User {
     @JsonIgnore
     private Set<Diagnostic> diagnosticsAsEngineer;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Payment> payments;
+
     public User() {}
 
     public User(User user) {
@@ -65,4 +70,6 @@ public class User {
     public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
     public Set<Diagnostic> getDiagnosticsAsEngineer() {return diagnosticsAsEngineer;}
     public void setDiagnosticsAsEngineer(Set<Diagnostic> diagnosticsAsEngineer) {this.diagnosticsAsEngineer = diagnosticsAsEngineer;}
+    public Set<Payment> getPayments() {return payments;}
+    public void setPayments(Set<Payment> payments) {this.payments = payments;}
 }

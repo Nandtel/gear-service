@@ -13,9 +13,9 @@
             <span ng-show="hasPrepayment && !cheque.hasPaidStatus">{{'sum with prepayment' | translate}}:</span>
             <span style="margin-left: 1rem"></span>
             <span>
-                {{sum('rub', hasPrepayment && !cheque.paid) | currency: '&#x20bd;'}},
-                {{sum('uah', hasPrepayment && !cheque.paid) | currency: '&#8372;'}},
-                {{sum('usd', hasPrepayment && !cheque.paid) | currency: '$'}}
+                {{sum('rub', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#x20bd;'}},
+                {{sum('uah', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#8372;'}},
+                {{sum('usd', hasPrepayment && !cheque.hasPaidStatus) | currency: '$'}}
             </span>
 
             <span style="margin-left:3rem"></span>

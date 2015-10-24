@@ -1,6 +1,7 @@
 package com.gearservice.model.cheque;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.gearservice.model.authorization.User;
 import com.gearservice.model.currency.Currency;
 
 import javax.persistence.*;
@@ -28,6 +29,10 @@ public class Payment {
     @ManyToOne
     Currency currency;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user", referencedColumnName = "username")
+    private User user;
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
     public String getType() {return type;}
@@ -44,4 +49,6 @@ public class Payment {
     public void setCurrentCurrency(String currentCurrency) {this.currentCurrency = currentCurrency;}
     public Currency getCurrency() {return currency;}
     public void setCurrency(Currency currency) {this.currency = currency;}
+    public User getUser() {return user;}
+    public void setUser(User user) {this.user = user;}
 }
