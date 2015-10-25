@@ -1,6 +1,7 @@
 <md-content class="comment-form">
 
-    <form name="form" ng-submit="saveComment()" layout="column" layout-align="center center" layout-padding>
+    <form name="form" ng-submit="saveComment()" layout="column" layout-align="center center" layout-padding
+            ng-show="title === 'notes' || title === 'diagnostics' && security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">
 
         <md-input-container>
             <textarea ng-model="comment.text" rows="2" required></textarea>
@@ -22,13 +23,13 @@
         <md-list-item class="md-3-line" ng-repeat="comment in cheque[title] | orderBy: '-time' | limitTo: limit">
 
             <md-content layout="row" flex>
-                <md-content class="md-list-item-text" flex="95">
+                <md-content class="md-list-item-text" flex>
                     <h3>{{comment.user.fullname}}</h3>
                     <h4>{{comment.time | amDateFormat:'lll'}}</h4>
                     <p>{{comment.text}}</p>
                 </md-content>
 
-                <md-content layout="column" layout-align="center center" flex="5">
+                <md-content layout="column" layout-align="center center" flex="5" ng-show="security.hasRole('ROLE_ADMIN')">
                     <md-button class="md-icon-button" ng-click="deleteComment(comment.id)">
                         <md-icon md-font-set="material-icons">delete</md-icon>
                     </md-button>

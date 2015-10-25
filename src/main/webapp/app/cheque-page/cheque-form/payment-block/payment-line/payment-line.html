@@ -2,19 +2,19 @@
 
     <md-input-container flex="15">
         <label translate>type</label>
-        <md-select ng-model="payment.type" ng-disabled="paid">
+        <md-select ng-model="payment.type" ng-disabled="paymentLineDisabled">
             <md-option ng-repeat="type in types" value="{{type}}">{{type | translate}}</md-option>
         </md-select>
     </md-input-container>
 
     <md-input-container flex="25">
         <label translate>description</label>
-        <input ng-model="payment.description" ng-disabled="paid">
+        <input ng-model="payment.description" ng-disabled="paymentLineDisabled">
     </md-input-container>
 
     <md-input-container flex="20">
         <label>{{'master' | translate}}</label>
-        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}" ng-disabled="paid">
+        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}" ng-disabled="paymentLineDisabled">
             <md-option ng-value="payment.user">{{payment.user.fullname}}</md-option>
             <md-option ng-value="user" ng-repeat="user in users">{{user.fullname}}</md-option>
         </md-select>
@@ -22,12 +22,12 @@
 
     <md-input-container flex="10">
         <label translate>cost</label>
-        <input type="number" min="0" ng-model="payment.cost" ng-disabled="paid">
+        <input type="number" min="0" ng-model="payment.cost" ng-disabled="paymentLineDisabled">
     </md-input-container>
 
     <md-input-container flex="10">
         <label translate>currency</label>
-        <md-select ng-model="payment.currentCurrency" ng-disabled="paid">
+        <md-select ng-model="payment.currentCurrency" ng-disabled="paymentLineDisabled">
             <md-option ng-repeat="currency in currencies" value="{{currency}}">{{currency | uppercase}}</md-option>
         </md-select>
     </md-input-container>

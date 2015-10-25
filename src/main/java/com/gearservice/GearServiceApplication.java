@@ -43,6 +43,7 @@ public class GearServiceApplication implements CommandLineRunner {
         Authority engineer = new Authority("ROLE_ENGINEER");
         Authority secretary = new Authority("ROLE_SECRETARY");
         Authority administrator = new Authority("ROLE_ADMIN");
+        Authority boss = new Authority("ROLE_BOSS");
 
         User admin = new User();
         admin.setUsername("admin");
@@ -76,6 +77,14 @@ public class GearServiceApplication implements CommandLineRunner {
         svetka.setEnabled(true);
         svetka.setAuthorities(new HashSet<>(Arrays.asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
+
+        User yanka = new User();
+        yanka.setUsername("yanka");
+        yanka.setPassword(passwordEncoder().encode("b"));
+        yanka.setFullname("Янкаская Ж.Ж.");
+        yanka.setEnabled(true);
+        yanka.setAuthorities(new HashSet<>(Arrays.asList(boss.withUsername(yanka))));
+        userRepository.save(yanka);
 
         Currency yesterday = new Currency();
         yesterday.setId(LocalDate.now().minusDays(1).toString());

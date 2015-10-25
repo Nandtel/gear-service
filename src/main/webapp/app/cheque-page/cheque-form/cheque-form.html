@@ -17,7 +17,7 @@
                 <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
             </md-button>
 
-            <md-button type="button" class="md-icon-button" ng-click="deleteCheque()" ng-show="hasID">
+            <md-button type="button" class="md-icon-button" ng-click="deleteCheque()" ng-show="hasID && security.hasRole('ROLE_ADMIN')">
                 <md-icon md-font-set="material-icons">delete</md-icon>
             </md-button>
         </div>

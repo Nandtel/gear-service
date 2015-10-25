@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope',
-        function($scope, $http, $document, $rootScope) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security',
+        function($scope, $http, $document, $rootScope, security) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -61,6 +61,7 @@ angular.module("mainModule")
                     $scope.bottomButton = 'show more';
             };
 
+            $scope.security = security;
         }
     ])
     .directive('commentsBlock', [function() {

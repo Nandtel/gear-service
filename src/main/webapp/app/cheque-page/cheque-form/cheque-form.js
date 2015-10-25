@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state',
-        function($scope, $http, gettextCatalog, $mdToast, $state) {
+    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security',
+        function($scope, $http, gettextCatalog, $mdToast, $state, security) {
 
             /**
              * Method getCheque request from serve-side one cheque with detail information
@@ -89,7 +89,9 @@ angular.module("mainModule")
                     .success(function(data) {
                         $scope.users = data;
                     });
-            }
+            };
+
+            $scope.security = security;
         }
     ])
     .directive('chequeForm', [function() {

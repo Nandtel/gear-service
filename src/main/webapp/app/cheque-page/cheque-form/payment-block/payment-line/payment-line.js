@@ -1,12 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentLine', ['$scope', '$http',
-        function($scope, $http) {
-            $scope.hasPrepayment = false;
-
-            $scope.types = [ "repair" , "zip", "deliver", "prepayment"];
-            $scope.masters = ['kosoy', 'valikozz'];
-            $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
-
+    .controller('PaymentLine', ['$scope', '$http', 'security',
+        function($scope, $http, security) {
 
             $scope.$watch('payment.type', function(newValue, oldValue) {
                 $scope.hasPrepayment = newValue === 'prepayment';
@@ -22,7 +16,16 @@ angular.module("mainModule")
                     .success(function(data) {
                         $scope.users = data;
                     });
-            }
+            };
+
+            $scope.hasPrepayment = false;
+            $scope.types = [ "repair" , "zip", "deliver", "prepayment"];
+            $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
+            $scope.security = security;
+            $scope.paymentLineDisabled =
+                $scope.paid
+                || !$scope.security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
+                && !$scope.security.isSameUser($scope.payment.user);
 
         }
     ])

@@ -56,17 +56,17 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 .state('cheque.dashboard', {
                     url: "^/dashboard",
                     template: '<dashboard></dashboard>',
-                    data: {'selectedTab': 2}
+                    data: {'selectedTab': 2, 'access':['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER']}
                 })
                 .state('cheque.analytics', {
                     url: "^/analytics",
                     template: '<analytics-page></analytics-page>',
-                    data: {'selectedTab': 3}
+                    data: {'selectedTab': 3, 'access':['ROLE_ADMIN', 'ROLE_BOSS']}
                 })
                 .state('cheque.profile', {
                     url: "^/profile",
                     template: '<profile-page></profile-page>',
-                    data: {'selectedTab': 4}
+                    data: {'selectedTab': 4, 'access':['ROLE_ADMIN']}
                 })
                 .state('cheque.login', {
                     url: "^/login",
@@ -109,9 +109,11 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             // Can change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
-    .run(['gettextCatalog', 'amMoment', 'auth',
-        function(gettextCatalog, amMoment, auth){
+    .run(['gettextCatalog', 'amMoment', 'auth', 'security',
+        function(gettextCatalog, amMoment, auth, security){
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
             auth.init();
+            security.init();
+
     }]);
