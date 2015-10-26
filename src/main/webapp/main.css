@@ -13,7 +13,8 @@ html {}
 /* Loading bar */
 
 #loading-bar .bar {
-    background: #3F51B5;
+    /*background: #3F51B5;*/
+    background: #212121;
 }
 
 /* Dates fields in filters, create and edit*/
@@ -31,6 +32,7 @@ md-content.dates-field md-content p {
 }
 
 md-toolbar button.md-icon-button.md-button {
-    background-color: #3F51B5;
+    background-color: #212121;
+    /*background-color: #3F51B5;*/
     color:white
 }

@@ -17,14 +17,14 @@
     }
 
     comments-block .bottom-toolbar {
-        background: #F6F6F6;
+        background: #ffffff;
         width: 100%;
     }
 
     comments-block .bottom-toolbar div.text {
         font-size: 12px;
         margin: 0.5rem;
-        color: #797979;
+        color: #d9d9d9;
     }
 
     comments-block .bottom-toolbar div.md-ripple-container {

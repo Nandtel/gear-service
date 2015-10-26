@@ -4,6 +4,7 @@
     }
 
     md-datepicker md-icon {
-        color: #3F51B5;
+        color: #212121;
+        /*color: #3F51B5;*/
     }
 }

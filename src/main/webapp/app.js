@@ -81,6 +81,10 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
     }])
     .config(['$mdThemingProvider', function($mdThemingProvider){
             $mdThemingProvider
+                .theme('default')
+                .primaryPalette('grey', {'default':'900'});
+
+            $mdThemingProvider
                 .theme('payment')
                 .primaryPalette('grey', {'default':'50'})
                 .accentPalette('pink')
@@ -88,13 +92,15 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
 
             $mdThemingProvider
                 .theme('header')
-                .primaryPalette('grey', {'default': '900'})
-                .accentPalette('indigo');
+                .accentPalette('grey', {'default': '900'});
+                //.primaryPalette('grey', {'default': '900'})
+                //.accentPalette('indigo');
 
             $mdThemingProvider
                 .theme('tabs')
-                .primaryPalette('grey', {'default': '900'})
-                .accentPalette('indigo');
+                .accentPalette('grey', {'default': '900'});
+                //.primaryPalette('grey', {'default': '900'})
+                //.accentPalette('indigo');
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

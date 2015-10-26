@@ -25,11 +25,7 @@
     .phone:-ms-input-placeholder      {color: rgba(0,0,0,0);}
 
     cheque-page md-tabs {
-        background: #f6f6f6;
+        background: #ffffff;
         border: 1px solid #e1e1e1;
     }
-
-    /*cheque-page md-content.comments-block {*/
-        /*margin-bottom: 3rem;*/
-    /*}*/
 }
