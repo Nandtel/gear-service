@@ -34,7 +34,8 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'DateTimePicker',
             scope: {
-                datetime: '=ngModel'
+                datetime: '=ngModel',
+                disableChequeForm: '=ngDisabled'
             },
             require: 'ngModel',
             templateUrl: 'directives/date-time-picker/date-time-picker.html'

@@ -91,6 +91,8 @@ angular.module("mainModule")
                     });
             };
 
+            $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
+
             $scope.security = security;
         }
     ])

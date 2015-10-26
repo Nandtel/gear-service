@@ -39,15 +39,15 @@
         <md-list class="comments-list">
             <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments | orderBy: 'id'">
 
-                <md-content layout="row" layout-align="center center" flex>
-                    <payment-line payment="payment" paid="cheque.hasPaidStatus" flex></payment-line>
+                <md-content layout="row" layout-align="start center" flex>
+                    <payment-line payment="payment" paid="cheque.hasPaidStatus" flex="95"></payment-line>
 
-                    <md-button class="md-icon-button"
-                               ng-show="!cheque.hasPaidStatus
-                               && (security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
-                               || security.isSameUser(payment.user))">
-                        <md-icon md-font-set="material-icons" ng-click="delPayment(payment)">delete</md-icon>
-                    </md-button>
+                        <md-button class="md-icon-button"
+                                   ng-show="!cheque.hasPaidStatus
+                                   && (security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
+                                   || security.isSameUser(payment.user))">
+                            <md-icon md-font-set="material-icons" ng-click="delPayment(payment)">delete</md-icon>
+                        </md-button>
                 </md-content>
 
             </md-list-item>

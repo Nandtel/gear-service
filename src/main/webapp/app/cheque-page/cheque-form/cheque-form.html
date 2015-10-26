@@ -27,28 +27,37 @@
 
         <md-content layout="column" layout-align="end center">
             <p class="with-date">{{ 'Introduced' | translate}}</p>
-            <date-time-picker ng-model="cheque.introducedDate"></date-time-picker>
+            <date-time-picker ng-model="cheque.introducedDate" ng-disabled="disableChequeForm"></date-time-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center">
-            <md-checkbox ng-model="cheque.hasGuaranteeStatus" class="md-primary with-date">
+            <md-checkbox ng-model="cheque.hasGuaranteeStatus"
+                         class="md-primary with-date"
+                         ng-disabled="disableChequeForm">
                 <p>{{ 'Guarantee' | translate}}</p>
             </md-checkbox>
-            <date-picker ng-model="cheque.guaranteeDate" ng-disabled="!cheque.hasGuaranteeStatus"></date-picker>
+            <date-picker ng-model="cheque.guaranteeDate"
+                         ng-disabled="!cheque.hasGuaranteeStatus || disableChequeForm"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <md-checkbox ng-model="cheque.hasReadyStatus" class="md-primary with-date">
+            <md-checkbox ng-model="cheque.hasReadyStatus"
+                         class="md-primary with-date"
+                         ng-disabled="disableChequeForm">
                 <p>{{ 'Ready' | translate}}</p>
             </md-checkbox>
-            <date-picker ng-model="cheque.readyDate" ng-disabled="!cheque.hasReadyStatus"></date-picker>
+            <date-picker ng-model="cheque.readyDate"
+                         ng-disabled="!cheque.hasReadyStatus || disableChequeForm"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <md-checkbox ng-model="cheque.hasIssuedStatus" class="md-primary with-date">
+            <md-checkbox ng-model="cheque.hasIssuedStatus"
+                         class="md-primary with-date"
+                         ng-disabled="disableChequeForm">
                 <p>{{ 'Issued' | translate}}</p>
             </md-checkbox>
-            <date-picker ng-model="cheque.issuedDate" ng-disabled="!cheque.hasIssuedStatus"></date-picker>
+            <date-picker ng-model="cheque.issuedDate"
+                         ng-disabled="!cheque.hasIssuedStatus || disableChequeForm"></date-picker>
         </md-content>
 
     </md-content>
@@ -57,7 +66,7 @@
         <md-input-container flex="75" class="md-icon-float">
             <label translate>Customer</label>
             <md-icon md-font-set="material-icons">people</md-icon>
-            <input ng-model="cheque.nameOfCustomer" required>
+            <input ng-model="cheque.nameOfCustomer" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="25" class="md-icon-float">
@@ -70,17 +79,17 @@
         <md-input-container flex="40" class="md-icon-float">
             <label translate>Name of Product</label>
             <md-icon md-font-set="material-icons">desktop_windows</md-icon>
-            <input ng-model="cheque.nameOfProduct" required>
+            <input ng-model="cheque.nameOfProduct" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Model</label>
-            <input ng-model="cheque.model" required>
+            <input ng-model="cheque.model" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Serial Number</label>
-            <input ng-model="cheque.serialNumber" required>
+            <input ng-model="cheque.serialNumber" required ng-disabled="disableChequeForm">
         </md-input-container>
     </md-content>
 
@@ -88,7 +97,7 @@
         <md-input-container flex class="md-icon-float">
             <label translate>Malfunction</label>
             <md-icon md-font-set="material-icons">local_hospital</md-icon>
-            <input ng-model="cheque.malfunction">
+            <input ng-model="cheque.malfunction" ng-disabled="disableChequeForm">
         </md-input-container>
     </md-content>
 
@@ -96,7 +105,7 @@
         <md-input-container flex class="md-icon-float">
             <label translate>Special Notes</label>
             <md-icon md-font-set="material-icons">book</md-icon>
-            <input ng-model="cheque.specialNotes">
+            <input ng-model="cheque.specialNotes" ng-disabled="disableChequeForm">
         </md-input-container>
     </md-content>
 
@@ -104,22 +113,22 @@
         <md-input-container flex="30" class="md-icon-float">
             <label translate >Purchaser</label>
             <md-icon md-font-set="material-icons">account_box</md-icon>
-            <input ng-model="cheque.purchaserName" required>
+            <input ng-model="cheque.purchaserName" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Address</label>
-            <input ng-model="cheque.address">
+            <input ng-model="cheque.address" ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="20" class="md-icon-float">
             <label translate>Phone</label>
-            <input ng-model="cheque.phone" ui-mask="(999) 999 ‒  99 ‒  99" class="phone">
+            <input ng-model="cheque.phone" ui-mask="(999) 999 ‒  99 ‒  99" class="phone" ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="20" class="md-icon-float">
             <label translate>Email</label>
-            <input ng-model="cheque.email">
+            <input ng-model="cheque.email" ng-disabled="disableChequeForm">
         </md-input-container>
     </md-content>
 
@@ -127,9 +136,16 @@
 
         <md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>
 
-        <user-select ng-model="cheque.engineer" title="'master'" class="left-margin" flex="50"></user-select>
-        <user-select ng-model="cheque.secretary" title="'Inspector'" flex="50"></user-select>
+        <user-select ng-model="cheque.engineer"
+                     title="'master'"
+                     ng-disabled="disableChequeForm"
+                     class="left-margin"
+                     flex="50"></user-select>
 
+        <user-select ng-model="cheque.secretary"
+                     title="'Inspector'"
+                     ng-disabled="disableChequeForm"
+                     flex="50"></user-select>
     </md-content>
 
     <md-content layout-padding layout="row" layout-align="center start">

@@ -43,4 +43,8 @@
         padding: 2px;
     }
 
+    payment-block span.button-bar {
+        width: 48px;
+    }
+
 }

@@ -17,7 +17,8 @@ angular.module("mainModule")
             controller: 'UserSelect',
             scope: {
                 user: '=ngModel',
-                title: '=title'
+                title: '=title',
+                disableChequeForm: '=ngDisabled'
             },
             require: ['ngModel', 'title'],
             templateUrl: 'app/cheque-page/cheque-form/user-select/user-select.html'

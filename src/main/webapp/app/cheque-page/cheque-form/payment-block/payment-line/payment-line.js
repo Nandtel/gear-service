@@ -6,6 +6,13 @@ angular.module("mainModule")
                 $scope.hasPrepayment = newValue === 'prepayment';
             });
 
+            $scope.$watch('paid', function(newValue, oldValue) {
+                $scope.paymentLineDisabled =
+                    newValue
+                    || !$scope.security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
+                    && !$scope.security.isSameUser($scope.payment.user);
+            });
+
             $scope.toPay = function(currency) {
                 return $scope.payment.cost *
                     $scope.payment.currency[$scope.payment.currentCurrency] / $scope.payment.currency[currency];
@@ -22,10 +29,6 @@ angular.module("mainModule")
             $scope.types = [ "repair" , "zip", "deliver", "prepayment"];
             $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
             $scope.security = security;
-            $scope.paymentLineDisabled =
-                $scope.paid
-                || !$scope.security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
-                && !$scope.security.isSameUser($scope.payment.user);
 
         }
     ])
