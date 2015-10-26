@@ -41,7 +41,8 @@ angular.module("mainModule")
             };
 
             $scope.addedLesserThanElem = function() {
-                return $scope.add < $scope.cheque[$scope.title].length;
+                if(!!$scope.cheque[$scope.title])
+                    return $scope.add < $scope.cheque[$scope.title].length;
             };
 
             var limitLesserThanElem = function() {

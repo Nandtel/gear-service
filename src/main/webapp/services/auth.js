@@ -51,6 +51,7 @@ angular.module('mainModule')
 				logout: function() {
 					$http.post(auth.logoutPath, {});
 					auth.authenticated = false;
+					$rootScope.user = {};
 					$state.go(auth.loginState);
 				}
 			};

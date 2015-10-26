@@ -24,7 +24,7 @@
     comments-block .bottom-toolbar div.text {
         font-size: 12px;
         margin: 0.5rem;
-        color: #d9d9d9;
+        color: #b6b6b6;
     }
 
     comments-block .bottom-toolbar div.md-ripple-container {
@@ -53,5 +53,9 @@
 
     comments-block md-icon:focus {
         outline: none;
+    }
+
+    comments-block md-list {
+        padding: 0;
     }
 }

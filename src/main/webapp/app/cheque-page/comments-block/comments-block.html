@@ -19,8 +19,9 @@
 
 <md-content layout-align="center start">
 
-    <md-list class="comments-list" layout-padding>
-        <md-list-item class="md-3-line" ng-repeat="comment in cheque[title] | orderBy: '-time' | limitTo: limit">
+    <md-list class="comments-list">
+        <md-list-item class="md-3-line"
+                      ng-repeat="comment in cheque[title] | orderBy: '-time' | limitTo: limit">
 
             <md-content layout="row" flex>
                 <md-content class="md-list-item-text" flex>

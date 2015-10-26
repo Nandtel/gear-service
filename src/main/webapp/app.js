@@ -6,7 +6,7 @@
  * @since 04.09.2015
  */
 angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
-    'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'chart.js'])
+    'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'chart.js', 'ngFileUpload'])
     .value('duScrollDuration', 3000)
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){

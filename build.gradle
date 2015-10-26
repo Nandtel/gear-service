@@ -8,16 +8,14 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
-        classpath "org.springframework:springloaded:1.2.0.RELEASE"
+        classpath "org.springframework:springloaded:1.2.4.RELEASE"
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
-apply plugin: 'io.spring.dependency-management'
 
 idea {
     module {
