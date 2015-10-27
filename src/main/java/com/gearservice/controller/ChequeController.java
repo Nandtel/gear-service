@@ -1,16 +1,17 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.ChequeMin;
-import com.gearservice.model.cheque.Diagnostic;
-import com.gearservice.model.cheque.Note;
+import com.gearservice.model.cheque.*;
+import com.gearservice.model.repositories.PhotoRepository;
 import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.awt.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +22,7 @@ import java.util.List;
 public class ChequeController {
 
     @Autowired ChequeService chequeService;
+    @Autowired PhotoRepository photoRepository;
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
     public List<ChequeMin> getMinChequesList() {
@@ -84,15 +86,16 @@ public class ChequeController {
     }
 
     @RequestMapping(value = "/upload-image", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
     public String uploadImage (@RequestParam("file") MultipartFile image) {
 
         if(!image.isEmpty()) {
             try {
                 byte[] bytes = image.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(image.getOriginalFilename())));
-                stream.write(bytes);
-                stream.close();
+                Photo photo = new Photo();
+                photo.setPhoto(bytes);
+                photo.setName(image.getOriginalFilename());
+                photoRepository.save(photo);
                 return "You successfully uploaded";
             } catch (Exception e) {
                 return "You failed to upload => " + e.getMessage();
@@ -100,6 +103,11 @@ public class ChequeController {
         } else
             return "You failed to upload because the file was empty.";
 
+    }
+
+    @RequestMapping(value = "/photos/{imageID}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] photos (@PathVariable Long imageID) {
+        return photoRepository.findOne(imageID).getPhoto();
     }
 
 }

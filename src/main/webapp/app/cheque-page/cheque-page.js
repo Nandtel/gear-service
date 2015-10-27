@@ -6,8 +6,8 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("ChequePage", ['$scope', '$stateParams', '$http', 'Upload',
-        function ($scope, $stateParams, $http, Upload) {
+    .controller("ChequePage", ['$scope', '$stateParams', '$http', 'Upload', 'cfpLoadingBar',
+        function ($scope, $stateParams, $http, Upload, cfpLoadingBar) {
             $scope.cheque = {kits: [], payments: [], phone: "", email: ""};
             $scope.hasID = false;
 
@@ -49,6 +49,7 @@ angular.module("mainModule")
 
             $scope.upload = function (files) {
                 if (files && files.length) {
+                    console.log(files);
                     for (var i = 0; i < files.length; i++) {
                         var file = files[i];
                         if (!file.$error) {
@@ -56,7 +57,8 @@ angular.module("mainModule")
                                 url: '/upload-image',
                                 data: {
                                     file: file
-                                }
+                                },
+                                ignoreLoadingBar: true
                             }).progress(function (evt) {
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                 $scope.log = 'progress: ' + progressPercentage + '% ' +
