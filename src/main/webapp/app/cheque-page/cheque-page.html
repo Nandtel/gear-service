@@ -2,32 +2,7 @@
 
     <cheque-form ng-model="cheque" has-id="hasID" class="content-block"></cheque-form>
 
-
-
-    Drop File:
-    <div ngf-drop ngf-select ng-model="files" class="drop-box"
-         ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-         accept="image/*"
-         ngf-pattern="'image/*'">Drop pdfs or images here or click to upload</div>
-
-    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-
-    Image thumbnail:
-    <md-content layout="row">
-
-        <img ngf-thumbnail="file"
-             ng-repeat="file in files"
-             ngf-size="{width: 200, height: 200, quality: 0.9}" style="margin: 0 10px">
-
-    </md-content>
-
-
-    Files:
-    <ul>
-        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
-    </ul>
-    Upload Log:
-    <pre>{{log}}</pre>
+    <photo-block ng-model="cheque" has-id="hasID" class="content-block"></photo-block>
 
     <md-content md-theme="tabs" ng-show="hasID" class="content-block md-whiteframe-z1 comments-block">
         <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" md-theme="default">

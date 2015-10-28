@@ -1,0 +1,44 @@
+<md-content class="md-whiteframe-z1">
+
+    <md-toolbar>
+
+        <div ngf-drop ngf-select
+             ng-model="files"
+             class="drop-box md-whiteframe-6dp"
+             ngf-drag-over-class="dragover"
+             ngf-multiple="true"
+             ngf-allow-dir="true"
+             accept="image/*"
+             ngf-pattern="'image/*'"
+             layout="column"
+             layout-align="center center">
+            <span>{{"drop photographies here" | translate}}</span>
+        </div>
+
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>{{'photographies' | translate}}</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-content class="photo-content">
+
+        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+        <md-content layout="row">
+
+            <img ngf-thumbnail="file"
+                 ng-repeat="file in files"
+                 class="photo"
+                 ngf-size="{width: 200, height: 200, quality: 0.9}">
+
+            <!--<img ng-src="data:image/JPEG;base64,{{image.photo}}" ng-repeat="image in photos">-->
+
+        </md-content>
+
+    </md-content>
+
+</md-content>
+
+<pre>{{files | json}}</pre>

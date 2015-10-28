@@ -110,4 +110,9 @@ public class ChequeController {
         return photoRepository.findOne(imageID).getPhoto();
     }
 
+    @RequestMapping(value = "/photos", method = RequestMethod.GET)
+    public List<Photo> allPhotos() {
+        return photoRepository.findAll();
+    }
+
 }
