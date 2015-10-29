@@ -1,0 +1,10 @@
+@media screen {
+
+    photo-download md-icon.material-icons {
+        font-size: 46px;
+        color: #212121;
+        height: auto;
+        width: auto;
+    }
+
+}

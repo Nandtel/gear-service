@@ -1,12 +1,20 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http',
-        function($scope, Upload, $http) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location',
+        function($scope, Upload, $http, $state, $location) {
+
+            $scope.open = function(name) {
+                window.location.assign("https://" + $location.host() + ":"+ $location.port() + '/photo/' + name);
+            };
 
             $scope.getAllPhoto = function() {
                 $http.get('/photos')
                     .success(function(data) {
                         $scope.photos = data;
                     })
+            };
+
+            $scope.openPhoto = function(ID) {
+                $state.go('cheque.photo', {photoID: ID});
             };
 
             $scope.$watch('files', function () {

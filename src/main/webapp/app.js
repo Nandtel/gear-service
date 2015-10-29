@@ -72,6 +72,15 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                     url: "^/login",
                     template: '<login-page></login-page>',
                     data: {'selectedTab': 5}
+                })
+                .state('cheque.photo', {
+                    url: "^/photo/{photoID}",
+                    controller:
+                        ['$scope', '$stateParams', function($scope, $stateParams) {
+                            $scope.photoID = $stateParams.photoID;
+                        }],
+                    template: '<photo-download photo-id="photoID"></photo-download>',
+                    data: {'selectedTab': 1}
                 });
 
             //$urlRouterProvider.when('', '/filter');

@@ -26,14 +26,14 @@
 
         <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
 
-        <md-content layout="row">
+        <md-content layout="column">
 
-            <img ngf-thumbnail="file"
-                 ng-repeat="file in files"
-                 class="photo"
-                 ngf-size="{width: 200, height: 200, quality: 0.9}">
+            <!--<img ngf-thumbnail="file"-->
+                 <!--ng-repeat="file in files"-->
+                 <!--class="photo"-->
+                 <!--ngf-size="{width: 200, height: 200, quality: 0.9}">-->
 
-            <!--<img ng-src="data:image/JPEG;base64,{{image.photo}}" ng-repeat="image in photos">-->
+            <div ng-repeat="photo in photos" style="padding: 10px" ng-click="openPhoto(photo.id)">{{photo.name}}</div>
 
         </md-content>
 

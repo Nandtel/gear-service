@@ -91,10 +91,10 @@ public class ChequeController {
 
         if(!image.isEmpty()) {
             try {
-                byte[] bytes = image.getBytes();
                 Photo photo = new Photo();
-                photo.setPhoto(bytes);
+                photo.setPhoto(image.getBytes());
                 photo.setName(image.getOriginalFilename());
+                photo.setContentType(image.getContentType());
                 photoRepository.save(photo);
                 return "You successfully uploaded";
             } catch (Exception e) {
@@ -105,9 +105,9 @@ public class ChequeController {
 
     }
 
-    @RequestMapping(value = "/photos/{imageID}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] photos (@PathVariable Long imageID) {
-        return photoRepository.findOne(imageID).getPhoto();
+    @RequestMapping(value = "/photo/{photoID}", method = RequestMethod.GET)
+    public Photo photos (@PathVariable Long photoID) {
+        return photoRepository.findOne(photoID);
     }
 
     @RequestMapping(value = "/photos", method = RequestMethod.GET)
