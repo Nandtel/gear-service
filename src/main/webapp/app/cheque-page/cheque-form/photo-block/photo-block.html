@@ -1,10 +1,10 @@
-<md-content class="md-whiteframe-z1">
+<md-content class="inner-block">
 
-    <md-toolbar>
+    <md-toolbar md-theme="inner-block">
 
         <div ngf-drop ngf-select
              ng-model="files"
-             class="drop-box md-whiteframe-6dp"
+             class="drop-box"
              ngf-drag-over-class="dragover"
              ngf-multiple="true"
              ngf-allow-dir="true"
@@ -19,6 +19,8 @@
             <h2>
                 <span>{{'photographies' | translate}}</span>
             </h2>
+            <span flex></span>
+            <md-icon class="material-icons">file_download</md-icon>
         </div>
     </md-toolbar>
 
@@ -40,5 +42,3 @@
     </md-content>
 
 </md-content>
-
-<pre>{{files | json}}</pre>

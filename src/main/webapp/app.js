@@ -94,7 +94,7 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 .primaryPalette('grey', {'default':'900'});
 
             $mdThemingProvider
-                .theme('payment')
+                .theme('inner-block')
                 .primaryPalette('grey', {'default':'50'})
                 .accentPalette('pink')
                 .warnPalette('red');

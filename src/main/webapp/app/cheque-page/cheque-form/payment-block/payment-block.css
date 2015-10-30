@@ -48,4 +48,8 @@
         width: 48px;
     }
 
+    payment-block .inner-block {
+        margin: 0.3rem 0;
+    }
+
 }

@@ -85,23 +85,21 @@ public class ChequeController {
         return chequeService.attentionChequesByDelay();
     }
 
-    @RequestMapping(value = "/upload-image", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public String uploadImage (@RequestParam("file") MultipartFile image) {
+    @RequestMapping(value = "/upload-image", method = RequestMethod.POST)
+    public void uploadImage (@RequestParam("file") MultipartFile image) {
 
         if(!image.isEmpty()) {
+            Photo photo = new Photo();
             try {
-                Photo photo = new Photo();
                 photo.setPhoto(image.getBytes());
-                photo.setName(image.getOriginalFilename());
-                photo.setContentType(image.getContentType());
-                photoRepository.save(photo);
-                return "You successfully uploaded";
-            } catch (Exception e) {
-                return "You failed to upload => " + e.getMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } else
-            return "You failed to upload because the file was empty.";
+            photo.setName(image.getOriginalFilename());
+            photo.setContentType(image.getContentType());
+            photoRepository.save(photo);
+        }
 
     }
 
