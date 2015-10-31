@@ -2,9 +2,9 @@ angular.module("mainModule")
     .controller("PhotoDownload", ['$scope', '$http',
         function($scope, $http) {
 
-            $http.get('/photo/' + $scope.photoID)
+            $http.get('/api/photo/' + $scope.photoID)
                 .success(function(data) {
-                    $scope.image = data;
+                    $scope.photo = data;
                 });
 
         }])

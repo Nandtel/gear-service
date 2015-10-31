@@ -34,6 +34,16 @@
 
     photo-block md-icon {
         margin: 0 5px;
+        color: #000000;
+    }
+
+    photo-block md-list {
+        padding: 0;
+    }
+
+    photo-block .md-button .md-ripple-container,
+    photo-block .md-button {
+        border-radius: 0;
     }
 
 }

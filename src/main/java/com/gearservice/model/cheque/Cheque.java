@@ -70,21 +70,25 @@ public class Cheque {
     private boolean hasIssuedStatus;
     private boolean hasPaidStatus;
 
-    @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Kit> kits;
 
-    @OneToMany(mappedBy = "diagnosticOwner", cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "diagnosticOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Diagnostic> diagnostics;
 
-    @OneToMany(mappedBy = "noteOwner", cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "noteOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Payment> payments;
+
+    @OneToMany(mappedBy = "photoOwner", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<Photo> photos;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "engineer", referencedColumnName = "username")
@@ -195,6 +199,8 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
+    public Set<Photo> getPhotos() {return photos;}
+    public void setPhotos(Set<Photo> photos) {this.photos = photos;}
     public User getEngineer() {return engineer;}
     public void setEngineer(User engineer) {this.engineer = engineer;}
     public User getSecretary() {return secretary;}

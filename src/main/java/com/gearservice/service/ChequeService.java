@@ -1,20 +1,17 @@
 package com.gearservice.service;
 
-import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.ChequeMin;
-import com.gearservice.model.cheque.Diagnostic;
-import com.gearservice.model.cheque.Note;
-import com.gearservice.model.repositories.ChequeRepository;
-import com.gearservice.model.repositories.DiagnosticRepository;
-import com.gearservice.model.repositories.NoteRepository;
+import com.gearservice.model.cheque.*;
+import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +23,8 @@ public class ChequeService {
     @Autowired ChequeRepository chequeRepository;
     @Autowired DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
+    @Autowired PhotoRepository photoRepository;
+    @Autowired UserRepository userRepository;
     @Autowired EntityManager em;
 
     /**
@@ -146,5 +145,27 @@ public class ChequeService {
         Long[] IDs = chequeRepository.findIdOfChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
         return chequeRepository.getListOfCompactChequesWithIDs(IDs);
     }
+
+    public void uploadImage(MultipartFile file, Long chequeID, String username) {
+
+        if(!file.isEmpty()) {
+            Photo photo = new Photo();
+            try {
+                photo.setBytes(file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            photo.setName(file.getOriginalFilename());
+            photo.setContentType(file.getContentType());
+            photo.setPhotoOwner(chequeRepository.findOne(chequeID));
+            photo.setUser(userRepository.findOne(username));
+            photo.setAddedDate(OffsetDateTime.now());
+            photoRepository.save(photo);
+        }
+    }
+
+    public Photo getPhotoByID(Long photoID) {return photoRepository.findOne(photoID);}
+
+    public List<PhotoMin> getListOfCompactPhoto() {return photoRepository.getListOfCompactPhoto();}
 
 }

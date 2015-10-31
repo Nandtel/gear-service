@@ -20,7 +20,7 @@
                 <span>{{'photographies' | translate}}</span>
             </h2>
             <span flex></span>
-            <md-icon class="material-icons">file_download</md-icon>
+            <md-icon class="material-icons">file_upload</md-icon>
         </div>
     </md-toolbar>
 
@@ -30,12 +30,18 @@
 
         <md-content layout="column">
 
-            <!--<img ngf-thumbnail="file"-->
-                 <!--ng-repeat="file in files"-->
-                 <!--class="photo"-->
-                 <!--ngf-size="{width: 200, height: 200, quality: 0.9}">-->
+            <md-list>
 
-            <div ng-repeat="photo in photos" style="padding: 10px" ng-click="openPhoto(photo.id)">{{photo.name}}</div>
+                <md-list-item ng-repeat="photo in photos | orderBy: 'id'" ng-click="openPhoto(photo.id)">
+                    <p flex="60">{{photo.name}}</p>
+                    <p flex="15">{{photo.user.fullname}}</p>
+                    <p flex="25">{{photo.addedDate | amDateFormat:'LLL'}}</p>
+                    <md-icon class="material-icons md-secondary"
+                             ng-click="deletePhoto()"
+                             aria-label="Delete photo">delete</md-icon>
+                </md-list-item>
+
+            </md-list>
 
         </md-content>
 

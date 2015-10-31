@@ -1,14 +1,14 @@
-<md-content layout="column" layout-align="center center" ng-show="!!image">
+<md-content layout="column" layout-align="center center" ng-show="!!photo">
 
     <h1>
-        {{image.name}}
+        {{photo.name}}
 
-        <a ng-href="data:{{image.contentType}};base64,{{image.photo}}" download="{{image.name}}">
+        <a ng-href="data:{{photo.contentType}};base64,{{photo.bytes}}" download="{{photo.name}}">
             <md-icon class="material-icons">file_download</md-icon>
         </a>
     </h1>
 
-    <img ng-src="data:{{image.contentType}};base64,{{image.photo}}">
+    <img ng-src="data:{{photo.contentType}};base64,{{photo.bytes}}">
 
 </md-content>
 

@@ -2,12 +2,12 @@ angular.module("mainModule")
     .controller("Dashboard", ['$scope', '$stateParams', '$http',
         function ($scope, $stateParams, $http) {
 
-            $http.get('/attention')
+            $http.get('/api/attention')
                 .success(function(data) {
                     $scope.attention = data;
                 });
 
-            $http.get('/delay')
+            $http.get('/api/delay')
                 .success(function(data) {
                     $scope.delay = data;
                 });

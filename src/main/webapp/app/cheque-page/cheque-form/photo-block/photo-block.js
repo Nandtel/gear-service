@@ -1,16 +1,19 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location',
-        function($scope, Upload, $http, $state, $location) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope',
+        function($scope, Upload, $http, $state, $location, $rootScope) {
 
             $scope.open = function(name) {
                 window.location.assign("https://" + $location.host() + ":"+ $location.port() + '/photo/' + name);
             };
 
             $scope.getAllPhoto = function() {
-                $http.get('/photos')
+                $http.get('/api/photos')
                     .success(function(data) {
                         $scope.photos = data;
                     })
+            };
+
+            $scope.deletePhoto = function() {
             };
 
             $scope.openPhoto = function(ID) {
@@ -33,8 +36,12 @@ angular.module("mainModule")
                         var file = files[i];
                         if (!file.$error) {
                             Upload.upload({
-                                url: '/upload-image',
-                                file: file
+                                url: '/api/upload-image',
+                                data: {
+                                    file: file,
+                                    chequeID: $scope.cheque.id,
+                                    username: $rootScope.user.principal.username
+                                }
                             })
                             .success(function () {
                                 $scope.getAllPhoto();
@@ -52,10 +59,9 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'PhotoBlock',
             scope: {
-                cheque: '=ngModel',
-                hasID: '=hasId'
+                cheque: '=ngModel'
             },
-            require: ['ngModel', 'hasId'],
+            require: 'ngModel',
             templateUrl: 'app/cheque-page/cheque-form/photo-block/photo-block.html'
         }
     }]);

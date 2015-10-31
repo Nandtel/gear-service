@@ -1,5 +1,6 @@
 package com.gearservice.controller;
 
+import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
 import com.gearservice.model.repositories.PhotoRepository;
 import com.gearservice.service.ChequeService;
@@ -22,7 +23,6 @@ import java.util.List;
 public class ChequeController {
 
     @Autowired ChequeService chequeService;
-    @Autowired PhotoRepository photoRepository;
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
     public List<ChequeMin> getMinChequesList() {
@@ -75,42 +75,24 @@ public class ChequeController {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/attention", method = RequestMethod.GET)
-    public List<Cheque> attentionCheques() {
-        return chequeService.attentionCheques();
-    }
+    @RequestMapping(value = "/api/attention", method = RequestMethod.GET)
+    public List<Cheque> attentionCheques() {return chequeService.attentionCheques();}
 
-    @RequestMapping(value = "/delay", method = RequestMethod.GET)
-    public List<ChequeMin> attentionChequesByDelay() {
-        return chequeService.attentionChequesByDelay();
-    }
+    @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
+    public List<ChequeMin> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
 
     @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/upload-image", method = RequestMethod.POST)
-    public void uploadImage (@RequestParam("file") MultipartFile image) {
-
-        if(!image.isEmpty()) {
-            Photo photo = new Photo();
-            try {
-                photo.setPhoto(image.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            photo.setName(image.getOriginalFilename());
-            photo.setContentType(image.getContentType());
-            photoRepository.save(photo);
-        }
-
+    @RequestMapping(value = "/api/upload-image", method = RequestMethod.POST)
+    public void uploadImage(@RequestParam("file") MultipartFile photo,
+                            @RequestParam("chequeID") Long chequeID,
+                            @RequestParam("username") String username) {
+        chequeService.uploadImage(photo, chequeID, username);
     }
 
-    @RequestMapping(value = "/photo/{photoID}", method = RequestMethod.GET)
-    public Photo photos (@PathVariable Long photoID) {
-        return photoRepository.findOne(photoID);
-    }
+    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
+    public Photo getPhotoByID(@PathVariable Long photoID) {return chequeService.getPhotoByID(photoID);}
 
-    @RequestMapping(value = "/photos", method = RequestMethod.GET)
-    public List<Photo> allPhotos() {
-        return photoRepository.findAll();
-    }
+    @RequestMapping(value = "/api/photos", method = RequestMethod.GET)
+    public List<PhotoMin> getAllPhoto() {return chequeService.getListOfCompactPhoto();}
 
 }
