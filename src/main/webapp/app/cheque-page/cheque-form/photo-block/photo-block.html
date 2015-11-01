@@ -37,7 +37,8 @@
                     <p flex="15">{{photo.user.fullname}}</p>
                     <p flex="25">{{photo.addedDate | amDateFormat:'LLL'}}</p>
                     <md-icon class="material-icons md-secondary"
-                             ng-click="deletePhoto()"
+                             type="button"
+                             ng-click="deletePhoto(photo.id)"
                              aria-label="Delete photo">delete</md-icon>
                 </md-list-item>
 

@@ -92,7 +92,12 @@ public class ChequeController {
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
     public Photo getPhotoByID(@PathVariable Long photoID) {return chequeService.getPhotoByID(photoID);}
 
-    @RequestMapping(value = "/api/photos", method = RequestMethod.GET)
-    public List<PhotoMin> getAllPhoto() {return chequeService.getListOfCompactPhoto();}
+    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deletePhotoByID(@PathVariable Long photoID) {chequeService.deletePhotoByID(photoID);}
 
+    @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)
+    public List<PhotoMin> getListOfCompactPhotoFromCheque(@PathVariable Long chequeID) {
+        return chequeService.getListOfCompactPhotoFromCheque(chequeID);
+    }
 }

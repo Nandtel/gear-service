@@ -166,6 +166,10 @@ public class ChequeService {
 
     public Photo getPhotoByID(Long photoID) {return photoRepository.findOne(photoID);}
 
-    public List<PhotoMin> getListOfCompactPhoto() {return photoRepository.getListOfCompactPhoto();}
+    public void deletePhotoByID(Long photoID) {photoRepository.delete(photoID);}
+
+    public List<PhotoMin> getListOfCompactPhotoFromCheque(Long chequeID) {
+        return photoRepository.getListOfCompactPhotoFromCheque(chequeID);
+    }
 
 }

@@ -2,18 +2,18 @@ angular.module("mainModule")
     .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope',
         function($scope, Upload, $http, $state, $location, $rootScope) {
 
-            $scope.open = function(name) {
-                window.location.assign("https://" + $location.host() + ":"+ $location.port() + '/photo/' + name);
-            };
-
-            $scope.getAllPhoto = function() {
-                $http.get('/api/photos')
+            $scope.getAllPhotoFromCheque = function() {
+                $http.get('/api/photo/cheque/' + $scope.cheque.id)
                     .success(function(data) {
                         $scope.photos = data;
                     })
             };
 
-            $scope.deletePhoto = function() {
+            $scope.deletePhoto = function(photoID) {
+                $http.delete('api/photo/' + photoID)
+                    .success(function() {
+                        $scope.getAllPhotoFromCheque();
+                    })
             };
 
             $scope.openPhoto = function(ID) {
@@ -44,14 +44,18 @@ angular.module("mainModule")
                                 }
                             })
                             .success(function () {
-                                $scope.getAllPhoto();
+                                $scope.getAllPhotoFromCheque();
                             });
                         }
                     }
                 }
             };
 
-            $scope.getAllPhoto();
+            $scope.$watch('cheque.id', function(newValue, oldValue) {
+                if(newValue !== undefined)
+                    $scope.getAllPhotoFromCheque();
+            });
+
         }
     ])
     .directive('photoBlock', [function() {
