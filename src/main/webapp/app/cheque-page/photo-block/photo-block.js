@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope',
-        function($scope, Upload, $http, $state, $location, $rootScope) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning',
+        function($scope, Upload, $http, $state, $location, $rootScope, warning) {
 
             $scope.getAllPhotoFromCheque = function() {
                 $http.get('/api/photo/cheque/' + $scope.cheque.id)
@@ -9,11 +9,13 @@ angular.module("mainModule")
                     })
             };
 
-            $scope.deletePhoto = function(photoID) {
-                $http.delete('api/photo/' + photoID)
-                    .success(function() {
-                        $scope.getAllPhotoFromCheque();
-                    })
+            $scope.deletePhoto = function(photoID, event) {
+                warning.showConfirmDeletePhoto(event).then(function() {
+                    $http.delete('api/photo/' + photoID)
+                        .success(function() {
+                            $scope.getAllPhotoFromCheque();
+                        })
+                }, function() {});
             };
 
             $scope.openPhoto = function(ID) {
@@ -66,6 +68,6 @@ angular.module("mainModule")
                 cheque: '=ngModel'
             },
             require: 'ngModel',
-            templateUrl: 'app/cheque-page/cheque-form/photo-block/photo-block.html'
+            templateUrl: 'app/cheque-page/photo-block/photo-block.html'
         }
     }]);

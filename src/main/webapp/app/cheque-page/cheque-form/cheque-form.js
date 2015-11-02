@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security',
-        function($scope, $http, gettextCatalog, $mdToast, $state, security) {
+    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning',
+        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning) {
 
             /**
              * Method getCheque request from serve-side one cheque with detail information
@@ -38,17 +38,21 @@ angular.module("mainModule")
              * Method deleteCheque delete current cheque and then send request to server-side
              * It show toast about delivery status
              */
-            $scope.deleteCheque = function() {
-                $http.delete('/api/cheques/' + $scope.cheque.id)
-                    .success(function() {
-                        $state.go('cheque.filter');
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
-                                .position('top right')
-                                .hideDelay(700)
-                        );
-                    });
+            $scope.deleteCheque = function(event) {
+                warning.showConfirmDeleteCheque(event).then(function() {
+
+                    $http.delete('/api/cheques/' + $scope.cheque.id)
+                        .success(function() {
+                            $state.go('cheque.filter');
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
+                                    .position('top right')
+                                    .hideDelay(700)
+                            );
+                        });
+
+                }, function() {});
             };
 
             /**
@@ -80,16 +84,27 @@ angular.module("mainModule")
                 $scope.resetNewCheck();
             }
 
-            $scope.$watch('form.$dirty', function(newValue, oldValue) {
-                $scope.hasUnsavedChange = newValue;
-            });
-
             $scope.loadUsers = function() {
                 $http.get('/api/users')
                     .success(function(data) {
                         $scope.users = data;
                     });
             };
+
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+                console.log('fromState: ' + fromState.name + ', toState: ' + toState.name);
+
+                if($scope.form.$dirty === true && fromState.name === 'cheque.edit') {
+                    event.preventDefault();
+
+                    warning.showConfirmUnsavedChanges().then(function() {
+                        $scope.form.$setPristine();
+                        $state.go(toState);
+                    }, function() {});
+                }
+
+            });
+
 
             $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
 

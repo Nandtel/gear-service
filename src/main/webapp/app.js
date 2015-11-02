@@ -130,5 +130,4 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             amMoment.changeLocale('ru');
             auth.init();
             security.init();
-
     }]);

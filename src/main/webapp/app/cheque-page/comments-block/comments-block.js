@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security',
-        function($scope, $http, $document, $rootScope, security) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning',
+        function($scope, $http, $document, $rootScope, security, warning) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -26,9 +26,14 @@ angular.module("mainModule")
              * Method removeComment send request to server-side to delete comment from database
              * @param commentID - is id of comment, that necessary to delete
              */
-            $scope.deleteComment = function(commentID) {
-                $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
-                    .success(function() {$scope.getCheque()});
+            $scope.deleteComment = function(commentID, event) {
+                warning.showConfirmDeleteComment(event).then(function() {
+
+                    $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
+                        .success(function() {$scope.getCheque()});
+
+                }, function() {});
+
             };
 
             /**

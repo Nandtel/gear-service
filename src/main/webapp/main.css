@@ -13,7 +13,6 @@ html {}
 /* Loading bar */
 
 #loading-bar .bar {
-    /*background: #3F51B5;*/
     background: #212121;
 }
 
@@ -33,6 +32,9 @@ md-content.dates-field md-content p {
 
 md-toolbar button.md-icon-button.md-button {
     background-color: #212121;
-    /*background-color: #3F51B5;*/
     color:white
+}
+
+md-icon.md-default-theme, md-icon {
+    color: #212121;
 }

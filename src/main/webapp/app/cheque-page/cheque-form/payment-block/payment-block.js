@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security',
-        function($scope, currencyRatesService, $rootScope, security) {
+    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning',
+        function($scope, currencyRatesService, $rootScope, security, warning) {
             $scope.hasPrepayment = false;
 
             $scope.addPayment = function() {
@@ -16,8 +16,10 @@ angular.module("mainModule")
                         user: $rootScope.user.principal});
             };
 
-            $scope.delPayment = function(payment) {
-                $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
+            $scope.delPayment = function(payment, event) {
+                warning.showConfirmDeletePayment(event).then(function() {
+                    $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
+                }, function() {});
             };
 
             $scope.sum = function(currency, withPrepayment) {

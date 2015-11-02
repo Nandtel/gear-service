@@ -1,24 +1,17 @@
 <md-content class="inner-block">
 
-    <md-toolbar md-theme="inner-block">
-
-        <div ngf-drop ngf-select
-             ng-model="files"
-             class="drop-box"
-             ngf-drag-over-class="dragover"
-             ngf-multiple="true"
-             ngf-allow-dir="true"
-             accept="image/*"
-             ngf-pattern="'image/*'"
-             layout="column"
-             layout-align="center center">
-            <span>{{"drop photographies here" | translate}}</span>
-        </div>
+    <md-toolbar md-theme="inner-block"
+                ngf-drop ngf-select
+                ng-model="files"
+                class="drop-box"
+                ngf-drag-over-class="dragover"
+                ngf-multiple="true"
+                ngf-allow-dir="true"
+                accept="image/*"
+                ngf-pattern="'image/*'">
 
         <div class="md-toolbar-tools">
-            <h2>
-                <span>{{'photographies' | translate}}</span>
-            </h2>
+            <h2>{{'drop photographies here' | translate}}</h2>
             <span flex></span>
             <md-icon class="material-icons">file_upload</md-icon>
         </div>
@@ -38,7 +31,7 @@
                     <p flex="25">{{photo.addedDate | amDateFormat:'LLL'}}</p>
                     <md-icon class="material-icons md-secondary"
                              type="button"
-                             ng-click="deletePhoto(photo.id)"
+                             ng-click="deletePhoto(photo.id, $event)"
                              aria-label="Delete photo">delete</md-icon>
                 </md-list-item>
 

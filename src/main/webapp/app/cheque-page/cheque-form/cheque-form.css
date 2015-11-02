@@ -5,7 +5,6 @@
 
     cheque-form md-input-container md-icon {
         color: #212121;
-        /*color: #3F51B5;*/
     }
 
     cheque-form md-checkbox.with-date {
@@ -24,7 +23,6 @@
         top: 24px;
         left: 11px;
         position: absolute;
-        /*color: #3F51B5;*/
         color: #212121;
     }
 

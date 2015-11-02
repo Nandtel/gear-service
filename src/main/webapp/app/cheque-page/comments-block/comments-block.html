@@ -31,7 +31,7 @@
                 </md-content>
 
                 <md-content layout="column" layout-align="center center" flex="5" ng-show="security.hasRole('ROLE_ADMIN')">
-                    <md-button class="md-icon-button" ng-click="deleteComment(comment.id)">
+                    <md-button class="md-icon-button" ng-click="deleteComment(comment.id, $event)">
                         <md-icon md-font-set="material-icons">delete</md-icon>
                     </md-button>
                 </md-content>

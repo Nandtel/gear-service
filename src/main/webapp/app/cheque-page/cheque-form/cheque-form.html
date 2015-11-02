@@ -9,15 +9,11 @@
 
             <span flex></span>
 
-            <md-button type="button" class="md-icon-button md-warn" ng-show="hasUnsavedChange">
-                <md-icon md-font-set="material-icons">error_outline</md-icon>
-            </md-button>
-
             <md-button type="button" class="md-icon-button" ng-click="printCheque()" ng-show="hasID">
                 <md-icon md-font-set="material-icons" aria-label="delete">print</md-icon>
             </md-button>
 
-            <md-button type="button" class="md-icon-button" ng-click="deleteCheque()" ng-show="hasID && security.hasRole('ROLE_ADMIN')">
+            <md-button type="button" class="md-icon-button" ng-click="deleteCheque($event)" ng-show="hasID && security.hasRole('ROLE_ADMIN')">
                 <md-icon md-font-set="material-icons">delete</md-icon>
             </md-button>
         </div>
@@ -158,8 +154,6 @@
     </md-content>
 
     <payment-block ng-model="cheque" rates="rates" ng-show="hasID"></payment-block>
-
-    <photo-block ng-model="cheque" has-id="hasID" class="content-block" ng-show="hasID"></photo-block>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
         <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">

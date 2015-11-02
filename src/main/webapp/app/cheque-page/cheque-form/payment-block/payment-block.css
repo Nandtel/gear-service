@@ -27,11 +27,6 @@
         background-color: #FAFAFA;
     }
 
-    payment-block md-toolbar button.md-icon-button.md-button md-icon {
-        color: #212121;
-        /*color: #3F51B5;*/
-    }
-
     payment-block .prediction {
         padding-bottom: 0.6rem;
     }

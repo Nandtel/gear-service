@@ -54,6 +54,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-springBoot {
-    mainClass = "com.gearservice.GearServiceApplication"
-}
+//springBoot {
+//    mainClass = "com.gearservice.GearServiceApplication"
+//}
