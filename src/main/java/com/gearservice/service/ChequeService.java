@@ -96,9 +96,7 @@ public class ChequeService {
      * @param diagnosticID is ID of diagnostic in database, that client-side wants to delete
      */
     public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
-        Cheque cheque = chequeRepository.findOne(chequeID);
-        cheque.getDiagnostics().removeIf(diagnostic -> Objects.equals(diagnostic.getId(), diagnosticID));
-        chequeRepository.save(cheque);
+        diagnosticRepository.delete(diagnosticID);
     }
 
     /**
@@ -120,9 +118,7 @@ public class ChequeService {
      * @param noteID is ID of node in database, that client-side wants to delete
      */
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {
-        Cheque cheque = chequeRepository.findOne(chequeID);
-        cheque.getNotes().removeIf(note -> Objects.equals(note.getId(), noteID));
-        chequeRepository.save(cheque);
+        noteRepository.delete(noteID);
     }
 
     /**
@@ -152,9 +148,7 @@ public class ChequeService {
             Photo photo = new Photo();
             try {
                 photo.setBytes(file.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) {e.printStackTrace();}
             photo.setName(file.getOriginalFilename());
             photo.setContentType(file.getContentType());
             photo.setPhotoOwner(chequeRepository.findOne(chequeID));
