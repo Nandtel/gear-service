@@ -47,4 +47,8 @@
         margin: 0.3rem 0;
     }
 
+    payment-block .payment-lines {
+        min-height: 7rem;
+    }
+
 }

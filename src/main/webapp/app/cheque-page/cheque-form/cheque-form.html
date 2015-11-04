@@ -93,7 +93,7 @@
         <md-input-container flex class="md-icon-float">
             <label translate>Malfunction</label>
             <md-icon md-font-set="material-icons">local_hospital</md-icon>
-            <input ng-model="cheque.malfunction" ng-disabled="disableChequeForm">
+            <input ng-model="cheque.malfunction" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
@@ -101,7 +101,7 @@
         <md-input-container flex class="md-icon-float">
             <label translate>Special Notes</label>
             <md-icon md-font-set="material-icons">book</md-icon>
-            <input ng-model="cheque.specialNotes" ng-disabled="disableChequeForm">
+            <input ng-model="cheque.specialNotes" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
@@ -152,8 +152,6 @@
             <md-chip-template>{{$chip.text}}</md-chip-template>
         </md-chips>
     </md-content>
-
-    <payment-block ng-model="cheque" rates="rates" ng-show="hasID"></payment-block>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
         <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">

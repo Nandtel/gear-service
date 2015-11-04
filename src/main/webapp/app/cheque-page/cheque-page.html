@@ -7,6 +7,9 @@
             <md-tab label="{{'photographies' | translate}}">
                 <photo-block ng-model="cheque" has-id="hasID" ng-show="hasID"></photo-block>
             </md-tab>
+            <md-tab label="{{'payment' | translate}}">
+                <payment-block ng-model="cheque" ng-show="hasID"></payment-block>
+            </md-tab>
             <md-tab label="{{'diagnostics' | translate}}">
                 <comments-block ng-model="cheque" title="'diagnostics'"></comments-block>
             </md-tab>

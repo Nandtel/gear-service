@@ -41,6 +41,6 @@ angular.module("mainModule")
                 paid: '=paid'
             },
             require: ['ngModel', 'paid'],
-            templateUrl: 'app/cheque-page/cheque-form/payment-block/payment-line/payment-line.html'
+            templateUrl: 'app/cheque-page/payment-block/payment-line/payment-line.html'
         }
     }]);

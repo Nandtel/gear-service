@@ -5,26 +5,10 @@
             <md-checkbox ng-model="cheque.hasPaidStatus" class="md-primary" md-theme="default"
                          ng-disabled="!security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY'])">
                 <h2>
-                    <span ng-hide="cheque.hasPaidStatus" translate>payment</span>
+                    <span ng-hide="cheque.hasPaidStatus" translate>not paid</span>
                     <span ng-show="cheque.hasPaidStatus" translate>paid</span>
                 </h2>
             </md-checkbox>
-            <span style="margin-left: 2rem"></span>
-            <span ng-hide="hasPrepayment && !cheque.hasPaidStatus">{{'sum' | translate}}:</span>
-            <span ng-show="hasPrepayment && !cheque.hasPaidStatus">{{'sum with prepayment' | translate}}:</span>
-            <span style="margin-left: 1rem"></span>
-            <span>
-                {{sum('rub', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#x20bd;'}},
-                {{sum('uah', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#8372;'}},
-                {{sum('usd', hasPrepayment && !cheque.hasPaidStatus) | currency: '$'}}
-            </span>
-
-            <span style="margin-left:3rem"></span>
-
-            <md-input-container md-theme="default" class="prediction">
-                <label translate>prediction</label>
-                <input type="number" min="0" ng-model="cheque.prediction" ng-disabled="cheque.hasPaidStatus">
-            </md-input-container>
 
             <span flex></span>
 
@@ -34,7 +18,7 @@
         </div>
     </md-toolbar>
 
-    <md-content layout-align="center start">
+    <md-content layout-align="center start" class="payment-lines">
 
         <md-list class="comments-list">
             <md-list-item class="md-3-line" ng-repeat="payment in cheque.payments | orderBy: 'id'">
@@ -54,5 +38,27 @@
         </md-list>
 
     </md-content>
+
+    <md-toolbar md-theme="inner-block">
+        <div class="md-toolbar-tools">
+
+            <md-input-container md-theme="default" class="prediction">
+                <label translate>prediction</label>
+                <input type="number" min="0" ng-model="cheque.prediction" ng-disabled="cheque.hasPaidStatus">
+            </md-input-container>
+
+            <span flex></span>
+
+            <span ng-hide="hasPrepayment && !cheque.hasPaidStatus">{{'sum' | translate}}:</span>
+            <span ng-show="hasPrepayment && !cheque.hasPaidStatus">{{'sum with prepayment' | translate}}:</span>
+            <span style="margin-left: 1rem"></span>
+            <span>
+                {{sum('rub', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#x20bd;'}},
+                {{sum('uah', hasPrepayment && !cheque.hasPaidStatus) | currency: '&#8372;'}},
+                {{sum('usd', hasPrepayment && !cheque.hasPaidStatus) | currency: '$'}}
+            </span>
+
+        </div>
+    </md-toolbar>
 
 </md-content>
