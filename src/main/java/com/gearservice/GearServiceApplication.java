@@ -1,11 +1,15 @@
 package com.gearservice;
 import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.currency.Currency;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.CurrencyRepository;
+import com.gearservice.model.repositories.PaymentRepository;
 import com.gearservice.model.repositories.UserRepository;
 import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
+import com.gearservice.service.AnalyticsService;
+import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,6 +40,7 @@ public class GearServiceApplication implements CommandLineRunner {
     @Autowired UserRepository userRepository;
     @Autowired CurrencyRepository currencyRepository;
     @Autowired ChequeRepository chequeRepository;
+    @Autowired PaymentRepository paymentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -114,6 +119,7 @@ public class GearServiceApplication implements CommandLineRunner {
 
         IntStream.range(0, 5)
                 .forEach(i -> {
+
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setIntroducedDate(now.minusDays(i));
                     cheque.withDiagnosticUser(admin);
@@ -121,6 +127,35 @@ public class GearServiceApplication implements CommandLineRunner {
                     cheque.setEngineer(admin);
                     cheque.setSecretary(svetka);
                     chequeRepository.save(cheque);
+
+                    Payment repair = new Payment();
+                    repair.setCost(1);
+                    repair.setCurrentCurrency("usd");
+                    repair.setCurrency(yesterday);
+                    repair.setType("repair");
+                    repair.setUser(kosoy);
+                    repair.setPaymentOwner(cheque);
+                    paymentRepository.save(repair);
+
+                    Payment zip = new Payment();
+                    zip.setCost(1);
+                    zip.setCurrentCurrency("rub");
+                    zip.setCurrency(dayBeforeYesterday);
+                    zip.setType("zip");
+                    zip.setUser(admin);
+                    zip.setPaymentOwner(cheque);
+                    paymentRepository.save(zip);
+
+                    Payment prepayment = new Payment();
+                    prepayment.setCost(1);
+                    prepayment.setCurrentCurrency("uah");
+                    prepayment.setCurrency(tomorrow);
+                    prepayment.setType("zip");
+                    prepayment.setUser(admin);
+                    prepayment.setPaymentOwner(cheque);
+                    paymentRepository.save(prepayment);
+
+
                 });
     }
 

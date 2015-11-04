@@ -48,4 +48,11 @@ public class Payment {
     public void setCurrency(Currency currency) {this.currency = currency;}
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                '}';
+    }
 }
