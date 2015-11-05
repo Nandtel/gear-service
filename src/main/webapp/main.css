@@ -26,15 +26,15 @@ md-content.dates-field md-content p {
     margin: 0;
 }
 
-.md-calendar-month td{
-    font-size: 13px;
-}
-
 md-toolbar button.md-icon-button.md-button {
     background-color: #212121;
-    color:white
+    color:white;
 }
 
 md-icon.md-default-theme, md-icon {
     color: #212121;
+}
+
+md-icon:focus {
+    outline: 0;
 }

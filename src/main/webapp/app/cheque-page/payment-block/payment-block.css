@@ -15,10 +15,6 @@
         padding: 0 8px;
     }
 
-    payment-block md-icon:focus {
-        outline: 0;
-    }
-
     payment-block .payment md-list-item {
         padding: 0 0 0 10px;
     }

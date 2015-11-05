@@ -9,20 +9,10 @@
 
     /* Chips in create and edit*/
 
-    ::-webkit-input-placeholder {color: rgba(0,0,0,0.26);}
-    ::-moz-placeholder          {color: rgba(0,0,0,0.26);}
-    :-moz-placeholder           {color: rgba(0,0,0,0.26);}
-    :-ms-input-placeholder      {color: rgba(0,0,0,0.26);}
-
     .md-chips .md-chip-input-container {
         font-size: 16px;
         padding-left: 2px;
     }
-
-    .phone::-webkit-input-placeholder {color: rgba(0,0,0,0);}
-    .phone::-moz-placeholder          {color: rgba(0,0,0,0);}
-    .phone:-moz-placeholder           {color: rgba(0,0,0,0);}
-    .phone:-ms-input-placeholder      {color: rgba(0,0,0,0);}
 
     cheque-page md-tabs {
         background: #ffffff;

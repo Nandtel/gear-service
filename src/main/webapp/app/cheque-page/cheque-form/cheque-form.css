@@ -3,10 +3,6 @@
         outline: none;
     }
 
-    cheque-form md-input-container md-icon {
-        color: #212121;
-    }
-
     cheque-form md-checkbox.with-date {
         margin: 1rem 0 0 0;
     }

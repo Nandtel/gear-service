@@ -51,10 +51,6 @@
         margin: 0;
     }
 
-    comments-block md-icon:focus {
-        outline: none;
-    }
-
     comments-block md-list {
         padding: 0;
     }

@@ -10,9 +10,4 @@
     login-page form md-content.first{
         padding-top: 30px;
     }
-
-    login-page md-input-container.md-icon-float md-icon {
-        color: #212121;
-        /*color: #3F51B5;*/
-    }
 }
