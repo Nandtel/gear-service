@@ -26,19 +26,4 @@ public class Application {
 //        return new ModelAndView("forward:/");
 //    }
 
-    @Autowired AnalyticsService analyticsService;
-
-    @RequestMapping(value = "/r", method = RequestMethod.GET)
-    public String request() {
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        analyticsService.run();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-
-        return "All fine";
-    }
-
 }

@@ -1,22 +1,13 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
-import com.gearservice.model.repositories.PhotoRepository;
 import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.awt.*;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 @RestController

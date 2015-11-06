@@ -146,6 +146,15 @@ public class GearServiceApplication implements CommandLineRunner {
                     zip.setPaymentOwner(cheque);
                     paymentRepository.save(zip);
 
+                    Payment repair2 = new Payment();
+                    repair2.setCost(1);
+                    repair2.setCurrentCurrency("rub");
+                    repair2.setCurrency(dayBeforeYesterday);
+                    repair2.setType("repair");
+                    repair2.setUser(kosoy);
+                    repair2.setPaymentOwner(cheque);
+                    paymentRepository.save(repair2);
+
                     Payment prepayment = new Payment();
                     prepayment.setCost(1);
                     prepayment.setCurrentCurrency("uah");

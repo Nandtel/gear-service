@@ -1,8 +1,10 @@
 package com.gearservice.service;
 
+import com.gearservice.model.analytics.AnalyticsPreferences;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.repositories.ChequeRepository;
+import com.gearservice.model.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.stream.Collector;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
@@ -18,73 +24,62 @@ import static java.util.stream.Collectors.summingDouble;
 @Service
 public class AnalyticsService {
 
-    @Autowired ChequeRepository chequeRepository;
+    @Autowired PaymentRepository paymentRepository;
 
-    @SuppressWarnings("ConstantConditions")
-    public void run() {
+    private static Function<Payment, String> getPaymentsByCreatorName = payment -> payment.getUser().getFullname();
+    private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getPaymentOwner().getModel().split("\\.")[0];
+    private static Function<Payment, String> getPaymentsByDate = payment -> payment.getCurrency().getId();
 
-        System.out.println("In service:");
+    private static ToDoubleFunction<Payment> getCostInRub =
+            payment -> {
+                BigDecimal currency;
 
-        List<Cheque> list = chequeRepository.findAll();
+                switch(payment.getCurrentCurrency()) {
+                    case "rub": currency = payment.getCurrency().getRub(); break;
+                    case "uah": currency = payment.getCurrency().getUah(); break;
+                    case "usd": currency = payment.getCurrency().getUsd(); break;
+                    case "eur": currency = payment.getCurrency().getEur(); break;
+                    default: throw new IllegalArgumentException();
+                }
 
+                return currency.multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
+            };
 
-
-
-        Map<String, Double> byDay = list
-                .stream()
-                .map(Cheque::getPayments)
-                .flatMap(Collection::stream)
-                .collect(
-                        groupingBy(
-                                payment -> payment.getCurrency().getId(),
-                                summingDouble(AnalyticsService::getCostInRub)
-                        )
-                );
-
-        System.out.println();
-        System.out.println("Grouping by day:");
-        System.out.println(byDay);
-
-        Map<String, Double> byEngineer = list
-                .stream()
-                .map(Cheque::getPayments)
-                .flatMap(Collection::stream)
-                .collect(
-                        groupingBy(
-                                payment -> payment.getUser().getFullname(),
-                                summingDouble(AnalyticsService::getCostInRub)
-                        )
-                );
-
-        System.out.println();
-        System.out.println("Grouping by engineer:");
-        System.out.println(byEngineer);
-
-        Map<String, Double> byBrand = list
-                .stream()
-                .map(Cheque::getPayments)
-                .flatMap(Collection::stream)
-                .collect(
-                        groupingBy(
-                                payment -> payment.getPaymentOwner().getModel().split("\\.")[0],
-                                summingDouble(AnalyticsService::getCostInRub)
-                        )
-                );
-
-        System.out.println();
-        System.out.println("Grouping by brand:");
-        System.out.println(byBrand);
-
+    private static Function<Payment, String> getColumnDataName(String column) {
+        switch (column) {
+            case "brands": return getPaymentsByBrandName;
+            case "engineers": return getPaymentsByCreatorName;
+            default: throw new IllegalArgumentException();
+        }
     }
 
-    public static Double getCostInRub(Payment payment) {
-        switch(payment.getCurrentCurrency()) {
-                    case "rub": return payment.getCurrency().getRub().multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
-                    case "uah": return payment.getCurrency().getUah().multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
-                    case "usd": return payment.getCurrency().getUsd().multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
-                    case "eur": return payment.getCurrency().getEur().multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
-                    default: return null;
-                }
+    public Map<String, Map<String, Double>> getAnalytics(AnalyticsPreferences analyticsPreferences) {
+
+        System.out.println(analyticsPreferences.getColumn());
+        System.out.println(analyticsPreferences.getRow());
+        System.out.println(analyticsPreferences.getFindTo());
+        System.out.println(analyticsPreferences.getFindFrom());
+
+        Optional<LocalDate> findTo = Optional.ofNullable(analyticsPreferences.getFindTo());
+        Optional<LocalDate> findFrom = Optional.ofNullable(analyticsPreferences.getFindFrom());
+
+        System.out.println();
+        System.out.println(findTo.orElse(LocalDate.now()).toString());
+        System.out.println(findFrom.orElse(LocalDate.MIN).toString());
+        System.out.println();
+
+        return paymentRepository.findByCurrencyIdBetween(
+                    findFrom.orElse(LocalDate.MIN).toString(),
+                    findTo.orElse(LocalDate.now()).toString()
+                )
+                        .stream()
+                        .collect(
+                                groupingBy(
+                                    getPaymentsByDate,
+                                    groupingBy(
+                                            AnalyticsService.getColumnDataName(analyticsPreferences.getColumn()),
+                                            summingDouble(getCostInRub)
+                                    )));
     }
 
 }
