@@ -12,6 +12,7 @@ public class AnalyticsPreferences {
     private LocalDate findTo;
     private String row;
     private String column;
+    private String fund;
 
     public LocalDate getFindFrom() {return findFrom;}
     public void setFindFrom(LocalDate findFrom) {this.findFrom = findFrom;}
@@ -21,4 +22,6 @@ public class AnalyticsPreferences {
     public void setRow(String row) {this.row = row;}
     public String getColumn() {return column;}
     public void setColumn(String column) {this.column = column;}
+    public String getFund() {return fund;}
+    public void setFund(String fund) {this.fund = fund;}
 }
