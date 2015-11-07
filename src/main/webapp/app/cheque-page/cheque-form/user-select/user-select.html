@@ -1,5 +1,5 @@
 <md-input-container flex>
-    <label>{{'master' | translate}}</label>
+    <label>{{title | translate}}</label>
     <md-select ng-model="user" md-on-open="loadUsers()" placeholder="{{title | translate}}" ng-disabled="disableChequeForm">
         <md-option ng-value="user">{{user.fullname}}</md-option>
         <md-option ng-value="user" ng-repeat="user in users">{{user.fullname}}</md-option>
