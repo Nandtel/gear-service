@@ -1,4 +1,4 @@
-<md-content md-theme="header" layout="row" layout-align="center center">
+<md-content md-theme="header" layout="row" layout-align="center center" ng-show="authenticated()">
 
     <md-content layout-align="center center" flex="35">
 
@@ -28,5 +28,5 @@
         <md-tab ng-if="authenticated()" ng-click="logout()">{{'logout' | translate}}</md-tab>
     </md-tabs>
 
+    <md-divider></md-divider>
 </md-content>
-<md-divider></md-divider>
