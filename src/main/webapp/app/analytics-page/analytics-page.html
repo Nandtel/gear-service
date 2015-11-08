@@ -74,7 +74,7 @@
             </tr>
             <tr ng-repeat="(key, val) in analytics">
                 <th scope="row">{{key}}</th>
-                <td ng-repeat="name in analyticsHeader">{{val[name]}}</td>
+                <td ng-repeat="name in analyticsHeader">{{!!val[name] ? val[name] + ' руб.' : ''}}</td>
             </tr>
         </table>
 

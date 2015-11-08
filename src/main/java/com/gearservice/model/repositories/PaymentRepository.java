@@ -9,4 +9,5 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
     List<Payment> findByCurrencyIdBetween(String findFrom, String findTo);
     Payment findFirstByOrderByCurrencyIdDesc();
+    List<Payment> findByPaymentOwnerId(Long chequeID);
 }

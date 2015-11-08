@@ -26,7 +26,7 @@ angular.module("mainModule")
             };
 
             $scope.hasPrepayment = false;
-            $scope.types = [ "repair" , "zip", "deliver", "prepayment"];
+            $scope.types = [ 'repair' , 'zip', 'deliver', 'prepayment'];
             $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
             $scope.security = security;
 

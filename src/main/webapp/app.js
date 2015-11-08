@@ -124,10 +124,11 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             // Can change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
-    .run(['gettextCatalog', 'amMoment', 'auth', 'security',
-        function(gettextCatalog, amMoment, auth, security){
+    .run(['gettextCatalog', 'amMoment', 'auth', 'security', '$document',
+        function(gettextCatalog, amMoment, auth, security, $document){
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
             auth.init();
             security.init();
+            //$document[0].body.style.zoom = "75%";
     }]);

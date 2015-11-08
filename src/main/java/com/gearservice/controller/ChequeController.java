@@ -91,4 +91,10 @@ public class ChequeController {
     public List<PhotoMin> getListOfCompactPhotoFromCheque(@PathVariable Long chequeID) {
         return chequeService.getListOfCompactPhotoFromCheque(chequeID);
     }
+
+    @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.GET)
+    public List<Payment> getPaymentsOfCheque(@PathVariable Long chequeID) {
+        return chequeService.getPaymentsOfCheque(chequeID);
+    }
+
 }

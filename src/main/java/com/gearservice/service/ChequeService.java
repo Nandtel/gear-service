@@ -1,6 +1,7 @@
 package com.gearservice.service;
 
 import com.gearservice.model.cheque.*;
+
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,12 @@ public class ChequeService {
     @Autowired NoteRepository noteRepository;
     @Autowired PhotoRepository photoRepository;
     @Autowired UserRepository userRepository;
+    @Autowired PaymentRepository paymentRepository;
     @Autowired EntityManager em;
 
     /**
      * Method getCheques call by client-side and return all cheques from database
-     * Native query use for create partial object of Cheque — ChequeMin, that has only necessary for client-side fields
+     * Native query use for create partial object of Cheque ï¿½ ChequeMin, that has only necessary for client-side fields
      * Call with value "/cheques" and request method GET
      * @return list of all cheques, that database has
      */
@@ -164,6 +166,10 @@ public class ChequeService {
 
     public List<PhotoMin> getListOfCompactPhotoFromCheque(Long chequeID) {
         return photoRepository.getListOfCompactPhotoFromCheque(chequeID);
+    }
+
+    public List<Payment> getPaymentsOfCheque(Long chequeID) {
+        return paymentRepository.findByPaymentOwnerId(chequeID);
     }
 
 }

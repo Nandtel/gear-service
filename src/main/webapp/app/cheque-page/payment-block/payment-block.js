@@ -1,15 +1,22 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning',
-        function($scope, currencyRatesService, $rootScope, security, warning) {
+    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning', '$http',
+        function($scope, currencyRatesService, $rootScope, security, warning, $http) {
             $scope.hasPrepayment = false;
+
+            $scope.getPayments = function(chequeId) {
+                $http.get('/api/payment/cheque/' + chequeId)
+                    .success(function(data) {
+                        $scope.payments = data;
+                    });
+            };
 
             $scope.addPayment = function() {
 
-                if($scope.cheque.payments === undefined)
-                    $scope.cheque.payments = [];
+                if($scope.payments === undefined)
+                    $scope.payments = [];
 
                 currencyRatesService.refreshCurrencyRate();
-                $scope.cheque.payments.push(
+                $scope.payments.push(
                     {cost: 0,
                         currentCurrency: 'rub',
                         currency: $rootScope.currencyRates,
@@ -18,7 +25,7 @@ angular.module("mainModule")
 
             $scope.delPayment = function(payment, event) {
                 warning.showConfirmDeletePayment(event).then(function() {
-                    $scope.cheque.payments.splice($scope.cheque.payments.indexOf(payment), 1);
+                    $scope.payments.splice($scope.payments.indexOf(payment), 1);
                 }, function() {});
             };
 
@@ -26,8 +33,8 @@ angular.module("mainModule")
                 var sum = 0;
                 $scope.hasPrepayment = false;
 
-                if($scope.cheque.payments != undefined)
-                    $scope.cheque.payments.forEach(function(item) {
+                if($scope.payments != undefined)
+                    $scope.payments.forEach(function(item) {
                         if(item.cost != undefined && item.currentCurrency != undefined) {
                             if(item.type != 'prepayment')
                                 sum += item.cost * item.currency[item.currentCurrency] / item.currency[currency];
@@ -43,6 +50,12 @@ angular.module("mainModule")
             };
 
             $scope.security = security;
+
+            $scope.$watch('cheque.id', function (newValue, oldValue) {
+                if(newValue !== undefined)
+                    $scope.getPayments(newValue);
+            });
+
         }
     ])
     .directive('paymentBlock', [function() {

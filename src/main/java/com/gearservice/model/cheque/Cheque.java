@@ -82,8 +82,8 @@ public class Cheque {
     @JsonManagedReference
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<Payment> payments;
 
     @OneToMany(mappedBy = "photoOwner", cascade = CascadeType.REMOVE)
