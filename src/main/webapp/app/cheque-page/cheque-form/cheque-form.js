@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning',
-        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning) {
+    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning', '$document',
+        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document) {
 
             /**
              * Method getCheque request from serve-side one cheque with detail information
@@ -25,12 +25,14 @@ angular.module("mainModule")
                         $scope.form.$setPristine();
                         $scope.form.$setUntouched();
 
+                        console.log(angular.element($document[0].querySelector('#toastBounds')));
+
                         $mdToast.show(
                             $mdToast.simple()
-                                .content(gettextCatalog.getString('Cheque') + ' ' + gettextCatalog.getString('added'))
+                                .content(gettextCatalog.getString('Cheque') + ' ' + gettextCatalog.getString('synchronized'))
                                 .position('top right')
                                 .hideDelay(700)
-                        );
+                                .parent($document[0].querySelector('#toastBounds')));
                     });
             };
 
@@ -47,7 +49,7 @@ angular.module("mainModule")
                             $mdToast.show(
                                 $mdToast.simple()
                                     .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
-                                    .position('top right')
+                                    .position('top left')
                                     .hideDelay(700)
                             );
                         });
