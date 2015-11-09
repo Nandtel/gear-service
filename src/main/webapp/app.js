@@ -91,25 +91,12 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
     .config(['$mdThemingProvider', function($mdThemingProvider){
             $mdThemingProvider
                 .theme('default')
-                .primaryPalette('grey', {'default':'900'});
+                .primaryPalette('grey', {'default':'900'})
+                .accentPalette('blue-grey', {'default':'900'});
 
             $mdThemingProvider
                 .theme('inner-block')
-                .primaryPalette('grey', {'default':'50'})
-                .accentPalette('pink')
-                .warnPalette('red');
-
-            $mdThemingProvider
-                .theme('header')
-                .accentPalette('grey', {'default': '900'});
-                //.primaryPalette('grey', {'default': '900'})
-                //.accentPalette('indigo');
-
-            $mdThemingProvider
-                .theme('tabs')
-                .accentPalette('grey', {'default': '900'});
-                //.primaryPalette('grey', {'default': '900'})
-                //.accentPalette('indigo');
+                .primaryPalette('grey', {'default':'50'});
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
@@ -121,7 +108,7 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             $mdDateLocaleProvider.shortMonths = 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_');
             $mdDateLocaleProvider.days = 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_');
             $mdDateLocaleProvider.shortDays = 'вс_пн_вт_ср_чт_пт_сб'.split('_');
-            // Can change week display to start on Monday.
+            // Change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
     .run(['gettextCatalog', 'amMoment', 'auth', 'security', '$document',
@@ -130,5 +117,8 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             amMoment.changeLocale('ru');
             auth.init();
             security.init();
-            //$document[0].body.style.zoom = "75%";
+
+            //if(window.screen.availHeight < 1080)
+                $document[0].body.style.zoom = "75%";
+
     }]);

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class ChequeController {
@@ -95,6 +96,18 @@ public class ChequeController {
     @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.GET)
     public List<Payment> getPaymentsOfCheque(@PathVariable Long chequeID) {
         return chequeService.getPaymentsOfCheque(chequeID);
+    }
+
+    @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void setPaymentsOfCheque(@PathVariable Long chequeID, @RequestBody Set<Payment> payments) {
+        chequeService.setPaymentsOfCheque(chequeID, payments);
+    }
+
+    @RequestMapping(value = "/api/payment/{paymentID}/cheque", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deletePaymentOfCheque(@PathVariable Long paymentID) {
+        chequeService.deletePayment(paymentID);
     }
 
 }

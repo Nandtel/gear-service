@@ -1,4 +1,4 @@
-<md-content class="payment inner-block">
+<form name="form" ng-submit="setPayments()" novalidate class="payment inner-block">
 
     <md-toolbar md-theme="inner-block">
         <div class="md-toolbar-tools">
@@ -30,7 +30,7 @@
                                    ng-show="!hasPaidStatus
                                    && (security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
                                    || security.isSameUser(payment.user))">
-                            <md-icon md-font-set="material-icons" ng-click="delPayment(payment, $event)">delete</md-icon>
+                            <md-icon md-font-set="material-icons" ng-click="delPayment(payment.id, $event)">delete</md-icon>
                         </md-button>
                 </md-content>
 
@@ -61,4 +61,10 @@
         </div>
     </md-toolbar>
 
-</md-content>
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
+        <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">
+            <span translate>Modify Check</span>
+        </md-button>
+    </md-content>
+
+</form>

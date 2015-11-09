@@ -22,17 +22,15 @@ angular.module("mainModule")
                     .success(function(response) {
                         $scope.cheque = response;
 
-                        $scope.form.$setPristine();
-                        $scope.form.$setUntouched();
-
-                        console.log(angular.element($document[0].querySelector('#toastBounds')));
+                        $scope.chequeForm.$setPristine();
+                        $scope.chequeForm.$setUntouched();
 
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(gettextCatalog.getString('Cheque') + ' ' + gettextCatalog.getString('synchronized'))
                                 .position('top right')
                                 .hideDelay(700)
-                                .parent($document[0].querySelector('#toastBounds')));
+                        );
                     });
             };
 
@@ -49,7 +47,7 @@ angular.module("mainModule")
                             $mdToast.show(
                                 $mdToast.simple()
                                     .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
-                                    .position('top left')
+                                    .position('top right')
                                     .hideDelay(700)
                             );
                         });
@@ -94,13 +92,12 @@ angular.module("mainModule")
             };
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-                console.log('fromState: ' + fromState.name + ', toState: ' + toState.name);
 
-                if($scope.form.$dirty === true && fromState.name === 'cheque.edit') {
+                if(fromState.name === 'cheque.edit' && !!$scope.chequeForm && $scope.chequeForm.$dirty === true) {
                     event.preventDefault();
 
                     warning.showConfirmUnsavedChanges().then(function() {
-                        $scope.form.$setPristine();
+                        $scope.chequeForm.$setPristine();
                         $state.go(toState);
                     }, function() {});
                 }

@@ -38,3 +38,17 @@ md-icon.md-default-theme, md-icon {
 md-icon:focus {
     outline: 0;
 }
+
+md-toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+}
+
+.dates-field md-content {
+    overflow: hidden;
+}
+
+md-input-container label {
+    font-size: 20px;
+}

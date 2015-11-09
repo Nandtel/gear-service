@@ -4,7 +4,7 @@
             ng-show="title === 'notes' || title === 'diagnostics' && security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">
 
         <md-input-container>
-            <textarea ng-model="comment.text" rows="2" required></textarea>
+            <textarea ng-model="comment.text" rows="2" aria-label="commentText" required></textarea>
         </md-input-container>
 
         <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">

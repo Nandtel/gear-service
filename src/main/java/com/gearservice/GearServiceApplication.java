@@ -117,7 +117,7 @@ public class GearServiceApplication implements CommandLineRunner {
 
         OffsetDateTime now = OffsetDateTime.now();
 
-        IntStream.range(0, 25)
+        IntStream.range(0, 5)
                 .forEach(i -> {
 
                     Cheque cheque = new Cheque().withRandomData();

@@ -23,10 +23,6 @@ angular.module("mainModule")
                         .hideDelay(700));
             };
 
-            $rootScope.$on('$routeChangeStart', function() {
-                console.log('Change the route');
-            });
-
             $scope.authenticated = function() {
                 return auth.authenticated;
             };

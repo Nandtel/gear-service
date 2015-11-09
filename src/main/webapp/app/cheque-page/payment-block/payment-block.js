@@ -1,12 +1,20 @@
 angular.module("mainModule")
     .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning', '$http',
         function($scope, currencyRatesService, $rootScope, security, warning, $http) {
+            var chequeID;
             $scope.hasPrepayment = false;
 
             $scope.getPayments = function(chequeId) {
                 $http.get('/api/payment/cheque/' + chequeId)
                     .success(function(data) {
                         $scope.payments = data;
+                    });
+            };
+
+            $scope.setPayments = function() {
+                $http.post('/api/payment/cheque/' + chequeID, $scope.payments)
+                    .success(function() {
+                        $scope.getPayments(chequeID)
                     });
             };
 
@@ -23,9 +31,12 @@ angular.module("mainModule")
                         user: $rootScope.user.principal});
             };
 
-            $scope.delPayment = function(payment, event) {
+            $scope.delPayment = function(paymentID, event) {
                 warning.showConfirmDeletePayment(event).then(function() {
-                    $scope.payments.splice($scope.payments.indexOf(payment), 1);
+                    $http.delete('/api/payment/' + paymentID + '/cheque')
+                        .success(function() {
+                            $scope.getPayments(chequeID)
+                        });
                 }, function() {});
             };
 
@@ -52,8 +63,10 @@ angular.module("mainModule")
             $scope.security = security;
 
             $scope.$watch('cheque.id', function (newValue, oldValue) {
-                if(newValue !== undefined)
-                    $scope.getPayments(newValue);
+                if(newValue !== undefined) {
+                    chequeID = newValue;
+                    $scope.getPayments(chequeID);
+                }
             });
 
         }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 @Service
@@ -170,6 +171,16 @@ public class ChequeService {
 
     public List<Payment> getPaymentsOfCheque(Long chequeID) {
         return paymentRepository.findByPaymentOwnerId(chequeID);
+    }
+
+    public void setPaymentsOfCheque(Long chequeID, Set<Payment> payments) {
+        Cheque cheque = chequeRepository.findOne(chequeID);
+        payments.stream().forEach(payment -> payment.setPaymentOwner(cheque));
+        paymentRepository.save(payments);
+    }
+
+    public void deletePayment(Long paymentID) {
+        paymentRepository.delete(paymentID);
     }
 
 }

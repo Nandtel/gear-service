@@ -2,8 +2,8 @@
 
     <cheque-form ng-model="cheque" has-id="hasID" class="content-block"></cheque-form>
 
-    <md-content md-theme="tabs" ng-show="hasID" class="content-block md-whiteframe-z1 comments-block">
-        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" md-theme="default">
+    <md-content ng-show="hasID" class="content-block md-whiteframe-z1 comments-block">
+        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
             <md-tab label="{{'photographies' | translate}}">
                 <photo-block ng-model="cheque" has-id="hasID" ng-show="hasID"></photo-block>
             </md-tab>
