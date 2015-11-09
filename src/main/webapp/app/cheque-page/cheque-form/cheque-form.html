@@ -59,11 +59,26 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex="75" class="md-icon-float">
-            <label translate>Customer</label>
-            <md-icon md-font-set="material-icons">people</md-icon>
-            <input ng-model="cheque.nameOfCustomer" required ng-disabled="disableChequeForm">
-        </md-input-container>
+        <!--<md-input-container flex="75" class="md-icon-float">-->
+            <!--<label translate>Customer</label>-->
+            <!--<md-icon md-font-set="material-icons">people</md-icon>-->
+            <!--<input ng-model="cheque.nameOfCustomer" required ng-disabled="disableChequeForm">-->
+        <!--</md-input-container>-->
+
+        <md-autocomplete flex="75" class="md-icon-float"
+                         md-search-text="cheque.nameOfCustomer"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.nameOfCustomer"
+                         md-item-text="item"
+                         md-floating-label="{{'Customer' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('nameOfCustomer')">
+            <md-item-template>
+                <span md-highlight-text="cheque.nameOfCustomer" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
 
         <md-input-container flex="25" class="md-icon-float">
             <label translate>Repair Period</label>

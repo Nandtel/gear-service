@@ -29,4 +29,8 @@
     cheque-form .md-char-counter {
         padding: 5px;
     }
+
+    cheque-form md-content {
+        overflow: hidden;
+    }
 }

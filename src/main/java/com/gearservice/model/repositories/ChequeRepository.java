@@ -43,6 +43,9 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "WHERE d2.time IS NULL AND d1.time <= ?1", nativeQuery = true)
     Long[] findIdOfChequesWithDelay(String delay);
 
+    @Query(value = "SELECT name_of_customer FROM cheque", nativeQuery = true)
+    List<String> ListOfCustomers();
+
 //    @Query(value = "SELECT * FROM cheque WHERE cheque.id IN " +
 //            "(SELECT d1.cheque FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
 //            "ON d1.cheque = d2.cheque AND d1.time < d2.time " +

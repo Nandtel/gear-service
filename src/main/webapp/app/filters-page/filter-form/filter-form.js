@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog',
-        function ($scope, $http, $timeout, $mdDialog, gettextCatalog) {
+    .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q',
+        function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q) {
             $scope.filterForm = {};
             $scope.cleanFilter = {
                 order: '-id', limit: 15, page: 1, nameOfCustomer: "", nameOfProduct: "", model: "", serialNumber: "",

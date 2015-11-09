@@ -104,6 +104,15 @@ angular.module("mainModule")
 
             });
 
+            $scope.items = [];
+            $scope.serverItems = function(name) {
+                console.log('IN AUTOCOMPLETE FIND');
+                $http.get('/api/autocomplete/' + name)
+                    .success(function(data) {
+                        $scope.items = data;
+                    });
+            };
+
 
             $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
 

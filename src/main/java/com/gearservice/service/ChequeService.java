@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.asList;
 
 @Service
 public class ChequeService {
@@ -183,4 +186,8 @@ public class ChequeService {
         paymentRepository.delete(paymentID);
     }
 
+    public List<String> getAutocompleteData(String itemName) {
+        System.out.println(itemName);
+        return chequeRepository.ListOfCustomers();
+    }
 }

@@ -110,4 +110,9 @@ public class ChequeController {
         chequeService.deletePayment(paymentID);
     }
 
+    @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
+    public List<String> autocompleteData(@PathVariable String itemName) {
+        return chequeService.getAutocompleteData(itemName);
+    }
+
 }
