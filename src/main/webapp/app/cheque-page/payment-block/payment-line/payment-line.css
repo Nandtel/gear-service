@@ -6,4 +6,8 @@
     payment-line .green {
         color: #1B5E20;
     }
+
+    payment-line .to-pay {
+        font-family: 'PT Sans', serif;
+    }
 }

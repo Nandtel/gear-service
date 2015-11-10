@@ -1,5 +1,6 @@
 package com.gearservice.service;
 
+import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
 
 import com.gearservice.model.repositories.*;
@@ -15,12 +16,16 @@ import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 @Service
 public class ChequeService {
@@ -32,6 +37,8 @@ public class ChequeService {
     @Autowired UserRepository userRepository;
     @Autowired PaymentRepository paymentRepository;
     @Autowired EntityManager em;
+
+    @Autowired PhotoMongoRepository photoMongoRepository;
 
     /**
      * Method getCheques call by client-side and return all cheques from database
@@ -150,26 +157,60 @@ public class ChequeService {
 
     public void uploadImage(MultipartFile file, Long chequeID, String username) {
 
+//        if(!file.isEmpty()) {
+//            Photo photo = new Photo();
+//            try {
+//                photo.setBytes(file.getBytes());
+//            } catch (IOException e) {e.printStackTrace();}
+//            photo.setName(file.getOriginalFilename());
+//            photo.setContentType(file.getContentType());
+//            photo.setPhotoOwner(chequeRepository.findOne(chequeID));
+//            photo.setUser(userRepository.findOne(username));
+//            photo.setAddedDate(OffsetDateTime.now());
+//            photoRepository.save(photo);
+//        }
+
         if(!file.isEmpty()) {
-            Photo photo = new Photo();
+            PhotoMongo photo = new PhotoMongo();
             try {
                 photo.setBytes(file.getBytes());
             } catch (IOException e) {e.printStackTrace();}
             photo.setName(file.getOriginalFilename());
             photo.setContentType(file.getContentType());
-            photo.setPhotoOwner(chequeRepository.findOne(chequeID));
-            photo.setUser(userRepository.findOne(username));
+            photo.setPhotoOwner(chequeID.toString());
+            photo.setUser(username);
             photo.setAddedDate(OffsetDateTime.now());
-            photoRepository.save(photo);
+            photoMongoRepository.save(photo);
         }
     }
 
-    public Photo getPhotoByID(Long photoID) {return photoRepository.findOne(photoID);}
+//    public Photo getPhotoByID(Long photoID) {
+//        return photoRepository.findOne(photoID);
+//    }
 
-    public void deletePhotoByID(Long photoID) {photoRepository.delete(photoID);}
+    public PhotoMongo getPhotoByID(String photoID) {
+        return photoMongoRepository.findOne(photoID);
+    }
 
-    public List<PhotoMin> getListOfCompactPhotoFromCheque(Long chequeID) {
-        return photoRepository.getListOfCompactPhotoFromCheque(chequeID);
+//    public void deletePhotoByID(Long photoID) {photoRepository.delete(photoID);}
+
+    public void deletePhotoByID(String photoID) {photoMongoRepository.delete(photoID);}
+
+//    public List<PhotoMin> getListOfCompactPhotoFromCheque(Long chequeID) {
+//        return photoRepository.getListOfCompactPhotoFromCheque(chequeID);
+//    }
+
+    public List<PhotoMongo> getListOfCompactPhotoMongoFromCheque(String chequeID) {
+        Map<String, String> users =
+                userRepository.findAll().stream()
+                        .collect(toMap(User::getUsername, User::getFullname));
+
+        List<PhotoMongo> photos = photoMongoRepository.findAll();
+
+        photos.stream()
+                .forEach(photoMongo -> photoMongo.setUser(users.get(photoMongo.getUser())));
+
+        return photos;
     }
 
     public List<Payment> getPaymentsOfCheque(Long chequeID) {

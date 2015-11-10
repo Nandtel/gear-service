@@ -81,16 +81,28 @@ public class ChequeController {
         chequeService.uploadImage(photo, chequeID, username);
     }
 
+//    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
+//    public Photo getPhotoByID(@PathVariable Long photoID) {return chequeService.getPhotoByID(photoID);}
+
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
-    public Photo getPhotoByID(@PathVariable Long photoID) {return chequeService.getPhotoByID(photoID);}
+    public PhotoMongo getPhotoByID(@PathVariable String photoID) {return chequeService.getPhotoByID(photoID);}
+
+//    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void deletePhotoByID(@PathVariable Long photoID) {chequeService.deletePhotoByID(photoID);}
 
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deletePhotoByID(@PathVariable Long photoID) {chequeService.deletePhotoByID(photoID);}
+    public void deletePhotoByID(@PathVariable String photoID) {chequeService.deletePhotoByID(photoID);}
+
+//    @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)
+//    public List<PhotoMin> getListOfCompactPhotoFromCheque(@PathVariable Long chequeID) {
+//        return chequeService.getListOfCompactPhotoFromCheque(chequeID);
+//    }
 
     @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)
-    public List<PhotoMin> getListOfCompactPhotoFromCheque(@PathVariable Long chequeID) {
-        return chequeService.getListOfCompactPhotoFromCheque(chequeID);
+    public List<PhotoMongo> getListOfCompactPhotoFromCheque(@PathVariable String chequeID) {
+        return chequeService.getListOfCompactPhotoMongoFromCheque(chequeID);
     }
 
     @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.GET)

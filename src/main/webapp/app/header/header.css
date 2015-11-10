@@ -6,4 +6,8 @@
         font-weight: normal;
     }
 
+    header md-content.currency-rates h4 {
+        font-family: 'PT Sans', serif;
+    }
+
 }
