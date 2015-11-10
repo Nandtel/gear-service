@@ -5,8 +5,8 @@
         <span  layout="row" layout-align="center center" flex ng-show="!!$root.currencyRates.id">
             <h4>{{'currency rates' | translate}} {{$root.currencyRates.id | amDateFormat: 'll'}}</h4>
             <md-content layout="row" class="currency-rates">
-                <h4>USD {{$root.currencyRates["usd"] | currency: '&#8381;'}},</h4>
-                <h4>UAH {{$root.currencyRates["uah"] | currency: "&#8381;"}}</h4>
+                <h4>USD {{$root.currencyRates["usd"] | currency: '₽'}},</h4>
+                <h4>UAH {{$root.currencyRates["uah"] | currency: "₽"}}</h4>
             </md-content>
 
             <md-button type="button" class="md-icon-button" ng-click="refreshCurrencyRates()" md-theme="default">

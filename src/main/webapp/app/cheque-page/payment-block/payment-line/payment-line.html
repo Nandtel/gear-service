@@ -33,8 +33,8 @@
     </md-input-container>
 
     <span flex="20" ng-class="{green: hasPrepayment, red: !hasPrepayment}">
-        {{toPay('rub') | currency: '&#x20bd;'}},
-        {{toPay('uah') | currency: '&#8372;'}},
+        {{toPay('rub') | currency: '₽'}},
+        {{toPay('uah') | currency: '₴'}},
         {{toPay('usd') | currency: '$'}}
     </span>
 
