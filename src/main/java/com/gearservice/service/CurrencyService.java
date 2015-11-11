@@ -40,7 +40,7 @@ public class CurrencyService {
         return currencyRepository.findOne(now);
     }
 
-    public List<Currency> getCurrencyRatesList() {return currencyRepository.findTop4ByOrderByIdAsc();}
+    public List<Currency> getCurrencyRatesList() {return currencyRepository.findTop4ByOrderByIdDesc();}
 
     public void setCurrencyRates(Currency currency) {currencyRepository.save(currency);}
 }
