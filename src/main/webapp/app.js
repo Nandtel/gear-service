@@ -119,6 +119,6 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             security.init();
 
             //if(window.screen.availHeight < 1080)
-                $document[0].body.style.zoom = "75%";
+                $document[0].body.style.zoom = "85%";
 
     }]);

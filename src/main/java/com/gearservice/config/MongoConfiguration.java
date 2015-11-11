@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableMongoRepositories(basePackages = {"com.gearservice.model.repositories"})
-public class MongoConfiguration extends AbstractMongoConfiguration {
+class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public CustomConversions customConversions() {

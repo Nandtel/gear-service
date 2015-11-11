@@ -47,4 +47,8 @@
         min-height: 7rem;
     }
 
+    payment-block .sum {
+        font-family: 'PT Sans', serif;
+    }
+
 }

@@ -1,15 +1,13 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.cheque.*;
+import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.ChequeMin;
 import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class ChequeController {
@@ -37,94 +35,13 @@ public class ChequeController {
         chequeService.deleteCheque(chequeID);
     }
 
-    @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-        chequeService.addDiagnostic(chequeID, diagnostic);
-    }
-
-    @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics/{diagnosticID}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
-        chequeService.deleteDiagnostic(chequeID, diagnosticID);
-    }
-
-    @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
-        chequeService.addNote(chequeID, note);
-    }
-
-    @RequestMapping(value = "/api/cheques/{chequeID}/notes/{noteID}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {
-        chequeService.deleteNote(chequeID, noteID);
-    }
-
-    @RequestMapping(value = "/sample", method = RequestMethod.GET)
-    public ModelAndView addSampleCheques() {
-        chequeService.addSampleCheques();
-        return new ModelAndView("redirect:/");
-    }
-
     @RequestMapping(value = "/api/attention", method = RequestMethod.GET)
     public List<Cheque> attentionCheques() {return chequeService.attentionCheques();}
 
     @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
     public List<ChequeMin> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
 
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/api/upload-image", method = RequestMethod.POST)
-    public void uploadImage(@RequestParam("file") MultipartFile photo,
-                            @RequestParam("chequeID") Long chequeID,
-                            @RequestParam("username") String username) {
-        chequeService.uploadImage(photo, chequeID, username);
-    }
-
-//    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
-//    public Photo getPhotoByID(@PathVariable Long photoID) {return chequeService.getPhotoByID(photoID);}
-
-    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
-    public PhotoMongo getPhotoByID(@PathVariable String photoID) {return chequeService.getPhotoByID(photoID);}
-
-//    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public void deletePhotoByID(@PathVariable Long photoID) {chequeService.deletePhotoByID(photoID);}
-
-    @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deletePhotoByID(@PathVariable String photoID) {chequeService.deletePhotoByID(photoID);}
-
-//    @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)
-//    public List<PhotoMin> getListOfCompactPhotoFromCheque(@PathVariable Long chequeID) {
-//        return chequeService.getListOfCompactPhotoFromCheque(chequeID);
-//    }
-
-    @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)
-    public List<PhotoMongo> getListOfCompactPhotoFromCheque(@PathVariable String chequeID) {
-        return chequeService.getListOfCompactPhotoMongoFromCheque(chequeID);
-    }
-
-    @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.GET)
-    public List<Payment> getPaymentsOfCheque(@PathVariable Long chequeID) {
-        return chequeService.getPaymentsOfCheque(chequeID);
-    }
-
-    @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void setPaymentsOfCheque(@PathVariable Long chequeID, @RequestBody Set<Payment> payments) {
-        chequeService.setPaymentsOfCheque(chequeID, payments);
-    }
-
-    @RequestMapping(value = "/api/payment/{paymentID}/cheque", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deletePaymentOfCheque(@PathVariable Long paymentID) {
-        chequeService.deletePayment(paymentID);
-    }
-
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
-    public List<String> autocompleteData(@PathVariable String itemName) {
-        return chequeService.getAutocompleteData(itemName);
-    }
+    public List<String> autocompleteData(@PathVariable String itemName) {return chequeService.getAutocompleteData(itemName);}
 
 }

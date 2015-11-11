@@ -1,31 +1,19 @@
 package com.gearservice.service;
 
-import com.gearservice.model.authorization.User;
-import com.gearservice.model.cheque.*;
-
+import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.ChequeMin;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
-import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 @Service
 public class ChequeService {
@@ -37,8 +25,6 @@ public class ChequeService {
     @Autowired UserRepository userRepository;
     @Autowired PaymentRepository paymentRepository;
     @Autowired EntityManager em;
-
-    @Autowired PhotoMongoRepository photoMongoRepository;
 
     /**
      * Method getCheques call by client-side and return all cheques from database
@@ -85,53 +71,7 @@ public class ChequeService {
      */
     public void deleteCheque(@PathVariable Long chequeID) {
         chequeRepository.delete(chequeID);
-    }
-
-    /**
-     * Method addDiagnostic call by client-side, when it needs to add new diagnostic comment to cheque
-     * Call with value of request "/cheques/{chequeID}/diagnostic" and request method POST
-     * Should send in response OK status, if code works correct
-     * @param chequeID is ID of cheque in database, in that client-side wants add a diagnostic comment
-     * @param diagnostic is data for Diagnostic.class, that was create on client-side
-     */
-    public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-        diagnosticRepository.save(
-                diagnostic
-                        .withDateTime()
-                        .withOwner(chequeRepository.findOne(chequeID)));
-    }
-
-    /**
-     * Method deleteDiagnostic call by client-side, when it needs to delete diagnostic comment in cheque
-     * Call with value of request "/cheques/{chequeID}/diagnostic/{diagnosticID}" and request method DELETE
-     * Should send in response OK status, if code works correct
-     * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
-     * @param diagnosticID is ID of diagnostic in database, that client-side wants to delete
-     */
-    public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
-        diagnosticRepository.delete(diagnosticID);
-    }
-
-    /**
-     * Method addNote call by client-side, when it needs to add note comment to cheque
-     * Call with value of request "/cheques/{chequeID}/note" and request method POST
-     * Should send in response OK status, if code works correct
-     * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
-     * @param note is data for Note.class, that was create on client-side
-     */
-    public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
-        noteRepository.save(note.withDateTime().withOwner(chequeRepository.findOne(chequeID)));
-    }
-
-    /**
-     * Method deleteNote call by client-side, when it needs to delete note comment in cheque
-     * Call with value of request "/cheques/{chequeID}/note/{noteID}" and request method DELETE
-     * Should send in response OK status, if code works correct
-     * @param chequeID is ID of cheque in database, in that client-side wants delete diagnostic comment
-     * @param noteID is ID of node in database, that client-side wants to delete
-     */
-    public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {
-        noteRepository.delete(noteID);
+        photoRepository.deleteByPhotoOwner(chequeID.toString());
     }
 
     /**
@@ -155,80 +95,9 @@ public class ChequeService {
         return chequeRepository.getListOfCompactChequesWithIDs(IDs);
     }
 
-    public void uploadImage(MultipartFile file, Long chequeID, String username) {
-
-//        if(!file.isEmpty()) {
-//            Photo photo = new Photo();
-//            try {
-//                photo.setBytes(file.getBytes());
-//            } catch (IOException e) {e.printStackTrace();}
-//            photo.setName(file.getOriginalFilename());
-//            photo.setContentType(file.getContentType());
-//            photo.setPhotoOwner(chequeRepository.findOne(chequeID));
-//            photo.setUser(userRepository.findOne(username));
-//            photo.setAddedDate(OffsetDateTime.now());
-//            photoRepository.save(photo);
-//        }
-
-        if(!file.isEmpty()) {
-            PhotoMongo photo = new PhotoMongo();
-            try {
-                photo.setBytes(file.getBytes());
-            } catch (IOException e) {e.printStackTrace();}
-            photo.setName(file.getOriginalFilename());
-            photo.setContentType(file.getContentType());
-            photo.setPhotoOwner(chequeID.toString());
-            photo.setUser(username);
-            photo.setAddedDate(OffsetDateTime.now());
-            photoMongoRepository.save(photo);
-        }
-    }
-
-//    public Photo getPhotoByID(Long photoID) {
-//        return photoRepository.findOne(photoID);
-//    }
-
-    public PhotoMongo getPhotoByID(String photoID) {
-        return photoMongoRepository.findOne(photoID);
-    }
-
-//    public void deletePhotoByID(Long photoID) {photoRepository.delete(photoID);}
-
-    public void deletePhotoByID(String photoID) {photoMongoRepository.delete(photoID);}
-
-//    public List<PhotoMin> getListOfCompactPhotoFromCheque(Long chequeID) {
-//        return photoRepository.getListOfCompactPhotoFromCheque(chequeID);
-//    }
-
-    public List<PhotoMongo> getListOfCompactPhotoMongoFromCheque(String chequeID) {
-        Map<String, String> users =
-                userRepository.findAll().stream()
-                        .collect(toMap(User::getUsername, User::getFullname));
-
-        List<PhotoMongo> photos = photoMongoRepository.findAll();
-
-        photos.stream()
-                .forEach(photoMongo -> photoMongo.setUser(users.get(photoMongo.getUser())));
-
-        return photos;
-    }
-
-    public List<Payment> getPaymentsOfCheque(Long chequeID) {
-        return paymentRepository.findByPaymentOwnerId(chequeID);
-    }
-
-    public void setPaymentsOfCheque(Long chequeID, Set<Payment> payments) {
-        Cheque cheque = chequeRepository.findOne(chequeID);
-        payments.stream().forEach(payment -> payment.setPaymentOwner(cheque));
-        paymentRepository.save(payments);
-    }
-
-    public void deletePayment(Long paymentID) {
-        paymentRepository.delete(paymentID);
-    }
-
     public List<String> getAutocompleteData(String itemName) {
         System.out.println(itemName);
         return chequeRepository.ListOfCustomers();
     }
+
 }

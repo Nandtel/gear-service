@@ -112,6 +112,30 @@ public class GearServiceApplication implements CommandLineRunner {
         dayBeforeYesterday.withRUB();
         currencyRepository.save(dayBeforeYesterday);
 
+        Currency yesterday1 = new Currency();
+        yesterday1.setId(LocalDate.now().plusDays(1).toString());
+        yesterday1.setEur(new BigDecimal("70"));
+        yesterday1.setUsd(new BigDecimal("70"));
+        yesterday1.setUah(new BigDecimal("70"));
+        yesterday1.withRUB();
+        currencyRepository.save(yesterday1);
+
+        Currency tomorrow1 = new Currency();
+        tomorrow1.setId(LocalDate.now().plusDays(2).toString());
+        tomorrow1.setEur(new BigDecimal("100"));
+        tomorrow1.setUsd(new BigDecimal("100"));
+        tomorrow1.setUah(new BigDecimal("100"));
+        tomorrow1.withRUB();
+        currencyRepository.save(tomorrow1);
+
+        Currency dayBeforeYesterday1 = new Currency();
+        dayBeforeYesterday1.setId(LocalDate.now().plusDays(3).toString());
+        dayBeforeYesterday1.setEur(new BigDecimal("10"));
+        dayBeforeYesterday1.setUsd(new BigDecimal("10"));
+        dayBeforeYesterday1.setUah(new BigDecimal("10"));
+        dayBeforeYesterday1.withRUB();
+        currencyRepository.save(dayBeforeYesterday1);
+
         OffsetDateTime now = OffsetDateTime.now();
 
         IntStream.range(0, 5)

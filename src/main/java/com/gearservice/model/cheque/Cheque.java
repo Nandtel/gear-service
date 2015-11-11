@@ -86,10 +86,6 @@ public class Cheque {
     @JsonIgnore
     private Set<Payment> payments;
 
-    @OneToMany(mappedBy = "photoOwner", cascade = CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<Photo> photos;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "engineer", referencedColumnName = "username")
     private User engineer;
@@ -199,47 +195,8 @@ public class Cheque {
     public Set<Note> getNotes() {return notes;}
     public Set<Payment> getPayments() {return payments;}
     public void setPayments(Set<Payment> payments) {this.payments = payments;}
-    public Set<Photo> getPhotos() {return photos;}
-    public void setPhotos(Set<Photo> photos) {this.photos = photos;}
     public User getEngineer() {return engineer;}
     public void setEngineer(User engineer) {this.engineer = engineer;}
     public User getSecretary() {return secretary;}
     public void setSecretary(User secretary) {this.secretary = secretary;}
-
-    @Override
-    public String toString() {
-        return "Cheque{" +
-                "id=" + id + '\n' +
-                ", repairPeriod=" + repairPeriod + '\n' +
-                ", nameOfCustomer='" + nameOfCustomer + '\n' +
-                ", nameOfProduct='" + nameOfProduct + '\n' +
-                ", model='" + model + '\n' +
-                ", serialNumber='" + serialNumber + '\n' +
-                ", malfunction='" + malfunction + '\n' +
-                ", specialNotes='" + specialNotes + '\n' +
-                ", purchaserName='" + purchaserName + '\n' +
-                ", address='" + address + '\n' +
-                ", phone='" + phone + '\n' +
-                ", email='" + email + '\n' +
-                ", prediction=" + prediction + '\n' +
-                ", introducedDate=" + introducedDate + '\n' +
-                ", guaranteeDate=" + guaranteeDate + '\n' +
-                ", readyDate=" + readyDate + '\n' +
-                ", issuedDate=" + issuedDate + '\n' +
-                ", withoutRepair=" + withoutRepair + '\n' +
-                ", actNG=" + actNG + '\n' +
-                ", actVO=" + actVO + '\n' +
-                ", hasGuaranteeStatus=" + hasGuaranteeStatus + '\n' +
-                ", hasReadyStatus=" + hasReadyStatus + '\n' +
-                ", hasIssuedStatus=" + hasIssuedStatus + '\n' +
-                ", hasPaidStatus=" + hasPaidStatus + '\n' +
-                ", kits=" + kits + '\n' +
-                ", diagnostics=" + diagnostics + '\n' +
-                ", notes=" + notes + '\n' +
-                ", payments=" + payments + '\n' +
-                ", photos=" + photos + '\n' +
-                ", engineer=" + engineer + '\n' +
-                ", secretary=" + secretary +
-                '}';
-    }
 }

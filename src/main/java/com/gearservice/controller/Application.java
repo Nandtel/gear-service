@@ -1,11 +1,6 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.cheque.Cheque;
-import com.gearservice.service.AnalyticsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Class Application is controller, that handles all request from client-side

@@ -52,7 +52,7 @@
             <span ng-hide="hasPrepayment && !hasPaidStatus">{{'sum' | translate}}:</span>
             <span ng-show="hasPrepayment && !hasPaidStatus">{{'sum with prepayment' | translate}}:</span>
             <span style="margin-left: 1rem"></span>
-            <span>
+            <span class="sum">
                 {{sum('rub', hasPrepayment && !hasPaidStatus) | currency: '&#x20bd;'}},
                 {{sum('uah', hasPrepayment && !hasPaidStatus) | currency: '&#8372;'}},
                 {{sum('usd', hasPrepayment && !hasPaidStatus) | currency: '$'}}

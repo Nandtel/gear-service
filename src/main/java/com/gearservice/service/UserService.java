@@ -10,7 +10,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toMap;
 
 @Service
 public class UserService implements UserDetailsService, UserDetailsManager {
@@ -62,5 +65,11 @@ public class UserService implements UserDetailsService, UserDetailsManager {
         @Override public boolean isEnabled() {return super.isEnabled();}
         @Override public Set<Authority> getAuthorities() {return super.getAuthorities();}
 
+    }
+
+    public Map<String, String> getUsernameFullnameMap() {
+        return userRepository.findAll()
+                .stream()
+                .collect(toMap(User::getUsername, User::getFullname));
     }
 }
