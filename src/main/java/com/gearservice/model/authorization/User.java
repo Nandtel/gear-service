@@ -26,22 +26,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "authority"))
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "engineer", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Cheque> chequesAsEngineer;
-
-    @OneToMany(mappedBy = "secretary", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Cheque> chequesAsSecretary;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Diagnostic> diagnosticsAsEngineer;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Payment> payments;
-
     public User() {}
 
     public User(User user) {
@@ -65,12 +49,4 @@ public class User {
     public void setFullname(String fullname) {this.fullname = fullname;}
     public Set<Authority> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
-    public Set<Cheque> getChequesAsEngineer() {return chequesAsEngineer;}
-    public void setChequesAsEngineer(Set<Cheque> chequesAsEngineer) {this.chequesAsEngineer = chequesAsEngineer;}
-    public Set<Cheque> getChequesAsSecretary() {return chequesAsSecretary;}
-    public void setChequesAsSecretary(Set<Cheque> chequesAsSecretary) {this.chequesAsSecretary = chequesAsSecretary;}
-    public Set<Diagnostic> getDiagnosticsAsEngineer() {return diagnosticsAsEngineer;}
-    public void setDiagnosticsAsEngineer(Set<Diagnostic> diagnosticsAsEngineer) {this.diagnosticsAsEngineer = diagnosticsAsEngineer;}
-    public Set<Payment> getPayments() {return payments;}
-    public void setPayments(Set<Payment> payments) {this.payments = payments;}
 }

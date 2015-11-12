@@ -23,37 +23,37 @@
 
         <md-content layout="column" layout-align="end center">
             <p class="with-date">{{ 'Introduced' | translate}}</p>
-            <date-time-picker ng-model="cheque.introducedDate" ng-disabled="disableChequeForm"></date-time-picker>
+            <date-time-picker ng-model="cheque.receiptDate" ng-disabled="disableChequeForm"></date-time-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center">
-            <md-checkbox ng-model="cheque.hasGuaranteeStatus"
+            <md-checkbox ng-model="cheque.warrantyStatus"
                          class="md-primary with-date"
                          ng-disabled="disableChequeForm">
                 <p>{{ 'Guarantee' | translate}}</p>
             </md-checkbox>
-            <date-picker ng-model="cheque.guaranteeDate"
-                         ng-disabled="!cheque.hasGuaranteeStatus || disableChequeForm"></date-picker>
+            <date-picker ng-model="cheque.warrantyDate"
+                         ng-disabled="!cheque.warrantyStatus || disableChequeForm"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <md-checkbox ng-model="cheque.hasReadyStatus"
+            <md-checkbox ng-model="cheque.readyStatus"
                          class="md-primary with-date"
                          ng-disabled="disableChequeForm">
                 <p>{{ 'Ready' | translate}}</p>
             </md-checkbox>
             <date-picker ng-model="cheque.readyDate"
-                         ng-disabled="!cheque.hasReadyStatus || disableChequeForm"></date-picker>
+                         ng-disabled="!cheque.readyStatus || disableChequeForm"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="end center" ng-show="hasID">
-            <md-checkbox ng-model="cheque.hasIssuedStatus"
+            <md-checkbox ng-model="cheque.returnedToClientStatus"
                          class="md-primary with-date"
                          ng-disabled="disableChequeForm">
                 <p>{{ 'Issued' | translate}}</p>
             </md-checkbox>
-            <date-picker ng-model="cheque.issuedDate"
-                         ng-disabled="!cheque.hasIssuedStatus || disableChequeForm"></date-picker>
+            <date-picker ng-model="cheque.returnedToClientDate"
+                         ng-disabled="!cheque.returnedToClientStatus || disableChequeForm"></date-picker>
         </md-content>
 
     </md-content>
@@ -62,21 +62,21 @@
         <!--<md-input-container flex="75" class="md-icon-float">-->
             <!--<label translate>Customer</label>-->
             <!--<md-icon md-font-set="material-icons">people</md-icon>-->
-            <!--<input ng-model="cheque.nameOfCustomer" required ng-disabled="disableChequeForm">-->
+            <!--<input ng-model="cheque.customerName" required ng-disabled="disableChequeForm">-->
         <!--</md-input-container>-->
 
         <md-autocomplete flex="75" class="md-icon-float"
-                         md-search-text="cheque.nameOfCustomer"
+                         md-search-text="cheque.customerName"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.nameOfCustomer"
+                         md-items="item in items | filter: cheque.customerName"
                          md-item-text="item"
                          md-floating-label="{{'Customer' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('nameOfCustomer')">
+                         ng-click="serverItems('customerName')">
             <md-item-template>
-                <span md-highlight-text="cheque.nameOfCustomer" md-highlight-flags="^i"> {{item}} </span>
+                <span md-highlight-text="cheque.customerName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
         </md-autocomplete>
 
@@ -90,12 +90,12 @@
         <md-input-container flex="40" class="md-icon-float">
             <label translate>Name of Product</label>
             <md-icon md-font-set="material-icons">desktop_windows</md-icon>
-            <input ng-model="cheque.nameOfProduct" required ng-disabled="disableChequeForm">
+            <input ng-model="cheque.productName" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Model</label>
-            <input ng-model="cheque.model" required ng-disabled="disableChequeForm">
+            <input ng-model="cheque.modelName" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
@@ -108,7 +108,7 @@
         <md-input-container flex class="md-icon-float">
             <label translate>Malfunction</label>
             <md-icon md-font-set="material-icons">local_hospital</md-icon>
-            <input ng-model="cheque.malfunction" ng-disabled="disableChequeForm" md-maxlength="150">
+            <input ng-model="cheque.defect" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
@@ -124,7 +124,7 @@
         <md-input-container flex="30" class="md-icon-float">
             <label translate >Purchaser</label>
             <md-icon md-font-set="material-icons">account_box</md-icon>
-            <input ng-model="cheque.purchaserName" required ng-disabled="disableChequeForm">
+            <input ng-model="cheque.representativeName" required ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="30" class="md-icon-float">
@@ -134,7 +134,7 @@
 
         <md-input-container flex="20" class="md-icon-float">
             <label translate>Phone</label>
-            <input ng-model="cheque.phone" ui-mask="(999) 999 ‒  99 ‒  99" class="phone" ng-disabled="disableChequeForm">
+            <input ng-model="cheque.phoneNumber" ui-mask="(999) 999 ‒  99 ‒  99" class="phoneNumber" ng-disabled="disableChequeForm">
         </md-input-container>
 
         <md-input-container flex="20" class="md-icon-float">
@@ -160,11 +160,11 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-align="center start">
-        <md-chips ng-model="cheque.kits" flex
+        <md-chips ng-model="cheque.components" flex
                   placeholder="{{'Kits' | translate}}"
                   secondary-placeholder="{{'Kits' | translate}}"
                   md-on-append="addKit($chip)">
-            <md-chip-template>{{$chip.text}}</md-chip-template>
+            <md-chip-template>{{$chip.name}}</md-chip-template>
         </md-chips>
     </md-content>
 

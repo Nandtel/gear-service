@@ -60,8 +60,8 @@ angular.module("mainModule")
              * @param text of kit chip
              * @returns kit object with kit-text
              */
-            $scope.addKit = function(text) {
-                return {'text': text};
+            $scope.addKit = function(name) {
+                return {'name': name};
             };
 
             $scope.printCheque = function() {
@@ -71,8 +71,8 @@ angular.module("mainModule")
 
             if(!$scope.hasID) {
 
-                $scope.cleanNewCheck = {repairPeriod: 99, introducedDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                    inspectorName: 'Администратор', kits: [], notes: [], payments: [], diagnostics: []};
+                $scope.cleanNewCheck = {repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
+                    secretary: 'Администратор', components: [], notes: [], payments: [], diagnostics: []};
 
                 /**
                  * Method resetNewCheck reset cheque with default cleanNewCheque data
@@ -106,7 +106,6 @@ angular.module("mainModule")
 
             $scope.items = [];
             $scope.serverItems = function(name) {
-                console.log('IN AUTOCOMPLETE FIND');
                 $http.get('/api/autocomplete/' + name)
                     .success(function(data) {
                         $scope.items = data;

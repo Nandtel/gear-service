@@ -27,8 +27,8 @@
 
                 <md-list-item ng-repeat="photo in photos | orderBy: 'id'" ng-click="openPhoto(photo.id)">
                     <p flex="60">{{photo.name}}</p>
-                    <p flex="15">{{photo.user}}</p>
-                    <p flex="25">{{photo.addedDate | amDateFormat:'LLL'}}</p>
+                    <p flex="15">{{photo.username}}</p>
+                    <p flex="25">{{photo.addDate | amDateFormat:'LLL'}}</p>
                     <md-icon class="material-icons md-secondary"
                              type="button"
                              ng-click="deletePhoto(photo.id, $event)"

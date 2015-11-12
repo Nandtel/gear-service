@@ -1,4 +1,4 @@
-package com.gearservice.model.currency;
+package com.gearservice.model.exchangeRate;
 
 import org.jsoup.Jsoup;
 
@@ -9,31 +9,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-public class Currency {
+public class ExchangeRate {
 
     @Id
-    private String id;
+    private String addDate;
 
     private BigDecimal usd;
     private BigDecimal uah;
     private BigDecimal eur;
     private BigDecimal rub;
 
-    public Currency() {
-        this.id = LocalDate.now().toString();
-    }
-
-    public Currency forToday() {
-        this.id = LocalDate.now().toString();
-        return this;
-    }
-
-    public Currency withRUB() {
+    public ExchangeRate() {
+        this.addDate = LocalDate.now().toString();
         this.rub = new BigDecimal("1");
-        return this;
     }
 
-    public Currency getFromServer(String link, String tag) {
+    public ExchangeRate getFromServer(String link, String tag) {
         String[] elements = parseWebSite(link, tag);
 
         for(int i = 0; i < elements.length;) {
@@ -70,8 +61,8 @@ public class Currency {
         return first.add(second).divide(two, 2, BigDecimal.ROUND_HALF_UP);
     }
 
-    public String getId() {return id;}
-    public void setId(String id) {this.id = id;}
+    public String getAddDate() {return addDate;}
+    public void setAddDate(String addDate) {this.addDate = addDate;}
     public BigDecimal getUsd() {return usd;}
     public void setUsd(BigDecimal usd) {this.usd = usd;}
     public BigDecimal getUah() {return uah;}

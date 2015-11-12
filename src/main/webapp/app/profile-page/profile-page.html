@@ -14,7 +14,7 @@
             </div>
         </md-toolbar>
 
-        <md-content md-theme="header">
+        <md-content>
             <md-tabs md-border-bottom md-dynamic-height>
                 <md-tab ng-repeat="user in users | orderBy: 'username'" label="{{user.fullname}}">
                     <user-details ng-model="user"></user-details>
@@ -34,7 +34,7 @@
         <md-content layout-padding>
 
             <md-list layout="row" layout-align="center center">
-                <md-list-item class="day" ng-repeat="rate in rates | orderBy: 'id'" layout-wrap layout="row" layout-align="center center">
+                <md-list-item class="day" ng-repeat="rate in rates | orderBy: 'addDate'" layout-wrap layout="row" layout-align="center center">
                     <currency-rate-day ng-model="rate"></currency-rate-day>
                 </md-list-item>
             </md-list>

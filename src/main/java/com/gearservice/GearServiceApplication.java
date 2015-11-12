@@ -1,12 +1,10 @@
 package com.gearservice;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Payment;
-import com.gearservice.model.currency.Currency;
+import com.gearservice.model.exchangeRate.ExchangeRate;
 import com.gearservice.model.repositories.*;
 import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
-import com.gearservice.service.AnalyticsService;
-import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,7 +33,8 @@ import java.util.stream.IntStream;
 public class GearServiceApplication implements CommandLineRunner {
 
     @Autowired UserRepository userRepository;
-    @Autowired CurrencyRepository currencyRepository;
+    @Autowired
+    ExchangeRateRepository exchangeRateRepository;
     @Autowired ChequeRepository chequeRepository;
     @Autowired PaymentRepository paymentRepository;
 
@@ -88,53 +87,47 @@ public class GearServiceApplication implements CommandLineRunner {
         yanka.setAuthorities(new HashSet<>(Arrays.asList(boss.withUsername(yanka))));
         userRepository.save(yanka);
 
-        Currency yesterday = new Currency();
-        yesterday.setId(LocalDate.now().minusDays(1).toString());
+        ExchangeRate yesterday = new ExchangeRate();
+        yesterday.setAddDate(LocalDate.now().minusDays(1).toString());
         yesterday.setEur(new BigDecimal("70"));
         yesterday.setUsd(new BigDecimal("70"));
         yesterday.setUah(new BigDecimal("70"));
-        yesterday.withRUB();
-        currencyRepository.save(yesterday);
+        exchangeRateRepository.save(yesterday);
 
-        Currency tomorrow = new Currency();
-        tomorrow.setId(LocalDate.now().minusDays(2).toString());
+        ExchangeRate tomorrow = new ExchangeRate();
+        tomorrow.setAddDate(LocalDate.now().minusDays(2).toString());
         tomorrow.setEur(new BigDecimal("100"));
         tomorrow.setUsd(new BigDecimal("100"));
         tomorrow.setUah(new BigDecimal("100"));
-        tomorrow.withRUB();
-        currencyRepository.save(tomorrow);
+        exchangeRateRepository.save(tomorrow);
 
-        Currency dayBeforeYesterday = new Currency();
-        dayBeforeYesterday.setId(LocalDate.now().minusDays(3).toString());
+        ExchangeRate dayBeforeYesterday = new ExchangeRate();
+        dayBeforeYesterday.setAddDate(LocalDate.now().minusDays(3).toString());
         dayBeforeYesterday.setEur(new BigDecimal("10"));
         dayBeforeYesterday.setUsd(new BigDecimal("10"));
         dayBeforeYesterday.setUah(new BigDecimal("10"));
-        dayBeforeYesterday.withRUB();
-        currencyRepository.save(dayBeforeYesterday);
+        exchangeRateRepository.save(dayBeforeYesterday);
 
-        Currency yesterday1 = new Currency();
-        yesterday1.setId(LocalDate.now().plusDays(1).toString());
+        ExchangeRate yesterday1 = new ExchangeRate();
+        yesterday1.setAddDate(LocalDate.now().plusDays(1).toString());
         yesterday1.setEur(new BigDecimal("70"));
         yesterday1.setUsd(new BigDecimal("70"));
         yesterday1.setUah(new BigDecimal("70"));
-        yesterday1.withRUB();
-        currencyRepository.save(yesterday1);
+        exchangeRateRepository.save(yesterday1);
 
-        Currency tomorrow1 = new Currency();
-        tomorrow1.setId(LocalDate.now().plusDays(2).toString());
+        ExchangeRate tomorrow1 = new ExchangeRate();
+        tomorrow1.setAddDate(LocalDate.now().plusDays(2).toString());
         tomorrow1.setEur(new BigDecimal("100"));
         tomorrow1.setUsd(new BigDecimal("100"));
         tomorrow1.setUah(new BigDecimal("100"));
-        tomorrow1.withRUB();
-        currencyRepository.save(tomorrow1);
+        exchangeRateRepository.save(tomorrow1);
 
-        Currency dayBeforeYesterday1 = new Currency();
-        dayBeforeYesterday1.setId(LocalDate.now().plusDays(3).toString());
+        ExchangeRate dayBeforeYesterday1 = new ExchangeRate();
+        dayBeforeYesterday1.setAddDate(LocalDate.now().plusDays(3).toString());
         dayBeforeYesterday1.setEur(new BigDecimal("10"));
         dayBeforeYesterday1.setUsd(new BigDecimal("10"));
         dayBeforeYesterday1.setUah(new BigDecimal("10"));
-        dayBeforeYesterday1.withRUB();
-        currencyRepository.save(dayBeforeYesterday1);
+        exchangeRateRepository.save(dayBeforeYesterday1);
 
         OffsetDateTime now = OffsetDateTime.now();
 
@@ -142,7 +135,7 @@ public class GearServiceApplication implements CommandLineRunner {
                 .forEach(i -> {
 
                     Cheque cheque = new Cheque().withRandomData();
-                    cheque.setIntroducedDate(now.minusDays(i));
+                    cheque.setReceiptDate(now.minusDays(i));
                     cheque.withDiagnosticUser(admin);
                     cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
@@ -151,38 +144,38 @@ public class GearServiceApplication implements CommandLineRunner {
 
                     Payment repair = new Payment();
                     repair.setCost(1);
-                    repair.setCurrentCurrency("usd");
-                    repair.setCurrency(yesterday);
+                    repair.setCurrency("usd");
+                    repair.setExchangeRate(yesterday);
                     repair.setType("repair");
                     repair.setUser(kosoy);
-                    repair.setPaymentOwner(cheque);
+                    repair.setCheque(cheque);
                     paymentRepository.save(repair);
 
                     Payment zip = new Payment();
                     zip.setCost(1);
-                    zip.setCurrentCurrency("rub");
-                    zip.setCurrency(dayBeforeYesterday);
+                    zip.setCurrency("rub");
+                    zip.setExchangeRate(dayBeforeYesterday);
                     zip.setType("zip");
                     zip.setUser(admin);
-                    zip.setPaymentOwner(cheque);
+                    zip.setCheque(cheque);
                     paymentRepository.save(zip);
 
                     Payment repair2 = new Payment();
                     repair2.setCost(1);
-                    repair2.setCurrentCurrency("rub");
-                    repair2.setCurrency(dayBeforeYesterday);
+                    repair2.setCurrency("rub");
+                    repair2.setExchangeRate(dayBeforeYesterday);
                     repair2.setType("repair");
                     repair2.setUser(kosoy);
-                    repair2.setPaymentOwner(cheque);
+                    repair2.setCheque(cheque);
                     paymentRepository.save(repair2);
 
                     Payment prepayment = new Payment();
                     prepayment.setCost(1);
-                    prepayment.setCurrentCurrency("uah");
-                    prepayment.setCurrency(tomorrow);
+                    prepayment.setCurrency("uah");
+                    prepayment.setExchangeRate(tomorrow);
                     prepayment.setType("zip");
                     prepayment.setUser(admin);
-                    prepayment.setPaymentOwner(cheque);
+                    prepayment.setCheque(cheque);
                     paymentRepository.save(prepayment);
 
 

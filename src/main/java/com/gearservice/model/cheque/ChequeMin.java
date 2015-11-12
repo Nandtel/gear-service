@@ -19,87 +19,87 @@ public class ChequeMin {
 
     @Id
     private Long id;
-    private String nameOfCustomer;
+    private String customerName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime introducedDate;
+    private OffsetDateTime receiptDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime guaranteeDate;
+    private OffsetDateTime warrantyDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime readyDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime issuedDate;
+    private OffsetDateTime returnedToClientDate;
 
-    private String nameOfProduct;
-    private String model;
+    private String productName;
+    private String modelName;
     private String serialNumber;
 
-    private String purchaserName;
-    private String inspectorName;
-    private String masterName;
+    private String representativeName;
+    private String secretary;
+    private String engineer;
 
-    private boolean hasGuaranteeStatus;
-    private boolean hasReadyStatus;
-    private boolean hasIssuedStatus;
-    private boolean hasPaidStatus;
+    private boolean warrantyStatus;
+    private boolean readyStatus;
+    private boolean returnedToClientStatus;
+    private boolean paidStatus;
 
     public ChequeMin() {}
 
-    public ChequeMin(Long id, String nameOfCustomer, OffsetDateTime introducedDate, OffsetDateTime guaranteeDate,
-                     OffsetDateTime readyDate, OffsetDateTime issuedDate, String nameOfProduct, String model,
-                     String serialNumber, String purchaserName, String inspectorName, String masterName,
-                     boolean hasGuaranteeStatus, boolean hasReadyStatus, boolean hasIssuedStatus,
-                     boolean hasPaidStatus) {
+    public ChequeMin(Long id, String customerName, OffsetDateTime receiptDate, OffsetDateTime guaranteeDate,
+                     OffsetDateTime readyDate, OffsetDateTime returnedToClientDate, String productName, String modelName,
+                     String serialNumber, String representativeName, String secretary, String engineer,
+                     boolean warrantyStatus, boolean readyStatus, boolean returnedToClientStatus,
+                     boolean paidStatus) {
 
         this.id = id;
-        this.nameOfCustomer = nameOfCustomer;
-        this.introducedDate = introducedDate;
-        this.guaranteeDate = guaranteeDate;
+        this.customerName = customerName;
+        this.receiptDate = receiptDate;
+        this.warrantyDate = guaranteeDate;
         this.readyDate = readyDate;
-        this.issuedDate = issuedDate;
-        this.nameOfProduct = nameOfProduct;
-        this.model = model;
+        this.returnedToClientDate = returnedToClientDate;
+        this.productName = productName;
+        this.modelName = modelName;
         this.serialNumber = serialNumber;
-        this.purchaserName = purchaserName;
-        this.inspectorName = inspectorName;
-        this.masterName = masterName;
-        this.hasGuaranteeStatus = hasGuaranteeStatus;
-        this.hasReadyStatus = hasReadyStatus;
-        this.hasIssuedStatus = hasIssuedStatus;
-        this.hasPaidStatus = hasPaidStatus;
+        this.representativeName = representativeName;
+        this.secretary = secretary;
+        this.engineer = engineer;
+        this.warrantyStatus = warrantyStatus;
+        this.readyStatus = readyStatus;
+        this.returnedToClientStatus = returnedToClientStatus;
+        this.paidStatus = paidStatus;
     }
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
-    public String getNameOfCustomer() {return nameOfCustomer;}
-    public void setNameOfCustomer(String nameOfCustomer) {this.nameOfCustomer = nameOfCustomer;}
-    public String getNameOfProduct() {return nameOfProduct;}
-    public void setNameOfProduct(String nameOfProduct) {this.nameOfProduct = nameOfProduct;}
-    public String getModel() {return model;}
-    public void setModel(String model) {this.model = model;}
+    public String getCustomerName() {return customerName;}
+    public void setCustomerName(String customerName) {this.customerName = customerName;}
+    public String getProductName() {return productName;}
+    public void setProductName(String productName) {this.productName = productName;}
+    public String getModelName() {return modelName;}
+    public void setModelName(String modelName) {this.modelName = modelName;}
     public String getSerialNumber() {return serialNumber;}
     public void setSerialNumber(String serialNumber) {this.serialNumber = serialNumber;}
-    public String getPurchaserName() {return purchaserName;}
-    public void setPurchaserName(String purchaserName) {this.purchaserName = purchaserName;}
-    public String getInspectorName() {return inspectorName;}
-    public void setInspectorName(String inspectorName) {this.inspectorName = inspectorName;}
-    public String getMasterName() {return masterName;}
-    public void setMasterName(String masterName) {this.masterName = masterName;}
-    public void setIntroducedDate(OffsetDateTime introducedDate) {this.introducedDate = introducedDate;}
-    public OffsetDateTime getIntroducedDate() {return introducedDate;}
-    public void setGuaranteeDate(OffsetDateTime guaranteeDate) {this.guaranteeDate = guaranteeDate;}
-    public OffsetDateTime getGuaranteeDate() {return guaranteeDate;}
+    public String getRepresentativeName() {return representativeName;}
+    public void setRepresentativeName(String representativeName) {this.representativeName = representativeName;}
+    public String getSecretary() {return secretary;}
+    public void setSecretary(String secretary) {this.secretary = secretary;}
+    public String getEngineer() {return engineer;}
+    public void setEngineer(String engineer) {this.engineer = engineer;}
+    public void setReceiptDate(OffsetDateTime receiptDate) {this.receiptDate = receiptDate;}
+    public OffsetDateTime getReceiptDate() {return receiptDate;}
+    public void setWarrantyDate(OffsetDateTime warrantyDate) {this.warrantyDate = warrantyDate;}
+    public OffsetDateTime getWarrantyDate() {return warrantyDate;}
     public void setReadyDate(OffsetDateTime readyDate) {this.readyDate = readyDate;}
     public OffsetDateTime getReadyDate() {return readyDate;}
-    public void setIssuedDate(OffsetDateTime issuedDate) {this.issuedDate = issuedDate;}
-    public OffsetDateTime getIssuedDate() {return issuedDate;}
-    public boolean getHasPaidStatus() {return hasPaidStatus;}
-    public void setHasPaidStatus(boolean hasPaidStatus) {this.hasPaidStatus = hasPaidStatus;}
-    public boolean isHasGuaranteeStatus() {return hasGuaranteeStatus;}
-    public void setHasGuaranteeStatus(boolean hasGuaranteeStatus) {this.hasGuaranteeStatus = hasGuaranteeStatus;}
-    public boolean isHasReadyStatus() {return hasReadyStatus;}
-    public void setHasReadyStatus(boolean hasReadyStatus) {this.hasReadyStatus = hasReadyStatus;}
-    public boolean isHasIssuedStatus() {return hasIssuedStatus;}
-    public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
+    public void setReturnedToClientDate(OffsetDateTime returnedToClientDate) {this.returnedToClientDate = returnedToClientDate;}
+    public OffsetDateTime getReturnedToClientDate() {return returnedToClientDate;}
+    public boolean getPaidStatus() {return paidStatus;}
+    public void setPaidStatus(boolean paidStatus) {this.paidStatus = paidStatus;}
+    public boolean isWarrantyStatus() {return warrantyStatus;}
+    public void setWarrantyStatus(boolean warrantyStatus) {this.warrantyStatus = warrantyStatus;}
+    public boolean isReadyStatus() {return readyStatus;}
+    public void setReadyStatus(boolean readyStatus) {this.readyStatus = readyStatus;}
+    public boolean isReturnedToClientStatus() {return returnedToClientStatus;}
+    public void setReturnedToClientStatus(boolean returnedToClientStatus) {this.returnedToClientStatus = returnedToClientStatus;}
 
 }

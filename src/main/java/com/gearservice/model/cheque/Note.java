@@ -30,18 +30,18 @@ public class Note {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
-    private OffsetDateTime time;
+    private OffsetDateTime date;
 
     @Lob
     private String text;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque", referencedColumnName = "id")
+    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     @JsonBackReference
-    private Cheque noteOwner;
+    private Cheque cheque;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user", referencedColumnName = "username")
+    @JoinColumn(name = "user_username", referencedColumnName = "username")
     private User user;
 
     /**
@@ -50,7 +50,7 @@ public class Note {
      */
     public Note withRandomData() {
         this.setText(SampleDataService.getRandomComment());
-        this.setTime(SampleDataService.getRandomDate());
+        this.setDate(SampleDataService.getRandomDate());
         return this;
     }
 
@@ -60,7 +60,7 @@ public class Note {
      * @return this Note object after editing
      */
     public Note withDateTime() {
-        this.setTime(OffsetDateTime.now());
+        this.setDate(OffsetDateTime.now());
         return this;
     }
 
@@ -70,12 +70,12 @@ public class Note {
     }
 
     /**
-     * Method withOwner handle current Note object filling it with owner and return this edited object
+     * Method withCheque handle current Note object filling it with owner and return this edited object
      * @param owner is owner class in bidirectional one-to-many relationship
      * @return this Note object after editing
      */
     public Note withOwner(Cheque owner) {
-        this.setNoteOwner(owner);
+        this.setCheque(owner);
         return this;
     }
 
@@ -83,10 +83,10 @@ public class Note {
     public Long getId() {return id;}
     public void setText(String text) {this.text = text;}
     public String getText() {return text;}
-    public void setTime(OffsetDateTime time) {this.time = time;}
-    public OffsetDateTime getTime() {return time;}
+    public void setDate(OffsetDateTime date) {this.date = date;}
+    public OffsetDateTime getDate() {return date;}
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
-    public void setNoteOwner(Cheque noteOwner) {this.noteOwner = noteOwner;}
-    public Cheque getNoteOwner() {return noteOwner;}
+    public void setCheque(Cheque cheque) {this.cheque = cheque;}
+    public Cheque getCheque() {return cheque;}
 }

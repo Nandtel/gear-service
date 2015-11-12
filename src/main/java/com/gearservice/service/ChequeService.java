@@ -71,7 +71,7 @@ public class ChequeService {
      */
     public void deleteCheque(@PathVariable Long chequeID) {
         chequeRepository.delete(chequeID);
-        photoRepository.deleteByPhotoOwner(chequeID.toString());
+        photoRepository.deleteByChequeId(chequeID.toString());
     }
 
     /**

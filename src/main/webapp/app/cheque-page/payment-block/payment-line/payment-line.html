@@ -27,7 +27,7 @@
 
     <md-input-container flex="10">
         <label translate>currency</label>
-        <md-select ng-model="payment.currentCurrency" ng-disabled="paymentLineDisabled">
+        <md-select ng-model="payment.currency" ng-disabled="paymentLineDisabled">
             <md-option ng-repeat="currency in currencies" value="{{currency}}">{{currency | uppercase}}</md-option>
         </md-select>
     </md-input-container>

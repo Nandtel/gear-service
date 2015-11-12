@@ -1,5 +1,5 @@
 <form name="day" class="md-item-text md-whiteframe-z1" layout="column" layout-align="center center" flex>
-    <h3>{{rate.id | amDateFormat: 'll'}}</h3>
+    <h3>{{rate.addDate | amDateFormat: 'll'}}</h3>
     <md-input-container>
         <label>USD</label>
         <input type="number" step="0.01" ng-model="rate.usd">

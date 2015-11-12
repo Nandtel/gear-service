@@ -17,13 +17,15 @@ public class PaymentService {
     @Autowired ChequeRepository chequeRepository;
 
     public List<Payment> getPaymentsOfCheque(Long chequeID) {
-        return paymentRepository.findByPaymentOwnerId(chequeID);
+        return paymentRepository.findByChequeId(chequeID);
     }
 
-    public void setPaymentsOfCheque(Long chequeID, Set<Payment> payments) {
+    public List<Payment> synchronizePaymentsOfCheque(Long chequeID, Set<Payment> payments) {
         Cheque cheque = chequeRepository.findOne(chequeID);
-        payments.stream().forEach(payment -> payment.setPaymentOwner(cheque));
+        payments.stream().forEach(payment -> payment.setCheque(cheque));
         paymentRepository.save(payments);
+
+        return paymentRepository.findByChequeId(chequeID);
     }
 
     public void deletePayment(Long paymentID) {paymentRepository.delete(paymentID);}

@@ -20,7 +20,7 @@ public class PhotoService {
     @Autowired UserService userService;
 
     private static Photo replaceFullnameToActual(Photo photo, Map<String, String> users) {
-        photo.setUser(users.get(photo.getUser()));
+        photo.setUsername(users.get(photo.getUsername()));
         return photo;
     }
 
@@ -33,16 +33,16 @@ public class PhotoService {
             } catch (IOException e) {e.printStackTrace();}
             photo.setName(file.getOriginalFilename());
             photo.setContentType(file.getContentType());
-            photo.setPhotoOwner(chequeID.toString());
-            photo.setUser(username);
-            photo.setAddedDate(OffsetDateTime.now());
+            photo.setChequeId(chequeID.toString());
+            photo.setUsername(username);
+            photo.setAddDate(OffsetDateTime.now());
             photoRepository.save(photo);
         }
     }
 
     public List<Photo> getListOfPhotoExcludeBytesFromCheque(String chequeID) {
         Map<String, String> users = userService.getUsernameFullnameMap();
-        return photoRepository.findByPhotoOwnerExcludeBytes(chequeID)
+        return photoRepository.findByChequeIdExcludeBytes(chequeID)
                 .stream()
                 .map(photo -> PhotoService.replaceFullnameToActual(photo, users))
                 .collect(toList());

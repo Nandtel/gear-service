@@ -32,57 +32,60 @@ public class Cheque {
     private Long id;
 
     private int repairPeriod;
-    private String nameOfCustomer;
-    private String nameOfProduct;
-    private String model;
+    private String customerName;
+    private String productName;
+    private String modelName;
     private String serialNumber;
-    private String malfunction;
+    private String defect;
     private String specialNotes;
-    private String purchaserName;
+    private String representativeName;
     private String address;
-    private String phone;
+    private String phoneNumber;
     private String email;
-    private int prediction;
+    private int estimatedCost;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
-    private OffsetDateTime introducedDate;
+    private OffsetDateTime receiptDate;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
-    private OffsetDateTime guaranteeDate;
+    private OffsetDateTime warrantyDate;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime readyDate;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
-    private OffsetDateTime issuedDate;
+    private OffsetDateTime returnedToClientDate;
 
     private boolean withoutRepair;
-    private boolean actNG;
-    private boolean actVO;
+    private boolean actNotWarranty;
+    private boolean actVisualInspection;
 
-    private boolean hasGuaranteeStatus;
-    private boolean hasReadyStatus;
-    private boolean hasIssuedStatus;
-    private boolean hasPaidStatus;
+    private boolean warrantyStatus;
+    private boolean readyStatus;
+    private boolean returnedToClientStatus;
+    private boolean paidStatus;
 
-    @OneToMany(mappedBy = "kitOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Kit> kits;
+    private Set<Component> components;
 
-    @OneToMany(mappedBy = "diagnosticOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Diagnostic> diagnostics;
 
-    @OneToMany(mappedBy = "noteOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "paymentOwner", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Payment> payments;
 
@@ -99,24 +102,24 @@ public class Cheque {
      * @return this Cheque object after editing
      */
     public Cheque withRandomData() {
-        this.setNameOfCustomer(SampleDataService.getRandomName());
-        this.setNameOfProduct(SampleDataService.getRandomProduct());
+        this.setCustomerName(SampleDataService.getRandomName());
+        this.setProductName(SampleDataService.getRandomProduct());
         this.setRepairPeriod(SampleDataService.getRepairPeriod());
-        this.setIntroducedDate(SampleDataService.getRandomDate());
-        this.setModel(SampleDataService.getRandomModel());
+        this.setReceiptDate(SampleDataService.getRandomDate());
+        this.setModelName(SampleDataService.getRandomModel());
         this.setSerialNumber(SampleDataService.getRandomSerialNumber());
-        this.setMalfunction(SampleDataService.getRandomMalfunction());
+        this.setDefect(SampleDataService.getRandomMalfunction());
         this.setSpecialNotes(SampleDataService.getRandomSpecialNotes());
-        this.setPurchaserName(SampleDataService.getRandomName());
+        this.setRepresentativeName(SampleDataService.getRandomName());
         this.setAddress(SampleDataService.getRandomAddress());
-        this.setPhone(SampleDataService.getRandomPhone());
+        this.setPhoneNumber(SampleDataService.getRandomPhone());
         this.setEmail(SampleDataService.getRandomEmail());
 
-        this.setKits(SampleDataService.getSetConsistFrom(o -> new Kit().withRandomData().withOwner(this)));
+        this.setComponents(SampleDataService.getSetConsistFrom(o -> new Component().withRandomData().withOwner(this)));
 
-        this.setGuaranteeDate(SampleDataService.getRandomDate());
+        this.setWarrantyDate(SampleDataService.getRandomDate());
         this.setReadyDate(SampleDataService.getRandomDate());
-        this.setIssuedDate(SampleDataService.getRandomDate());
+        this.setReturnedToClientDate(SampleDataService.getRandomDate());
 
         return this;
     }
@@ -125,7 +128,7 @@ public class Cheque {
         this.setDiagnostics(SampleDataService.getSetConsistFrom(
                 o -> new Diagnostic()
                         .withRandomData()
-                        .withOwner(this)
+                        .withCheque(this)
                         .withUser(user)));
         return this;
     }
@@ -141,54 +144,54 @@ public class Cheque {
 
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
-    public void setNameOfCustomer(String nameOfCustomer) {this.nameOfCustomer = nameOfCustomer;}
-    public String getNameOfCustomer() {return nameOfCustomer;}
+    public void setCustomerName(String customerName) {this.customerName = customerName;}
+    public String getCustomerName() {return customerName;}
     public void setRepairPeriod(int repairPeriod) {this.repairPeriod = repairPeriod;}
     public int getRepairPeriod() {return repairPeriod;}
-    public void setNameOfProduct(String nameOfProduct) {this.nameOfProduct = nameOfProduct;}
-    public String getNameOfProduct() {return nameOfProduct;}
-    public void setModel(String model) {this.model = model;}
-    public String getModel() {return model;}
+    public void setProductName(String productName) {this.productName = productName;}
+    public String getProductName() {return productName;}
+    public void setModelName(String modelName) {this.modelName = modelName;}
+    public String getModelName() {return modelName;}
     public void setSerialNumber(String serialNumber) {this.serialNumber = serialNumber;}
     public String getSerialNumber() {return serialNumber;}
-    public void setMalfunction(String malfunction) {this.malfunction = malfunction;}
-    public String getMalfunction() {return malfunction;}
+    public void setDefect(String defect) {this.defect = defect;}
+    public String getDefect() {return defect;}
     public void setSpecialNotes(String specialNotes) {this.specialNotes = specialNotes;}
     public String getSpecialNotes() {return specialNotes;}
-    public void setPurchaserName(String purchaserName) {this.purchaserName = purchaserName;}
-    public String getPurchaserName() {return purchaserName;}
+    public void setRepresentativeName(String representativeName) {this.representativeName = representativeName;}
+    public String getRepresentativeName() {return representativeName;}
     public void setAddress(String address) {this.address = address;}
     public String getAddress() {return address;}
-    public void setPhone(String phone) {this.phone = phone;}
-    public String getPhone() {return phone;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public String getPhoneNumber() {return phoneNumber;}
     public void setEmail(String email) {this.email = email;}
     public String getEmail() {return email;}
     public void setWithoutRepair(boolean withoutRepair) {this.withoutRepair = withoutRepair;}
     public boolean isWithoutRepair() {return withoutRepair;}
-    public void setActNG(boolean actNG) {this.actNG = actNG;}
-    public boolean isActNG() {return actNG;}
-    public void setActVO(boolean actVO) {this.actVO = actVO;}
-    public boolean isActVO() {return actVO;}
-    public void setIntroducedDate(OffsetDateTime introducedDate) {this.introducedDate = introducedDate;}
-    public OffsetDateTime getIntroducedDate() {return introducedDate;}
-    public void setGuaranteeDate(OffsetDateTime guaranteeDate) {this.guaranteeDate = guaranteeDate;}
-    public OffsetDateTime getGuaranteeDate() {return guaranteeDate;}
+    public void setActNotWarranty(boolean actNotWarranty) {this.actNotWarranty = actNotWarranty;}
+    public boolean isActNotWarranty() {return actNotWarranty;}
+    public void setActVisualInspection(boolean actVisualInspection) {this.actVisualInspection = actVisualInspection;}
+    public boolean isActVisualInspection() {return actVisualInspection;}
+    public void setReceiptDate(OffsetDateTime receiptDate) {this.receiptDate = receiptDate;}
+    public OffsetDateTime getReceiptDate() {return receiptDate;}
+    public void setWarrantyDate(OffsetDateTime warrantyDate) {this.warrantyDate = warrantyDate;}
+    public OffsetDateTime getWarrantyDate() {return warrantyDate;}
     public void setReadyDate(OffsetDateTime readyDate) {this.readyDate = readyDate;}
     public OffsetDateTime getReadyDate() {return readyDate;}
-    public void setIssuedDate(OffsetDateTime issuedDate) {this.issuedDate = issuedDate;}
-    public OffsetDateTime getIssuedDate() {return issuedDate;}
-    public boolean getHasPaidStatus() {return hasPaidStatus;}
-    public void setHasPaidStatus(boolean hasPaidStatus) {this.hasPaidStatus = hasPaidStatus;}
-    public int getPrediction() {return prediction;}
-    public void setPrediction(int prediction) {this.prediction = prediction;}
-    public boolean isHasGuaranteeStatus() {return hasGuaranteeStatus;}
-    public void setHasGuaranteeStatus(boolean hasGuaranteeStatus) {this.hasGuaranteeStatus = hasGuaranteeStatus;}
-    public boolean isHasReadyStatus() {return hasReadyStatus;}
-    public void setHasReadyStatus(boolean hasReadyStatus) {this.hasReadyStatus = hasReadyStatus;}
-    public boolean isHasIssuedStatus() {return hasIssuedStatus;}
-    public void setHasIssuedStatus(boolean hasIssuedStatus) {this.hasIssuedStatus = hasIssuedStatus;}
-    public void setKits(Set<Kit> kits) {this.kits = kits;}
-    public Set<Kit> getKits() {return kits;}
+    public void setReturnedToClientDate(OffsetDateTime returnedToClientDate) {this.returnedToClientDate = returnedToClientDate;}
+    public OffsetDateTime getReturnedToClientDate() {return returnedToClientDate;}
+    public boolean getPaidStatus() {return paidStatus;}
+    public void setPaidStatus(boolean paidStatus) {this.paidStatus = paidStatus;}
+    public int getEstimatedCost() {return estimatedCost;}
+    public void setEstimatedCost(int estimatedCost) {this.estimatedCost = estimatedCost;}
+    public boolean isWarrantyStatus() {return warrantyStatus;}
+    public void setWarrantyStatus(boolean warrantyStatus) {this.warrantyStatus = warrantyStatus;}
+    public boolean isReadyStatus() {return readyStatus;}
+    public void setReadyStatus(boolean readyStatus) {this.readyStatus = readyStatus;}
+    public boolean isReturnedToClientStatus() {return returnedToClientStatus;}
+    public void setReturnedToClientStatus(boolean returnedToClientStatus) {this.returnedToClientStatus = returnedToClientStatus;}
+    public void setComponents(Set<Component> components) {this.components = components;}
+    public Set<Component> getComponents() {return components;}
     public void setDiagnostics(Set<Diagnostic> diagnostics) {this.diagnostics = diagnostics;}
     public Set<Diagnostic> getDiagnostics() {return diagnostics;}
     public void setNotes(Set<Note> notes) {this.notes = notes;}

@@ -2,7 +2,7 @@ package com.gearservice.service;
 
 import com.gearservice.model.analytics.AnalyticsPreferences;
 import com.gearservice.model.cheque.Payment;
-import com.gearservice.model.repositories.CurrencyRepository;
+import com.gearservice.model.repositories.ExchangeRateRepository;
 import com.gearservice.model.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,13 @@ import static java.util.stream.Collectors.summingDouble;
 public class AnalyticsService {
 
     @Autowired PaymentRepository paymentRepository;
-    @Autowired CurrencyRepository currencyRepository;
+    @Autowired
+    ExchangeRateRepository exchangeRateRepository;
 
     private static Function<Payment, String> getPaymentsByCreatorName = payment -> payment.getUser().getFullname();
-    private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getPaymentOwner().getModel().split("\\.")[0];
-    private static Function<Payment, String> getPaymentsByDate = payment -> payment.getCurrency().getId();
-    private static Function<Payment, String> getPaymentsByCheque = payment -> payment.getPaymentOwner().getId().toString();
+    private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getCheque().getModelName().split("\\.")[0];
+    private static Function<Payment, String> getPaymentsByDate = payment -> payment.getExchangeRate().getAddDate();
+    private static Function<Payment, String> getPaymentsByCheque = payment -> payment.getCheque().getId().toString();
     private static Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
     private static Predicate<Payment> getPaymentProfit = payment -> payment.getType().equalsIgnoreCase("repair");
 
@@ -35,11 +36,11 @@ public class AnalyticsService {
             payment -> {
                 BigDecimal currency;
 
-                switch(payment.getCurrentCurrency()) {
-                    case "rub": currency = payment.getCurrency().getRub(); break;
-                    case "uah": currency = payment.getCurrency().getUah(); break;
-                    case "usd": currency = payment.getCurrency().getUsd(); break;
-                    case "eur": currency = payment.getCurrency().getEur(); break;
+                switch(payment.getCurrency()) {
+                    case "rub": currency = payment.getExchangeRate().getRub(); break;
+                    case "uah": currency = payment.getExchangeRate().getUah(); break;
+                    case "usd": currency = payment.getExchangeRate().getUsd(); break;
+                    case "eur": currency = payment.getExchangeRate().getEur(); break;
                     default: throw new IllegalArgumentException();
                 }
 
@@ -73,7 +74,7 @@ public class AnalyticsService {
     public Map<String, Map<String, Double>> getAnalytics(AnalyticsPreferences analyticsPreferences) {
         String findFrom =
                 Optional.ofNullable(analyticsPreferences.getFindFrom())
-                        .orElse(LocalDate.parse(currencyRepository.findMaximumDistantDate())).toString();
+                        .orElse(LocalDate.parse(exchangeRateRepository.findMaximumDistantDate())).toString();
 
         String findTo =
                 Optional.ofNullable(analyticsPreferences.getFindTo())
@@ -83,7 +84,7 @@ public class AnalyticsService {
         String row = analyticsPreferences.getRow();
         String fund = analyticsPreferences.getFund();
 
-        return paymentRepository.findByCurrencyIdBetween(findFrom, findTo)
+        return paymentRepository.findByExchangeRateAddDateBetween(findFrom, findTo)
                 .stream()
                 .filter(AnalyticsService.filterByFunds(fund))
                 .collect(

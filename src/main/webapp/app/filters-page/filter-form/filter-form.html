@@ -34,30 +34,30 @@
             </md-input-container>
 
             <md-autocomplete flex="90"
-                             md-search-text="filter.nameOfCustomer"
+                             md-search-text="filter.customerName"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {nameOfCustomer : filter.nameOfCustomer} | unique:'nameOfCustomer'"
-                             md-item-text="cheque.nameOfCustomer"
+                             md-items="cheque in cheques | filter: {customerName : filter.customerName} | unique:'customerName'"
+                             md-item-text="cheque.customerName"
                              md-floating-label="{{'Customer' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.nameOfCustomer" md-highlight-flags="^i"> {{cheque.nameOfCustomer}} </span>
+                    <span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{cheque.customerName}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <!--<md-autocomplete flex="90"-->
-                             <!--md-search-text="filter.nameOfCustomer"-->
+                             <!--md-search-text="filter.customerName"-->
                              <!--md-no-cache="true"-->
                              <!--md-min-length="1"-->
                              <!--md-search-text-change=""-->
-                             <!--md-items="item in items | filter: filter.nameOfCustomer"-->
+                             <!--md-items="item in items | filter: filter.customerName"-->
                              <!--md-item-text="item"-->
                              <!--md-floating-label="{{'Customer' | translate}}"-->
                              <!--md-autofocus="false"-->
                              <!--ng-click="serverItems('name_of_customer')">-->
                 <!--<md-item-template>-->
-                    <!--<span md-highlight-text="filter.nameOfCustomer" md-highlight-flags="^i"> {{item}} </span>-->
+                    <!--<span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{item}} </span>-->
                 <!--</md-item-template>-->
             <!--</md-autocomplete>-->
 
@@ -66,15 +66,15 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
             <md-autocomplete flex="40"
-                             md-search-text="filter.nameOfProduct"
+                             md-search-text="filter.productName"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {nameOfProduct : filter.nameOfProduct} | unique:'nameOfProduct'"
-                             md-item-text="cheque.nameOfProduct"
+                             md-items="cheque in cheques | filter: {productName : filter.productName} | unique:'productName'"
+                             md-item-text="cheque.productName"
                              md-floating-label="{{'Name of Product' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.nameOfProduct" md-highlight-flags="^i"> {{cheque.nameOfProduct}} </span>
+                    <span md-highlight-text="filter.productName" md-highlight-flags="^i"> {{cheque.productName}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -109,15 +109,15 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
             <md-autocomplete flex="100"
-                             md-search-text="filter.purchaserName"
+                             md-search-text="filter.representativeName"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {purchaserName : filter.purchaserName} | unique:'purchaserName'"
-                             md-item-text="cheque.purchaserName"
+                             md-items="cheque in cheques | filter: {representativeName : filter.representativeName} | unique:'representativeName'"
+                             md-item-text="cheque.representativeName"
                              md-floating-label="{{'Purchaser' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.purchaserName" md-highlight-flags="^i"> {{cheque.purchaserName}} </span>
+                    <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{cheque.representativeName}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -126,28 +126,28 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.inspectorName"
+                             md-search-text="filter.secretary"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {inspectorName : filter.inspectorName} | unique:'inspectorName'"
-                             md-item-text="cheque.inspectorName"
+                             md-items="cheque in cheques | filter: {secretary : filter.secretary} | unique:'secretary'"
+                             md-item-text="cheque.secretary"
                              md-floating-label="{{'Inspector' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.inspectorName" md-highlight-flags="^i"> {{cheque.inspectorName}} </span>
+                    <span md-highlight-text="filter.secretary" md-highlight-flags="^i"> {{cheque.secretary}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.masterName"
+                             md-search-text="filter.engineer"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {masterName : filter.masterName} | unique:'masterName'"
-                             md-item-text="cheque.masterName"
+                             md-items="cheque in cheques | filter: {engineer : filter.engineer} | unique:'engineer'"
+                             md-item-text="cheque.engineer"
                              md-floating-label="{{'master' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.masterName" md-highlight-flags="^i"> {{cheque.masterName}} </span>
+                    <span md-highlight-text="filter.engineer" md-highlight-flags="^i"> {{cheque.engineer}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -155,22 +155,22 @@
 
         <md-content layout-padding layout="row" layout-align="center start">
 
-            <md-select ng-model="filter.hasGuaranteeStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
+            <md-select ng-model="filter.warrantyStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
                 <md-option value="true">{{'Has guarantee' | translate}}</md-option>
                 <md-option value="false">{{'Has no guarantee' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.hasReadyStatus" placeholder="{{'Ready' | translate}}" flex="25">
+            <md-select ng-model="filter.readyStatus" placeholder="{{'Ready' | translate}}" flex="25">
                 <md-option value="true">{{'Ready' | translate}}</md-option>
                 <md-option value="false">{{'Not ready' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.hasIssuedStatus" placeholder="{{'Issued' | translate}}" flex="25">
+            <md-select ng-model="filter.returnedToClientStatus" placeholder="{{'Issued' | translate}}" flex="25">
                 <md-option value="true">{{'Issued' | translate}}</md-option>
                 <md-option value="false">{{'Not issued' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.hasPaidStatus" placeholder="{{'paid' | translate}}" flex="25">
+            <md-select ng-model="filter.paidStatus" placeholder="{{'paid' | translate}}" flex="25">
                 <md-option value="true">{{'paid' | translate}}</md-option>
                 <md-option value="false">{{'not paid' | translate}}</md-option>
             </md-select>

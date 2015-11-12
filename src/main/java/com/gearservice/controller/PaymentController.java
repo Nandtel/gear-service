@@ -21,8 +21,8 @@ public class PaymentController {
 
     @RequestMapping(value = "/api/payment/cheque/{chequeID}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void setPaymentsOfCheque(@PathVariable Long chequeID, @RequestBody Set<Payment> payments) {
-        paymentService.setPaymentsOfCheque(chequeID, payments);
+    public List<Payment> synchronizePaymentsOfCheque(@PathVariable Long chequeID, @RequestBody Set<Payment> payments) {
+        return paymentService.synchronizePaymentsOfCheque(chequeID, payments);
     }
 
     @RequestMapping(value = "/api/payment/{paymentID}/cheque", method = RequestMethod.DELETE)

@@ -18,12 +18,12 @@ angular.module("mainModule")
 
             var dateFrom = from != null ? moment(from).unix() : moment("1899-12-31T21:00:00.000Z").unix();
             var dateTo = to != null ? moment(to).unix() : moment("2999-12-31T21:00:00.000Z").unix();
-            var introduced = null;
+            var receiptDate = null;
             var result = [];
 
             angular.forEach(items, function (item) {
-                introduced = moment(item.introducedDate).unix();
-                if (dateFrom < introduced && introduced < dateTo)
+                receiptDate = moment(item.receiptDate).unix();
+                if (dateFrom < receiptDate && receiptDate < dateTo)
                     result.push(item);
             });
 

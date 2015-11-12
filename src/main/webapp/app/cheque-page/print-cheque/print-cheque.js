@@ -12,10 +12,10 @@ angular.module("mainModule")
 
                 $scope.spec = specializations[$scope.specialization];
 
-                $scope.getKits = function() {
+                $scope.getComponents = function() {
                     var array = [];
-                    $scope.cheque.kits.forEach(function(item) {
-                        array.push(item.text);
+                    $scope.cheque.components.forEach(function(item) {
+                        array.push(item.name);
                     });
                     return array.join(', ');
                 };

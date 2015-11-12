@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning', '$http',
-        function($scope, currencyRatesService, $rootScope, security, warning, $http) {
+    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog',
+        function($scope, currencyRatesService, $rootScope, security, warning, $http, $mdToast, gettextCatalog) {
             var chequeID;
             $scope.hasPrepayment = false;
 
@@ -11,10 +11,17 @@ angular.module("mainModule")
                     });
             };
 
-            $scope.setPayments = function() {
+            $scope.synchronizePayments = function() {
                 $http.post('/api/payment/cheque/' + chequeID, $scope.payments)
-                    .success(function() {
-                        $scope.getPayments(chequeID)
+                    .success(function(payments) {
+                        $scope.payments = payments;
+
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content(gettextCatalog.getString('payments synchronized'))
+                                .position('top right')
+                                .hideDelay(700)
+                        );
                     });
             };
 
@@ -26,8 +33,8 @@ angular.module("mainModule")
                 currencyRatesService.refreshCurrencyRate();
                 $scope.payments.push(
                     {cost: 0,
-                        currentCurrency: 'rub',
-                        currency: $rootScope.currencyRates,
+                        currency: 'rub',
+                        exchangeRate: $rootScope.currencyRates,
                         user: $rootScope.user.principal});
             };
 
@@ -46,13 +53,13 @@ angular.module("mainModule")
 
                 if($scope.payments != undefined)
                     $scope.payments.forEach(function(item) {
-                        if(item.cost != undefined && item.currentCurrency != undefined) {
+                        if(item.cost != undefined && item.currency != undefined) {
                             if(item.type != 'prepayment')
-                                sum += item.cost * item.currency[item.currentCurrency] / item.currency[currency];
+                                sum += item.cost * item.exchangeRate[item.currency] / item.exchangeRate[currency];
                             else {
                                 $scope.hasPrepayment = true;
                                 if(withPrepayment)
-                                    sum -= item.cost * item.currency[item.currentCurrency] / item.currency[currency];
+                                    sum -= item.cost * item.exchangeRate[item.currency] / item.exchangeRate[currency];
                             }
                         }
                     });

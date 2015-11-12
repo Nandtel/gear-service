@@ -3,8 +3,8 @@ angular.module("mainModule")
         function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q) {
             $scope.filterForm = {};
             $scope.cleanFilter = {
-                order: '-id', limit: 15, page: 1, nameOfCustomer: "", nameOfProduct: "", model: "", serialNumber: "",
-                purchaserName: "", inspectorName: "", masterName: "", introducedFrom: undefined,
+                order: '-id', limit: 15, page: 1, customerName: "", productName: "", modelName: "", serialNumber: "",
+                representativeName: "", secretary: "", engineer: "", introducedFrom: undefined,
                 introducedTo: undefined
             };
             /**

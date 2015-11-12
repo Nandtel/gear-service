@@ -48,7 +48,3 @@ md-toast {
 .dates-field md-content {
     overflow: hidden;
 }
-
-md-input-container label {
-    font-size: 20px;
-}

@@ -1,9 +1,6 @@
 package com.gearservice.model.cheque;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
-import com.gearservice.config.converter.OffsetDateTimePersistenceConverter;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -16,11 +13,11 @@ public class Photo {
     private String name;
     private String contentType;
 
-    private String photoOwner;
-    private String user;
+    private String chequeId;
+    private String username;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime addedDate;
+    private OffsetDateTime addDate;
 
     private byte[] bytes;
 
@@ -32,10 +29,10 @@ public class Photo {
     public void setName(String name) {this.name = name;}
     public String getContentType() {return contentType;}
     public void setContentType(String contentType) {this.contentType = contentType;}
-    public String getPhotoOwner() {return photoOwner;}
-    public void setPhotoOwner(String photoOwner) {this.photoOwner = photoOwner;}
-    public String getUser() {return user;}
-    public void setUser(String user) {this.user = user;}
-    public OffsetDateTime getAddedDate() {return addedDate;}
-    public void setAddedDate(OffsetDateTime addedDate) {this.addedDate = addedDate;}
+    public String getChequeId() {return chequeId;}
+    public void setChequeId(String chequeId) {this.chequeId = chequeId;}
+    public String getUsername() {return username;}
+    public void setUsername(String username) {this.username = username;}
+    public OffsetDateTime getAddDate() {return addDate;}
+    public void setAddDate(OffsetDateTime addDate) {this.addDate = addDate;}
 }

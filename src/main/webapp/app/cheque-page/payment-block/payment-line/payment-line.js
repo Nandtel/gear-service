@@ -15,7 +15,7 @@ angular.module("mainModule")
 
             $scope.toPay = function(currency) {
                 return $scope.payment.cost *
-                    $scope.payment.currency[$scope.payment.currentCurrency] / $scope.payment.currency[currency];
+                    $scope.payment.exchangeRate[$scope.payment.currency] / $scope.payment.exchangeRate[currency];
             };
 
             $scope.loadUsers = function() {

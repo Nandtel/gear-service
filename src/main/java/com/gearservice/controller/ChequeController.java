@@ -20,9 +20,7 @@ public class ChequeController {
     }
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)
-    public Cheque synchronizeCheque(@RequestBody Cheque cheque) {
-        return chequeService.synchronizeCheque(cheque);
-    }
+    public Cheque synchronizeCheque(@RequestBody Cheque cheque) {return chequeService.synchronizeCheque(cheque);}
 
     @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.GET)
     public Cheque getCheque(@PathVariable Long chequeID) {

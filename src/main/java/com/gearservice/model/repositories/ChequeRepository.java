@@ -21,29 +21,29 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     Cheque findFirstByOrderByIdDesc();
     List<Cheque> findByDiagnosticsIsNull();
 
-    @Query("SELECT NEW ChequeMin(c.id, c.nameOfCustomer, c.introducedDate, c.guaranteeDate, c.readyDate, c.issuedDate," +
-            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, secretary.fullname, engineer.fullname," +
-            "c.hasGuaranteeStatus, c.hasReadyStatus, c.hasIssuedStatus, c.hasPaidStatus) " +
+    @Query("SELECT NEW ChequeMin(c.id, c.customerName, c.receiptDate, c.warrantyDate, c.readyDate, c.returnedToClientDate," +
+            "c.productName, c.modelName, c.serialNumber, c.representativeName, secretary.fullname, engineer.fullname," +
+            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus, c.paidStatus) " +
             "FROM Cheque c " +
             "LEFT JOIN c.engineer engineer " +
             "LEFT JOIN c.secretary secretary ")
     List<ChequeMin> getListOfCompactCheques();
 
-    @Query("SELECT NEW ChequeMin(c.id, c.nameOfCustomer, c.introducedDate, c.guaranteeDate, c.readyDate, c.issuedDate," +
-            "c.nameOfProduct, c.model, c.serialNumber, c.purchaserName, secretary.fullname, engineer.fullname, " +
-            "c.hasGuaranteeStatus, c.hasReadyStatus, c.hasIssuedStatus, c.hasPaidStatus) " +
+    @Query("SELECT NEW ChequeMin(c.id, c.customerName, c.receiptDate, c.warrantyDate, c.readyDate, c.returnedToClientDate," +
+            "c.productName, c.modelName, c.serialNumber, c.representativeName, secretary.fullname, engineer.fullname, " +
+            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus, c.paidStatus) " +
             "FROM Cheque c " +
             "LEFT JOIN c.engineer engineer " +
             "LEFT JOIN c.secretary secretary " +
             "WHERE c.id IN (?1)")
     List<ChequeMin> getListOfCompactChequesWithIDs(Long... IDs);
 
-    @Query(value = "SELECT d1.cheque FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
-            "ON d1.cheque = d2.cheque AND d1.time < d2.time " +
-            "WHERE d2.time IS NULL AND d1.time <= ?1", nativeQuery = true)
+    @Query(value = "SELECT d1.cheque_id FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
+            "ON d1.cheque_id = d2.cheque_id AND d1.date < d2.date " +
+            "WHERE d2.date IS NULL AND d1.date <= ?1", nativeQuery = true)
     Long[] findIdOfChequesWithDelay(String delay);
 
-    @Query(value = "SELECT name_of_customer FROM cheque", nativeQuery = true)
+    @Query(value = "SELECT customer_name FROM cheque", nativeQuery = true)
     List<String> ListOfCustomers();
 
 //    @Query(value = "SELECT * FROM cheque WHERE cheque.id IN " +

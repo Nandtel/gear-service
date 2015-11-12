@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    List<Payment> findByCurrencyIdBetween(String findFrom, String findTo);
-    Payment findFirstByOrderByCurrencyIdDesc();
-    List<Payment> findByPaymentOwnerId(Long chequeID);
+    List<Payment> findByExchangeRateAddDateBetween(String findFrom, String findTo);
+    Payment findFirstByOrderByExchangeRateAddDateDesc();
+    List<Payment> findByChequeId(Long chequeID);
 }

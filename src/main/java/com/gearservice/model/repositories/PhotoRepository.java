@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface PhotoRepository extends MongoRepository<Photo, String> {
 
-    @Query(value = "{photoOwner:?0}", fields = "{bytes:0}")
-    List<Photo> findByPhotoOwnerExcludeBytes(String chequeID);
+    @Query(value = "{chequeId:?0}", fields = "{bytes:0}")
+    List<Photo> findByChequeIdExcludeBytes(String chequeID);
 
-    Long deleteByPhotoOwner(String chequeID);
+    Long deleteByChequeId(String chequeID);
 
 }

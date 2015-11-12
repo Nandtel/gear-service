@@ -25,7 +25,7 @@ public class DiagnosticService {
         diagnosticRepository.save(
                 diagnostic
                         .withDateTime()
-                        .withOwner(chequeRepository.findOne(chequeID)));
+                        .withCheque(chequeRepository.findOne(chequeID)));
     }
 
     /**

@@ -30,18 +30,18 @@ public class Diagnostic {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
-    private OffsetDateTime time;
+    private OffsetDateTime date;
 
     @Lob
     private String text;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque", referencedColumnName = "id")
+    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     @JsonBackReference
-    private Cheque diagnosticOwner;
+    private Cheque cheque;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user", referencedColumnName = "username")
+    @JoinColumn(name = "user_username", referencedColumnName = "username")
     private User user;
 
     /**
@@ -50,27 +50,27 @@ public class Diagnostic {
      */
     public Diagnostic withRandomData() {
         this.setText(SampleDataService.getRandomComment());
-        this.setTime(SampleDataService.getRandomDate());
+        this.setDate(SampleDataService.getRandomDate());
         return this;
     }
 
     /**
-     * Method withDateTimeAndUser handle current Diagnostic object filling it fields: current time to time and
+     * Method withDateTimeAndUser handle current Diagnostic object filling it fields: current date to date and
      * name to user, then return this edited object
      * @return this Diagnostic object after editing
      */
     public Diagnostic withDateTime() {
-        this.setTime(OffsetDateTime.now());
+        this.setDate(OffsetDateTime.now());
         return this;
     }
 
     /**
-     * Method withOwner handle current Diagnostic object filling it with owner and return this edited object
-     * @param owner is owner class in bidirectional one-to-many relationship
+     * Method withCheque handle current Diagnostic object filling it with owner and return this edited object
+     * @param cheque is owner class in bidirectional one-to-many relationship
      * @return this Diagnostic object after editing
      */
-    public Diagnostic withOwner(Cheque owner) {
-        this.setDiagnosticOwner(owner);
+    public Diagnostic withCheque(Cheque cheque) {
+        this.setCheque(cheque);
         return this;
     }
 
@@ -81,12 +81,12 @@ public class Diagnostic {
 
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
-    public void setTime(OffsetDateTime time) {this.time = time;}
-    public OffsetDateTime getTime() {return time;}
+    public void setDate(OffsetDateTime date) {this.date = date;}
+    public OffsetDateTime getDate() {return date;}
     public void setText(String text) {this.text = text;}
     public String getText() {return text;}
-    public void setDiagnosticOwner(Cheque diagnosticOwner) {this.diagnosticOwner = diagnosticOwner;}
-    public Cheque getDiagnosticOwner() {return diagnosticOwner;}
+    public void setCheque(Cheque cheque) {this.cheque = cheque;}
+    public Cheque getCheque() {return cheque;}
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
 }

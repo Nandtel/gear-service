@@ -12,5 +12,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @see <a href="http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation">more</a>
  */
-public interface NoteRepository extends JpaRepository<Note, Long> {
-}
+public interface NoteRepository extends JpaRepository<Note, Long> {}

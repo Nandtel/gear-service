@@ -11,18 +11,18 @@
             <div class="text">
                 <img ng-show="spec.client" src="/images/logo.png">
                 <div class="date-field text">Дата приема:
-                    <span class="date">{{cheque.introducedDate | amDateFormat:'DD.MM.YYYY'}}</span>
-                    <span class="time" ng-show="spec.tech">{{cheque.introducedDate | amDateFormat:'HH:mm:ss'}}</span>
+                    <span class="date">{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</span>
+                    <span class="time" ng-show="spec.tech">{{cheque.receiptDate | amDateFormat:'HH:mm:ss'}}</span>
                 </div>
-                <div ng-show="!!cheque.hasGuaranteeStatus" class="text">
-                    Дата продажи: <span class="date">{{cheque.guaranteeDate | amDateFormat:'DD.MM.YYYY'}}</span>
+                <div ng-show="!!cheque.warrantyStatus" class="text">
+                    Дата продажи: <span class="date">{{cheque.warrantyDate | amDateFormat:'DD.MM.YYYY'}}</span>
                 </div>
                 <div>
-                    <div ng-show="!!cheque.hasGuaranteeStatus" class="text">
-                        Принято для подтверждения гарантийного статуса: {{cheque.nameOfCustomer}}
+                    <div ng-show="!!cheque.warrantyStatus" class="text">
+                        Принято для подтверждения гарантийного статуса: {{cheque.customerName}}
                     </div>
-                    <div ng-hide="!!cheque.hasGuaranteeStatus" class="text">
-                        Принято на диагностику: {{cheque.nameOfCustomer}}
+                    <div ng-hide="!!cheque.warrantyStatus" class="text">
+                        Принято на диагностику: {{cheque.customerName}}
                     </div>
                 </div>
             </div>
@@ -48,13 +48,13 @@
         <td class="grey center third border">Серийный номер</td>
     </tr>
     <tr>
-        <td class="center border">{{cheque.nameOfProduct}}</td>
+        <td class="center border">{{cheque.productName}}</td>
         <td class="center border">{{cheque.model}}</td>
         <td class="center border">{{cheque.serialNumber}}</td>
     </tr>
 
     <tr>
-        <td colspan="3" class="border">Неисправность: {{cheque.malfunction}}</td>
+        <td colspan="3" class="border">Неисправность: {{cheque.defect}}</td>
     </tr>
 
     <tr>
@@ -62,9 +62,9 @@
     </tr>
 
     <tr>
-        <td class="border" colspan="2">Комплект: {{getKits()}}</td>
-        <td class="border" ng-show="!!cheque.hasGuaranteeStatus"><span>{{cheque.prediction}} руб.</span></td>
-        <td class="border" ng-hide="!!cheque.hasGuaranteeStatus"><span>Ориентировочная стоимость: {{cheque.prediction}} руб.</span></td>
+        <td class="border" colspan="2">Комплект: {{getComponents()}}</td>
+        <td class="border" ng-show="!!cheque.warrantyStatus"><span>{{cheque.estimatedCost}} руб.</span></td>
+        <td class="border" ng-hide="!!cheque.warrantyStatus"><span>Ориентировочная стоимость: {{cheque.estimatedCost}} руб.</span></td>
 
     </tr>
 
@@ -91,12 +91,12 @@
 
     <tr>
         <td class="grey border">Сдал в ремонт</td>
-        <td class="border" colspan="2">{{cheque.purchaserName}}</td>
+        <td class="border" colspan="2">{{cheque.representativeName}}</td>
     </tr>
 
     <tr ng-show="spec.office || spec.tech">
         <td class="grey border">Контактная инфомрация</td>
-        <td class="border" colspan="2">{{cheque.phone}} {{cheque.email}}</td>
+        <td class="border" colspan="2">{{cheque.phoneNumber}} {{cheque.email}}</td>
     </tr>
 
     <tr ng-show="spec.office">

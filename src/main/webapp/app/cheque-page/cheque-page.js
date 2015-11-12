@@ -8,7 +8,7 @@
 angular.module("mainModule")
     .controller("ChequePage", ['$scope', '$stateParams', '$http',
         function ($scope, $stateParams, $http) {
-            $scope.cheque = {kits: [], payments: [], phone: "", email: ""};
+            $scope.cheque = {components: [], payments: [], phoneNumber: "", email: ""};
             $scope.hasID = false;
 
             /**
