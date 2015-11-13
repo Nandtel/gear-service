@@ -4,7 +4,7 @@
     }
 }
 
-@media print{
+@media print {
 
     ui-view[name="header"], section {
         display: none;
@@ -12,6 +12,7 @@
 
     body {
         -webkit-print-color-adjust:exact;
+        zoom: 100%;
     }
 
     .print-only{

@@ -43,8 +43,14 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "WHERE d2.date IS NULL AND d1.date <= ?1", nativeQuery = true)
     Long[] findIdOfChequesWithDelay(String delay);
 
-    @Query(value = "SELECT customer_name FROM cheque", nativeQuery = true)
-    List<String> ListOfCustomers();
+    @Query(value = "SELECT DISTINCT customer_name FROM cheque", nativeQuery = true)
+    List<String> listOfCustomerNames();
+
+    @Query(value = "SELECT DISTINCT product_name FROM cheque", nativeQuery = true)
+    List<String> listOfProductNames();
+
+    @Query(value = "SELECT DISTINCT model_name FROM cheque", nativeQuery = true)
+    List<String> listOfModelNames();
 
 //    @Query(value = "SELECT * FROM cheque WHERE cheque.id IN " +
 //            "(SELECT d1.cheque FROM diagnostic d1 LEFT JOIN diagnostic d2 " +

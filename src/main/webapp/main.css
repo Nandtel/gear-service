@@ -1,5 +1,9 @@
 html {}
 
+body {
+    zoom: 85%;
+}
+
 .content-block:first-child {
     margin-top: 1rem;
     margin-bottom: .5rem;

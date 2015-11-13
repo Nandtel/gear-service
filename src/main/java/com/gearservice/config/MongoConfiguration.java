@@ -5,6 +5,12 @@ import com.gearservice.config.converter.OffsetDateTimeToStringConverter;
 import com.gearservice.config.converter.StringToOffsetDateTimeConverter;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.mongo.MongoProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -12,10 +18,18 @@ import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.Collections.singletonList;
 
 @Configuration
+@EnableConfigurationProperties(MongoProperties.class)
 @EnableMongoRepositories(basePackages = {"com.gearservice.model.repositories"})
 class MongoConfiguration extends AbstractMongoConfiguration {
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired private MongoProperties properties;
 
     @Override
     public CustomConversions customConversions() {
@@ -25,13 +39,27 @@ class MongoConfiguration extends AbstractMongoConfiguration {
     }
 
     @Override
-    protected String getDatabaseName() {
-        return "photographies";
+    public String getDatabaseName() {
+        return Optional.ofNullable(properties.getDatabase()).orElse("test");
     }
 
     @Override
     @Bean
     public Mongo mongo() throws Exception {
-        return new MongoClient("127.0.0.1");
+        String host = Optional.ofNullable(properties.getHost()).orElse("localhost");
+        Integer port = Optional.ofNullable(properties.getPort()).orElse(27017);
+        String database = Optional.ofNullable(properties.getDatabase()).orElse("test");
+        Optional<String> username = Optional.ofNullable(properties.getUsername());
+        Optional<char[]> password = Optional.ofNullable(properties.getPassword());
+
+        if (username.isPresent() || password.isPresent()) {
+            return new MongoClient(singletonList(new ServerAddress(host, port)),
+                    singletonList(MongoCredential.createCredential(username.get(), database, password.get())));
+        } else {
+            return new MongoClient(singletonList(new ServerAddress(host, port)));
+        }
+
+
+
     }
 }

@@ -96,8 +96,12 @@ public class ChequeService {
     }
 
     public List<String> getAutocompleteData(String itemName) {
-        System.out.println(itemName);
-        return chequeRepository.ListOfCustomers();
+        switch (itemName) {
+            case "customerName": return chequeRepository.listOfCustomerNames();
+            case "productName": return chequeRepository.listOfProductNames();
+            case "modelName": return chequeRepository.listOfModelNames();
+            default: throw new IllegalArgumentException();
+        }
     }
 
 }

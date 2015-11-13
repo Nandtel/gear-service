@@ -117,8 +117,4 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             amMoment.changeLocale('ru');
             auth.init();
             security.init();
-
-            //if(window.screen.availHeight < 1080)
-                $document[0].body.style.zoom = "85%";
-
     }]);
