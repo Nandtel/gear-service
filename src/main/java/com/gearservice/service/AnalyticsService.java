@@ -86,6 +86,7 @@ public class AnalyticsService {
 
         return paymentRepository.findByExchangeRateAddDateBetween(findFrom, findTo)
                 .stream()
+                .filter(payment -> payment.getCheque().getPaidStatus())
                 .filter(AnalyticsService.filterByFunds(fund))
                 .collect(
                         groupingBy(

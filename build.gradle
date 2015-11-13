@@ -44,7 +44,7 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1"
     compile "net.sourceforge.nekohtml:nekohtml:1.9.15"
     compile "org.jsoup:jsoup:1.8.3"
-    runtime "org.mongodb:mongo-java-driver:3.1.0"
+    compile "org.mongodb:mongo-java-driver:3.1.0"
     runtime "mysql:mysql-connector-java:5.1.36"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"
@@ -52,9 +52,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    gradleVersion = '2.8'
 }
-
-//springBoot {
-//    mainClass = "com.gearservice.GearServiceApplication"
-//}

@@ -10,4 +10,7 @@
         font-family: 'PT Sans', serif;
     }
 
+    header md-tabs[md-border-bottom] md-tabs-wrapper {
+        border: none;
+    }
 }

@@ -2,17 +2,17 @@
 
     <md-toolbar md-theme="inner-block">
         <div class="md-toolbar-tools">
-            <md-checkbox ng-model="paidStatus" class="md-primary" md-theme="default"
+            <md-checkbox ng-model="cheque.paidStatus" class="md-primary" md-theme="default"
                          ng-disabled="!security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY'])">
                 <h2>
-                    <span ng-hide="paidStatus" translate>not paid</span>
-                    <span ng-show="paidStatus" translate>paid</span>
+                    <span ng-hide="cheque.paidStatus" translate>not paid</span>
+                    <span ng-show="cheque.paidStatus" translate>paid</span>
                 </h2>
             </md-checkbox>
 
             <span flex></span>
 
-            <md-button type="button" class="md-icon-button" ng-click="addPayment()" ng-hide="paidStatus">
+            <md-button type="button" class="md-icon-button" ng-click="addPayment()" ng-hide="cheque.cheque.paidStatus">
                 <md-icon md-font-set="material-icons">note_add</md-icon>
             </md-button>
         </div>
@@ -24,10 +24,10 @@
             <md-list-item class="md-3-line" ng-repeat="payment in payments | orderBy: 'id'">
 
                 <md-content layout="row" layout-align="start center" flex>
-                    <payment-line payment="payment" paid="paidStatus" flex="95"></payment-line>
+                    <payment-line payment="payment" paid="cheque.paidStatus" flex="95"></payment-line>
 
                         <md-button class="md-icon-button" type="button"
-                                   ng-show="!paidStatus
+                                   ng-show="!cheque.paidStatus
                                    && (security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
                                    || security.isSameUser(payment.user))">
                             <md-icon md-font-set="material-icons" ng-click="delPayment(payment.id, $event)">delete</md-icon>
@@ -44,18 +44,18 @@
 
             <md-input-container md-theme="default" class="estimatedCost">
                 <label translate>estimated cost</label>
-                <input type="number" min="0" ng-model="cheque.estimatedCost" ng-disabled="paidStatus">
+                <input type="number" min="0" ng-model="cheque.estimatedCost" ng-disabled="cheque.paidStatus">
             </md-input-container>
 
             <span flex></span>
 
-            <span ng-hide="hasPrepayment && !paidStatus">{{'sum' | translate}}:</span>
-            <span ng-show="hasPrepayment && !paidStatus">{{'sum with prepayment' | translate}}:</span>
+            <span ng-hide="hasPrepayment && !cheque.paidStatus">{{'sum' | translate}}:</span>
+            <span ng-show="hasPrepayment && !cheque.paidStatus">{{'sum with prepayment' | translate}}:</span>
             <span style="margin-left: 1rem"></span>
             <span class="sum">
-                {{sum('rub', hasPrepayment && !paidStatus) | currency: '&#x20bd;'}},
-                {{sum('uah', hasPrepayment && !paidStatus) | currency: '&#8372;'}},
-                {{sum('usd', hasPrepayment && !paidStatus) | currency: '$'}}
+                {{sum('rub', hasPrepayment && !cheque.paidStatus) | currency: '&#x20bd;'}},
+                {{sum('uah', hasPrepayment && !cheque.paidStatus) | currency: '&#8372;'}},
+                {{sum('usd', hasPrepayment && !cheque.paidStatus) | currency: '$'}}
             </span>
 
         </div>

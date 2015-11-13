@@ -4,7 +4,7 @@ angular.module("mainModule")
             var chequeID;
             $scope.hasPrepayment = false;
 
-            $scope.getPayments = function(chequeId) {
+                $scope.getPayments = function(chequeId) {
                 $http.get('/api/payment/cheque/' + chequeId)
                     .success(function(data) {
                         $scope.payments = data;

@@ -87,16 +87,46 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex="40" class="md-icon-float">
-            <label translate>Name of Product</label>
-            <md-icon md-font-set="material-icons">desktop_windows</md-icon>
-            <input ng-model="cheque.productName" required ng-disabled="disableChequeForm">
-        </md-input-container>
+        <!--<md-input-container flex="40" class="md-icon-float">-->
+            <!--<label translate>Name of Product</label>-->
+            <!--<md-icon md-font-set="material-icons">desktop_windows</md-icon>-->
+            <!--<input ng-model="cheque.productName" required ng-disabled="disableChequeForm">-->
+        <!--</md-input-container>-->
 
-        <md-input-container flex="30" class="md-icon-float">
-            <label translate>Model</label>
-            <input ng-model="cheque.modelName" required ng-disabled="disableChequeForm">
-        </md-input-container>
+        <md-autocomplete flex="40" class="md-icon-float"
+                         md-search-text="cheque.productName"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.productName"
+                         md-item-text="item"
+                         md-floating-label="{{'Name of Product' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('productName')">
+            <md-item-template>
+                <span md-highlight-text="cheque.productName" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
+
+        <!--<md-input-container flex="30" class="md-icon-float">-->
+            <!--<label translate>Model</label>-->
+            <!--<input ng-model="cheque.modelName" required ng-disabled="disableChequeForm">-->
+        <!--</md-input-container>-->
+
+        <md-autocomplete flex="30" class="md-icon-float"
+                         md-search-text="cheque.modelName"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.modelName"
+                         md-item-text="item"
+                         md-floating-label="{{'Model' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('modelName')">
+            <md-item-template>
+                <span md-highlight-text="cheque.modelName" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
 
         <md-input-container flex="30" class="md-icon-float">
             <label translate>Serial Number</label>

@@ -140,6 +140,7 @@ public class GearServiceApplication implements CommandLineRunner {
                     cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
                     cheque.setSecretary(svetka);
+                    cheque.setPaidStatus(true);
                     chequeRepository.save(cheque);
 
                     Payment repair = new Payment();
