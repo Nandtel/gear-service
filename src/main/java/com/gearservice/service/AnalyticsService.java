@@ -26,9 +26,9 @@ public class AnalyticsService {
     ExchangeRateRepository exchangeRateRepository;
 
     private static Function<Payment, String> getPaymentsByCreatorName = payment -> payment.getUser().getFullname();
-    private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getCheque().getModelName().split("\\.")[0];
+    private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getBalance().getCheque().getModelName().split("\\.")[0];
     private static Function<Payment, String> getPaymentsByDate = payment -> payment.getExchangeRate().getAddDate();
-    private static Function<Payment, String> getPaymentsByCheque = payment -> payment.getCheque().getId().toString();
+    private static Function<Payment, String> getPaymentsByCheque = payment -> payment.getBalance().getCheque().getId().toString();
     private static Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
     private static Predicate<Payment> getPaymentProfit = payment -> payment.getType().equalsIgnoreCase("repair");
 
@@ -86,7 +86,7 @@ public class AnalyticsService {
 
         return paymentRepository.findByExchangeRateAddDateBetween(findFrom, findTo)
                 .stream()
-                .filter(payment -> payment.getCheque().getPaidStatus())
+                .filter(payment -> payment.getBalance().getPaidStatus())
                 .filter(AnalyticsService.filterByFunds(fund))
                 .collect(
                         groupingBy(

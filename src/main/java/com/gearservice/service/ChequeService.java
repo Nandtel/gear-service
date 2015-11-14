@@ -89,11 +89,11 @@ public class ChequeService {
         return chequeRepository.findByDiagnosticsIsNull();
     }
 
-    @Transactional(readOnly = true)
-    public List<ChequeMin> attentionChequesByDelay() {
-        Long[] IDs = chequeRepository.findIdOfChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
-        return chequeRepository.getListOfCompactChequesWithIDs(IDs);
-    }
+//    @Transactional(readOnly = true)
+//    public List<ChequeMin> attentionChequesByDelay() {
+//        Long[] IDs = chequeRepository.findIdOfChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
+//        return chequeRepository.getListOfCompactChequesWithIDs(IDs);
+//    }
 
     public List<String> getAutocompleteData(String itemName) {
         switch (itemName) {

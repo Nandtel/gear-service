@@ -3,18 +3,19 @@ angular.module("mainModule")
         function($scope, currencyRatesService, $rootScope, security, warning, $http, $mdToast, gettextCatalog) {
             var chequeID;
             $scope.hasPrepayment = false;
+            $scope.balance = {payments: []};
 
-                $scope.getPayments = function(chequeId) {
-                $http.get('/api/payment/cheque/' + chequeId)
-                    .success(function(data) {
-                        $scope.payments = data;
+            $scope.getBalance = function(chequeID) {
+                $http.get('/api/balance/cheque/' + chequeID)
+                    .success(function(balance) {
+                        $scope.balance = balance;
                     });
             };
 
-            $scope.synchronizePayments = function() {
-                $http.post('/api/payment/cheque/' + chequeID, $scope.payments)
-                    .success(function(payments) {
-                        $scope.payments = payments;
+            $scope.synchronizeBalance = function() {
+                $http.post('/api/balance/cheque/' + chequeID, $scope.balance)
+                    .success(function(balance) {
+                        $scope.balance = balance;
 
                         $mdToast.show(
                             $mdToast.simple()
@@ -27,23 +28,20 @@ angular.module("mainModule")
 
             $scope.addPayment = function() {
 
-                if($scope.payments === undefined)
-                    $scope.payments = [];
+                if($scope.balance.payments === undefined)
+                    $scope.balance.payments = [];
 
                 currencyRatesService.refreshCurrencyRate();
-                $scope.payments.push(
+                $scope.balance.payments.push(
                     {cost: 0,
                         currency: 'rub',
                         exchangeRate: $rootScope.currencyRates,
                         user: $rootScope.user.principal});
             };
 
-            $scope.delPayment = function(paymentID, event) {
+            $scope.delPayment = function(payment, event) {
                 warning.showConfirmDeletePayment(event).then(function() {
-                    $http.delete('/api/payment/' + paymentID + '/cheque')
-                        .success(function() {
-                            $scope.getPayments(chequeID)
-                        });
+                    $scope.balance.payments.splice($scope.balance.payments.indexOf(payment), 1);
                 }, function() {});
             };
 
@@ -51,8 +49,8 @@ angular.module("mainModule")
                 var sum = 0;
                 $scope.hasPrepayment = false;
 
-                if($scope.payments != undefined)
-                    $scope.payments.forEach(function(item) {
+                if($scope.balance.payments != undefined)
+                    $scope.balance.payments.forEach(function(item) {
                         if(item.cost != undefined && item.currency != undefined) {
                             if(item.type != 'prepayment')
                                 sum += item.cost * item.exchangeRate[item.currency] / item.exchangeRate[currency];
@@ -69,10 +67,10 @@ angular.module("mainModule")
 
             $scope.security = security;
 
-            $scope.$watch('cheque.id', function (newValue, oldValue) {
+            $scope.$watch('chequeID', function (newValue, oldValue) {
                 if(newValue !== undefined) {
                     chequeID = newValue;
-                    $scope.getPayments(chequeID);
+                    $scope.getBalance(chequeID);
                 }
             });
 
@@ -83,9 +81,9 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'PaymentBlock',
             scope: {
-                cheque: '=ngModel'
+                chequeID: '=chequeId'
             },
-            require: 'ngModel',
+            require: 'chequeId',
             templateUrl: 'app/cheque-page/payment-block/payment-block.html'
         }
     }]);

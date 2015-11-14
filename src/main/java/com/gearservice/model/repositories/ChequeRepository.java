@@ -23,7 +23,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
     @Query("SELECT NEW ChequeMin(c.id, c.customerName, c.receiptDate, c.warrantyDate, c.readyDate, c.returnedToClientDate," +
             "c.productName, c.modelName, c.serialNumber, c.representativeName, secretary.fullname, engineer.fullname," +
-            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus, c.paidStatus) " +
+            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus) " +
             "FROM Cheque c " +
             "LEFT JOIN c.engineer engineer " +
             "LEFT JOIN c.secretary secretary ")
@@ -31,17 +31,17 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
     @Query("SELECT NEW ChequeMin(c.id, c.customerName, c.receiptDate, c.warrantyDate, c.readyDate, c.returnedToClientDate," +
             "c.productName, c.modelName, c.serialNumber, c.representativeName, secretary.fullname, engineer.fullname, " +
-            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus, c.paidStatus) " +
+            "c.warrantyStatus, c.readyStatus, c.returnedToClientStatus) " +
             "FROM Cheque c " +
             "LEFT JOIN c.engineer engineer " +
             "LEFT JOIN c.secretary secretary " +
             "WHERE c.id IN (?1)")
     List<ChequeMin> getListOfCompactChequesWithIDs(Long... IDs);
 
-    @Query(value = "SELECT d1.cheque_id FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
-            "ON d1.cheque_id = d2.cheque_id AND d1.date < d2.date " +
-            "WHERE d2.date IS NULL AND d1.date <= ?1", nativeQuery = true)
-    Long[] findIdOfChequesWithDelay(String delay);
+//    @Query(value = "SELECT d1.balance_id FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
+//            "ON d1.cheque_id = d2.cheque_id AND d1.date < d2.date " +
+//            "WHERE d2.date IS NULL AND d1.date <= ?1", nativeQuery = true)
+//    Long[] findIdOfChequesWithDelay(String delay);
 
     @Query(value = "SELECT DISTINCT customer_name FROM cheque", nativeQuery = true)
     List<String> listOfCustomerNames();

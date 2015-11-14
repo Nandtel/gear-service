@@ -2,6 +2,9 @@ package com.gearservice.model.repositories;
 
 import com.gearservice.model.cheque.Diagnostic;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Interface DiagnosticRepository with extending of jpa repository get all capabilities of Spring Boot JPA

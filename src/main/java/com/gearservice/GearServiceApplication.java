@@ -1,4 +1,5 @@
 package com.gearservice;
+import com.gearservice.model.cheque.Balance;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.exchangeRate.ExchangeRate;
@@ -20,6 +21,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.stream.IntStream;
 
+import static java.util.Arrays.asList;
+
 /**
  * Class GearServiceApplication is main, configurable class of application.
  * It handles by Spring Boot.
@@ -33,10 +36,10 @@ import java.util.stream.IntStream;
 public class GearServiceApplication implements CommandLineRunner {
 
     @Autowired UserRepository userRepository;
-    @Autowired
-    ExchangeRateRepository exchangeRateRepository;
+    @Autowired ExchangeRateRepository exchangeRateRepository;
     @Autowired ChequeRepository chequeRepository;
     @Autowired PaymentRepository paymentRepository;
+    @Autowired BalanceRepository balanceRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -52,7 +55,7 @@ public class GearServiceApplication implements CommandLineRunner {
         admin.setFullname("Грешник А.А.");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(
-        Arrays.asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
+        asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
         userRepository.save(admin);
 
         User kosoy = new User();
@@ -60,7 +63,7 @@ public class GearServiceApplication implements CommandLineRunner {
         kosoy.setPassword(passwordEncoder().encode("b"));
         kosoy.setFullname("Косойский Ж.Ж.");
         kosoy.setEnabled(true);
-        kosoy.setAuthorities(new HashSet<>(Arrays.asList(engineer.withUsername(kosoy))));
+        kosoy.setAuthorities(new HashSet<>(asList(engineer.withUsername(kosoy))));
         userRepository.save(kosoy);
 
         User valikozz = new User();
@@ -68,7 +71,7 @@ public class GearServiceApplication implements CommandLineRunner {
         valikozz.setPassword(passwordEncoder().encode("b"));
         valikozz.setFullname("Валикоззкий Ж.Ж.");
         valikozz.setEnabled(true);
-        valikozz.setAuthorities(new HashSet<>(Arrays.asList(engineer.withUsername(valikozz))));
+        valikozz.setAuthorities(new HashSet<>(asList(engineer.withUsername(valikozz))));
         userRepository.save(valikozz);
 
         User svetka = new User();
@@ -76,7 +79,7 @@ public class GearServiceApplication implements CommandLineRunner {
         svetka.setPassword(passwordEncoder().encode("b"));
         svetka.setFullname("Светкаская Ж.Ж.");
         svetka.setEnabled(true);
-        svetka.setAuthorities(new HashSet<>(Arrays.asList(secretary.withUsername(svetka))));
+        svetka.setAuthorities(new HashSet<>(asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
 
         User yanka = new User();
@@ -84,7 +87,7 @@ public class GearServiceApplication implements CommandLineRunner {
         yanka.setPassword(passwordEncoder().encode("b"));
         yanka.setFullname("Янкаская Ж.Ж.");
         yanka.setEnabled(true);
-        yanka.setAuthorities(new HashSet<>(Arrays.asList(boss.withUsername(yanka))));
+        yanka.setAuthorities(new HashSet<>(asList(boss.withUsername(yanka))));
         userRepository.save(yanka);
 
         ExchangeRate yesterday = new ExchangeRate();
@@ -133,15 +136,17 @@ public class GearServiceApplication implements CommandLineRunner {
 
         IntStream.range(0, 5)
                 .forEach(i -> {
-
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setReceiptDate(now.minusDays(i));
                     cheque.withDiagnosticUser(admin);
                     cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
                     cheque.setSecretary(svetka);
-                    cheque.setPaidStatus(true);
-                    chequeRepository.save(cheque);
+
+                    Balance balance = new Balance();
+                    balance.setPaidStatus(true);
+                    balance.setCheque(cheque);
+                    balance.setEstimatedCost(300);
 
                     Payment repair = new Payment();
                     repair.setCost(1);
@@ -149,8 +154,6 @@ public class GearServiceApplication implements CommandLineRunner {
                     repair.setExchangeRate(yesterday);
                     repair.setType("repair");
                     repair.setUser(kosoy);
-                    repair.setCheque(cheque);
-                    paymentRepository.save(repair);
 
                     Payment zip = new Payment();
                     zip.setCost(1);
@@ -158,8 +161,6 @@ public class GearServiceApplication implements CommandLineRunner {
                     zip.setExchangeRate(dayBeforeYesterday);
                     zip.setType("zip");
                     zip.setUser(admin);
-                    zip.setCheque(cheque);
-                    paymentRepository.save(zip);
 
                     Payment repair2 = new Payment();
                     repair2.setCost(1);
@@ -167,8 +168,6 @@ public class GearServiceApplication implements CommandLineRunner {
                     repair2.setExchangeRate(dayBeforeYesterday);
                     repair2.setType("repair");
                     repair2.setUser(kosoy);
-                    repair2.setCheque(cheque);
-                    paymentRepository.save(repair2);
 
                     Payment prepayment = new Payment();
                     prepayment.setCost(1);
@@ -176,8 +175,19 @@ public class GearServiceApplication implements CommandLineRunner {
                     prepayment.setExchangeRate(tomorrow);
                     prepayment.setType("zip");
                     prepayment.setUser(admin);
-                    prepayment.setCheque(cheque);
-                    paymentRepository.save(prepayment);
+
+//                    repair.setBalance(balance);
+//                    zip.setBalance(balance);
+//                    repair2.setBalance(balance);
+//                    prepayment.setBalance(balance);
+                    balance.setPayments(new HashSet<>(asList(repair, zip, repair2, prepayment)));
+
+                    chequeRepository.save(cheque);
+                    cheque.setBalance(balance);
+                    balanceRepository.save(balance);
+
+
+
 
 
                 });

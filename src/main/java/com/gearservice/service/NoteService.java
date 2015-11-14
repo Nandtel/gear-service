@@ -1,5 +1,6 @@
 package com.gearservice.service;
 
+import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Note;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.NoteRepository;
@@ -22,7 +23,9 @@ public class NoteService {
      * @param note is data for Note.class, that was create on client-side
      */
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
-        noteRepository.save(note.withDateTime().withOwner(chequeRepository.findOne(chequeID)));
+        Cheque cheque = chequeRepository.findOne(chequeID);
+        cheque.getNotes().add(note.withDateTime());
+        chequeRepository.save(cheque);
     }
 
     /**

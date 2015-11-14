@@ -36,8 +36,8 @@ public class ChequeController {
     @RequestMapping(value = "/api/attention", method = RequestMethod.GET)
     public List<Cheque> attentionCheques() {return chequeService.attentionCheques();}
 
-    @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
-    public List<ChequeMin> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
+//    @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
+//    public List<ChequeMin> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
 
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
     public List<String> autocompleteData(@PathVariable String itemName) {return chequeService.getAutocompleteData(itemName);}

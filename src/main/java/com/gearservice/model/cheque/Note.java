@@ -36,11 +36,6 @@ public class Note {
     private String text;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
-    @JsonBackReference
-    private Cheque cheque;
-
-    @ManyToOne(optional = false)
     @JoinColumn(name = "user_username", referencedColumnName = "username")
     private User user;
 
@@ -69,16 +64,6 @@ public class Note {
         return this;
     }
 
-    /**
-     * Method withCheque handle current Note object filling it with owner and return this edited object
-     * @param owner is owner class in bidirectional one-to-many relationship
-     * @return this Note object after editing
-     */
-    public Note withOwner(Cheque owner) {
-        this.setCheque(owner);
-        return this;
-    }
-
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
     public void setText(String text) {this.text = text;}
@@ -87,6 +72,4 @@ public class Note {
     public OffsetDateTime getDate() {return date;}
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
-    public void setCheque(Cheque cheque) {this.cheque = cheque;}
-    public Cheque getCheque() {return cheque;}
 }

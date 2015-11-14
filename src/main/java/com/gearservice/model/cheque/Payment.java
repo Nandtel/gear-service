@@ -20,9 +20,9 @@ public class Payment {
     private String currency;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
+    @JoinColumn(name = "balance_id", referencedColumnName = "id")
     @JsonBackReference
-    private Cheque cheque;
+    private Balance balance;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "exchange_rate_add_date", referencedColumnName = "addDate")
@@ -40,8 +40,8 @@ public class Payment {
     public void setDescription(String description) {this.description = description;}
     public float getCost() {return cost;}
     public void setCost(float cost) {this.cost = cost;}
-    public Cheque getCheque() {return cheque;}
-    public void setCheque(Cheque cheque) {this.cheque = cheque;}
+    public Balance getBalance() {return balance;}
+    public void setBalance(Balance balance) {this.balance = balance;}
     public String getCurrency() {return currency;}
     public void setCurrency(String currency) {this.currency = currency;}
     public ExchangeRate getExchangeRate() {return exchangeRate;}

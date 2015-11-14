@@ -35,10 +35,10 @@ public class Diagnostic {
     @Lob
     private String text;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
-    @JsonBackReference
-    private Cheque cheque;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
+//    @JsonBackReference
+//    private Cheque cheque;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_username", referencedColumnName = "username")
@@ -64,16 +64,6 @@ public class Diagnostic {
         return this;
     }
 
-    /**
-     * Method withCheque handle current Diagnostic object filling it with owner and return this edited object
-     * @param cheque is owner class in bidirectional one-to-many relationship
-     * @return this Diagnostic object after editing
-     */
-    public Diagnostic withCheque(Cheque cheque) {
-        this.setCheque(cheque);
-        return this;
-    }
-
     public Diagnostic withUser(User user) {
         this.user = user;
         return this;
@@ -85,8 +75,8 @@ public class Diagnostic {
     public OffsetDateTime getDate() {return date;}
     public void setText(String text) {this.text = text;}
     public String getText() {return text;}
-    public void setCheque(Cheque cheque) {this.cheque = cheque;}
-    public Cheque getCheque() {return cheque;}
+//    public void setCheque(Cheque cheque) {this.cheque = cheque;}
+//    public Cheque getCheque() {return cheque;}
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
 }

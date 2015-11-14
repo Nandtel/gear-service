@@ -48,8 +48,7 @@ public class ChequeMin {
     public ChequeMin(Long id, String customerName, OffsetDateTime receiptDate, OffsetDateTime guaranteeDate,
                      OffsetDateTime readyDate, OffsetDateTime returnedToClientDate, String productName, String modelName,
                      String serialNumber, String representativeName, String secretary, String engineer,
-                     boolean warrantyStatus, boolean readyStatus, boolean returnedToClientStatus,
-                     boolean paidStatus) {
+                     boolean warrantyStatus, boolean readyStatus, boolean returnedToClientStatus) {
 
         this.id = id;
         this.customerName = customerName;

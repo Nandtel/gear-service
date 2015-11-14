@@ -42,7 +42,6 @@ public class Cheque {
     private String address;
     private String phoneNumber;
     private String email;
-    private int estimatedCost;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
@@ -71,23 +70,18 @@ public class Cheque {
     private boolean warrantyStatus;
     private boolean readyStatus;
     private boolean returnedToClientStatus;
-    private boolean paidStatus;
 
     @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Component> components;
 
-    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Diagnostic> diagnostics;
 
-    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Note> notes;
-
-    @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<Payment> payments;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "engineer", referencedColumnName = "username")
@@ -96,6 +90,10 @@ public class Cheque {
     @ManyToOne(optional = false)
     @JoinColumn(name = "secretary", referencedColumnName = "username")
     private User secretary;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cheque", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Balance balance;
 
     /**
      * Method withRandomData handle current Cheque object filling it with random data and return this edited object
@@ -128,7 +126,6 @@ public class Cheque {
         this.setDiagnostics(SampleDataService.getSetConsistFrom(
                 o -> new Diagnostic()
                         .withRandomData()
-                        .withCheque(this)
                         .withUser(user)));
         return this;
     }
@@ -137,7 +134,6 @@ public class Cheque {
         this.setNotes(SampleDataService.getSetConsistFrom(
                 o -> new Note()
                         .withRandomData()
-                        .withOwner(this)
                         .withUser(user)));
         return this;
     }
@@ -180,10 +176,6 @@ public class Cheque {
     public OffsetDateTime getReadyDate() {return readyDate;}
     public void setReturnedToClientDate(OffsetDateTime returnedToClientDate) {this.returnedToClientDate = returnedToClientDate;}
     public OffsetDateTime getReturnedToClientDate() {return returnedToClientDate;}
-    public boolean getPaidStatus() {return paidStatus;}
-    public void setPaidStatus(boolean paidStatus) {this.paidStatus = paidStatus;}
-    public int getEstimatedCost() {return estimatedCost;}
-    public void setEstimatedCost(int estimatedCost) {this.estimatedCost = estimatedCost;}
     public boolean isWarrantyStatus() {return warrantyStatus;}
     public void setWarrantyStatus(boolean warrantyStatus) {this.warrantyStatus = warrantyStatus;}
     public boolean isReadyStatus() {return readyStatus;}
@@ -196,10 +188,10 @@ public class Cheque {
     public Set<Diagnostic> getDiagnostics() {return diagnostics;}
     public void setNotes(Set<Note> notes) {this.notes = notes;}
     public Set<Note> getNotes() {return notes;}
-    public Set<Payment> getPayments() {return payments;}
-    public void setPayments(Set<Payment> payments) {this.payments = payments;}
     public User getEngineer() {return engineer;}
     public void setEngineer(User engineer) {this.engineer = engineer;}
     public User getSecretary() {return secretary;}
     public void setSecretary(User secretary) {this.secretary = secretary;}
+    public Balance getBalance() {return balance;}
+    public void setBalance(Balance balance) {this.balance = balance;}
 }

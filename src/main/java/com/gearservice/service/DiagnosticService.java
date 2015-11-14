@@ -1,5 +1,6 @@
 package com.gearservice.service;
 
+import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.DiagnosticRepository;
@@ -22,10 +23,9 @@ public class DiagnosticService {
      * @param diagnostic is data for Diagnostic.class, that was create on client-side
      */
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-        diagnosticRepository.save(
-                diagnostic
-                        .withDateTime()
-                        .withCheque(chequeRepository.findOne(chequeID)));
+        Cheque cheque = chequeRepository.findOne(chequeID);
+        cheque.getDiagnostics().add(diagnostic.withDateTime());
+        chequeRepository.save(cheque);
     }
 
     /**
