@@ -126,28 +126,28 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start">
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.secretary"
+                             md-search-text="filter.secretary.fullname"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {secretary : filter.secretary} | unique:'secretary'"
-                             md-item-text="cheque.secretary"
+                             md-items="cheque in cheques | filter: {secretary : filter.secretary.fullname} | unique:'secretary'"
+                             md-item-text="cheque.secretary.fullname"
                              md-floating-label="{{'Inspector' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.secretary" md-highlight-flags="^i"> {{cheque.secretary}} </span>
+                    <span md-highlight-text="filter.secretary.fullname" md-highlight-flags="^i"> {{cheque.secretary}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.engineer"
+                             md-search-text="filter.engineer.fullname"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {engineer : filter.engineer} | unique:'engineer'"
-                             md-item-text="cheque.engineer"
+                             md-items="cheque in cheques | filter: {engineer : filter.engineer.fullname} | unique:'engineer'"
+                             md-item-text="cheque.engineer.fullname"
                              md-floating-label="{{'master' | translate}}"
                              md-autofocus="false">
                 <md-item-template>
-                    <span md-highlight-text="filter.engineer" md-highlight-flags="^i"> {{cheque.engineer}} </span>
+                    <span md-highlight-text="filter.engineer.fullname" md-highlight-flags="^i"> {{cheque.engineer}} </span>
                 </md-item-template>
             </md-autocomplete>
 

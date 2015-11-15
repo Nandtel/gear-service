@@ -176,20 +176,15 @@ public class GearServiceApplication implements CommandLineRunner {
                     prepayment.setType("zip");
                     prepayment.setUser(admin);
 
-//                    repair.setBalance(balance);
-//                    zip.setBalance(balance);
-//                    repair2.setBalance(balance);
-//                    prepayment.setBalance(balance);
+                    repair.setBalance(balance);
+                    zip.setBalance(balance);
+                    repair2.setBalance(balance);
+                    prepayment.setBalance(balance);
                     balance.setPayments(new HashSet<>(asList(repair, zip, repair2, prepayment)));
 
                     chequeRepository.save(cheque);
                     cheque.setBalance(balance);
                     balanceRepository.save(balance);
-
-
-
-
-
                 });
     }
 

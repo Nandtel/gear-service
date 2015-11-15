@@ -45,6 +45,7 @@ dependencies {
     compile "net.sourceforge.nekohtml:nekohtml:1.9.15"
     compile "org.jsoup:jsoup:1.8.3"
     compile "org.mongodb:mongo-java-driver:3.1.0"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.3"
     runtime "mysql:mysql-connector-java:5.1.36"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"

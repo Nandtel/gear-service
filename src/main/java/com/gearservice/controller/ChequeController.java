@@ -1,7 +1,6 @@
 package com.gearservice.controller;
 
 import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.ChequeMin;
 import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,7 @@ public class ChequeController {
     @Autowired ChequeService chequeService;
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
-    public List<ChequeMin> getMinChequesList() {
+    public List<Cheque> getMinChequesList() {
         return chequeService.getMinChequesList();
     }
 
@@ -36,8 +35,8 @@ public class ChequeController {
     @RequestMapping(value = "/api/attention", method = RequestMethod.GET)
     public List<Cheque> attentionCheques() {return chequeService.attentionCheques();}
 
-//    @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
-//    public List<ChequeMin> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
+    @RequestMapping(value = "/api/delay", method = RequestMethod.GET)
+    public List<Cheque> attentionChequesByDelay() {return chequeService.attentionChequesByDelay();}
 
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
     public List<String> autocompleteData(@PathVariable String itemName) {return chequeService.getAutocompleteData(itemName);}

@@ -1,7 +1,6 @@
 package com.gearservice.service;
 
 import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.ChequeMin;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,8 @@ public class ChequeService {
      * Call with value "/cheques" and request method GET
      * @return list of all cheques, that database has
      */
-    public List<ChequeMin> getMinChequesList() {
-        return chequeRepository.getListOfCompactCheques();
+    public List<Cheque> getMinChequesList() {
+        return chequeRepository.findAll();
     }
 
     /**
@@ -60,7 +59,7 @@ public class ChequeService {
      * @return Cheque, that client-side was request
      */
     public Cheque getCheque(@PathVariable Long chequeID) {
-        return chequeRepository.findOne(chequeID);
+        return chequeRepository.findById(chequeID);
     }
 
     /**
@@ -89,11 +88,10 @@ public class ChequeService {
         return chequeRepository.findByDiagnosticsIsNull();
     }
 
-//    @Transactional(readOnly = true)
-//    public List<ChequeMin> attentionChequesByDelay() {
-//        Long[] IDs = chequeRepository.findIdOfChequesWithDelay(OffsetDateTime.now().minusDays(3).toString());
-//        return chequeRepository.getListOfCompactChequesWithIDs(IDs);
-//    }
+    @Transactional(readOnly = true)
+    public List<Cheque> attentionChequesByDelay() {
+        return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(3).toString());
+    }
 
     public List<String> getAutocompleteData(String itemName) {
         switch (itemName) {

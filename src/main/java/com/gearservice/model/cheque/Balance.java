@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@NamedEntityGraph(name = "balance.full", attributeNodes = {
+        @NamedAttributeNode("payments")
+})
 public class Balance {
 
     @Id
@@ -16,12 +19,10 @@ public class Balance {
     private boolean paidStatus;
 
     @OneToMany(mappedBy = "balance", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private Set<Payment> payments;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cheque_id")
-    @JsonIgnore
     private Cheque cheque;
 
     public Long getId() {return id;}

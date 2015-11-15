@@ -1,6 +1,5 @@
 package com.gearservice.model.cheque;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
@@ -23,11 +22,6 @@ public class Component {
     @Lob
     private String name;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
-    @JsonBackReference
-    private Cheque cheque;
-
     public Component() {}
 
     /**
@@ -39,21 +33,9 @@ public class Component {
         return this;
     }
 
-    /**
-     * Method withCheque handle current Kit object filling it with owner and return this edited object
-     * @param owner is owner class in bidirectional one-to-many relationship
-     * @return this Kit object after editing
-     */
-    public Component withOwner(Cheque owner) {
-        this.setCheque(owner);
-        return this;
-    }
-
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
     public void setName(String name) {this.name = name;}
     public String getName() {return name;}
-    public void setCheque(Cheque cheque) {this.cheque = cheque;}
-    public Cheque getCheque() {return cheque;}
 
 }

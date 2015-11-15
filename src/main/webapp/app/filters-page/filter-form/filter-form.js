@@ -4,7 +4,7 @@ angular.module("mainModule")
             $scope.filterForm = {};
             $scope.cleanFilter = {
                 order: '-id', limit: 15, page: 1, customerName: "", productName: "", modelName: "", serialNumber: "",
-                representativeName: "", secretary: "", engineer: "", introducedFrom: undefined,
+                representativeName: "", secretary: {fullname: ""}, engineer: {fullname: ""}, introducedFrom: undefined,
                 introducedTo: undefined
             };
             /**

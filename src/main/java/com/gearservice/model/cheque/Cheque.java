@@ -22,9 +22,23 @@ import java.util.Set;
  * @since 04.09.2015
  */
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "cheque.full", attributeNodes = {
+                @NamedAttributeNode("components"),
+                @NamedAttributeNode("diagnostics"),
+                @NamedAttributeNode("notes")
+        }),
+        @NamedEntityGraph(name = "cheque.preview", attributeNodes = {
+                @NamedAttributeNode("balance"),
+                @NamedAttributeNode("engineer"),
+                @NamedAttributeNode("secretary")
+        }),
+        @NamedEntityGraph(name = "cheque.general", attributeNodes = {
+                @NamedAttributeNode("engineer"),
+                @NamedAttributeNode("secretary")
+        }),
+})
 public class Cheque {
 
     @Id
@@ -71,8 +85,8 @@ public class Cheque {
     private boolean readyStatus;
     private boolean returnedToClientStatus;
 
-    @OneToMany(mappedBy = "cheque", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Component> components;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -92,7 +106,6 @@ public class Cheque {
     private User secretary;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "cheque", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private Balance balance;
 
     /**
@@ -113,7 +126,7 @@ public class Cheque {
         this.setPhoneNumber(SampleDataService.getRandomPhone());
         this.setEmail(SampleDataService.getRandomEmail());
 
-        this.setComponents(SampleDataService.getSetConsistFrom(o -> new Component().withRandomData().withOwner(this)));
+        this.setComponents(SampleDataService.getSetConsistFrom(o -> new Component().withRandomData()));
 
         this.setWarrantyDate(SampleDataService.getRandomDate());
         this.setReadyDate(SampleDataService.getRandomDate());

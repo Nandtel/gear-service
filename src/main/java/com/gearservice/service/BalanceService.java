@@ -20,6 +20,7 @@ public class BalanceService {
     public Balance synchronizeBalanceOfCheque(Long chequeID, Balance balance) {
 
         Cheque cheque = chequeRepository.findOne(chequeID);
+        balance.getPayments().stream().forEach(payment -> payment.setBalance(balance));
         balance.setCheque(cheque);
         balanceRepository.save(balance);
 
