@@ -1,7 +1,6 @@
 package com.gearservice.model.repositories;
 
 import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.ChequeMin;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
