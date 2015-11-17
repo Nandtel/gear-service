@@ -37,13 +37,16 @@ import java.util.Set;
         @NamedEntityGraph(name = "cheque.general", attributeNodes = {
                 @NamedAttributeNode("engineer"),
                 @NamedAttributeNode("secretary")
-        }),
+        })
 })
 public class Cheque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Version
+    private Long version;
 
     private int repairPeriod;
     private String customerName;
@@ -89,12 +92,16 @@ public class Cheque {
     @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Component> components;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Diagnostic> diagnostics;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Note> notes;
 
     @ManyToOne(optional = false)
@@ -139,7 +146,8 @@ public class Cheque {
         this.setDiagnostics(SampleDataService.getSetConsistFrom(
                 o -> new Diagnostic()
                         .withRandomData()
-                        .withUser(user)));
+                        .withUser(user)
+                        .withCheque(this)));
         return this;
     }
 
@@ -153,6 +161,8 @@ public class Cheque {
 
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
+    public Long getVersion() {return version;}
+    public void setVersion(Long version) {this.version = version;}
     public void setCustomerName(String customerName) {this.customerName = customerName;}
     public String getCustomerName() {return customerName;}
     public void setRepairPeriod(int repairPeriod) {this.repairPeriod = repairPeriod;}

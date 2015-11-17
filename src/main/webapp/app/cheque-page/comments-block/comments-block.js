@@ -12,6 +12,7 @@ angular.module("mainModule")
              */
             $scope.saveComment = function() {
                 $scope.comment.user = $rootScope.user.principal;
+                $scope.comment.cheque = $scope.cheque;
                 $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
                     .success(function() {
                         $scope.comment.text = undefined;

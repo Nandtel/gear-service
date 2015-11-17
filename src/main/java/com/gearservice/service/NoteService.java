@@ -23,9 +23,10 @@ public class NoteService {
      * @param note is data for Note.class, that was create on client-side
      */
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
-        Cheque cheque = chequeRepository.findOne(chequeID);
-        cheque.getNotes().add(note.withDateTime());
-        chequeRepository.save(cheque);
+//        Cheque cheque = chequeRepository.findOne(chequeID);
+//        cheque.getNotes().add(note.withDateTime());
+//        chequeRepository.save(cheque);
+        noteRepository.save(note.withDateTime());
     }
 
     /**

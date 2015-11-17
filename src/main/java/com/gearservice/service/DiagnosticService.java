@@ -23,9 +23,11 @@ public class DiagnosticService {
      * @param diagnostic is data for Diagnostic.class, that was create on client-side
      */
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-        Cheque cheque = chequeRepository.findOne(chequeID);
-        cheque.getDiagnostics().add(diagnostic.withDateTime());
-        chequeRepository.save(cheque);
+//        System.out.println(diagnostic);
+//        Cheque cheque = chequeRepository.findOne(chequeID);
+//        cheque.getDiagnostics().add(diagnostic.withDateTime().withCheque(cheque));
+//        chequeRepository.save(cheque);
+        diagnosticRepository.save(diagnostic.withDateTime());
     }
 
     /**

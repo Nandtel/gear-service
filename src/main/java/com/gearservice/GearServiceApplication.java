@@ -1,11 +1,10 @@
 package com.gearservice;
-import com.gearservice.model.cheque.Balance;
-import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.Payment;
+import com.gearservice.model.cheque.*;
 import com.gearservice.model.exchangeRate.ExchangeRate;
 import com.gearservice.model.repositories.*;
 import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
+import com.gearservice.service.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +18,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
@@ -40,6 +40,8 @@ public class GearServiceApplication implements CommandLineRunner {
     @Autowired ChequeRepository chequeRepository;
     @Autowired PaymentRepository paymentRepository;
     @Autowired BalanceRepository balanceRepository;
+    @Autowired DiagnosticRepository diagnosticRepository;
+    @Autowired NoteRepository noteRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -67,7 +69,7 @@ public class GearServiceApplication implements CommandLineRunner {
         userRepository.save(kosoy);
 
         User valikozz = new User();
-        valikozz.setUsername("valikozz");
+        valikozz.setUsername("valikoz");
         valikozz.setPassword(passwordEncoder().encode("b"));
         valikozz.setFullname("Валикоззкий Ж.Ж.");
         valikozz.setEnabled(true);
@@ -75,7 +77,7 @@ public class GearServiceApplication implements CommandLineRunner {
         userRepository.save(valikozz);
 
         User svetka = new User();
-        svetka.setUsername("svetka");
+        svetka.setUsername("sveta");
         svetka.setPassword(passwordEncoder().encode("b"));
         svetka.setFullname("Светкаская Ж.Ж.");
         svetka.setEnabled(true);
@@ -83,7 +85,7 @@ public class GearServiceApplication implements CommandLineRunner {
         userRepository.save(svetka);
 
         User yanka = new User();
-        yanka.setUsername("yanka");
+        yanka.setUsername("yana");
         yanka.setPassword(passwordEncoder().encode("b"));
         yanka.setFullname("Янкаская Ж.Ж.");
         yanka.setEnabled(true);
@@ -138,8 +140,8 @@ public class GearServiceApplication implements CommandLineRunner {
                 .forEach(i -> {
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setReceiptDate(now.minusDays(i));
-                    cheque.withDiagnosticUser(admin);
-                    cheque.withNoteUser(admin);
+//                    cheque.withDiagnosticUser(admin);
+//                    cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
                     cheque.setSecretary(svetka);
 
@@ -185,6 +187,18 @@ public class GearServiceApplication implements CommandLineRunner {
                     chequeRepository.save(cheque);
                     cheque.setBalance(balance);
                     balanceRepository.save(balance);
+
+                    diagnosticRepository.save(SampleDataService.getSetConsistFrom(
+                            o -> new Diagnostic()
+                                    .withRandomData()
+                                    .withUser(admin)
+                                    .withCheque(cheque)));
+
+                    noteRepository.save(SampleDataService.getSetConsistFrom(
+                            o -> new Note()
+                                    .withRandomData()
+                                    .withUser(admin)
+                                    .withCheque(cheque)));
                 });
     }
 

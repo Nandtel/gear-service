@@ -22,9 +22,7 @@ public class ChequeController {
     public Cheque synchronizeCheque(@RequestBody Cheque cheque) {return chequeService.synchronizeCheque(cheque);}
 
     @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.GET)
-    public Cheque getCheque(@PathVariable Long chequeID) {
-        return chequeService.getCheque(chequeID);
-    }
+    public Cheque getCheque(@PathVariable Long chequeID) {return chequeService.getCheque(chequeID);}
 
     @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)

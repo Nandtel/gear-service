@@ -21,12 +21,12 @@
 
     <md-list class="comments-list">
         <md-list-item class="md-3-line"
-                      ng-repeat="comment in cheque[title] | orderBy: '-time' | limitTo: limit">
+                      ng-repeat="comment in cheque[title] | orderBy: '-date' | limitTo: limit">
 
             <md-content layout="row" flex>
                 <md-content class="md-list-item-text" flex>
                     <h3>{{comment.user.fullname}}</h3>
-                    <h4>{{comment.time | amDateFormat:'lll'}}</h4>
+                    <h4>{{comment.date | amDateFormat:'lll'}}</h4>
                     <p>{{comment.text}}</p>
                 </md-content>
 

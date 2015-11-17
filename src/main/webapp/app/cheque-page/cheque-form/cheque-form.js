@@ -31,6 +31,17 @@ angular.module("mainModule")
                                 .position('top right')
                                 .hideDelay(700)
                         );
+                    })
+                    .error(function(data) {
+                        if(data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("В данную расписку внесены изменения другим пользователем, пожалуйста, обновите расписку и внесите свои изменения снова.")
+                                    .action('OK')
+                                    .position('top right')
+                                    .hideDelay(70000)
+                            );
+                        }
                     });
             };
 
@@ -48,7 +59,7 @@ angular.module("mainModule")
                                 $mdToast.simple()
                                     .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
                                     .position('top right')
-                                    .hideDelay(700)
+                                    .hideDelay(7000)
                             );
                         });
 
