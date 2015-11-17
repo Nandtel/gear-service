@@ -10,4 +10,13 @@
     login-page form md-content.first{
         padding-top: 30px;
     }
+
+    login-page div[vc-recaptcha] {
+        zoom: 117%;
+    }
+
+    body>div {
+        zoom: 117%;
+    }
+
 }

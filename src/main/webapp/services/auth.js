@@ -1,6 +1,6 @@
 angular.module('mainModule')
-	.factory('auth', ['$rootScope', '$http', '$state',
-		function($rootScope, $http, $state) {
+	.factory('auth', ['$rootScope', '$http', '$state', '$q',
+		function($rootScope, $http, $state, $q) {
 
 			$rootScope.user = {};
 
@@ -14,10 +14,11 @@ angular.module('mainModule')
 
 				init: function() {
 
-					auth.authenticate({}, function(authenticated) {
-						if(!authenticated)
-							$state.go(auth.loginState);
-					});
+					auth.authenticate({}, {})
+							.then(function(authenticated) {
+								if(!authenticated)
+									$state.go(auth.loginState);
+							});
 
 					$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
@@ -31,21 +32,25 @@ angular.module('mainModule')
 					});
 				},
 
-				authenticate: function(credentials, callback) {
+				authenticate: function(credentials, recaptcha) {
+					var deferred = $q.defer();
 					var headers = credentials && credentials.username ?
-					{authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
+					{Authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
+					headers.ReCaptcha = recaptcha;
 
 					$http.get('/api/user', {headers: headers})
 						.success(function(data) {
 							$rootScope.user = data;
 							auth.authenticated = !!data.name;
 							$state.go(auth.desireState, auth.desireParams);
-							callback && callback(auth.authenticated);})
+							deferred.resolve(auth.authenticated);
+						})
 						.error(function() {
+							deferred.resolve(false);
 							auth.authenticated = false;
-							callback && callback(false);
 						});
 
+					return deferred.promise;
 				},
 
 				logout: function() {

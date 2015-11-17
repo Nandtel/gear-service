@@ -24,6 +24,17 @@
             </md-input-container>
         </md-content>
 
+        <!--<div class="g-recaptcha" data-sitekey="6Le_FBETAAAAABTCTvoZWEEIqb1lxqNpNAtRlGWk" data-theme="dark"></div>-->
+
+        <div
+                vc-recaptcha
+                theme="'dark'"
+                key="model.key"
+                on-create="setWidgetId(widgetId)"
+                on-success="setResponse(response)"
+                on-expire="cbExpiration()"
+        ></div>
+
         <md-content layout-padding>
             <md-button type="submit" class="md-raised md-primary">{{'login' | translate}}</md-button>
         </md-content>
