@@ -6,7 +6,11 @@
         font-weight: normal;
     }
 
-    header md-content.currency-rates h4 {
+    /*header md-content.currency-rates h4 {*/
+        /*font-family: 'Roboto', serif;*/
+    /*}*/
+
+    header md-content.span {
         font-family: 'Roboto', serif;
     }
 

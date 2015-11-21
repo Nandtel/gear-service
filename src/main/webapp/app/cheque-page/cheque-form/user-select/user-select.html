@@ -1,4 +1,4 @@
-<md-input-container flex>
+<md-input-container flex="100" class="flex100">
     <label>{{title | translate}}</label>
     <md-select ng-model="user" md-on-open="loadUsers()" placeholder="{{title | translate}}" ng-disabled="disableChequeForm">
         <md-option ng-value="user">{{user.fullname}}</md-option>

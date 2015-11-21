@@ -14,4 +14,8 @@
         padding: 8px 3px 0 3px;
     }
 
+    time-picker md-input-container {
+        margin: 0;
+    }
+
 }

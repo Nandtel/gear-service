@@ -80,7 +80,7 @@
             </md-item-template>
         </md-autocomplete>
 
-        <md-input-container flex="25" class="md-icon-float">
+        <md-input-container flex="25">
             <label translate>Repair Period</label>
             <input type="number" min="1" max="99" ng-model="cheque.repairPeriod">
         </md-input-container>
@@ -93,7 +93,7 @@
             <!--<input ng-model="cheque.productName" required ng-disabled="disableChequeForm">-->
         <!--</md-input-container>-->
 
-        <md-autocomplete flex="40" class="md-icon-float"
+        <md-autocomplete flex="40"
                          md-search-text="cheque.productName"
                          md-no-cache="true"
                          md-min-length="1"
@@ -113,7 +113,7 @@
             <!--<input ng-model="cheque.modelName" required ng-disabled="disableChequeForm">-->
         <!--</md-input-container>-->
 
-        <md-autocomplete flex="30" class="md-icon-float"
+        <md-autocomplete flex="30"
                          md-search-text="cheque.modelName"
                          md-no-cache="true"
                          md-min-length="1"
@@ -128,46 +128,46 @@
             </md-item-template>
         </md-autocomplete>
 
-        <md-input-container flex="30" class="md-icon-float">
+        <md-input-container flex="30">
             <label translate>Serial Number</label>
             <input ng-model="cheque.serialNumber" required ng-disabled="disableChequeForm">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex class="md-icon-float">
+        <md-input-container flex>
             <label translate>Malfunction</label>
-            <md-icon md-font-set="material-icons">local_hospital</md-icon>
+            <!--<md-icon md-font-set="material-icons">local_hospital</md-icon>-->
             <input ng-model="cheque.defect" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex class="md-icon-float">
+        <md-input-container flex>
             <label translate>Special Notes</label>
-            <md-icon md-font-set="material-icons">book</md-icon>
+            <!--<md-icon md-font-set="material-icons">book</md-icon>-->
             <input ng-model="cheque.specialNotes" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex="30" class="md-icon-float">
-            <label translate >Purchaser</label>
-            <md-icon md-font-set="material-icons">account_box</md-icon>
+        <md-input-container flex="30">
+            <label translate>Purchaser</label>
+            <!--<md-icon md-font-set="material-icons">account_box</md-icon>-->
             <input ng-model="cheque.representativeName" required ng-disabled="disableChequeForm">
         </md-input-container>
 
-        <md-input-container flex="30" class="md-icon-float">
+        <md-input-container flex="30">
             <label translate>Address</label>
             <input ng-model="cheque.address" ng-disabled="disableChequeForm">
         </md-input-container>
 
-        <md-input-container flex="20" class="md-icon-float">
+        <md-input-container flex="20">
             <label translate>Phone</label>
             <input ng-model="cheque.phoneNumber" ui-mask="(999) 999 ‒  99 ‒  99" class="phoneNumber" ng-disabled="disableChequeForm">
         </md-input-container>
 
-        <md-input-container flex="20" class="md-icon-float">
+        <md-input-container flex="20">
             <label translate>Email</label>
             <input ng-model="cheque.email" ng-disabled="disableChequeForm">
         </md-input-container>
@@ -175,12 +175,11 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
-        <md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>
+        <!--<md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>-->
 
         <user-select ng-model="cheque.engineer"
                      title="'master'"
                      ng-disabled="disableChequeForm"
-                     class="left-margin"
                      flex="50"></user-select>
 
         <user-select ng-model="cheque.secretary"
