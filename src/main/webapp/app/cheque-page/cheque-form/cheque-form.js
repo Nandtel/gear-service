@@ -34,13 +34,7 @@ angular.module("mainModule")
                     })
                     .error(function(data) {
                         if(data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .content("В данную расписку внесены изменения другим пользователем, пожалуйста, обновите расписку и внесите свои изменения снова.")
-                                    .action('OK')
-                                    .position('top right')
-                                    .hideDelay(70000)
-                            );
+                            warning.showAlertOptimisticLockingException();
                         }
                     });
             };

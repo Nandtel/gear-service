@@ -8,7 +8,7 @@ angular.module('mainModule')
 
                     var confirmUnsavedChanges = $mdDialog.confirm()
                         .title(gettextCatalog.getString('would you like to continue without saving changes?'))
-                        .content(gettextCatalog.getString("if you do not save your changes, then all the information will be lost"))
+                        .textContent(gettextCatalog.getString("if you do not save your changes, then all the information will be lost"))
                         .ariaLabel('unsaved changes warning')
                         .targetEvent(undefined)
                         .ok(gettextCatalog.getString('continue'))
@@ -22,7 +22,7 @@ angular.module('mainModule')
 
                     var confirmDelete = $mdDialog.confirm()
                         .title(gettextCatalog.getString('would you like to delete payment?'))
-                        .content(gettextCatalog.getString('deleted payment can not be recovered'))
+                        .textContent(gettextCatalog.getString('deleted payment can not be recovered'))
                         .ariaLabel('delete payment warning')
                         .targetEvent(event)
                         .ok(gettextCatalog.getString('delete'))
@@ -36,7 +36,7 @@ angular.module('mainModule')
 
                     var confirmDelete = $mdDialog.confirm()
                         .title(gettextCatalog.getString('would you like to delete comment?'))
-                        .content(gettextCatalog.getString('deleted comment can not be recovered'))
+                        .textContent(gettextCatalog.getString('deleted comment can not be recovered'))
                         .ariaLabel('delete comment warning')
                         .targetEvent(event)
                         .ok(gettextCatalog.getString('delete'))
@@ -50,7 +50,7 @@ angular.module('mainModule')
 
                     var confirmDelete = $mdDialog.confirm()
                         .title(gettextCatalog.getString('would you like to delete cheque?'))
-                        .content(gettextCatalog.getString('deleted cheque can not be recovered'))
+                        .textContent(gettextCatalog.getString('deleted cheque can not be recovered'))
                         .ariaLabel('delete cheque warning')
                         .targetEvent(event)
                         .ok(gettextCatalog.getString('delete'))
@@ -64,13 +64,26 @@ angular.module('mainModule')
 
                     var confirmDelete = $mdDialog.confirm()
                         .title(gettextCatalog.getString('would you like to delete photo?'))
-                        .content(gettextCatalog.getString('deleted photo can not be recovered'))
+                        .textContent(gettextCatalog.getString('deleted photo can not be recovered'))
                         .ariaLabel('delete photo warning')
                         .targetEvent(event)
                         .ok(gettextCatalog.getString('delete'))
                         .cancel(gettextCatalog.getString('cancel'));
 
                     return $mdDialog.show(confirmDelete);
+
+                },
+
+                showAlertOptimisticLockingException: function() {
+
+                    var alertOptLockExc = $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title(gettextCatalog.getString('cheque has been changed'))
+                        .textContent(gettextCatalog.getString('cheque has been changed by another user, please refresh the cheque and enter your changes again.'))
+                        .ariaLabel('optimistic locking exception')
+                        .ok(gettextCatalog.getString('ok'));
+
+                    return $mdDialog.show(alertOptLockExc);
 
                 }
 

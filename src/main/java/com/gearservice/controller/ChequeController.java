@@ -39,4 +39,9 @@ public class ChequeController {
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
     public List<String> autocompleteData(@PathVariable String itemName) {return chequeService.getAutocompleteData(itemName);}
 
+    @RequestMapping(value = "/sample", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void sample() {chequeService.addSampleCheques();}
+
+
 }

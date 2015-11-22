@@ -80,7 +80,7 @@ public class ChequeService {
      * @return redirect to main page
      */
     public ModelAndView addSampleCheques() {
-        IntStream.range(0, 5).forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
+        IntStream.range(0, 3000).parallel().forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
         return new ModelAndView("redirect:/");
     }
 
