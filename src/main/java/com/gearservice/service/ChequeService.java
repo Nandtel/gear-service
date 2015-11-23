@@ -2,6 +2,7 @@ package com.gearservice.service;
 
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.repositories.*;
+import com.gearservice.model.request.RequestPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,6 +101,24 @@ public class ChequeService {
             case "modelName": return chequeRepository.listOfModelNames();
             default: throw new IllegalArgumentException();
         }
+    }
+
+    public List<Cheque> getMinChequesListPre(RequestPreferences request) {
+        return chequeRepository.findByRequest(
+                request.getIntroducedFrom(),
+                request.getIntroducedTo(),
+                request.getCustomerName(),
+                request.getProductName(),
+                request.getModel(),
+                request.getSerialNumber(),
+                request.getRepresentativeName(),
+                request.getSecretary(),
+                request.getEngineer(),
+                request.getWarrantyStatus(),
+                request.getReadyStatus(),
+                request.getReturnedToClientStatus(),
+                request.getPaidStatus()
+        );
     }
 
 }

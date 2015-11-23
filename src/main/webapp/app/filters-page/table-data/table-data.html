@@ -10,7 +10,7 @@
 
     <md-data-table-container>
         <table md-data-table id="table">
-            <thead md-order="filter.order" md-trigger="onOrderChange">
+            <thead md-order="tableFilter.order" md-trigger="onOrderChange">
             <tr>
                 <th name="{{'Id'| translate}}" order-by="id"></th>
                 <th name="{{'Customer'| translate}}" order-by="customerName"></th>
@@ -28,23 +28,9 @@
             </tr>
             </thead>
             <tbody md-auto-select>
-            <tr ng-repeat="cheque in filteredCheques = (cheques
-				| filterByID: filter.id
-				| filterByDateRange:filter.introducedFrom :filter.introducedTo
-				| filter:{
-								customerName:           filter.customerName,
-								productName:            filter.productName,
-								modelName:              filter.modelName,
-								serialNumber:           filter.serialNumber,
-								representativeName:     filter.representativeName,
-								secretary:              filter.secretary,
-								engineer:               filter.engineer,
-								readyStatus:            filter.readyStatus,
-								returnedToClientStatus: filter.returnedToClientStatus,
-								warrantyStatus:         filter.warrantyStatus,
-								paidStatus:             filter.paidStatus})
-				| orderBy: filter.order
-				| limitTo: filter.limit: (filter.page - 1) * filter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
+            <tr ng-repeat="cheque in cheques
+				| orderBy: tableFilter.order
+				| limitTo: tableFilter.limit: (tableFilter.page - 1) * tableFilter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td>{{cheque.id}}</td>
                 <td>{{cheque.customerName}}</td>
                 <td>{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</td>
@@ -63,7 +49,7 @@
     </md-data-table-container>
 
     <md-data-table-toolbar layout-align="end">
-        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="filter.limit" md-page="filter.page" md-total="{{filteredCheques.length}}" md-trigger="onPageChange"></md-data-table-pagination>
+        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="tableFilter.limit" md-page="tableFilter.page" md-total="{{cheques.length}}" md-trigger="onPageChange"></md-data-table-pagination>
     </md-data-table-toolbar>
 
 </section>

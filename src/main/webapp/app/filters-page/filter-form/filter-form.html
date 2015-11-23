@@ -1,5 +1,5 @@
 <section class="content-block">
-    <form name="filterForm" id="filterForm" class="md-whiteframe-z1">
+    <form name="filterForm" id="filterForm" class="md-whiteframe-z1" ng-submit="sendFilterPreferences()">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>
@@ -126,7 +126,7 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.secretary.fullname"
+                             md-search-text="filter.secretary"
                              md-min-length="1"
                              md-search-text-change=""
                              md-items="cheque in cheques | filter: {secretary : filter.secretary.fullname} | unique:'secretary'"
@@ -139,7 +139,7 @@
             </md-autocomplete>
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.engineer.fullname"
+                             md-search-text="filter.engineer"
                              md-min-length="1"
                              md-search-text-change=""
                              md-items="cheque in cheques | filter: {engineer : filter.engineer.fullname} | unique:'engineer'"
@@ -176,6 +176,13 @@
             </md-select>
 
         </md-content>
+
+        <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="filterForm.$invalid">
+                <span translate>filter</span>
+            </md-button>
+        </md-content>
+
     </form>
 </section>
 

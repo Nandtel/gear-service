@@ -1,6 +1,6 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.analytics.AnalyticsPreferences;
+import com.gearservice.model.request.AnalyticsPreferences;
 import com.gearservice.service.AnalyticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

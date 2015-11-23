@@ -1,4 +1,4 @@
-package com.gearservice.model.analytics;
+package com.gearservice.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

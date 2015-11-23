@@ -1,6 +1,6 @@
 package com.gearservice.service;
 
-import com.gearservice.model.analytics.AnalyticsPreferences;
+import com.gearservice.model.request.AnalyticsPreferences;
 import com.gearservice.model.cheque.Payment;
 import com.gearservice.model.repositories.ExchangeRateRepository;
 import com.gearservice.model.repositories.PaymentRepository;
@@ -22,8 +22,7 @@ import static java.util.stream.Collectors.summingDouble;
 public class AnalyticsService {
 
     @Autowired PaymentRepository paymentRepository;
-    @Autowired
-    ExchangeRateRepository exchangeRateRepository;
+    @Autowired ExchangeRateRepository exchangeRateRepository;
 
     private static Function<Payment, String> getPaymentsByCreatorName = payment -> payment.getUser().getFullname();
     private static Function<Payment, String> getPaymentsByBrandName = payment -> payment.getBalance().getCheque().getModelName().split("\\.")[0];

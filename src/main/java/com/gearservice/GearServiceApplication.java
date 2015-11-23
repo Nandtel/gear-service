@@ -4,6 +4,7 @@ import com.gearservice.model.exchangeRate.ExchangeRate;
 import com.gearservice.model.repositories.*;
 import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
+import com.gearservice.service.AnalyticsService;
 import com.gearservice.service.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,9 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
@@ -42,6 +41,7 @@ public class GearServiceApplication implements CommandLineRunner {
     @Autowired BalanceRepository balanceRepository;
     @Autowired DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
+    @Autowired AnalyticsService analyticsService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -140,8 +140,6 @@ public class GearServiceApplication implements CommandLineRunner {
                 .forEach(i -> {
                     Cheque cheque = new Cheque().withRandomData();
                     cheque.setReceiptDate(now.minusDays(i));
-//                    cheque.withDiagnosticUser(admin);
-//                    cheque.withNoteUser(admin);
                     cheque.setEngineer(admin);
                     cheque.setSecretary(svetka);
 
@@ -200,6 +198,11 @@ public class GearServiceApplication implements CommandLineRunner {
                                     .withUser(admin)
                                     .withCheque(cheque)));
                 });
+
+
+
+
+
     }
 
     public PasswordEncoder passwordEncoder() {

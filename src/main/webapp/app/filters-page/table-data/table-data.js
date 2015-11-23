@@ -27,7 +27,7 @@ angular.module("mainModule")
          */
         $scope.onOrderChange = function() {};
 
-        $scope.getAllCheques();
+        //$scope.getAllCheques();
     }])
     .directive('tableData', function() {
         return {

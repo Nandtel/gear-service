@@ -1,6 +1,7 @@
 package com.gearservice.controller;
 
 import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.service.ChequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,11 @@ public class ChequeController {
     @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
     public List<Cheque> getMinChequesList() {
         return chequeService.getMinChequesList();
+    }
+
+    @RequestMapping(value = "/api/cheques/pre/", method = RequestMethod.POST)
+    public List<Cheque> getMinChequesListPre(@RequestBody RequestPreferences request) {
+        return chequeService.getMinChequesListPre(request);
     }
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)

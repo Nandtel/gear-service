@@ -2,21 +2,24 @@ angular.module("mainModule")
     .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q',
         function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q) {
             $scope.filterForm = {};
-            $scope.cleanFilter = {
-                order: '-id', limit: 15, page: 1, customerName: "", productName: "", modelName: "", serialNumber: "",
-                representativeName: "", secretary: {fullname: ""}, engineer: {fullname: ""}, introducedFrom: undefined,
-                introducedTo: undefined
-            };
+            $scope.tableFilter = {order: '-id', limit: 15, page: 1};
             /**
              * Method resetFilter add to filter necessary data for right displaying
              * It adds to filter data from cleanFilter and makes filterForm pristine
              */
             $scope.resetFilter = function() {
-                $scope.filter = angular.copy($scope.cleanFilter);
+                $scope.filter = angular.copy({});
                 $scope.filterForm.$setPristine();
             };
 
-            $scope.filter = angular.copy($scope.cleanFilter);
+            $scope.sendFilterPreferences = function() {
+                $http.post('/api/cheques/pre/', $scope.filter)
+                    .success(function(data) {
+                        $scope.test = data;
+                        console.log($scope.test);
+                        //$scope.cheques = data;
+                    });
+            };
         }
     ])
     .directive('filterForm', function() {
