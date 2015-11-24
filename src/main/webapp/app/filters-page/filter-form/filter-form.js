@@ -1,8 +1,9 @@
 angular.module("mainModule")
-    .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q',
-        function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q) {
+    .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q', 'chequeService',
+        function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q, chequeService) {
             $scope.filterForm = {};
             $scope.tableFilter = {order: '-id', limit: 15, page: 1};
+
             /**
              * Method resetFilter add to filter necessary data for right displaying
              * It adds to filter data from cleanFilter and makes filterForm pristine
@@ -13,12 +14,7 @@ angular.module("mainModule")
             };
 
             $scope.sendFilterPreferences = function() {
-                $http.post('/api/cheques/pre/', $scope.filter)
-                    .success(function(data) {
-                        $scope.test = data;
-                        console.log($scope.test);
-                        //$scope.cheques = data;
-                    });
+                chequeService.getChequeListFromServer($scope.filter);
             };
         }
     ])
@@ -26,11 +22,6 @@ angular.module("mainModule")
         return {
             restrict: 'E',
             controller: 'FilterForm',
-            scope: {
-                filter: '=filter',
-                cheques: '=cheques'
-            },
-            require: ['filter', 'cheques'],
             templateUrl: 'app/filters-page/filter-form/filter-form.html'
         }
     });

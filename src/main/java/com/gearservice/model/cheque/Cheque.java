@@ -94,12 +94,8 @@ public class Cheque {
 
     @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     private Set<Diagnostic> diagnostics;
 
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "cheque_id", referencedColumnName = "id")
     @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
     private Set<Note> notes;

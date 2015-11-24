@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning',
-        function($scope, $http, $document, $rootScope, security, warning) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning', 'chequeService',
+        function($scope, $http, $document, $rootScope, security, warning, chequeService) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -18,8 +18,7 @@ angular.module("mainModule")
                         $scope.comment.text = undefined;
                         $scope.form.$setPristine();
                         $scope.form.$setUntouched();
-
-                        $scope.getCheque();
+                        chequeService.getChequeFromServer($scope.cheque.id);
                     });
             };
 
@@ -31,19 +30,12 @@ angular.module("mainModule")
                 warning.showConfirmDeleteComment(event).then(function() {
 
                     $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
-                        .success(function() {$scope.getCheque()});
+                        .success(function() {
+                            chequeService.getChequeFromServer($scope.cheque.id);
+                        });
 
                 }, function() {});
 
-            };
-
-            /**
-             * Method getCheque request from serve-side one cheque with detail information
-             * It adds to cheque model cheque, when gets it
-             */
-            $scope.getCheque = function() {
-                $http.get('/api/cheques/' + $scope.cheque.id)
-                    .success(function (response) {$scope.cheque = response;});
             };
 
             $scope.addedLesserThanElem = function() {

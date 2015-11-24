@@ -1,40 +1,20 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning', '$document',
-        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document) {
+    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning', '$document', 'chequeService',
+        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document, chequeService) {
 
-            /**
-             * Method getCheque request from serve-side one cheque with detail information
-             * It adds to cheque model cheque, when gets it
-             */
-            $scope.getCheque = function() {
-                $http.get('/api/cheques/' + $scope.cheque.id)
-                    .success(function(response) {
-                        $scope.cheque = response;
-                    });
-            };
+            $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
+            $scope.security = security;
 
             /**
              * Method modifyCheque modify current cheque and then send request to server-side
              * It show toast about delivery status
              */
-            $scope.sendCheque = function() {
-                $http.post('/api/cheques', $scope.cheque)
-                    .success(function(response) {
-                        $scope.cheque = response;
-
-                        $scope.chequeForm.$setPristine();
-                        $scope.chequeForm.$setUntouched();
-
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content(gettextCatalog.getString('Cheque') + ' ' + gettextCatalog.getString('synchronized'))
-                                .position('top right')
-                                .hideDelay(700)
-                        );
-                    })
-                    .error(function(data) {
-                        if(data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
-                            warning.showAlertOptimisticLockingException();
+            $scope.syncCheque = function() {
+                chequeService.syncChequeWithServer($scope.cheque)
+                    .then(function(success) {
+                        if(success) {
+                            $scope.chequeForm.$setPristine();
+                            $scope.chequeForm.$setUntouched();
                         }
                     });
             };
@@ -45,18 +25,7 @@ angular.module("mainModule")
              */
             $scope.deleteCheque = function(event) {
                 warning.showConfirmDeleteCheque(event).then(function() {
-
-                    $http.delete('/api/cheques/' + $scope.cheque.id)
-                        .success(function() {
-                            $state.go('cheque.filter');
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .content(gettextCatalog.getString('Cheque') + ' №' + $scope.cheque.id + ' ' + gettextCatalog.getString('deleted'))
-                                    .position('top right')
-                                    .hideDelay(7000)
-                            );
-                        });
-
+                    chequeService.deleteChequeFromServer($scope.cheque.id);
                 }, function() {});
             };
 
@@ -70,30 +39,8 @@ angular.module("mainModule")
             };
 
             $scope.printCheque = function() {
-                $scope.sendCheque();
+                $scope.syncCheque();
                 window.print();
-            };
-
-            if(!$scope.hasID) {
-
-                $scope.cleanNewCheck = {repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                    secretary: 'Администратор', components: [], notes: [], payments: [], diagnostics: []};
-
-                /**
-                 * Method resetNewCheck reset cheque with default cleanNewCheque data
-                 */
-                $scope.resetNewCheck = function() {
-                    $scope.cheque = angular.copy($scope.cleanNewCheck);
-                };
-
-                $scope.resetNewCheck();
-            }
-
-            $scope.loadUsers = function() {
-                $http.get('/api/users')
-                    .success(function(data) {
-                        $scope.users = data;
-                    });
             };
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
@@ -117,10 +64,13 @@ angular.module("mainModule")
                     });
             };
 
+            $scope.loadUsers = function() {
+                $http.get('/api/users')
+                    .success(function(data) {
+                        $scope.users = data;
+                    });
+            };
 
-            $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
-
-            $scope.security = security;
         }
     ])
     .directive('chequeForm', [function() {

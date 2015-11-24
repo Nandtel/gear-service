@@ -1,33 +1,17 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$scope', 'currencyRatesService', '$rootScope', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog',
-        function($scope, currencyRatesService, $rootScope, security, warning, $http, $mdToast, gettextCatalog) {
+    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'chequeService',
+        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, chequeService) {
             var chequeID;
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
 
-            $scope.getBalance = function(chequeID) {
-                $http.get('/api/balance/cheque/' + chequeID)
-                    .success(function(balance) {
-                        $scope.balance = balance;
-                    });
-            };
+            $scope.security = security;
 
             $scope.synchronizeBalance = function() {
-                $http.post('/api/balance/cheque/' + chequeID, $scope.balance)
-                    .success(function(balance) {
-                        $scope.balance = balance;
-
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content(gettextCatalog.getString('payments synchronized'))
-                                .position('top right')
-                                .hideDelay(700)
-                        );
-                    });
+                chequeService.syncChequeBalanceWithServer(chequeID, $scope.balance);
             };
 
             $scope.addPayment = function() {
-
                 if($scope.balance.payments === undefined)
                     $scope.balance.payments = [];
 
@@ -65,12 +49,16 @@ angular.module("mainModule")
                 return sum;
             };
 
-            $scope.security = security;
-
             $scope.$watch('chequeID', function (newValue, oldValue) {
                 if(newValue !== undefined) {
                     chequeID = newValue;
-                    $scope.getBalance(chequeID);
+                    chequeService.getChequeBalanceFromServer(chequeID);
+                }
+            });
+
+            $rootScope.$watch('balance', function (newValue, oldValue) {
+                if(newValue !== undefined) {
+                    $scope.balance = newValue;
                 }
             });
 

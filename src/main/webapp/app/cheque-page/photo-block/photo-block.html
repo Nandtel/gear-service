@@ -25,7 +25,7 @@
 
             <md-list>
 
-                <md-list-item ng-repeat="photo in photos | orderBy: 'id'" ng-click="openPhoto(photo.id)">
+                <md-list-item ng-repeat="photo in $root.photoList | orderBy: 'id'" ng-click="openPhoto(photo.id)">
                     <p flex="60">{{photo.name}}</p>
                     <p flex="15">{{photo.username}}</p>
                     <p flex="25">{{photo.addDate | amDateFormat:'LLL'}}</p>

@@ -6,31 +6,25 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("ChequePage", ['$scope', '$stateParams', '$http',
-        function ($scope, $stateParams, $http) {
-            $scope.cheque = {components: [], payments: [], phoneNumber: "", email: ""};
-            $scope.hasID = false;
-
-            /**
-             * Method getCheque request from serve-side one cheque with detail information
-             * It adds to cheque model cheque, when gets it
-             */
-            $scope.getCheque = function (chequeID) {
-                $http.get('/api/cheques/' + chequeID)
-                    .success(function (response) {
-                        $scope.cheque = response;
-                        $scope.hasID = true;
-                    });
-            };
-
-            $scope.$watch('cheque.id', function (newValue, oldValue) {
-                $scope.hasID = !!newValue;
-            });
+    .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'chequeService',
+        function ($rootScope, $scope, $stateParams, $http, chequeService) {
 
             $scope.hasID = !!$scope.chequeID;
 
             if ($scope.hasID)
-                $scope.getCheque($scope.chequeID);
+                chequeService.getChequeFromServer($scope.chequeID);
+            else
+                chequeService.createNewCheque();
+
+            //$scope.$watch('cheque.id', function (newValue, oldValue) {
+            //    $scope.hasID = !!newValue;
+            //});
+
+            $rootScope.$watch('cheque', function (newValue, oldValue) {
+                $scope.cheque = newValue;
+                $scope.chequeID = newValue.id;
+                $scope.hasID = !!newValue.id;
+            });
 
         }
     ])

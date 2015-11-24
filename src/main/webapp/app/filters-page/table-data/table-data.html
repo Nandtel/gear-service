@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody md-auto-select>
-            <tr ng-repeat="cheque in cheques
+            <tr ng-repeat="cheque in $root.chequeList
 				| orderBy: tableFilter.order
 				| limitTo: tableFilter.limit: (tableFilter.page - 1) * tableFilter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td>{{cheque.id}}</td>
@@ -49,7 +49,7 @@
     </md-data-table-container>
 
     <md-data-table-toolbar layout-align="end">
-        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="tableFilter.limit" md-page="tableFilter.page" md-total="{{cheques.length}}" md-trigger="onPageChange"></md-data-table-pagination>
+        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="tableFilter.limit" md-page="tableFilter.page" md-total="{{$root.chequeList.length}}" md-trigger="onPageChange"></md-data-table-pagination>
     </md-data-table-toolbar>
 
 </section>

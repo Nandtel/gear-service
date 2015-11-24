@@ -1,19 +1,21 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning',
-        function($scope, Upload, $http, $state, $location, $rootScope, warning) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'chequeService',
+        function($scope, Upload, $http, $state, $location, $rootScope, warning, chequeService) {
+            var chequeID;
 
-            $scope.getAllPhotoFromCheque = function() {
-                $http.get('/api/photo/cheque/' + $scope.cheque.id)
-                    .success(function(data) {
-                        $scope.photos = data;
-                    })
-            };
+            $scope.$watch('chequeID', function(newValue, oldValue) {
+                if(newValue !== undefined) {
+                    chequeID = newValue;
+                    chequeService.getPhotoListFromServer(chequeID);
+                }
+            });
 
             $scope.deletePhoto = function(photoID, event) {
                 warning.showConfirmDeletePhoto(event).then(function() {
+                    //chequeService.deletePhotoFromServer(photoID);
                     $http.delete('api/photo/' + photoID)
                         .success(function() {
-                            $scope.getAllPhotoFromCheque();
+                            chequeService.getPhotoListFromServer(chequeID);
                         })
                 }, function() {});
             };
@@ -25,12 +27,12 @@ angular.module("mainModule")
             $scope.$watch('files', function () {
                 $scope.upload($scope.files);
             });
+
             $scope.$watch('file', function () {
                 if ($scope.file != null) {
                     $scope.files = [$scope.file];
                 }
             });
-            $scope.log = '';
 
             $scope.upload = function (files) {
                 if (files && files.length) {
@@ -41,23 +43,17 @@ angular.module("mainModule")
                                 url: '/api/upload-image',
                                 data: {
                                     file: file,
-                                    chequeID: $scope.cheque.id,
+                                    chequeID: chequeID,
                                     username: $rootScope.user.principal.username
                                 }
                             })
                             .success(function () {
-                                $scope.getAllPhotoFromCheque();
+                                chequeService.getPhotoListFromServer(chequeID);
                             });
                         }
                     }
                 }
             };
-
-            $scope.$watch('cheque.id', function(newValue, oldValue) {
-                if(newValue !== undefined)
-                    $scope.getAllPhotoFromCheque();
-            });
-
         }
     ])
     .directive('photoBlock', [function() {
@@ -65,9 +61,9 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'PhotoBlock',
             scope: {
-                cheque: '=ngModel'
+                chequeID: '=chequeId'
             },
-            require: 'ngModel',
+            require: 'chequeId',
             templateUrl: 'app/cheque-page/photo-block/photo-block.html'
         }
     }]);

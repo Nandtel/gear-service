@@ -15,6 +15,9 @@ public class Balance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Version
+    private Long version;
+
     private int estimatedCost;
     private boolean paidStatus;
 
@@ -27,6 +30,8 @@ public class Balance {
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
+    public Long getVersion() {return version;}
+    public void setVersion(Long version) {this.version = version;}
     public int getEstimatedCost() {return estimatedCost;}
     public void setEstimatedCost(int estimatedCost) {this.estimatedCost = estimatedCost;}
     public boolean getPaidStatus() {return paidStatus;}
