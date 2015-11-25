@@ -4,6 +4,7 @@ import com.gearservice.model.cheque.Photo;
 import com.gearservice.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +24,9 @@ public class PhotoController {
     }
 
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
-    public Photo getPhotoByID(@PathVariable String photoID) {return photoService.getPhotoByID(photoID);}
+    public ResponseEntity<byte[]> getPhotoByID(@PathVariable String photoID) {
+        return photoService.getPhotoByID(photoID);
+    }
 
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)

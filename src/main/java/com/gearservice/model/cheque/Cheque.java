@@ -108,7 +108,7 @@ public class Cheque {
     @JoinColumn(name = "secretary", referencedColumnName = "username")
     private User secretary;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cheque", cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cheque", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Balance balance;
 
     /**

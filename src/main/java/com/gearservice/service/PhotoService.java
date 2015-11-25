@@ -3,9 +3,14 @@ package com.gearservice.service;
 import com.gearservice.model.cheque.Photo;
 import com.gearservice.model.repositories.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -48,7 +53,15 @@ public class PhotoService {
                 .collect(toList());
     }
 
-    public Photo getPhotoByID(String photoID) {return photoRepository.findOne(photoID);}
+    public ResponseEntity<byte[]> getPhotoByID(String photoID) {
+        Photo photo = photoRepository.findOne(photoID);
+
+        return ResponseEntity
+                .ok()
+                .contentLength(photo.getBytes().length)
+                .contentType(MediaType.parseMediaType(photo.getContentType()))
+                .body(photo.getBytes());
+    }
 
     public void deletePhotoByID(String photoID) {photoRepository.delete(photoID);}
 

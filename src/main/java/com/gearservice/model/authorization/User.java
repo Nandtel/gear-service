@@ -15,7 +15,7 @@ public class User {
 
     @Id private String username;
     @JsonIgnore private String password;
-    @Transient private String newPassword;
+    @Transient @JsonProperty private String newPassword;
     private boolean enabled;
     private String fullname;
 
@@ -35,6 +35,14 @@ public class User {
         this.password = user.getPassword();
         this.enabled = user.isEnabled();
         this.authorities = user.getAuthorities();
+    }
+
+    public User(String username, String newPassword, boolean enabled, String fullname, Set<Authority> authorities) {
+        this.username = username;
+        this.newPassword = newPassword;
+        this.enabled = enabled;
+        this.fullname = fullname;
+        this.authorities = authorities;
     }
 
     public String getUsername() {return username;}

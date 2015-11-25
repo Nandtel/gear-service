@@ -199,10 +199,6 @@ public class GearServiceApplication implements CommandLineRunner {
                                     .withCheque(cheque)));
                 });
 
-
-
-
-
     }
 
     public PasswordEncoder passwordEncoder() {

@@ -45,6 +45,9 @@ public class ChequeService {
     public Cheque synchronizeCheque(@RequestBody Cheque cheque) {
         Long ID = cheque.getId();
 
+        if(cheque.getBalance().getCheque() == null)
+            cheque.getBalance().setCheque(cheque);
+
         chequeRepository.save(cheque);
 
         if(ID == null)

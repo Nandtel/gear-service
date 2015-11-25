@@ -24,6 +24,10 @@ public class UserController {
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
     public void setUser(@RequestBody User user) {
 
+        System.out.println(user.getNewPassword());
+        System.out.println(user.getFullname());
+        System.out.println(user.getUsername());
+
         if (user.getNewPassword() == null) {
             User userForReplacement = userRepository.findOne(user.getUsername());
             user.setPassword(userForReplacement.getPassword());
