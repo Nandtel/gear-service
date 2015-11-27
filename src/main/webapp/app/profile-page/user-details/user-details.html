@@ -4,19 +4,25 @@
 
         <md-content layout="column" layout-align="center start" flex="50">
             <md-input-container>
-                <label translate>Username</label>
+                <label translate>username</label>
                 <input ng-model="user.username">
             </md-input-container>
 
             <md-input-container>
-                <label translate>FullName</label>
+                <label translate>fullname</label>
                 <input ng-model="user.fullname">
             </md-input-container>
 
             <md-input-container>
-                <label translate>New password</label>
+                <label translate>new password</label>
                 <input ng-model="user.newPassword" type="password">
             </md-input-container>
+
+            <md-input-container>
+                <label translate>old password</label>
+                <input ng-model="user.oldPassword" type="password">
+            </md-input-container>
+
         </md-content>
 
         <md-content layout="column" layout-align="center start" flex="50">
@@ -25,27 +31,24 @@
                 <md-chips ng-model="user.authorities" flex
                           placeholder="{{'Authority' | translate}}"
                           secondary-placeholder="{{'Authority' | translate}}"
-                          md-on-append="addAuthority($chip)">
+                          md-transform-chip="addAuthority($chip)">
                     <md-chip-template>{{$chip.authority}}</md-chip-template>
                 </md-chips>
             </md-content>
 
             <md-checkbox ng-model="user.enabled" class="md-primary">
-                <p>{{ 'Enabled' | translate}}</p>
+                <p>{{ 'enabled' | translate}}</p>
             </md-checkbox>
 
         </md-content>
 
     </md-content>
 
+
     <md-content layout="row" layout-align="start center" flex="100">
 
         <md-button class="md-raised md-primary" ng-click="saveUser()" ng-disabled="userForm.$pristine">
             {{'save' | translate}}
-        </md-button>
-
-        <md-button class="md-raised md-primary" ng-click="deleteUser()">
-            {{'delete' | translate}}
         </md-button>
 
     </md-content>

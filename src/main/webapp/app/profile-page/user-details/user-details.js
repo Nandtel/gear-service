@@ -9,11 +9,8 @@ angular.module("mainModule")
                     });
             };
 
-            $scope.deleteUser = function() {
-                $http.delete('/api/user/' + $scope.user.username)
-                    .success(function() {
-                        $scope.$parent.getUsers();
-                    });
+            $scope.addAuthority = function(authority) {
+                return {'authority': authority};
             };
 
         }

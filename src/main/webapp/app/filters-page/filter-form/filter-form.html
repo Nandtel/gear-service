@@ -35,31 +35,19 @@
 
             <md-autocomplete flex="90"
                              md-search-text="filter.customerName"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {customerName : filter.customerName} | unique:'customerName'"
-                             md-item-text="cheque.customerName"
+                             md-items="item in items | filter: filter.customerName"
+                             md-item-text="item"
                              md-floating-label="{{'Customer' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItems('customerName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{cheque.customerName}} </span>
+                    <span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
-
-            <!--<md-autocomplete flex="90"-->
-                             <!--md-search-text="filter.customerName"-->
-                             <!--md-no-cache="true"-->
-                             <!--md-min-length="1"-->
-                             <!--md-search-text-change=""-->
-                             <!--md-items="item in items | filter: filter.customerName"-->
-                             <!--md-item-text="item"-->
-                             <!--md-floating-label="{{'Customer' | translate}}"-->
-                             <!--md-autofocus="false"-->
-                             <!--ng-click="serverItems('name_of_customer')">-->
-                <!--<md-item-template>-->
-                    <!--<span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{item}} </span>-->
-                <!--</md-item-template>-->
-            <!--</md-autocomplete>-->
 
         </md-content>
 
@@ -67,40 +55,49 @@
 
             <md-autocomplete flex="40"
                              md-search-text="filter.productName"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {productName : filter.productName} | unique:'productName'"
-                             md-item-text="cheque.productName"
+                             md-items="item in items | filter: filter.productName"
+                             md-item-text="item"
                              md-floating-label="{{'Name of Product' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItems('productName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.productName" md-highlight-flags="^i"> {{cheque.productName}} </span>
+                    <span md-highlight-text="filter.productName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="30"
                              md-search-text="filter.model"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {model : filter.model} | unique:'model'"
-                             md-item-text="cheque.model"
+                             md-items="item in items | filter: filter.model"
+                             md-item-text="item"
                              md-floating-label="{{'Model' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItems('modelName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{cheque.model}} </span>
+                    <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="30"
                              md-search-text="filter.serialNumber"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {serialNumber : filter.serialNumber} | unique:'serialNumber'"
-                             md-item-text="cheque.serialNumber"
+                             md-items="item in items | filter: filter.serialNumber"
+                             md-item-text="item"
                              md-floating-label="{{'Serial Number' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItems('serialNumber')">
                 <md-item-template>
-                    <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{cheque.serialNumber}} </span>
+                    <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -110,14 +107,17 @@
 
             <md-autocomplete flex="100"
                              md-search-text="filter.representativeName"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {representativeName : filter.representativeName} | unique:'representativeName'"
-                             md-item-text="cheque.representativeName"
+                             md-items="item in items | filter: filter.representativeName"
+                             md-item-text="item"
                              md-floating-label="{{'Purchaser' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItems('representativeName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{cheque.representativeName}} </span>
+                    <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -127,27 +127,33 @@
 
             <md-autocomplete flex="50"
                              md-search-text="filter.secretary"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {secretary : filter.secretary.fullname} | unique:'secretary'"
-                             md-item-text="cheque.secretary.fullname"
+                             md-items="item in items | filter: filter.secretary"
+                             md-item-text="item"
                              md-floating-label="{{'Inspector' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItemsUser('secretaryName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.secretary.fullname" md-highlight-flags="^i"> {{cheque.secretary}} </span>
+                    <span md-highlight-text="filter.secretary" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="50"
                              md-search-text="filter.engineer"
+                             md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="cheque in cheques | filter: {engineer : filter.engineer.fullname} | unique:'engineer'"
-                             md-item-text="cheque.engineer.fullname"
+                             md-items="item in items | filter: filter.engineer"
+                             md-item-text="item"
                              md-floating-label="{{'master' | translate}}"
-                             md-autofocus="false">
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="serverItemsUser('engineerName')">
                 <md-item-template>
-                    <span md-highlight-text="filter.engineer.fullname" md-highlight-flags="^i"> {{cheque.engineer}} </span>
+                    <span md-highlight-text="filter.engineer" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
@@ -179,7 +185,7 @@
 
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
             <md-button class="md-raised md-primary" type="submit" ng-disabled="filterForm.$invalid">
-                <span translate>filter</span>
+                <span translate>find</span>
             </md-button>
         </md-content>
 

@@ -49,5 +49,9 @@ public class ChequeController {
     @ResponseStatus(value = HttpStatus.OK)
     public void sample() {chequeService.addSampleCheques();}
 
+    @RequestMapping(value = "/read", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void readFromExcelToDB() throws Exception {chequeService.readFromExcelToDB();}
+
 
 }

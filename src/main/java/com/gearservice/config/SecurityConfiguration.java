@@ -72,7 +72,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/currency-rate").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/user").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/user/{\\d+}").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/index.html", "/", "/login", "/javascript/**", "/fonts/**","/stylesheets/**", "/api/currency-rate")
+                .antMatchers("/index.html", "/", "/login", "/javascript/**", "/fonts/**",
+                        "/stylesheets/**", "/images/**", "/api/currency-rate")
                 .permitAll().anyRequest().authenticated().and()
                 .logout().invalidateHttpSession(true).and()
                 .csrf().csrfTokenRepository(csrfTokenRepository()).and()

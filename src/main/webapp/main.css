@@ -4,6 +4,14 @@ body {
     zoom: 85%;
 }
 
+body>div.md-select-menu-container, body>div.md-datepicker-calendar-pane {
+    zoom: 100%;
+}
+
+body>div {
+    zoom: 117%;
+}
+
 .content-block:first-child {
     margin-top: 1rem;
     margin-bottom: .5rem;

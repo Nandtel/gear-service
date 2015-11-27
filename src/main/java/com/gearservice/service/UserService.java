@@ -7,18 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toMap;
 
 @Service
-public class UserService implements UserDetailsService, UserDetailsManager {
+public class UserService implements UserDetailsService {
 
     @Autowired UserRepository userRepository;
+
+    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -27,29 +32,28 @@ public class UserService implements UserDetailsService, UserDetailsManager {
         return new UserDetailsImpl(user);
     }
 
-    @Override
-    public void createUser(UserDetails user) {
+    public List<User> getUserList() {return userRepository.findAll();}
 
-    }
+    public void saveUser(User user) {
 
-    @Override
-    public void updateUser(UserDetails user) {
+        if (userRepository.exists(user.getUsername())) {
 
-    }
+            User userFromDB = userRepository.findOne(user.getUsername());
 
-    @Override
-    public void deleteUser(String username) {
+            if (user.getNewPassword() == null) {
+                user.setPassword(userFromDB.getPassword());
+            }
+            else if (user.getOldPassword() != null &&
+                    passwordEncoder().matches(user.getOldPassword(), userFromDB.getPassword())) {
+                String password = user.getNewPassword();
+                user.setPassword(passwordEncoder().encode(password));
+            }
+        } else {
+            String password = user.getNewPassword();
+            user.setPassword(passwordEncoder().encode(password));
+        }
 
-    }
-
-    @Override
-    public void changePassword(String oldPassword, String newPassword) {
-
-    }
-
-    @Override
-    public boolean userExists(String username) {
-        return false;
+        userRepository.save(user);
     }
 
     private final static class UserDetailsImpl extends User implements UserDetails {
@@ -64,12 +68,19 @@ public class UserService implements UserDetailsService, UserDetailsManager {
         @Override public boolean isCredentialsNonExpired() {return true;}
         @Override public boolean isEnabled() {return super.isEnabled();}
         @Override public Set<Authority> getAuthorities() {return super.getAuthorities();}
-
     }
 
     public Map<String, String> getUsernameFullnameMap() {
         return userRepository.findAll()
                 .stream()
                 .collect(toMap(User::getUsername, User::getFullname));
+    }
+
+    public List<String> getAutocompleteData(String itemName) {
+        switch (itemName) {
+            case "secretaryName": return userRepository.listOfSecretaries();
+            case "engineerName": return userRepository.listOfEngineers();
+            default: throw new IllegalArgumentException();
+        }
     }
 }

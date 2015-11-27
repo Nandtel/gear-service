@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -52,6 +54,18 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
     @Query(value = "SELECT DISTINCT model_name FROM cheque", nativeQuery = true)
     List<String> listOfModelNames();
+
+    @Query(value = "SELECT DISTINCT serial_number FROM cheque", nativeQuery = true)
+    List<String> listOfSerialNumbers();
+
+    @Query(value = "SELECT DISTINCT representative_name FROM cheque", nativeQuery = true)
+    List<String> listOfRepresentativeNames();
+
+    @Query(value = "SELECT DISTINCT address FROM cheque", nativeQuery = true)
+    List<String> listOfAddresses();
+
+    @Query(value = "SELECT DISTINCT email FROM cheque", nativeQuery = true)
+    List<String> listOfEmails();
 
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT c FROM Cheque c, Balance b, User e, User s " +

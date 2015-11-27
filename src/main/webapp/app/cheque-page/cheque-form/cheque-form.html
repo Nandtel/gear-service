@@ -74,7 +74,8 @@
                          md-floating-label="{{'Customer' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('customerName')">
+                         ng-click="serverItems('customerName')"
+                         ng-disabled="disableChequeForm">
             <md-item-template>
                 <span md-highlight-text="cheque.customerName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
@@ -87,11 +88,6 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <!--<md-input-container flex="40" class="md-icon-float">-->
-            <!--<label translate>Name of Product</label>-->
-            <!--<md-icon md-font-set="material-icons">desktop_windows</md-icon>-->
-            <!--<input ng-model="cheque.productName" required ng-disabled="disableChequeForm">-->
-        <!--</md-input-container>-->
 
         <md-autocomplete flex="40"
                          md-search-text="cheque.productName"
@@ -102,16 +98,12 @@
                          md-floating-label="{{'Name of Product' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('productName')">
+                         ng-click="serverItems('productName')"
+                         ng-disabled="disableChequeForm">
             <md-item-template>
                 <span md-highlight-text="cheque.productName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
         </md-autocomplete>
-
-        <!--<md-input-container flex="30" class="md-icon-float">-->
-            <!--<label translate>Model</label>-->
-            <!--<input ng-model="cheque.modelName" required ng-disabled="disableChequeForm">-->
-        <!--</md-input-container>-->
 
         <md-autocomplete flex="30"
                          md-search-text="cheque.modelName"
@@ -122,7 +114,8 @@
                          md-floating-label="{{'Model' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('modelName')">
+                         ng-click="serverItems('modelName')"
+                         ng-disabled="disableChequeForm">
             <md-item-template>
                 <span md-highlight-text="cheque.modelName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
@@ -137,7 +130,6 @@
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex>
             <label translate>Malfunction</label>
-            <!--<md-icon md-font-set="material-icons">local_hospital</md-icon>-->
             <input ng-model="cheque.defect" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
@@ -145,37 +137,67 @@
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
         <md-input-container flex>
             <label translate>Special Notes</label>
-            <!--<md-icon md-font-set="material-icons">book</md-icon>-->
             <input ng-model="cheque.specialNotes" ng-disabled="disableChequeForm" md-maxlength="150">
         </md-input-container>
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <md-input-container flex="30">
-            <label translate>Purchaser</label>
-            <!--<md-icon md-font-set="material-icons">account_box</md-icon>-->
-            <input ng-model="cheque.representativeName" required ng-disabled="disableChequeForm">
-        </md-input-container>
+        <md-autocomplete flex="30" class="md-icon-float"
+                         md-search-text="cheque.representativeName"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.representativeName"
+                         md-item-text="item"
+                         md-floating-label="{{'Purchaser' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('representativeName')"
+                         ng-disabled="disableChequeForm">
+            <md-item-template>
+                <span md-highlight-text="cheque.representativeName" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
 
-        <md-input-container flex="30">
-            <label translate>Address</label>
-            <input ng-model="cheque.address" ng-disabled="disableChequeForm">
-        </md-input-container>
+        <md-autocomplete flex="30" class="md-icon-float"
+                         md-search-text="cheque.address"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.address"
+                         md-item-text="item"
+                         md-floating-label="{{'Address' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('address')"
+                         ng-disabled="disableChequeForm">
+            <md-item-template>
+                <span md-highlight-text="cheque.address" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
 
         <md-input-container flex="20">
             <label translate>Phone</label>
             <input ng-model="cheque.phoneNumber" ui-mask="(999) 999 ‒  99 ‒  99" class="phoneNumber" ng-disabled="disableChequeForm">
         </md-input-container>
 
-        <md-input-container flex="20">
-            <label translate>Email</label>
-            <input ng-model="cheque.email" ng-disabled="disableChequeForm">
-        </md-input-container>
+        <md-autocomplete flex="30" class="md-icon-float"
+                         md-search-text="cheque.email"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-items="item in items | filter: cheque.email"
+                         md-item-text="item"
+                         md-floating-label="{{'Email' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-click="serverItems('email')"
+                         ng-disabled="disableChequeForm">
+            <md-item-template>
+                <span md-highlight-text="cheque.email" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
+
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-
-        <!--<md-icon md-font-set="material-icons" class="not-in-form">face</md-icon>-->
 
         <user-select ng-model="cheque.engineer"
                      title="'master'"
@@ -186,13 +208,24 @@
                      title="'Inspector'"
                      ng-disabled="disableChequeForm"
                      flex="50"></user-select>
+
     </md-content>
 
     <md-content layout-padding layout="row" layout-align="center start">
         <md-chips ng-model="cheque.components" flex
                   placeholder="{{'Kits' | translate}}"
                   secondary-placeholder="{{'Kits' | translate}}"
-                  md-on-append="addKit($chip)">
+                  md-transform-chip="addKit($chip)"
+                  readonly="disableChequeForm">
+
+            <md-autocomplete
+                    md-search-text="$chip"
+                    md-items="item in items | filter: $chip"
+                    md-item-text="item"
+                    ng-click="serverItemsComponent('name')">
+                <span md-highlight-text="$chip">{{item}}</span>
+            </md-autocomplete>
+
             <md-chip-template>{{$chip.name}}</md-chip-template>
         </md-chips>
     </md-content>

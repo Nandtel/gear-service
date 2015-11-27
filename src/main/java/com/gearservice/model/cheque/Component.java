@@ -19,7 +19,6 @@ public class Component {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
     private String name;
 
     public Component() {}

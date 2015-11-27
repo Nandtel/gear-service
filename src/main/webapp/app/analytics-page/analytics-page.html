@@ -24,31 +24,6 @@
 
             </md-content>
 
-            <!--<md-content layout-padding layout="row" layout-align="space-around start">-->
-
-                <!--<md-input-container flex="25">-->
-                    <!--<label>Column</label>-->
-                    <!--<md-select ng-model="preferences.column" required>-->
-                        <!--<md-option ng-value="column" ng-repeat="column in columns">{{column}}</md-option>-->
-                    <!--</md-select>-->
-                <!--</md-input-container>-->
-
-                <!--<md-input-container flex="25">-->
-                    <!--<label>Row</label>-->
-                    <!--<md-select ng-model="preferences.row" required>-->
-                        <!--<md-option ng-value="row" ng-repeat="row in rows">{{row}}</md-option>-->
-                    <!--</md-select>-->
-                <!--</md-input-container>-->
-
-                <!--<md-input-container flex="25">-->
-                    <!--<label>Funds</label>-->
-                    <!--<md-select ng-model="preferences.fund" required>-->
-                        <!--<md-option ng-value="fund" ng-repeat="fund in funds">{{fund}}</md-option>-->
-                    <!--</md-select>-->
-                <!--</md-input-container>-->
-
-            <!--</md-content>-->
-
             <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
                 <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">
                     <span translate>find</span>
@@ -58,28 +33,6 @@
         </md-content>
 
     </form>
-
-    <md-content class="md-whiteframe-z1 content-block" layout="column" layout-align="center center">
-
-        <md-toolbar>
-            <h2 class="md-toolbar-tools">
-                {{'Data' | translate}}
-            </h2>
-        </md-toolbar>
-
-        <table>
-            <tr>
-                <th></th>
-                <th scope="colgroup" ng-repeat="name in analyticsHeader">{{name}}</th>
-            </tr>
-            <tr ng-repeat="(key, val) in analytics">
-                <th scope="row">{{key}}</th>
-                <td ng-repeat="name in analyticsHeader">{{!!val[name] ? val[name] + ' руб.' : ''}}</td>
-            </tr>
-        </table>
-
-    </md-content>
-
 
 
 </section>

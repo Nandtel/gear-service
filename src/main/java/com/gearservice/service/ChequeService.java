@@ -3,6 +3,8 @@ package com.gearservice.service;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.repositories.*;
 import com.gearservice.model.request.RequestPreferences;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -102,6 +106,10 @@ public class ChequeService {
             case "customerName": return chequeRepository.listOfCustomerNames();
             case "productName": return chequeRepository.listOfProductNames();
             case "modelName": return chequeRepository.listOfModelNames();
+            case "serialNumber": return chequeRepository.listOfSerialNumbers();
+            case "representativeName": return chequeRepository.listOfRepresentativeNames();
+            case "address": return chequeRepository.listOfAddresses();
+            case "email": return chequeRepository.listOfEmails();
             default: throw new IllegalArgumentException();
         }
     }
@@ -122,6 +130,18 @@ public class ChequeService {
                 request.getReturnedToClientStatus(),
                 request.getPaidStatus()
         );
+    }
+
+    public void readFromExcelToDB() throws Exception {
+
+        FileInputStream excel = new FileInputStream(new File("analytics.xlsx"));
+
+        XSSFWorkbook wb = new XSSFWorkbook(excel);
+        XSSFSheet sheet = wb.getSheetAt(0);
+
+
+
+
     }
 
 }

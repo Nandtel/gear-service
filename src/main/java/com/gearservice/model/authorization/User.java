@@ -16,6 +16,7 @@ public class User {
     @Id private String username;
     @JsonIgnore private String password;
     @Transient @JsonProperty private String newPassword;
+    @Transient @JsonProperty private String oldPassword;
     private boolean enabled;
     private String fullname;
 
@@ -57,4 +58,6 @@ public class User {
     public void setFullname(String fullname) {this.fullname = fullname;}
     public Set<Authority> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
+    public String getOldPassword() {return oldPassword;}
+    public void setOldPassword(String oldPassword) {this.oldPassword = oldPassword;}
 }

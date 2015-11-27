@@ -64,6 +64,13 @@ angular.module("mainModule")
                     });
             };
 
+            $scope.serverItemsComponent = function(name) {
+                $http.get('/api/au/component/' + name)
+                    .success(function(data) {
+                        $scope.items = data;
+                    });
+            };
+
             $scope.loadUsers = function() {
                 $http.get('/api/users')
                     .success(function(data) {

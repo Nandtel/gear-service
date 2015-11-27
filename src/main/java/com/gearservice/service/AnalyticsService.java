@@ -142,8 +142,6 @@ public class AnalyticsService {
         cell17.setCellStyle(rubleStyle);
     }
 
-    private static void resetRowId() {
-        rowID = 1;
-    }
+    private static void resetRowId() {rowID = 1;}
 
 }
