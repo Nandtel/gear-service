@@ -11,7 +11,7 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
     .value('duScrollDuration', 3000)
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
-            //$locationProvider.html5Mode(true);
+            $locationProvider.html5Mode(true);
 
             $stateProvider
                 .state('cheque', {

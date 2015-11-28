@@ -33,7 +33,7 @@ angular.module("mainModule")
             restrict: 'E',
             controller: 'ChequePage',
             scope: {
-                chequeID: '=chequeId'
+                chequeID: '=?chequeId'
             },
             templateUrl: 'app/cheque-page/cheque-page.html'
         }

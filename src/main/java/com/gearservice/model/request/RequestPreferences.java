@@ -6,22 +6,25 @@ import java.time.OffsetDateTime;
 
 public class RequestPreferences {
 
+    private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    OffsetDateTime introducedFrom;
+    private OffsetDateTime introducedFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    OffsetDateTime introducedTo;
-    String customerName;
-    String productName;
-    String model;
-    String serialNumber;
-    String representativeName;
-    String secretary;
-    String engineer;
-    Boolean warrantyStatus;
-    Boolean readyStatus;
-    Boolean returnedToClientStatus;
-    Boolean paidStatus;
+    private OffsetDateTime introducedTo;
+    private String customerName;
+    private String productName;
+    private String model;
+    private String serialNumber;
+    private String representativeName;
+    private String secretary;
+    private String engineer;
+    private Boolean warrantyStatus;
+    private Boolean readyStatus;
+    private Boolean returnedToClientStatus;
+    private Boolean paidStatus;
 
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
     public OffsetDateTime getIntroducedFrom() {return introducedFrom;}
     public void setIntroducedFrom(OffsetDateTime introducedFrom) {this.introducedFrom = introducedFrom;}
     public OffsetDateTime getIntroducedTo() {return introducedTo;}

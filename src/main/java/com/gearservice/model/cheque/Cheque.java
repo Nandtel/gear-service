@@ -9,6 +9,7 @@ import com.gearservice.service.SampleDataService;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -94,11 +95,11 @@ public class Cheque {
 
     @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Diagnostic> diagnostics;
+    private Set<Diagnostic> diagnostics = new HashSet<>();
 
     @OneToMany(mappedBy = "cheque", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Note> notes;
+    private Set<Note> notes = new HashSet<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "engineer", referencedColumnName = "username")

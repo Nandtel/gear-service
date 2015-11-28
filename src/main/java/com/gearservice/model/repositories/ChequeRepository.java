@@ -44,7 +44,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     List<Cheque> findWithDelay(String delay);
 
     Cheque findFirstByOrderByIdDesc();
-    List<Cheque> findByDiagnosticsIsNull();
+    List<Cheque> findByReturnedToClientStatusFalseAndDiagnosticsIsNull();
 
     @Query(value = "SELECT DISTINCT customer_name FROM cheque", nativeQuery = true)
     List<String> listOfCustomerNames();
@@ -70,6 +70,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT c FROM Cheque c, Balance b, User e, User s " +
             "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
+            "AND (c.id = :id OR :id IS NULL) " +
             "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
             "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
             "AND (c.customerName LIKE %:customerName% OR :customerName IS NULL) " +
@@ -84,6 +85,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
             "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) ")
     List<Cheque> findByRequest(
+            @Param("id") Long id,
             @Param("introducedFrom") OffsetDateTime introducedFrom,
             @Param("introducedTo") OffsetDateTime introducedTo,
             @Param("customerName") String customerName,
