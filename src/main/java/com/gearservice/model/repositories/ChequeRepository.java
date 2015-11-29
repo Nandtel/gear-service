@@ -40,7 +40,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "WHERE b.paid_status = FALSE AND c.id IN ( " +
             "SELECT d1.cheque_id FROM diagnostic d1 LEFT JOIN diagnostic d2 " +
             "ON d1.cheque_id = d2.cheque_id AND d1.date < d2.date " +
-            "WHERE d2.date IS NULL AND d1.date <= ?1 ) ", nativeQuery = true)
+            "WHERE d2.date IS NULL AND d1.date <= ?1 AND c.returned_to_client_status = 0 ) ", nativeQuery = true)
     List<Cheque> findWithDelay(String delay);
 
     Cheque findFirstByOrderByIdDesc();

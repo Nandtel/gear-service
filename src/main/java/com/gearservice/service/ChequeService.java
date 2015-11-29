@@ -165,6 +165,7 @@ public class ChequeService {
             Iterator<Cell> cellIterator = row.cellIterator();
 
             Cheque cheque = new Cheque();
+            cheque.setRepairPeriod(99);
 
             Balance balance = new Balance();
             balance.setPaidStatus(false);
