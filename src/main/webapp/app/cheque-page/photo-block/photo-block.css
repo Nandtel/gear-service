@@ -24,10 +24,6 @@
         margin: 0.5rem 0;
     }
 
-    photo-block md-icon {
-        margin: 0 5px;
-    }
-
     photo-block md-list {
         padding: 0;
     }
@@ -35,6 +31,14 @@
     photo-block .md-button .md-ripple-container,
     photo-block .md-button {
         border-radius: 0;
+    }
+
+    photo-block md-list-item a.md-button {
+        margin: 0;
+    }
+
+    photo-block md-list-item {
+        margin: 0.2rem 0;
     }
 
 }

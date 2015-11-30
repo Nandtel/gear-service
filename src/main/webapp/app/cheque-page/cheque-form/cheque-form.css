@@ -3,12 +3,16 @@
         outline: none;
     }
 
+    cheque-form md-autocomplete {
+        outline: none;
+    }
+
     cheque-form md-checkbox.with-date {
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 .3rem 1.5rem;
     }
 
     cheque-form md-content.dates-field md-content p.with-date {
-        margin: 1.5rem 0 0 0;
+        margin: 1rem 0 .3rem 1.5rem;
     }
 
     cheque-form .left-margin {
@@ -30,4 +34,9 @@
     cheque-form md-content {
         overflow: hidden;
     }
+
+    cheque-form md-content.dates-field md-checkbox .md-label {
+        margin-left: 50px;
+    }
+
 }

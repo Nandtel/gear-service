@@ -2,8 +2,7 @@ angular.module('mainModule')
     .factory('chequeService', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog',
         function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog) {
 
-            $rootScope.cheque = {repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                components: [], notes: [], payments: [], diagnostics: []};
+            $rootScope.cheque = {components: [], notes: [], payments: [], diagnostics: []};
             $rootScope.chequeList = [];
             $rootScope.balance = {};
             $rootScope.photoList = [];
@@ -18,7 +17,8 @@ angular.module('mainModule')
             function createNewCheque() {
                 $rootScope.cheque = {
                     repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                    components: [], notes: [], payments: [], diagnostics: [], balance: {paidStatus: false}};
+                    components: [], notes: [], payments: [], diagnostics: [], balance: {paidStatus: false},
+                    secretary: $rootScope.user.principal};
             }
 
             function getChequeFromServer(chequeID) {
@@ -103,6 +103,11 @@ angular.module('mainModule')
                     })
             }
 
+            function addToChequeCurrentDateIfEmpty(name) {
+                if ($rootScope.cheque.hasOwnProperty(name))
+                    $rootScope.cheque[name] = moment().format("YYYY-MM-DDTHH:mm:ssZZ");
+            }
+
             return {
                 createNewCheque: createNewCheque,
                 getChequeListFromServer: getChequeListFromServer,
@@ -112,7 +117,8 @@ angular.module('mainModule')
                 getChequeBalanceFromServer: getChequeBalanceFromServer,
                 syncChequeBalanceWithServer: syncChequeBalanceWithServer,
                 getPhotoListFromServer: getPhotoListFromServer,
-                deletePhotoFromServer: deletePhotoFromServer
+                deletePhotoFromServer: deletePhotoFromServer,
+                addToChequeCurrentDateIfEmpty: addToChequeCurrentDateIfEmpty
             }
 
         }]);

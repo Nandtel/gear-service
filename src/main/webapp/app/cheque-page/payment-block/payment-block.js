@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'chequeService',
-        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, chequeService) {
+    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'chequeService', '$state',
+        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, chequeService, $state) {
             var chequeID;
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
@@ -48,6 +48,10 @@ angular.module("mainModule")
 
                 return sum;
             };
+
+            $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
+                $scope.$parent.formDirty.payment = newValue;
+            });
 
             $scope.$watch('chequeID', function (newValue, oldValue) {
                 if(newValue !== undefined) {

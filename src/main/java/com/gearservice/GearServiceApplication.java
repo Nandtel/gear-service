@@ -6,10 +6,17 @@ import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
 import com.gearservice.service.AnalyticsService;
 import com.gearservice.service.SampleDataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.ErrorPage;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -43,6 +50,18 @@ public class GearServiceApplication implements CommandLineRunner {
     @Autowired NoteRepository noteRepository;
     @Autowired AnalyticsService analyticsService;
 
+    @Bean
+    public EmbeddedServletContainerCustomizer notFoundCustomizer(){
+        return new NotFoundIndexTemplate();
+    }
+
+    private static class NotFoundIndexTemplate implements EmbeddedServletContainerCustomizer {
+        @Override
+        public void customize(ConfigurableEmbeddedServletContainer container) {
+            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/"));
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -52,8 +71,8 @@ public class GearServiceApplication implements CommandLineRunner {
         Authority boss = new Authority("ROLE_BOSS");
 
         User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword(passwordEncoder().encode("b"));
+        admin.setUsername("parinov_a");
+        admin.setPassword(passwordEncoder().encode("hren"));
         admin.setFullname("Паринов А.А.");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(
@@ -61,8 +80,8 @@ public class GearServiceApplication implements CommandLineRunner {
         userRepository.save(admin);
 
         User kosoy = new User();
-        kosoy.setUsername("kosoy");
-        kosoy.setPassword(passwordEncoder().encode("b"));
+        kosoy.setUsername("kositsky_a");
+        kosoy.setPassword(passwordEncoder().encode("hren"));
         kosoy.setFullname("Косицкий А.В.");
         kosoy.setEnabled(true);
         kosoy.setAuthorities(new HashSet<>(asList(engineer.withUsername(kosoy))));
@@ -70,7 +89,7 @@ public class GearServiceApplication implements CommandLineRunner {
 
         User novik = new User();
         novik.setUsername("novik_m");
-        novik.setPassword(passwordEncoder().encode("b"));
+        novik.setPassword(passwordEncoder().encode("hren"));
         novik.setFullname("Новик М.С.");
         novik.setEnabled(false);
         novik.setAuthorities(new HashSet<>(asList(engineer.withUsername(novik))));
@@ -78,39 +97,39 @@ public class GearServiceApplication implements CommandLineRunner {
 
         User levchenko = new User();
         levchenko.setUsername("levchenko_d");
-        levchenko.setPassword(passwordEncoder().encode("b"));
+        levchenko.setPassword(passwordEncoder().encode("hren"));
         levchenko.setFullname("Левченко Д.А.");
         levchenko.setEnabled(false);
         levchenko.setAuthorities(new HashSet<>(asList(engineer.withUsername(levchenko))));
         userRepository.save(levchenko);
 
         User nechesa = new User();
-        nechesa.setUsername("nechosa_e");
-        nechesa.setPassword(passwordEncoder().encode("b"));
+        nechesa.setUsername("nechesa_e");
+        nechesa.setPassword(passwordEncoder().encode("hren"));
         nechesa.setFullname("Нечеса Е.М.");
         nechesa.setEnabled(false);
         nechesa.setAuthorities(new HashSet<>(asList(engineer.withUsername(nechesa))));
         userRepository.save(nechesa);
 
         User valikozz = new User();
-        valikozz.setUsername("valikoz");
-        valikozz.setPassword(passwordEncoder().encode("b"));
+        valikozz.setUsername("alexeev_v");
+        valikozz.setPassword(passwordEncoder().encode("hren"));
         valikozz.setFullname("Алексеев В.Ю.");
         valikozz.setEnabled(true);
         valikozz.setAuthorities(new HashSet<>(asList(engineer.withUsername(valikozz))));
         userRepository.save(valikozz);
 
         User svetka = new User();
-        svetka.setUsername("sveta");
-        svetka.setPassword(passwordEncoder().encode("b"));
+        svetka.setUsername("moroz_s");
+        svetka.setPassword(passwordEncoder().encode("hren"));
         svetka.setFullname("Мороз С.В.");
         svetka.setEnabled(true);
         svetka.setAuthorities(new HashSet<>(asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
 
         User yanka = new User();
-        yanka.setUsername("yana");
-        yanka.setPassword(passwordEncoder().encode("b"));
+        yanka.setUsername("rudenko_y");
+        yanka.setPassword(passwordEncoder().encode("hren"));
         yanka.setFullname("Руденко-Алексеева Я.А.");
         yanka.setEnabled(true);
         yanka.setAuthorities(new HashSet<>(asList(boss.withUsername(yanka))));
@@ -157,7 +176,7 @@ public class GearServiceApplication implements CommandLineRunner {
 //        dayBeforeYesterday1.setUsd(new BigDecimal("10"));
 //        dayBeforeYesterday1.setUah(new BigDecimal("10"));
 //        exchangeRateRepository.save(dayBeforeYesterday1);
-
+//
 //        OffsetDateTime now = OffsetDateTime.now();
 //
 //        IntStream.range(0, 5).parallel()

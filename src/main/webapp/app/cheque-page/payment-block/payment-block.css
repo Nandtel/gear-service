@@ -51,4 +51,8 @@
         font-family: 'PT Sans', serif;
     }
 
+    payment-block md-input-container.estimatedCost {
+        margin-top: 40px;
+    }
+
 }

@@ -2,6 +2,9 @@ angular.module("mainModule")
     .controller("LoginPage", ['$scope', '$rootScope', 'auth', '$mdToast', 'vcRecaptchaService',
         function($scope, $rootScope, auth, $mdToast, vcRecaptchaService) {
             $scope.credentials = {};
+            $scope.response = null;
+            $scope.widgetId = null;
+            $scope.model = {key: '6Le_FBETAAAAABTCTvoZWEEIqb1lxqNpNAtRlGWk'};
 
             $scope.authenticated = function() {
                 return auth.authenticated;
@@ -40,22 +43,13 @@ angular.module("mainModule")
                 return boolean && $scope.authenticated();
             };
 
-            $scope.response = null;
-            $scope.widgetId = null;
-            $scope.model = {
-                key: '6Le_FBETAAAAABTCTvoZWEEIqb1lxqNpNAtRlGWk'
-            };
-
             $scope.setResponse = function (response) {
-                console.info('Response available');
                 $scope.response = response;
             };
             $scope.setWidgetId = function (widgetId) {
-                console.info('Created widget ID: %s', widgetId);
                 $scope.widgetId = widgetId;
             };
             $scope.cbExpiration = function() {
-                console.info('Captcha expired. Resetting response object');
                 $scope.response = null;
             };
 

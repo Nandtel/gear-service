@@ -17,20 +17,20 @@ public class ExchangeRateService {
         String now = LocalDate.now().toString();
 
         if(!exchangeRateRepository.exists(now))
-            exchangeRateRepository.save(new ExchangeRate().getFromServer("http://minfindnr.ru/", "li#text-12 font"));
-
-        return exchangeRateRepository.findOne(now);
+            return getExchangeRateFromServer();
+        else
+            return exchangeRateRepository.findOne(now);
     }
 
     public ExchangeRate getCleanCurrencyRates() {
-        String now = LocalDate.now().toString();
+        return getExchangeRateFromServer();
+    }
 
+    private ExchangeRate getExchangeRateFromServer() {
         exchangeRateRepository.save(new ExchangeRate().getFromServer("http://minfindnr.ru/", "li#text-12 font"));
-
-        return exchangeRateRepository.findOne(now);
+        return exchangeRateRepository.findOne(LocalDate.now().toString());
     }
 
     public List<ExchangeRate> getCurrencyRatesList() {return exchangeRateRepository.findTop4ByOrderByAddDateDesc();}
-
     public void setCurrencyRates(ExchangeRate exchangeRate) {exchangeRateRepository.save(exchangeRate);}
 }

@@ -43,17 +43,8 @@ angular.module("mainModule")
                 window.print();
             };
 
-            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
-                if(fromState.name === 'cheque.edit' && !!$scope.chequeForm && $scope.chequeForm.$dirty === true) {
-                    event.preventDefault();
-
-                    warning.showConfirmUnsavedChanges().then(function() {
-                        $scope.chequeForm.$setPristine();
-                        $state.go(toState);
-                    }, function() {});
-                }
-
+            $scope.$watch('chequeForm.$dirty', function (newValue, oldValue) {
+                $scope.$parent.formDirty.cheque = newValue;
             });
 
             $scope.items = [];
@@ -77,6 +68,10 @@ angular.module("mainModule")
                         $scope.users = data;
                     });
             };
+
+            $scope.currentDateIfEmpty = function(name) {
+                chequeService.addToChequeCurrentDateIfEmpty(name);
+            }
 
         }
     ])

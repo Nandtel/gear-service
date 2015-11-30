@@ -18,11 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class Application {
 
-    // Match everything without a suffix (so not a static resource)
-    @RequestMapping(value = "/{[path:[^\\.]*}")
-    public ModelAndView redirect() {
-        // Forward to home page so that route is preserved.
-        return new ModelAndView("forward:/");
-    }
+//    // Match everything without a suffix (so not a static resource)
+//    @RequestMapping(value = "/{[path:[^\\.]*}")
+//    public ModelAndView redirect1() {
+//        // Forward to home page so that route is preserved.
+//        return new ModelAndView("forward:/");
+//    }
 
 }

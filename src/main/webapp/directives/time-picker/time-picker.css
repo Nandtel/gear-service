@@ -1,17 +1,16 @@
 @media screen {
 
     time-picker md-content {
-        margin-left: 10px;
         font-size: 15px;
     }
 
     time-picker md-content md-input-container{
         width: 1.5rem;
-        padding: 8px 0 0 0;
+        padding: 4px 0 0 0;
     }
 
     time-picker span {
-        padding: 8px 3px 0 3px;
+        padding: 4px 3px 0 3px;
     }
 
     time-picker md-input-container {

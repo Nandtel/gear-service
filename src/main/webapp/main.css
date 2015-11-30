@@ -34,7 +34,7 @@ md-content.dates-field md-content p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    color: rgba(0,0,0,0.26);
+    color: rgba(0,0,0,.80);
     margin: 0;
 }
 
