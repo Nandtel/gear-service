@@ -39,12 +39,11 @@
         <md-content layout="column" layout-align="center start" ng-show="hasID">
             <md-checkbox ng-model="cheque.readyStatus"
                          ng-change="currentDateIfEmpty('readyDate')"
-                         class="md-primary with-date"
-                         ng-disabled="disableChequeForm">
+                         class="md-primary with-date">
                 <p>{{ 'Ready' | translate}}</p>
             </md-checkbox>
             <date-picker ng-model="cheque.readyDate"
-                         ng-disabled="!cheque.readyStatus || disableChequeForm"></date-picker>
+                         ng-disabled="!cheque.readyStatus"></date-picker>
         </md-content>
 
         <md-content layout="column" layout-align="center start" ng-show="hasID">

@@ -8,7 +8,7 @@ angular.module('mainModule')
             $rootScope.photoList = [];
 
             function getChequeListFromServer(filterPreferences) {
-                $http.post('/api/cheques/pre/', filterPreferences)
+                $http.post('/api/cheques/', filterPreferences)
                     .success(function(data) {
                         $rootScope.chequeList = data;
                     });

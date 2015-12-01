@@ -90,17 +90,6 @@ public class ChequeService {
         photoRepository.deleteByChequeId(chequeID.toString());
     }
 
-    /**
-     * Method addCheques call by client-side, when it needs to fill database few sample cheques
-     * Call with value of request "/add" and in default request method GET
-     * Should send in response OK status, if code works correct
-     * @return redirect to main page
-     */
-    public ModelAndView addSampleCheques() {
-        IntStream.range(0, 5).parallel().forEach(i -> chequeRepository.save(new Cheque().withRandomData()));
-        return new ModelAndView("redirect:/");
-    }
-
     public List<Cheque> attentionCheques() {
         return chequeRepository.findByReturnedToClientStatusFalseAndDiagnosticsIsNull();
     }
@@ -204,16 +193,11 @@ public class ChequeService {
             } else if (serialNumber.getCellType() == Cell.CELL_TYPE_NUMERIC) {
                 cheque.setSerialNumber(String.valueOf(serialNumber.getNumericCellValue()));
             }
-//            String serialNumber = cellIterator.next().getStringCellValue().trim();
             System.out.println("serialNumber: " + serialNumber);
 
             String defect = cellIterator.next().getStringCellValue().trim();
             cheque.setDefect(defect);
             System.out.println("defect: " + defect);
-
-//            String specialNotes = cellIterator.next().getStringCellValue().trim();
-//            cheque.setSpecialNotes(specialNotes);
-//            System.out.println("specialNotes: " + specialNotes);
 
             Cell specialNotes = cellIterator.next();
             if (specialNotes.getCellType() == Cell.CELL_TYPE_STRING) {
@@ -223,14 +207,6 @@ public class ChequeService {
             }
 
             cellIterator.next();
-//            String[] components = cellIterator.next().getStringCellValue().trim().split(",");
-//            Set<Component> componentsSet =
-//                    Stream.of(components)
-//                            .filter(s -> s.length() >= 2)
-//                            .map(Component::new)
-//                            .collect(toSet());
-//            cheque.setComponents(componentsSet);
-//            System.out.println("components: " + components);
 
             String representativeName = cellIterator.next().getStringCellValue().trim();
             cheque.setRepresentativeName(representativeName);
@@ -334,9 +310,7 @@ public class ChequeService {
             }
 
         }
-
         excel.close();
-
     }
 
     private static OffsetDateTime getOffsetDateTime(Date date) {

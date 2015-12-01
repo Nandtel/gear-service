@@ -15,13 +15,11 @@
         <md-content class="dates-field" layout="row" layout-align="space-around end" flex>
 
             <md-content layout="column" layout-align="end center">
-                <p>{{ 'IntroducedFrom' | translate}}</p>
-                <date-picker ng-model="filter.introducedFrom"></date-picker>
+                <date-picker ng-model="filter.introducedFrom" md-placeholder="'IntroducedFrom'"></date-picker>
             </md-content>
 
             <md-content layout="column" layout-align="end center">
-                <p>{{ 'IntroducedTo' | translate}}</p>
-                <date-picker ng-model="filter.introducedTo"></date-picker>
+                <date-picker ng-model="filter.introducedTo" md-placeholder="'IntroducedTo'"></date-picker>
             </md-content>
 
         </md-content>

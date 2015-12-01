@@ -11,4 +11,12 @@
         height: 78px;
         overflow: hidden;
     }
+
+    filter-form md-content.dates-field {
+        margin-top: 2rem ;
+    }
+
+    filter-form md-autocomplete {
+        outline: none;
+    }
 }

@@ -19,7 +19,7 @@ public class ChequeController {
         return chequeService.getMinChequesList();
     }
 
-    @RequestMapping(value = "/api/cheques/pre/", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/cheques/", method = RequestMethod.POST)
     public List<Cheque> getMinChequesListPre(@RequestBody RequestPreferences request) {
         return chequeService.getMinChequesListPre(request);
     }
@@ -45,13 +45,13 @@ public class ChequeController {
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
     public List<String> autocompleteData(@PathVariable String itemName) {return chequeService.getAutocompleteData(itemName);}
 
-    @RequestMapping(value = "/sample", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void sample() {chequeService.addSampleCheques();}
+//    @RequestMapping(value = "/sample", method = RequestMethod.GET)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void sample() {chequeService.addSampleCheques();}
 
-    @RequestMapping(value = "/read", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void readFromExcelToDB() throws Exception {chequeService.readFromExcelToDB();}
+//    @RequestMapping(value = "/read", method = RequestMethod.GET)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void readFromExcelToDB() throws Exception {chequeService.readFromExcelToDB();}
 
 
 }

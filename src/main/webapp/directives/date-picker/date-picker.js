@@ -21,7 +21,8 @@ angular.module("mainModule")
             controller: 'DatePicker',
             scope: {
                 date: '=ngModel',
-                disabled: '=ngDisabled'
+                disabled: '=ngDisabled',
+                placeholder: '=mdPlaceholder'
             },
             require: ['ngModel', 'ngDisabled'],
             templateUrl: 'directives/date-picker/date-picker.html'
