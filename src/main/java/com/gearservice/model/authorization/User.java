@@ -1,10 +1,6 @@
 package com.gearservice.model.authorization;
 
 import com.fasterxml.jackson.annotation.*;
-import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.cheque.Diagnostic;
-import com.gearservice.model.cheque.Payment;
-import com.gearservice.model.cheque.Photo;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,7 +12,7 @@ public class User {
     @Id private String username;
     @JsonIgnore private String password;
     @Transient @JsonProperty private String newPassword;
-    @Transient @JsonProperty private String oldPassword;
+    @Transient @JsonProperty private String adminPassword;
     private boolean enabled;
     private String fullname;
 
@@ -58,6 +54,6 @@ public class User {
     public void setFullname(String fullname) {this.fullname = fullname;}
     public Set<Authority> getAuthorities() {return authorities;}
     public void setAuthorities(Set<Authority> authorities) {this.authorities = authorities;}
-    public String getOldPassword() {return oldPassword;}
-    public void setOldPassword(String oldPassword) {this.oldPassword = oldPassword;}
+    public String getAdminPassword() {return adminPassword;}
+    public void setAdminPassword(String adminPassword) {this.adminPassword = adminPassword;}
 }

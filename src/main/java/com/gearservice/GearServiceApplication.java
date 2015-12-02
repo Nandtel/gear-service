@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -24,6 +25,7 @@ import static java.util.Arrays.asList;
  */
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableCaching
 public class GearServiceApplication implements CommandLineRunner {
 
     @Autowired UserRepository userRepository;

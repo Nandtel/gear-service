@@ -1,6 +1,7 @@
 package com.gearservice.model.repositories;
 
 import com.gearservice.model.cheque.Cheque;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
@@ -46,24 +47,31 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     Cheque findFirstByOrderByIdDesc();
     List<Cheque> findByReturnedToClientStatusFalseAndDiagnosticsIsNull();
 
+    @Cacheable("customers")
     @Query(value = "SELECT DISTINCT customer_name FROM cheque", nativeQuery = true)
     List<String> listOfCustomerNames();
 
+    @Cacheable("products")
     @Query(value = "SELECT DISTINCT product_name FROM cheque", nativeQuery = true)
     List<String> listOfProductNames();
 
+    @Cacheable("models")
     @Query(value = "SELECT DISTINCT model_name FROM cheque", nativeQuery = true)
     List<String> listOfModelNames();
 
+    @Cacheable("serials")
     @Query(value = "SELECT DISTINCT serial_number FROM cheque", nativeQuery = true)
     List<String> listOfSerialNumbers();
 
+    @Cacheable("representatives")
     @Query(value = "SELECT DISTINCT representative_name FROM cheque", nativeQuery = true)
     List<String> listOfRepresentativeNames();
 
+    @Cacheable("addresses")
     @Query(value = "SELECT DISTINCT address FROM cheque", nativeQuery = true)
     List<String> listOfAddresses();
 
+    @Cacheable("emails")
     @Query(value = "SELECT DISTINCT email FROM cheque", nativeQuery = true)
     List<String> listOfEmails();
 

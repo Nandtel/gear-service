@@ -63,7 +63,7 @@
 
     <tr>
         <td class="border" colspan="2">Комплект: {{getComponents()}}</td>
-        <td class="border" ng-show="!!cheque.warrantyStatus"><span>{{$root.balance.estimatedCost}} руб.</span></td>
+        <td class="border" ng-show="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">{{$root.balance.estimatedCost}} руб.</span></td>
         <td class="border" ng-hide="!!cheque.warrantyStatus"><span>Ориентировочная стоимость: {{$root.balance.estimatedCost}} руб.</span></td>
     </tr>
 
@@ -72,7 +72,7 @@
             <div class="text">
                 <div>Окончательная сумма ремонта согласовывается после диагностики, срок диагностики в теченнии 3-х рабочих дней</div>
                 <div>Ориентировочный срок ремонта: 99 дн.(но не более 5-ти рабочих дней с момента поступления запчастей)</div>
-                <div>Сервисный центр не несет ответственности за сохранность инфомрации</div>
+                <div>Сервисный центр не несет ответственности за сохранность информации</div>
                 <div>В случае отказа от ремонта клиент обязан оплатить диагностику или выполненные работы</div>
             </div>
         </td>
@@ -94,11 +94,11 @@
     </tr>
 
     <tr ng-show="spec.office || spec.tech">
-        <td class="grey border">Контактная инфомрация</td>
+        <td class="grey border">Контактная информация</td>
         <td class="border" colspan="2">{{cheque.phoneNumber}} {{cheque.email}}</td>
     </tr>
 
-    <tr ng-show="spec.office">
+    <tr ng-show="spec.office || spec.tech">
         <td class="grey border">Адрес</td>
         <td class="border" colspan="2">{{cheque.address}}</td>
     </tr>

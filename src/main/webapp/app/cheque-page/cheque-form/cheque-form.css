@@ -39,4 +39,8 @@
         margin-left: 50px;
     }
 
+    cheque-form .simple-input>label {
+        margin-left: 8px;
+    }
+
 }
