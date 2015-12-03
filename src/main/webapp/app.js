@@ -88,6 +88,28 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             $urlRouterProvider.otherwise('/filter');
 
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+            $httpProvider.interceptors.push(
+                ['$q', '$injector', function($q, $injector) {
+                    return {
+                        responseError: function (response) {
+
+                            if(response.status === -1) {
+                                var warning = $injector.get('warning');
+                                warning.showServerConnectionLostException();
+                                return $q.reject(response);
+                            }
+
+                            var $http = $injector.get('$http');
+                            var deferred = $q.defer();
+                            $http.get('/api/test').then(deferred.resolve, deferred.reject);
+                            return deferred.promise.then(function () {
+                                return $http(response.config);
+                            });
+                        }
+                    };
+                }]
+            );
     }])
     .config(['$mdThemingProvider', function($mdThemingProvider){
             $mdThemingProvider

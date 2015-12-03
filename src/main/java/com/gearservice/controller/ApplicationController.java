@@ -50,4 +50,8 @@ public class ApplicationController {
         applicationService.makeSample();
     }
 
+    @RequestMapping(value = "/api/test", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void test() {}
+
 }

@@ -85,6 +85,19 @@ angular.module('mainModule')
 
                     return $mdDialog.show(alertOptLockExc);
 
+                },
+
+                showServerConnectionLostException: function() {
+
+                    var alertSerConnLost = $mdDialog.alert()
+                        .clickOutsideToClose(false)
+                        .title(gettextCatalog.getString('server connection lost title'))
+                        .textContent(gettextCatalog.getString('server connection lost content'))
+                        .ariaLabel('server connection lost')
+                        .ok(gettextCatalog.getString('ok'));
+
+                    return $mdDialog.show(alertSerConnLost);
+
                 }
 
 

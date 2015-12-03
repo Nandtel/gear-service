@@ -38,7 +38,7 @@ angular.module('mainModule')
 					{Authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
 					headers.ReCaptcha = recaptcha;
 
-					$http.get('/api/user', {headers: headers})
+					$http.get('/api/user', {headers: headers, params: {"remember-me": true}})
 						.success(function(data) {
 							$rootScope.user = data;
 							auth.authenticated = !!data.name;

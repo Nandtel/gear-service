@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import java.io.File;
@@ -22,10 +21,8 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.*;
 
 @Service
@@ -91,12 +88,12 @@ public class ChequeService {
     }
 
     public List<Cheque> attentionCheques() {
-        return chequeRepository.findByReturnedToClientStatusFalseAndDiagnosticsIsNull();
+        return chequeRepository.findByReturnedToClientStatusFalseAndReadyStatusFalseAndDiagnosticsIsNull();
     }
 
     @Transactional(readOnly = true)
     public List<Cheque> attentionChequesByDelay() {
-        return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(3).toString());
+        return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(7).toString());
     }
 
     public List<String> getAutocompleteData(String itemName) {
