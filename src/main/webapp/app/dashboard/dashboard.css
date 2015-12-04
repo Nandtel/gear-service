@@ -1,11 +1,11 @@
 @media screen {
-    dashboard div.md-list-item-text:hover {
+    dashboard md-card:hover {
         background-color: #eee !important;
         cursor: pointer;
     }
 
     dashboard md-list md-list-item.md-3-line {
-        margin: 1rem;
+        margin-bottom: 1rem;
         height: auto;
     }
 
@@ -13,4 +13,25 @@
         padding: 0.5rem;
     }
 
+    dashboard md-card md-card-title md-card-title-text .md-headline {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    dashboard md-card md-card-title md-card-title-text:only-child .md-subhead {
+        padding-top: 0;
+        color: rgba(0,0,0,0.57);
+    }
+
+    dashboard md-card {
+        width: 25rem;
+    }
+
+    dashboard md-card md-card-title {
+        padding: 16px 16px;
+    }
+
+    dashboard span.md-subheader-content {
+        font-size: 20px;
+    }
 }

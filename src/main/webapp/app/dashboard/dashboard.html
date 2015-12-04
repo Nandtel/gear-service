@@ -8,39 +8,44 @@
             </div>
         </md-toolbar>
 
-        <md-content>
+        <md-content layout="row" layout-align="center center">
 
-            <md-list>
+            <md-list ng-show="attention.length > 0" flex="50">
+                <md-subheader class="md-no-sticky">{{'new cheques' | translate}}</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="cheque in attention">
+                    <md-card ui-sref="cheque.edit({chequeId:cheque.id})">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{'cheque' | translate}} №{{ cheque.id }} {{'receipt' | translate}} {{ cheque.receiptDate |  amDateFormat:'DD.MM.YYYY'}}</span>
+                                <span class="md-subhead" ng-show="cheque.warrantyStatus">Гарантия</span>
+                                <span class="md-subhead" ng-hide="cheque.warrantyStatus">Не гарантия</span>
+                                <span class="md-subhead">{{'Customer' | translate}}: {{ cheque.customerName }}</span>
+                                <span class="md-subhead">{{'master' | translate}}: {{ cheque.engineer.fullname }}</span>
+                                <span class="md-subhead">{{ cheque.productName }}, {{cheque.modelName}}, {{cheque.serialNumber}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-list-item>
+                <md-divider ></md-divider>
+            </md-list>
 
-                <span ng-show="attention.length > 0">
-                    <md-subheader class="md-no-sticky">{{'new cheques' | translate}}</md-subheader>
-                    <md-list-item class="md-3-line" ng-repeat="cheque in attention">
-                        <div class="md-list-item-text" layout="column" ui-sref="cheque.edit({chequeId:cheque.id})">
-                            <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
-                            <h4 ng-show="cheque.warrantyStatus">Гарантия</h4>
-                            <h4 ng-hide="cheque.warrantyStatus">Не гарантия</h4>
-                            <h4>{{'Introduced' | translate}}: {{ cheque.receiptDate |  amDateFormat:'DD.MM.YYYY'}}</h4>
-                            <p>{{'Customer' | translate}}: {{ cheque.customerName }}</p>
-                            <p>{{'Name of Product' | translate}}: {{ cheque.productName }}, {{cheque.modelName}}, {{cheque.serialNumber}}</p>
-                        </div>
-                    </md-list-item>
-                    <md-divider ></md-divider>
-                </span>
-
-                <span ng-show="delay.length > 0">
-                    <md-subheader class="md-no-sticky">{{'cheques with delay' | translate}}</md-subheader>
-                    <md-list-item class="md-3-line" ng-repeat="cheque in delay">
-                        <div class="md-list-item-text" layout="column" ui-sref="cheque.edit({chequeId:cheque.id})">
-                            <h3>{{'cheque' | translate}} №{{ cheque.id }}</h3>
-                            <h4 ng-show="cheque.warrantyStatus">Гарантия</h4>
-                            <h4 ng-hide="cheque.warrantyStatus">Не гарантия</h4>
-                            <h4>{{'Introduced' | translate}}: {{ cheque.receiptDate |  amDateFormat:'DD.MM.YYYY'}}</h4>
-                            <p>{{'Customer' | translate}}: {{ cheque.customerName }}</p>
-                            <p>{{'Name of Product' | translate}}: {{ cheque.productName }}, {{cheque.modelName}}, {{cheque.serialNumber}}</p>
-                        </div>
-                    </md-list-item>
-                    <md-divider ></md-divider>
-                </span>
+            <md-list ng-show="delay.length > 0" flex="50">
+                <md-subheader class="md-no-sticky">{{'cheques with delay' | translate}}</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="cheque in delay">
+                    <md-card ui-sref="cheque.edit({chequeId:cheque.id})">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{'cheque' | translate}} №{{ cheque.id }} {{'receipt' | translate}} {{ cheque.receiptDate |  amDateFormat:'DD.MM.YYYY'}}</span>
+                                <span class="md-subhead" ng-show="cheque.warrantyStatus">Гарантия</span>
+                                <span class="md-subhead" ng-hide="cheque.warrantyStatus">Не гарантия</span>
+                                <span class="md-subhead">{{'Customer' | translate}}: {{ cheque.customerName }}</span>
+                                <span class="md-subhead">{{'master' | translate}}: {{ cheque.engineer.fullname }}</span>
+                                <span class="md-subhead">{{ cheque.productName }}, {{cheque.modelName}}, {{cheque.serialNumber}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-list-item>
+                <md-divider ></md-divider>
             </md-list>
 
         </md-content>
