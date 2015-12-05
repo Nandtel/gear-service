@@ -22,7 +22,7 @@ public class UserController {
 
     @RequestMapping("/api/user")
     public Principal user(Principal user) {
-        logger.info("User " + user.getName() + " login");
+        logger.info("User " + user.getName().toUpperCase() + " has logged in");
         return user;
     }
 

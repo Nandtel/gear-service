@@ -8,7 +8,7 @@
             </div>
         </md-toolbar>
 
-        <md-content layout="row" layout-align="center center">
+        <md-content layout="row" layout-align="center start">
 
             <md-list ng-show="attention.length > 0" flex="50">
                 <md-subheader class="md-no-sticky">{{'new cheques' | translate}}</md-subheader>
@@ -26,7 +26,6 @@
                         </md-card-title>
                     </md-card>
                 </md-list-item>
-                <md-divider ></md-divider>
             </md-list>
 
             <md-list ng-show="delay.length > 0" flex="50">
@@ -45,7 +44,6 @@
                         </md-card-title>
                     </md-card>
                 </md-list-item>
-                <md-divider ></md-divider>
             </md-list>
 
         </md-content>

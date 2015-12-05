@@ -3,21 +3,24 @@ package com.gearservice.controller;
 import com.gearservice.model.cheque.Cheque;
 import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.service.ChequeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 public class ChequeController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ChequeController.class);
+
     @Autowired ChequeService chequeService;
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.GET)
-    public List<Cheque> getMinChequesList() {
-        return chequeService.getMinChequesList();
-    }
+    public List<Cheque> getMinChequesList() {return chequeService.getMinChequesList();}
 
     @RequestMapping(value = "/api/cheques/", method = RequestMethod.POST)
     public List<Cheque> getMinChequesListPre(@RequestBody RequestPreferences request) {
@@ -25,15 +28,20 @@ public class ChequeController {
     }
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)
-    public Cheque synchronizeCheque(@RequestBody Cheque cheque) {return chequeService.synchronizeCheque(cheque);}
+    public Cheque synchronizeCheque(@RequestBody Cheque cheque, Principal principal) {
+        Cheque chequeAfterSync = chequeService.synchronizeCheque(cheque);
+        logger.info("User " + principal.getName().toUpperCase() + " has synchronized cheque №" + chequeAfterSync.getId());
+        return chequeAfterSync;
+    }
 
     @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.GET)
     public Cheque getCheque(@PathVariable Long chequeID) {return chequeService.getCheque(chequeID);}
 
     @RequestMapping(value = "/api/cheques/{chequeID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteCheque(@PathVariable Long chequeID) {
+    public void deleteCheque(@PathVariable Long chequeID, Principal principal) {
         chequeService.deleteCheque(chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has removed cheque №" + chequeID);
     }
 
     @RequestMapping(value = "/api/attention", method = RequestMethod.GET)

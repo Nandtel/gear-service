@@ -84,7 +84,6 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                     data: {'selectedTab': 1}
                 });
 
-            //$urlRouterProvider.when('', '/filter');
             $urlRouterProvider.otherwise('/filter');
 
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -93,19 +92,22 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 ['$q', '$injector', function($q, $injector) {
                     return {
                         responseError: function (response) {
-
                             if(response.status === -1) {
                                 var warning = $injector.get('warning');
                                 warning.showServerConnectionLostException();
                                 return $q.reject(response);
                             }
 
-                            var $http = $injector.get('$http');
-                            var deferred = $q.defer();
-                            $http.get('/api/test').then(deferred.resolve, deferred.reject);
-                            return deferred.promise.then(function () {
-                                return $http(response.config);
-                            });
+                            if(response.status === 403) {
+                                var $http = $injector.get('$http');
+                                var deferred = $q.defer();
+                                $http.get('/api/test').then(deferred.resolve, deferred.reject);
+                                return deferred.promise.then(function () {
+                                    return $http(response.config);
+                                });
+                            }
+
+                            return $q.reject(response);
                         }
                     };
                 }]

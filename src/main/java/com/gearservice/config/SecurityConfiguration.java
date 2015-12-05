@@ -23,6 +23,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
@@ -33,6 +34,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.session.SessionManagementFilter;
+import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
@@ -98,11 +100,12 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                 .and().csrf()
                     .csrfTokenRepository(csrfTokenRepository())
-                .and().addFilterAfter(csrfHeaderFilter(), SessionManagementFilter.class).sessionManagement()
-                .and().addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class);
+                .and()
+                .addFilterAfter(csrfHeaderFilter(), SessionManagementFilter.class)
+                .addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class);
     }
 
-    public class RedirectAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    private class RedirectAuthenticationEntryPoint implements AuthenticationEntryPoint {
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
             response.sendRedirect("/");
@@ -133,12 +136,5 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
         repository.setHeaderName("X-XSRF-TOKEN");
         return repository;
-    }
-
-    @Bean
-    public TokenBasedRememberMeServices rememberMeServices() {
-        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("KEY", userDetailsService);
-        rememberMeServices.setAlwaysRemember(true);
-        return rememberMeServices;
     }
 }

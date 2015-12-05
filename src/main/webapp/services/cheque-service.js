@@ -12,7 +12,7 @@ angular.module('mainModule')
                     $rootScope.cheque = {
                         repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
                         components: [], notes: [], payments: [], diagnostics: [], balance: {paidStatus: false},
-                        secretary: $rootScope.user.principal};
+                        secretary: $rootScope.user.principal, engineer: $rootScope.user.principal};
                 },
 
                 getChequeListFromServer: function(filterPreferences) {

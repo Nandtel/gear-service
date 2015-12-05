@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'chequeService',
-        function($scope, Upload, $http, $state, $location, $rootScope, warning, chequeService) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'chequeService', '$window',
+        function($scope, Upload, $http, $state, $location, $rootScope, warning, chequeService, $window) {
             var chequeID;
 
             $scope.$watch('chequeID', function(newValue, oldValue) {
@@ -12,16 +12,15 @@ angular.module("mainModule")
 
             $scope.deletePhoto = function(photoID, event) {
                 warning.showConfirmDeletePhoto(event).then(function() {
-                    //chequeService.deletePhotoFromServer(photoID);
-                    $http.delete('api/photo/' + photoID)
+                    $http.delete('api/photo/' + $scope.chequeID + '/'+ photoID)
                         .success(function() {
                             chequeService.getPhotoListFromServer(chequeID);
                         })
                 }, function() {});
             };
 
-            $scope.openPhoto = function(ID) {
-                $state.go('cheque.photo', {photoID: ID});
+            $scope.openPhoto = function(photoID) {
+                $window.open('/api/photo/' + photoID, '_blank');
             };
 
             $scope.$watch('files', function () {
