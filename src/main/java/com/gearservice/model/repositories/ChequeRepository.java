@@ -68,10 +68,6 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     @Query(value = "SELECT DISTINCT representative_name FROM cheque", nativeQuery = true)
     List<String> listOfRepresentativeNames();
 
-    @Cacheable("addresses")
-    @Query(value = "SELECT DISTINCT address FROM cheque", nativeQuery = true)
-    List<String> listOfAddresses();
-
     @Cacheable("emails")
     @Query(value = "SELECT DISTINCT email FROM cheque", nativeQuery = true)
     List<String> listOfEmails();

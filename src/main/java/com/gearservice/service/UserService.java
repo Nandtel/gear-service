@@ -75,12 +75,4 @@ public class UserService implements UserDetailsService {
                 .stream()
                 .collect(toMap(User::getUsername, User::getFullname));
     }
-
-    public List<String> getAutocompleteData(String itemName) {
-        switch (itemName) {
-            case "secretaryName": return userRepository.listOfSecretaries();
-            case "engineerName": return userRepository.listOfEngineers();
-            default: throw new IllegalArgumentException();
-        }
-    }
 }

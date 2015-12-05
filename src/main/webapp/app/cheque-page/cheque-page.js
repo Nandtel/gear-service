@@ -6,15 +6,15 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'chequeService', 'warning', '$state',
-        function ($rootScope, $scope, $stateParams, $http, chequeService, warning, $state) {
+    .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'cheque', 'warning', '$state',
+        function ($rootScope, $scope, $stateParams, $http, cheque, warning, $state) {
             $scope.formDirty = {payment: false, cheque: false};
             $scope.hasID = !!$scope.chequeID;
 
             if ($scope.hasID)
-                chequeService.getChequeFromServer($scope.chequeID);
+                cheque.getChequeFromServer($scope.chequeID);
             else
-                chequeService.createNewCheque();
+                cheque.createNewCheque();
 
             $scope.$watch('cheque.id', function (newValue, oldValue) {
                 $scope.hasID = !!newValue;

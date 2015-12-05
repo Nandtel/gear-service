@@ -1,5 +1,5 @@
 angular.module('mainModule')
-    .factory('chequeService', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog',
+    .factory('cheque', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog',
         function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog) {
 
             $rootScope.cheque = {components: [], notes: [], payments: [], diagnostics: []};
@@ -16,7 +16,7 @@ angular.module('mainModule')
                 },
 
                 getChequeListFromServer: function(filterPreferences) {
-                    $http.post('/api/cheques/', filterPreferences)
+                    $http.post('/api/cheques/list', filterPreferences)
                         .success(function(data) {
                             $rootScope.chequeList = data;
                         });
@@ -100,7 +100,7 @@ angular.module('mainModule')
                 deletePhotoFromServer: function(photoID) {
                     $http.delete('api/photo/' + photoID)
                         .success(function() {
-                            chequeService.getPhotoListFromServer(photoID);
+                            cheque.getPhotoListFromServer(photoID);
                         })
                 },
 

@@ -70,12 +70,12 @@
                          md-search-text="cheque.customerName"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.customerName"
+                         md-items="item in $root.autocomplete.customers | filter: cheque.customerName"
                          md-item-text="item"
                          md-floating-label="{{'Customer' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('customerName')"
+                         ng-click="getAutocompleteData('customers')"
                          ng-disabled="disableChequeForm"
                          ng-required>
             <md-item-template>
@@ -95,12 +95,12 @@
                          md-search-text="cheque.productName"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.productName"
+                         md-items="item in $root.autocomplete.products | filter: cheque.productName"
                          md-item-text="item"
                          md-floating-label="{{'Name of Product' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('productName')"
+                         ng-click="getAutocompleteData('products')"
                          ng-disabled="disableChequeForm"
                          ng-required>
             <md-item-template>
@@ -112,12 +112,12 @@
                          md-search-text="cheque.modelName"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.modelName"
+                         md-items="item in $root.autocomplete.models | filter: cheque.modelName"
                          md-item-text="item"
                          md-floating-label="{{'Model' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('modelName')"
+                         ng-click="getAutocompleteData('models')"
                          ng-disabled="disableChequeForm"
                          ng-required>
             <md-item-template>
@@ -150,12 +150,12 @@
                          md-search-text="cheque.representativeName"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.representativeName"
+                         md-items="item in $root.autocomplete.representatives | filter: cheque.representativeName"
                          md-item-text="item"
                          md-floating-label="{{'Purchaser' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('representativeName')"
+                         ng-click="getAutocompleteData('representatives')"
                          ng-disabled="disableChequeForm"
                          ng-required>
             <md-item-template>
@@ -177,12 +177,12 @@
                          md-search-text="cheque.email"
                          md-no-cache="true"
                          md-min-length="1"
-                         md-items="item in items | filter: cheque.email"
+                         md-items="item in $root.autocomplete.emails | filter: cheque.email"
                          md-item-text="item"
                          md-floating-label="{{'Email' | translate}}"
                          md-autofocus="false"
                          md-autoselect="true"
-                         ng-click="serverItems('email')"
+                         ng-click="getAutocompleteData('emails')"
                          ng-disabled="disableChequeForm">
             <md-item-template>
                 <span md-highlight-text="cheque.email" md-highlight-flags="^i"> {{item}} </span>
@@ -193,15 +193,27 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
-        <user-select ng-model="cheque.engineer"
-                     title="'master'"
-                     ng-disabled="disableChequeForm"
-                     flex="50"></user-select>
+        <md-input-container flex="50">
+            <label>{{'master' | translate}}</label>
+            <md-select ng-model="cheque.engineer"
+                       md-on-open="getAutocompleteData('users')"
+                       placeholder="{{'master' | translate}}"
+                       ng-disabled="disableChequeForm"
+                       ng-model-options="{trackBy: '$value.username'}">
+                <md-option ng-value="user" ng-repeat="user in $root.autocomplete.users">{{user.fullname}}</md-option>
+            </md-select>
+        </md-input-container>
 
-        <user-select ng-model="cheque.secretary"
-                     title="'Inspector'"
-                     ng-disabled="disableChequeForm"
-                     flex="50"></user-select>
+        <md-input-container flex="50">
+            <label>{{'Inspector' | translate}}</label>
+            <md-select ng-model="cheque.secretary"
+                       md-on-open="getAutocompleteData('users')"
+                       placeholder="{{'Inspector' | translate}}"
+                       ng-disabled="disableChequeForm"
+                       ng-model-options="{trackBy: '$value.username'}">
+                <md-option ng-value="user" ng-repeat="user in $root.autocomplete.users">{{user.fullname}}</md-option>
+            </md-select>
+        </md-input-container>
 
     </md-content>
 
@@ -214,9 +226,9 @@
 
             <md-autocomplete
                     md-search-text="$chip"
-                    md-items="item in items | filter: $chip"
+                    md-items="item in $root.autocomplete.components | filter: $chip"
                     md-item-text="item"
-                    ng-click="serverItemsComponent('name')">
+                    ng-click="getAutocompleteData('components')">
                 <span md-highlight-text="$chip">{{item}}</span>
             </md-autocomplete>
 

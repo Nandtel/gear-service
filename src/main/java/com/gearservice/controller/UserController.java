@@ -32,8 +32,4 @@ public class UserController {
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
     public void setUser(@RequestBody User user) {userService.saveUser(user);}
 
-    @RequestMapping(value = "/api/autocomplete/user/{itemName}", method = RequestMethod.GET)
-    public List<String> autocompleteData(@PathVariable String itemName) {return userService.getAutocompleteData(itemName);}
-
-
 }

@@ -96,20 +96,7 @@ public class ChequeService {
         return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(7).toString());
     }
 
-    public List<String> getAutocompleteData(String itemName) {
-        switch (itemName) {
-            case "customerName": return chequeRepository.listOfCustomerNames();
-            case "productName": return chequeRepository.listOfProductNames();
-            case "modelName": return chequeRepository.listOfModelNames();
-            case "serialNumber": return chequeRepository.listOfSerialNumbers();
-            case "representativeName": return chequeRepository.listOfRepresentativeNames();
-            case "address": return chequeRepository.listOfAddresses();
-            case "email": return chequeRepository.listOfEmails();
-            default: throw new IllegalArgumentException();
-        }
-    }
-
-    public List<Cheque> getMinChequesListPre(RequestPreferences request) {
+    public List<Cheque> getMinChequesList(RequestPreferences request) {
 
         return chequeRepository.findByRequest(
                 request.getId(),

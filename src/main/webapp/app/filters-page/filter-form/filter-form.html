@@ -36,12 +36,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.customerName"
+                             md-items="item in $root.autocomplete.customers | filter: filter.customerName"
                              md-item-text="item"
                              md-floating-label="{{'Customer' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItems('customerName')">
+                             ng-click="getAutocompleteData('customers')">
                 <md-item-template>
                     <span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -56,12 +56,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.productName"
+                             md-items="item in $root.autocomplete.products | filter: filter.productName"
                              md-item-text="item"
                              md-floating-label="{{'Name of Product' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItems('productName')">
+                             ng-click="getAutocompleteData('products')">
                 <md-item-template>
                     <span md-highlight-text="filter.productName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -72,12 +72,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.model"
+                             md-items="item in $root.autocomplete.models | filter: filter.model"
                              md-item-text="item"
                              md-floating-label="{{'Model' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItems('modelName')">
+                             ng-click="getAutocompleteData('models')">
                 <md-item-template>
                     <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -88,12 +88,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.serialNumber"
+                             md-items="item in $root.autocomplete.serials | filter: filter.serialNumber"
                              md-item-text="item"
                              md-floating-label="{{'Serial Number' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItems('serialNumber')">
+                             ng-click="getAutocompleteData('serials')">
                 <md-item-template>
                     <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -108,12 +108,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.representativeName"
+                             md-items="item in $root.autocomplete.representatives | filter: filter.representativeName"
                              md-item-text="item"
                              md-floating-label="{{'Purchaser' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItems('representativeName')">
+                             ng-click="getAutocompleteData('representatives')">
                 <md-item-template>
                     <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -128,12 +128,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.secretary"
+                             md-items="item in $root.autocomplete.secretaries | filter: filter.secretary"
                              md-item-text="item"
                              md-floating-label="{{'Inspector' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItemsUser('secretaryName')">
+                             ng-click="getAutocompleteData('secretaries')">
                 <md-item-template>
                     <span md-highlight-text="filter.secretary" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -144,12 +144,12 @@
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in items | filter: filter.engineer"
+                             md-items="item in $root.autocomplete.engineers | filter: filter.engineer"
                              md-item-text="item"
                              md-floating-label="{{'master' | translate}}"
                              md-autofocus="false"
                              md-autoselect="true"
-                             ng-click="serverItemsUser('engineerName')">
+                             ng-click="getAutocompleteData('engineers')">
                 <md-item-template>
                     <span md-highlight-text="filter.engineer" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>

@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
@@ -27,6 +28,23 @@ public class ApplicationService {
     @Autowired BalanceRepository balanceRepository;
     @Autowired DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
+    @Autowired ComponentRepository componentRepository;
+
+    public List<?> getAutocompleteData(String itemName) {
+        switch (itemName) {
+            case "customers": return chequeRepository.listOfCustomerNames();
+            case "products": return chequeRepository.listOfProductNames();
+            case "models": return chequeRepository.listOfModelNames();
+            case "serials": return chequeRepository.listOfSerialNumbers();
+            case "representatives": return chequeRepository.listOfRepresentativeNames();
+            case "emails": return chequeRepository.listOfEmails();
+            case "components": return componentRepository.listOfComponentNames();
+            case "secretaries": return userRepository.listOfSecretaries();
+            case "engineers": return userRepository.listOfEngineers();
+            case "users": return userRepository.findAll();
+            default: throw new IllegalArgumentException();
+        }
+    }
 
     public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 

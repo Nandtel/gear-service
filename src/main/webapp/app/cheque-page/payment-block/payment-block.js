@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'chequeService', '$state',
-        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, chequeService, $state) {
+    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'cheque', '$state',
+        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, cheque, $state) {
             var chequeID;
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
@@ -8,7 +8,7 @@ angular.module("mainModule")
             $scope.security = security;
 
             $scope.synchronizeBalance = function() {
-                chequeService.syncChequeBalanceWithServer(chequeID, $scope.balance);
+                cheque.syncChequeBalanceWithServer(chequeID, $scope.balance);
             };
 
             $scope.addPayment = function() {
@@ -56,7 +56,7 @@ angular.module("mainModule")
             $scope.$watch('chequeID', function (newValue, oldValue) {
                 if(newValue !== undefined) {
                     chequeID = newValue;
-                    chequeService.getChequeBalanceFromServer(chequeID);
+                    cheque.getChequeBalanceFromServer(chequeID);
                 }
             });
 

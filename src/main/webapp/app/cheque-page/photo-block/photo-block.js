@@ -1,12 +1,12 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'chequeService', '$window',
-        function($scope, Upload, $http, $state, $location, $rootScope, warning, chequeService, $window) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'cheque', '$window',
+        function($scope, Upload, $http, $state, $location, $rootScope, warning, cheque, $window) {
             var chequeID;
 
             $scope.$watch('chequeID', function(newValue, oldValue) {
                 if(newValue !== undefined) {
                     chequeID = newValue;
-                    chequeService.getPhotoListFromServer(chequeID);
+                    cheque.getPhotoListFromServer(chequeID);
                 }
             });
 
@@ -14,7 +14,7 @@ angular.module("mainModule")
                 warning.showConfirmDeletePhoto(event).then(function() {
                     $http.delete('api/photo/' + $scope.chequeID + '/'+ photoID)
                         .success(function() {
-                            chequeService.getPhotoListFromServer(chequeID);
+                            cheque.getPhotoListFromServer(chequeID);
                         })
                 }, function() {});
             };
@@ -47,7 +47,7 @@ angular.module("mainModule")
                                 }
                             })
                             .success(function () {
-                                chequeService.getPhotoListFromServer(chequeID);
+                                cheque.getPhotoListFromServer(chequeID);
                             });
                         }
                     }

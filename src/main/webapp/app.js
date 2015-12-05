@@ -73,15 +73,6 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                     url: "^/login",
                     template: '<login-page></login-page>',
                     data: {'selectedTab': 5}
-                })
-                .state('cheque.photo', {
-                    url: "^/photo/{photoID}",
-                    controller:
-                        ['$scope', '$stateParams', function($scope, $stateParams) {
-                            $scope.photoID = $stateParams.photoID;
-                        }],
-                    template: '<photo-download photo-id="photoID"></photo-download>',
-                    data: {'selectedTab': 1}
                 });
 
             $urlRouterProvider.otherwise('/filter');
@@ -136,10 +127,11 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             // Change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
-    .run(['gettextCatalog', 'amMoment', 'auth', 'security', '$document',
-        function(gettextCatalog, amMoment, auth, security, $document){
+    .run(['gettextCatalog', 'amMoment', 'auth', 'security', 'autocomplete',
+        function(gettextCatalog, amMoment, auth, security, autocomplete){
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
             auth.init();
             security.init();
+            autocomplete.getDataFromServer('users');
     }]);

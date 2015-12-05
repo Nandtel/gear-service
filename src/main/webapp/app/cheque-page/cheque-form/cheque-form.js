@@ -1,16 +1,20 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope', 'warning', '$document', 'chequeService',
-        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document, chequeService) {
+    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope',
+        'warning', '$document', 'cheque', 'autocomplete',
+        function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document,
+                 cheque, autocomplete) {
 
             $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
             $scope.security = security;
+            $scope.getAutocompleteData = autocomplete.getDataFromServer;
+            $scope.currentDateIfEmpty = cheque.addToChequeCurrentDateIfEmpty;
 
             /**
              * Method modifyCheque modify current cheque and then send request to server-side
              * It show toast about delivery status
              */
             $scope.syncCheque = function() {
-                chequeService.syncChequeWithServer($scope.cheque)
+                cheque.syncChequeWithServer($scope.cheque)
                     .then(function(success) {
                         if(success) {
                             $scope.chequeForm.$setPristine();
@@ -25,7 +29,7 @@ angular.module("mainModule")
              */
             $scope.deleteCheque = function(event) {
                 warning.showConfirmDeleteCheque(event).then(function() {
-                    chequeService.deleteChequeFromServer($scope.cheque.id);
+                    cheque.deleteChequeFromServer($scope.cheque.id);
                 }, function() {});
             };
 
@@ -46,33 +50,6 @@ angular.module("mainModule")
             $scope.$watch('chequeForm.$dirty', function (newValue, oldValue) {
                 $scope.$parent.formDirty.cheque = newValue;
             });
-
-            $scope.items = [];
-            $scope.serverItems = function(name) {
-                $http.get('/api/autocomplete/' + name)
-                    .success(function(data) {
-                        $scope.items = data;
-                    });
-            };
-
-            $scope.serverItemsComponent = function(name) {
-                $http.get('/api/au/component/' + name)
-                    .success(function(data) {
-                        $scope.items = data;
-                    });
-            };
-
-            $scope.loadUsers = function() {
-                $http.get('/api/users')
-                    .success(function(data) {
-                        $scope.users = data;
-                    });
-            };
-
-            $scope.currentDateIfEmpty = function(name) {
-                chequeService.addToChequeCurrentDateIfEmpty(name);
-            }
-
         }
     ])
     .directive('chequeForm', [function() {

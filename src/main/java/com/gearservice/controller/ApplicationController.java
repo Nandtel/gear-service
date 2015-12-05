@@ -22,6 +22,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
@@ -49,12 +50,13 @@ public class ApplicationController {
 
     @RequestMapping(value = "/api/sample", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public void makeSample() {
-        applicationService.makeSample();
-    }
+    public void makeSample() {applicationService.makeSample();}
 
     @RequestMapping(value = "/api/test", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public void test() {}
+
+    @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
+    public List<?> autocompleteData(@PathVariable String itemName) {return applicationService.getAutocompleteData(itemName);}
 
 }

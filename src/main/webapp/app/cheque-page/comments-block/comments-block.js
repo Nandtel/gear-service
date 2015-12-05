@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning', 'chequeService',
-        function($scope, $http, $document, $rootScope, security, warning, chequeService) {
+    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning', 'cheque',
+        function($scope, $http, $document, $rootScope, security, warning, cheque) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
@@ -18,7 +18,7 @@ angular.module("mainModule")
                         $scope.comment.text = undefined;
                         $scope.form.$setPristine();
                         $scope.form.$setUntouched();
-                        chequeService.getChequeFromServer($scope.cheque.id);
+                        cheque.getChequeFromServer($scope.cheque.id);
                     });
             };
 
@@ -31,7 +31,7 @@ angular.module("mainModule")
 
                     $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
                         .success(function() {
-                            chequeService.getChequeFromServer($scope.cheque.id);
+                            cheque.getChequeFromServer($scope.cheque.id);
                         });
 
                 }, function() {});
