@@ -60,13 +60,10 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
-        <!--<md-input-container flex="75" class="md-icon-float">-->
-            <!--<label translate>Customer</label>-->
-            <!--<md-icon md-font-set="material-icons">people</md-icon>-->
-            <!--<input ng-model="cheque.customerName" required ng-disabled="disableChequeForm">-->
-        <!--</md-input-container>-->
 
+        <input ng-model="cheque.customerName" required hidden>
         <md-autocomplete flex="75" class="md-icon-float"
+                         md-input-name="cust" required
                          md-search-text="cheque.customerName"
                          md-no-cache="true"
                          md-min-length="1"
@@ -76,11 +73,13 @@
                          md-autofocus="false"
                          md-autoselect="true"
                          ng-click="getAutocompleteData('customers')"
-                         ng-disabled="disableChequeForm"
-                         ng-required>
+                         ng-disabled="disableChequeForm">
             <md-item-template>
                 <span md-highlight-text="cheque.customerName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
+            <div ng-messages="chequeForm.cust.$error" ng-if="chequeForm.cust.$touched">
+                <div ng-message="required">You <b>must</b> have a favorite state.</div>
+            </div>
         </md-autocomplete>
 
         <md-input-container flex="25" class="simple-input">
@@ -91,6 +90,7 @@
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
+        <input ng-model="cheque.productName" required hidden>
         <md-autocomplete flex="40"
                          md-search-text="cheque.productName"
                          md-no-cache="true"
@@ -102,12 +102,13 @@
                          md-autoselect="true"
                          ng-click="getAutocompleteData('products')"
                          ng-disabled="disableChequeForm"
-                         ng-required>
+                         required>
             <md-item-template>
                 <span md-highlight-text="cheque.productName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
         </md-autocomplete>
 
+        <input ng-model="cheque.modelName" required hidden>
         <md-autocomplete flex="30"
                          md-search-text="cheque.modelName"
                          md-no-cache="true"
@@ -119,7 +120,7 @@
                          md-autoselect="true"
                          ng-click="getAutocompleteData('models')"
                          ng-disabled="disableChequeForm"
-                         ng-required>
+                         required>
             <md-item-template>
                 <span md-highlight-text="cheque.modelName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
@@ -146,6 +147,7 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
+        <input ng-model="cheque.representativeName" required hidden>
         <md-autocomplete flex="30" class="md-icon-float"
                          md-search-text="cheque.representativeName"
                          md-no-cache="true"
@@ -157,7 +159,7 @@
                          md-autoselect="true"
                          ng-click="getAutocompleteData('representatives')"
                          ng-disabled="disableChequeForm"
-                         ng-required>
+                         required>
             <md-item-template>
                 <span md-highlight-text="cheque.representativeName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>

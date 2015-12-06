@@ -54,4 +54,8 @@
     comments-block md-list {
         padding: 0;
     }
+
+    comments-block .comments {
+        overflow: hidden;
+    }
 }

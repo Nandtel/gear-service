@@ -17,7 +17,7 @@
 
 <md-divider></md-divider>
 
-<md-content layout-align="center start">
+<md-content layout-align="center start" class="comments">
 
     <md-list class="comments-list">
         <md-list-item class="md-3-line"
@@ -36,7 +36,7 @@
                     </md-button>
                 </md-content>
 
-                <md-divider ng-if="!$last"></md-divider>
+                <md-divider md-inset ng-if="!$last"></md-divider>
             </md-content>
 
         </md-list-item>

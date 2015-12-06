@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,8 @@ public class ChequeService {
      * @param cheque is data for Cheque.class, that was create on client-side
      * @return Cheque, that added
      */
+    @Modifying
+    @Transactional
     public Cheque synchronizeCheque(@RequestBody Cheque cheque) {
         Long ID = cheque.getId();
 
@@ -72,6 +75,7 @@ public class ChequeService {
      * @param chequeID is ID of cheque in database, that client-side wants
      * @return Cheque, that client-side was request
      */
+    @Transactional(readOnly = true)
     public Cheque getCheque(@PathVariable Long chequeID) {
         return chequeRepository.findById(chequeID);
     }
@@ -82,11 +86,14 @@ public class ChequeService {
      * @param chequeID is ID of cheque in database, that client-side wants to delete
      * @return redirect to main page
      */
+    @Modifying
+    @Transactional
     public void deleteCheque(@PathVariable Long chequeID) {
         chequeRepository.delete(chequeID);
         photoRepository.deleteByChequeId(chequeID.toString());
     }
 
+    @Transactional(readOnly = true)
     public List<Cheque> attentionCheques() {
         return chequeRepository.findByReturnedToClientStatusFalseAndReadyStatusFalseAndDiagnosticsIsNull();
     }
@@ -96,6 +103,7 @@ public class ChequeService {
         return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(7).toString());
     }
 
+    @Transactional(readOnly = true)
     public List<Cheque> getMinChequesList(RequestPreferences request) {
 
         return chequeRepository.findByRequest(

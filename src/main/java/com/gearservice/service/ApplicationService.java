@@ -6,9 +6,11 @@ import com.gearservice.model.cheque.*;
 import com.gearservice.model.exchangeRate.ExchangeRate;
 import com.gearservice.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,6 +32,7 @@ public class ApplicationService {
     @Autowired NoteRepository noteRepository;
     @Autowired ComponentRepository componentRepository;
 
+    @Transactional(readOnly = true)
     public List<?> getAutocompleteData(String itemName) {
         switch (itemName) {
             case "customers": return chequeRepository.listOfCustomerNames();
@@ -54,6 +57,8 @@ public class ApplicationService {
      * Should send in response OK status, if code works correct
      * @return redirect to main page
      */
+    @Modifying
+    @Transactional
     public void makeSample() {
         Authority engineer = new Authority("ROLE_ENGINEER");
         Authority secretary = new Authority("ROLE_SECRETARY");

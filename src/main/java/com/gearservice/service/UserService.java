@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,9 +30,7 @@ public class UserService implements UserDetailsService {
         if(user == null) throw new UsernameNotFoundException("No user found for username '" + username +"'.");
         return new UserDetailsImpl(user);
     }
-
     public List<User> getUserList() {return userRepository.findAll();}
-
     public void saveUser(User user) {
 
         if (userRepository.exists(user.getUsername())) {
@@ -69,6 +66,7 @@ public class UserService implements UserDetailsService {
         @Override public boolean isEnabled() {return super.isEnabled();}
         @Override public Set<Authority> getAuthorities() {return super.getAuthorities();}
     }
+
 
     public Map<String, String> getUsernameFullnameMap() {
         return userRepository.findAll()

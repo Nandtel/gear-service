@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -53,6 +54,32 @@ public class AnalyticsService {
                 return currency.multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
             };
 
+    private static void createRow(Long chequeID, LocalDate receiptDate, LocalDate returnedToClientDate,
+                                  String brandName, String fullname, double income, double profit) {
+        Row row1 = sheet.createRow(rowID++);
+        Cell cell11 = row1.createCell(0);
+        cell11.setCellValue(chequeID);
+        Cell cell12 = row1.createCell(1);
+        cell12.setCellValue(Date.from(receiptDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        cell12.setCellStyle(dateStyle);
+        Cell cell13 = row1.createCell(2);
+        cell13.setCellValue(Date.from(returnedToClientDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        cell13.setCellStyle(dateStyle);
+        Cell cell14 = row1.createCell(3);
+        cell14.setCellValue(brandName);
+        Cell cell15 = row1.createCell(4);
+        cell15.setCellValue(fullname);
+        Cell cell16 = row1.createCell(5);
+        cell16.setCellStyle(rubleStyle);
+        cell16.setCellValue(income);
+        Cell cell17 = row1.createCell(6);
+        cell17.setCellValue(profit);
+        cell17.setCellStyle(rubleStyle);
+    }
+
+    private static void resetRowId() {rowID = 1;}
+
+    @Transactional(readOnly = true)
     public byte[] getExcelFile(AnalyticsPreferences analyticsPreferences) throws Exception {
         FileInputStream excel = new FileInputStream(new File("analytics.xlsx"));
 
@@ -118,30 +145,5 @@ public class AnalyticsService {
 
         return file.toByteArray();
     }
-
-    private static void createRow(Long chequeID, LocalDate receiptDate, LocalDate returnedToClientDate,
-                                  String brandName, String fullname, double income, double profit) {
-        Row row1 = sheet.createRow(rowID++);
-        Cell cell11 = row1.createCell(0);
-        cell11.setCellValue(chequeID);
-        Cell cell12 = row1.createCell(1);
-        cell12.setCellValue(Date.from(receiptDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        cell12.setCellStyle(dateStyle);
-        Cell cell13 = row1.createCell(2);
-        cell13.setCellValue(Date.from(returnedToClientDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        cell13.setCellStyle(dateStyle);
-        Cell cell14 = row1.createCell(3);
-        cell14.setCellValue(brandName);
-        Cell cell15 = row1.createCell(4);
-        cell15.setCellValue(fullname);
-        Cell cell16 = row1.createCell(5);
-        cell16.setCellStyle(rubleStyle);
-        cell16.setCellValue(income);
-        Cell cell17 = row1.createCell(6);
-        cell17.setCellValue(profit);
-        cell17.setCellStyle(rubleStyle);
-    }
-
-    private static void resetRowId() {rowID = 1;}
 
 }

@@ -1,8 +1,8 @@
 @media screen {
-    dashboard md-card:hover {
-        background-color: #eee !important;
-        cursor: pointer;
-    }
+    /*dashboard md-card:hover {*/
+        /*background-color: #eee !important;*/
+        /*cursor: pointer;*/
+    /*}*/
 
     dashboard md-list md-list-item.md-3-line {
         height: auto;

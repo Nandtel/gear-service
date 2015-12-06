@@ -4,7 +4,10 @@ body {
     zoom: 85%;
 }
 
-body>div.md-select-menu-container, body>div.md-datepicker-calendar-pane {
+body>div.md-select-menu-container,
+body>div.md-datepicker-calendar-pane,
+body>div.md-dialog-container,
+body>div.md-scroll-mask {
     zoom: 100%;
 }
 
