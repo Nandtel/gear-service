@@ -113,6 +113,12 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             $mdThemingProvider
                 .theme('inner-block')
                 .primaryPalette('grey', {'default':'50'});
+
+            $mdThemingProvider
+                .theme('header')
+                .primaryPalette('grey', {'default':'50'})
+                .accentPalette('blue-grey', {'default':'50'})
+                .dark();
     }])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

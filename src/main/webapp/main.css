@@ -15,6 +15,19 @@ body>div {
     zoom: 117%;
 }
 
+body div.md-dialog-container md-dialog {
+    width: 25rem;
+}
+
+body div.md-dialog-container md-dialog h2 {
+    font-weight: bold;
+}
+
+body div.md-dialog-container md-dialog p {
+    line-height: 1.2rem;
+}
+
+
 .content-block:first-child {
     margin-top: 1rem;
     margin-bottom: .5rem;
@@ -28,7 +41,8 @@ body>div {
 /* Loading bar */
 
 #loading-bar .bar {
-    background: #212121;
+    background: white;
+    /*background: #212121;*/
 }
 
 /* Dates fields in filters, create and edit*/

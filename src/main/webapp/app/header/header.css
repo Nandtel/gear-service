@@ -17,4 +17,47 @@
     header md-tabs[md-border-bottom] md-tabs-wrapper {
         border: none;
     }
+
+    header .toolbar {
+        height: 50px;
+    }
+
+    header .toolbar,
+    header .toolbar md-content {
+        background: #212121;
+        color: white;
+    }
+
+    header md-icon.md-header-theme {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    header img {
+        width: 10rem;
+    }
+
+    header h4 {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+    }
+
+    header h4 span.sign {
+        font-family: 'Roboto', monospace;
+    }
+
+    header h1 {
+        font-weight: 400;
+        font-size: 1.3em;
+    }
+
+    header md-content.login-panel span {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    header span.logout {
+        cursor: pointer;
+        outline: none;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
 }

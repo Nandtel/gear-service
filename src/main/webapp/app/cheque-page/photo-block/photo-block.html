@@ -30,6 +30,7 @@
                     <p flex="15">{{photo.username}}</p>
                     <p flex="25">{{photo.addDate | amDateFormat:'LLL'}}</p>
                     <md-icon class="material-icons md-secondary"
+                             ng-show="security.hasRole('ROLE_ADMIN')"
                              type="button"
                              ng-click="deletePhoto(photo.id, $event)"
                              aria-label="Delete photo">delete</md-icon>
