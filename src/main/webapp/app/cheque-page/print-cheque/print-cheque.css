@@ -84,4 +84,8 @@
         margin-top: 4px;
     }
 
+    print-cheque .right {
+        text-align: right;
+    }
+
 }

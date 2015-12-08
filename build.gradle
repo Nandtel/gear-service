@@ -54,7 +54,3 @@ dependencies {
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
-}

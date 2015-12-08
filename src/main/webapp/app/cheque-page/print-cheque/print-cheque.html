@@ -63,8 +63,8 @@
 
     <tr>
         <td class="border" colspan="2">Комплект: {{getComponents()}}</td>
-        <td class="border" ng-show="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">{{$root.balance.estimatedCost}} руб.</span></td>
-        <td class="border" ng-hide="!!cheque.warrantyStatus"><span>Ориентировочная стоимость: {{$root.balance.estimatedCost}} руб.</span></td>
+        <td class="border right" ng-show="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">{{$root.balance.estimatedCost}} руб.</span></td>
+        <td class="border right" ng-hide="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">Ориентировочная стоимость: {{$root.balance.estimatedCost}} руб.</span></td>
     </tr>
 
     <tr class="narrowly" ng-show="spec.office || spec.client">

@@ -1,7 +1,8 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'cheque', '$window',
-        function($scope, Upload, $http, $state, $location, $rootScope, warning, cheque, $window) {
+    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'cheque', '$window', 'security',
+        function($scope, Upload, $http, $state, $location, $rootScope, warning, cheque, $window, security) {
             var chequeID;
+            $scope.security = security;
 
             $scope.$watch('chequeID', function(newValue, oldValue) {
                 if(newValue !== undefined) {
