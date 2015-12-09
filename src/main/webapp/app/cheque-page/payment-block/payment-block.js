@@ -8,7 +8,13 @@ angular.module("mainModule")
             $scope.security = security;
 
             $scope.synchronizeBalance = function() {
-                cheque.syncChequeBalanceWithServer(chequeID, $scope.balance);
+                cheque.syncChequeBalanceWithServer(chequeID, $scope.balance)
+                    .then(function(success) {
+                        if(success) {
+                            $scope.paymentForm.$setPristine();
+                            $scope.paymentForm.$setUntouched();
+                        }
+                    });
             };
 
             $scope.addPayment = function() {

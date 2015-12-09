@@ -78,8 +78,10 @@ angular.module('mainModule')
                 },
 
                 syncChequeBalanceWithServer: function(chequeID, balance) {
+                    var deferred = $q.defer();
                     $http.post('/api/balance/cheque/' + chequeID, balance)
                         .success(function(balance) {
+                            deferred.resolve(true);
                             $rootScope.balance = balance;
 
                             $mdToast.show(
@@ -88,7 +90,12 @@ angular.module('mainModule')
                                     .position('top right')
                                     .hideDelay(700)
                             );
+                        })
+                        .error(function() {
+                            deferred.resolve(false);
                         });
+
+                    return deferred.promise;
                 },
 
                 getPhotoListFromServer: function(chequeID) {
