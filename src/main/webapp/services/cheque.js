@@ -2,16 +2,19 @@ angular.module('mainModule')
     .factory('cheque', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog',
         function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog) {
 
-            $rootScope.cheque = {components: [], notes: [], payments: [], diagnostics: []};
+            $rootScope.cheque = {
+                repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
+                components: [], notes: [], diagnostics: [], balance: {paidStatus: false},
+                secretary: $rootScope.user.principal, engineer: $rootScope.user.principal};
             $rootScope.chequeList = [];
-            $rootScope.balance = {};
+            $rootScope.balance = {payments: []};
             $rootScope.photoList = [];
 
             return {
                 createNewCheque: function() {
                     $rootScope.cheque = {
                         repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                        components: [], notes: [], payments: [], diagnostics: [], balance: {paidStatus: false},
+                        components: [], notes: [], diagnostics: [], balance: {paidStatus: false},
                         secretary: $rootScope.user.principal, engineer: $rootScope.user.principal};
                 },
 
@@ -104,11 +107,9 @@ angular.module('mainModule')
                             $rootScope.photoList = data;
                         })
                 },
+
                 deletePhotoFromServer: function(photoID) {
-                    $http.delete('api/photo/' + photoID)
-                        .success(function() {
-                            cheque.getPhotoListFromServer(photoID);
-                        })
+                    $http.delete('api/photo/' + photoID);
                 },
 
                 addToChequeCurrentDateIfEmpty: function(name) {

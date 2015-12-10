@@ -11,6 +11,10 @@ public class RequestPreferences {
     private OffsetDateTime introducedFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime introducedTo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+    private OffsetDateTime returnedToClientFrom;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+    private OffsetDateTime returnedToClientTo;
     private String customerName;
     private String productName;
     private String model;
@@ -29,6 +33,10 @@ public class RequestPreferences {
     public void setIntroducedFrom(OffsetDateTime introducedFrom) {this.introducedFrom = introducedFrom;}
     public OffsetDateTime getIntroducedTo() {return introducedTo;}
     public void setIntroducedTo(OffsetDateTime introducedTo) {this.introducedTo = introducedTo;}
+    public OffsetDateTime getReturnedToClientFrom() {return returnedToClientFrom;}
+    public void setReturnedToClientFrom(OffsetDateTime returnedToClientFrom) {this.returnedToClientFrom = returnedToClientFrom;}
+    public OffsetDateTime getReturnedToClientTo() {return returnedToClientTo;}
+    public void setReturnedToClientTo(OffsetDateTime returnedToClientTo) {this.returnedToClientTo = returnedToClientTo;}
     public String getCustomerName() {return customerName;}
     public void setCustomerName(String customerName) {this.customerName = customerName;}
     public String getProductName() {return productName;}

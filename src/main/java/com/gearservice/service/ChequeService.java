@@ -110,6 +110,8 @@ public class ChequeService {
                 request.getId(),
                 request.getIntroducedFrom(),
                 request.getIntroducedTo(),
+                request.getReturnedToClientFrom(),
+                request.getReturnedToClientTo(),
                 request.getCustomerName(),
                 request.getProductName(),
                 request.getModel(),

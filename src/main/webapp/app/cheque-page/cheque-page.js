@@ -11,9 +11,11 @@ angular.module("mainModule")
             $scope.formDirty = {payment: false, cheque: false};
             $scope.hasID = !!$scope.chequeID;
 
-            if ($scope.hasID)
+            if ($scope.hasID) {
                 cheque.getChequeFromServer($scope.chequeID);
-            else
+                cheque.getChequeBalanceFromServer($scope.chequeID);
+                cheque.getPhotoListFromServer($scope.chequeID);
+            } else
                 cheque.createNewCheque();
 
             $scope.$watch('cheque.id', function (newValue, oldValue) {

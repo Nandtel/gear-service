@@ -1,14 +1,13 @@
 angular.module("mainModule")
     .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'cheque', '$state',
         function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, cheque, $state) {
-            var chequeID;
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
 
             $scope.security = security;
 
             $scope.synchronizeBalance = function() {
-                cheque.syncChequeBalanceWithServer(chequeID, $scope.balance)
+                cheque.syncChequeBalanceWithServer($scope.chequeID, $scope.balance)
                     .then(function(success) {
                         if(success) {
                             $scope.paymentForm.$setPristine();
@@ -57,13 +56,6 @@ angular.module("mainModule")
 
             $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
                 $scope.$parent.formDirty.payment = newValue;
-            });
-
-            $scope.$watch('chequeID', function (newValue, oldValue) {
-                if(newValue !== undefined) {
-                    chequeID = newValue;
-                    cheque.getChequeBalanceFromServer(chequeID);
-                }
             });
 
             $rootScope.$watch('balance', function (newValue, oldValue) {

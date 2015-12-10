@@ -10,7 +10,7 @@
 
     <md-data-table-container>
         <table md-data-table id="table">
-            <thead md-order="tableFilter.order" md-trigger="onOrderChange">
+            <thead md-order="$root.tableFilter.order" md-trigger="onOrderChange">
             <tr>
                 <th name="{{'Id'| translate}}" order-by="id"></th>
                 <th name="{{'Customer'| translate}}" order-by="customerName"></th>
@@ -29,8 +29,9 @@
             </thead>
             <tbody md-auto-select>
             <tr ng-repeat="cheque in $root.chequeList
-				| orderBy: tableFilter.order
-				| limitTo: tableFilter.limit: (tableFilter.page - 1) * tableFilter.limit" ui-sref="cheque.edit({chequeId:cheque.id})">
+				| orderBy: $root.tableFilter.order
+				| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
+                ng-click="open($event, cheque.id)" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td>{{cheque.id}}</td>
                 <td>{{cheque.customerName}}</td>
                 <td>{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</td>
@@ -49,7 +50,7 @@
     </md-data-table-container>
 
     <md-data-table-toolbar layout-align="center center">
-        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="tableFilter.limit" md-page="tableFilter.page" md-total="{{$root.chequeList.length}}" md-trigger="onPageChange"></md-data-table-pagination>
+        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page" md-total="{{$root.chequeList.length}}" md-trigger="onPageChange"></md-data-table-pagination>
     </md-data-table-toolbar>
 
 </section>

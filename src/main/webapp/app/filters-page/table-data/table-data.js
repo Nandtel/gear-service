@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('TableData', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog',
-        function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog)  {
+    .controller('TableData', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$state',
+        function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $state)  {
 
             $scope.label = {
                 text: gettextCatalog.getString('Rows per page:'),
@@ -16,6 +16,12 @@ angular.module("mainModule")
              * Method necessary for md-data-table
              */
             $scope.onOrderChange = function() {};
+
+            $scope.open = function($event, chequeID) {
+                if ($event.which === 2 || ($event.which === 1 && ($event.metaKey || $event.ctrlKey))) {
+                    window.open($state.href('cheque.edit', {chequeId: chequeID}, {absolute: true}), '_blank');
+                }
+            };
 
     }])
     .directive('tableData', function() {

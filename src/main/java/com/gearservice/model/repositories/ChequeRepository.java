@@ -78,6 +78,8 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "AND (c.id = :id OR :id IS NULL) " +
             "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
             "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
+            "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
+            "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
             "AND (c.customerName LIKE %:customerName% OR :customerName IS NULL) " +
             "AND (c.productName LIKE %:productName% OR :productName IS NULL) " +
             "AND (c.modelName LIKE %:modelName% OR :modelName IS NULL) " +
@@ -93,6 +95,8 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             @Param("id") Long id,
             @Param("introducedFrom") OffsetDateTime introducedFrom,
             @Param("introducedTo") OffsetDateTime introducedTo,
+            @Param("returnedToClientFrom") OffsetDateTime returnedToClientFrom,
+            @Param("returnedToClientTo") OffsetDateTime returnedToClientTo,
             @Param("customerName") String customerName,
             @Param("productName") String productName,
             @Param("modelName") String model,

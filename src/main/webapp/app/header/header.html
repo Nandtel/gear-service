@@ -1,7 +1,7 @@
 <md-content md-theme="header" layout="column" layout-align="space-between stretch" ng-show="authenticated()" class="toolbar">
 
     <md-content layout="row" layout-align="space-between end">
-        <md-tabs md-selected="selectedTab" class="at-right" md-dynamic-height md-border-bottom flex="50">
+        <md-tabs md-selected="selectedTab" class="at-right" md-dynamic-height md-border-bottom flex="45">
             <md-tab ui-sref="cheque.filter" id="filters" ng-disabled="!authenticated()">{{'Filters' | translate}}</md-tab>
             <md-tab ui-sref="cheque.create" ng-disabled="!authenticated()">{{'cheque' | translate}}</md-tab>
             <md-tab ui-sref="cheque.dashboard" ng-disabled="!authenticated()"
@@ -9,11 +9,10 @@
             <md-tab ui-sref="cheque.analytics" ng-disabled="!authenticated()"
                     ng-if="security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])">{{'analytics' | translate}}</md-tab>
             <md-tab ui-sref="cheque.profile" ng-if="security.hasRole('ROLE_ADMIN')">Управление</md-tab>
-            <md-tab ng-if="!authenticated()">{{'login' | translate}}</md-tab>
-            <!--<md-tab ng-if="authenticated()" ng-click="logout()">{{'logout' | translate}}</md-tab>-->
+            <!--<md-tab ng-if="!authenticated()">{{'login' | translate}}</md-tab>-->
         </md-tabs>
 
-        <md-content layout-align="center end" flex="25">
+        <md-content layout-align="center end" flex="30">
 
             <md-content layout="row" layout-padding layout-align="end end" flex ng-show="!!$root.currencyRates.addDate">
                 <h4>{{'currency rates' | translate}} {{$root.currencyRates.addDate | amDateFormat: 'll'}}</h4>
@@ -27,17 +26,12 @@
 
         <md-content layout-padding layout="row" layout-align="end end" flex="25" class="login-panel">
             <span>{{profileName()}}</span>
-            <!--<span ng-click="logout()" ng-if="authenticated()" class="logout">ВЫЙТИ</span>-->
             <md-button type="button" ng-if="authenticated()" ng-click="logout()" class="md-icon-button logout">
                 <md-icon md-font-set="material-icons" aria-label="exit_to_app">exit_to_app</md-icon>
             </md-button>
         </md-content>
 
     </md-content>
-
-
-
-
 
 </md-content>
 <md-divider ng-show="authenticated()"></md-divider>

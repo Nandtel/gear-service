@@ -21,4 +21,8 @@
     table-data .table-block {
         margin: 0.5rem 2rem;
     }
+
+    table-data tr {
+        outline: none;
+    }
 }

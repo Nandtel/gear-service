@@ -1,21 +1,13 @@
 angular.module("mainModule")
     .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'cheque', '$window', 'security',
         function($scope, Upload, $http, $state, $location, $rootScope, warning, cheque, $window, security) {
-            var chequeID;
             $scope.security = security;
-
-            $scope.$watch('chequeID', function(newValue, oldValue) {
-                if(newValue !== undefined) {
-                    chequeID = newValue;
-                    cheque.getPhotoListFromServer(chequeID);
-                }
-            });
 
             $scope.deletePhoto = function(photoID, event) {
                 warning.showConfirmDeletePhoto(event).then(function() {
                     $http.delete('api/photo/' + $scope.chequeID + '/'+ photoID)
                         .success(function() {
-                            cheque.getPhotoListFromServer(chequeID);
+                            cheque.getPhotoListFromServer($scope.chequeID);
                         })
                 }, function() {});
             };
@@ -43,12 +35,12 @@ angular.module("mainModule")
                                 url: '/api/upload-image',
                                 data: {
                                     file: file,
-                                    chequeID: chequeID,
+                                    chequeID: $scope.chequeID,
                                     username: $rootScope.user.principal.username
                                 }
                             })
                             .success(function () {
-                                cheque.getPhotoListFromServer(chequeID);
+                                cheque.getPhotoListFromServer($scope.chequeID);
                             });
                         }
                     }

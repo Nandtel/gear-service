@@ -133,11 +133,12 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
             // Change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
     }])
-    .run(['gettextCatalog', 'amMoment', 'auth', 'security', 'autocomplete',
-        function(gettextCatalog, amMoment, auth, security, autocomplete){
-            gettextCatalog.setCurrentLanguage('ru');
-            amMoment.changeLocale('ru');
+    .run(['gettextCatalog', 'amMoment', 'auth', 'security', 'autocomplete', '$rootScope',
+        function(gettextCatalog, amMoment, auth, security, autocomplete, $rootScope){
             auth.init();
             security.init();
+            gettextCatalog.setCurrentLanguage('ru');
+            amMoment.changeLocale('ru');
             autocomplete.getDataFromServer('users');
+            $rootScope.tableFilter = {order: '-id', limit: 15, page: 1};
     }]);

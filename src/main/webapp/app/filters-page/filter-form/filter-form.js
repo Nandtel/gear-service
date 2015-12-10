@@ -2,7 +2,6 @@ angular.module("mainModule")
     .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q', 'cheque', 'autocomplete',
         function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q, cheque, autocomplete) {
             $scope.filterForm = {};
-            $scope.tableFilter = {order: '-id', limit: 15, page: 1};
             $scope.getAutocompleteData = autocomplete.getDataFromServer;
 
             /**
