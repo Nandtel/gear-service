@@ -20,13 +20,26 @@ Client-side:
 - Moment JS
 - Google ReCaptcha
 - HTML5, CSS3
-- Npm JS package manager
-- Bower JS package manager
+- Npm JS, Bower JS package managers
 - Grunt JS task runner
 - Jasmine framework for testing code
 - Protractor E2E-test framework
 - Karma unit-test runner
 - another client-side dependencies you can see in bower.json for bower and package.json for npm in root of project  
+
+# Demo
+Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
+Wait a few seconds until the Heroku initializes app. 
+
+For Heroku app was rewritten:
+- Migrated from MySQL to PostgreSQL
+- Disabled Mongo, all blobs store in PostgreSQL
+- Disabled Google reCaptcha
+
+Available following users for login:
+- login: 'admin', pass: 'pass' with administrator role
+- login: 'engin', pass: 'pass' with engineer restrictions
+- login: 'secret', pass: 'pass' with secretary restrictions
 
 # License
 The MIT License (MIT)
