@@ -3,7 +3,8 @@
     <md-toolbar md-theme="inner-block">
         <div class="md-toolbar-tools">
             <md-checkbox ng-model="balance.paidStatus" class="md-primary" md-theme="default"
-                         ng-disabled="!security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY'])">
+                         ng-disabled="!security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY'])
+                         || !hasAtLeastOnePayment()">
                 <h2>
                     <span ng-hide="balance.paidStatus" translate>not paid</span>
                     <span ng-show="balance.paidStatus" translate>paid</span>
@@ -30,7 +31,7 @@
                                    ng-show="!balance.paidStatus
                                    && (security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])
                                    || security.isSameUser(payment.user))">
-                            <md-icon md-font-set="material-icons" ng-click="delPayment(payment.id, $event)">delete</md-icon>
+                            <md-icon md-font-set="material-icons" ng-click="delPayment(payment, $event)">delete</md-icon>
                         </md-button>
                 </md-content>
 

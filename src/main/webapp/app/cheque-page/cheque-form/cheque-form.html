@@ -77,9 +77,9 @@
             <md-item-template>
                 <span md-highlight-text="cheque.customerName" md-highlight-flags="^i"> {{item}} </span>
             </md-item-template>
-            <div ng-messages="chequeForm.cust.$error" ng-if="chequeForm.cust.$touched">
-                <div ng-message="required">You <b>must</b> have a favorite state.</div>
-            </div>
+            <!--<div ng-messages="chequeForm.cust.$error" ng-if="chequeForm.cust.$touched">-->
+                <!--<div ng-message="required">You <b>must</b> have a favorite state.</div>-->
+            <!--</div>-->
         </md-autocomplete>
 
         <md-input-container flex="25" class="simple-input">
@@ -221,8 +221,6 @@
 
     <md-content layout-padding layout="row" layout-align="center start">
         <md-chips ng-model="cheque.components" flex
-                  placeholder="{{'Kits' | translate}}"
-                  secondary-placeholder="{{'Kits' | translate}}"
                   md-transform-chip="addKit($chip)"
                   readonly="disableChequeForm">
 
@@ -230,6 +228,8 @@
                     md-search-text="$chip"
                     md-items="item in $root.autocomplete.components | filter: $chip"
                     md-item-text="item"
+                    placeholder="{{'Kits' | translate}}"
+                    secondary-placeholder="{{'Kits' | translate}}"
                     ng-click="getAutocompleteData('components')">
                 <span md-highlight-text="$chip">{{item}}</span>
             </md-autocomplete>

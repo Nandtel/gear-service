@@ -1,18 +1,18 @@
 <md-content layout="row" layout-align="center center" flex>
 
-    <md-input-container flex="15">
+    <md-input-container flex="15" class="select-bottom-margin">
         <label translate>type</label>
         <md-select ng-model="payment.type" ng-disabled="paymentLineDisabled">
             <md-option ng-repeat="type in types" value="{{type}}">{{type | translate}}</md-option>
         </md-select>
     </md-input-container>
 
-    <md-input-container flex="25">
+    <md-input-container flex="20" class="text-bottom-margin">
         <label translate>description</label>
         <input ng-model="payment.description" ng-disabled="paymentLineDisabled">
     </md-input-container>
 
-    <md-input-container flex="20">
+    <md-input-container flex="20" class="select-bottom-margin">
         <label>{{'master' | translate}}</label>
         <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}" ng-disabled="paymentLineDisabled">
             <md-option ng-value="payment.user">{{payment.user.fullname}}</md-option>
@@ -20,19 +20,19 @@
         </md-select>
     </md-input-container>
 
-    <md-input-container flex="10">
+    <md-input-container flex="10" class="text-bottom-margin">
         <label translate>cost</label>
         <input type="number" min="0" ng-model="payment.cost" ng-disabled="paymentLineDisabled">
     </md-input-container>
 
-    <md-input-container flex="10">
+    <md-input-container flex="10" class="select-bottom-margin">
         <label translate>currency</label>
         <md-select ng-model="payment.currency" ng-disabled="paymentLineDisabled">
             <md-option ng-repeat="currency in currencies" value="{{currency}}">{{currency | uppercase}}</md-option>
         </md-select>
     </md-input-container>
 
-    <span flex="20" ng-class="{green: hasPrepayment, red: !hasPrepayment}" class="to-pay">
+    <span flex="25" ng-class="{green: hasPrepayment, red: !hasPrepayment}" class="to-pay">
         {{toPay('rub') | currency: '₽'}},
         {{toPay('uah') | currency: '₴'}},
         {{toPay('usd') | currency: '$'}}

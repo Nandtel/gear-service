@@ -9,5 +9,14 @@
 
     payment-line .to-pay {
         font-family: 'Roboto', serif;
+        text-align: center;
+    }
+
+    payment-line .select-bottom-margin {
+        margin-bottom: 23px;
+    }
+
+    payment-line .text-bottom-margin {
+        margin-bottom: 0;
     }
 }

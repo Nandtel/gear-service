@@ -29,6 +29,7 @@ angular.module("mainModule")
              */
             $scope.deleteCheque = function(event) {
                 warning.showConfirmDeleteCheque(event).then(function() {
+                    $scope.$parent.formDirty = {payment: false, cheque: false};
                     cheque.deleteChequeFromServer($scope.cheque.id);
                 }, function() {});
             };

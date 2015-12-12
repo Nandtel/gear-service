@@ -6,6 +6,10 @@ angular.module("mainModule")
 
             $scope.security = security;
 
+            $scope.hasAtLeastOnePayment = function() {
+                return $scope.balance.payments.length > 0;
+            };
+
             $scope.synchronizeBalance = function() {
                 cheque.syncChequeBalanceWithServer($scope.chequeID, $scope.balance)
                     .then(function(success) {
@@ -31,6 +35,7 @@ angular.module("mainModule")
             $scope.delPayment = function(payment, event) {
                 warning.showConfirmDeletePayment(event).then(function() {
                     $scope.balance.payments.splice($scope.balance.payments.indexOf(payment), 1);
+                    $scope.paymentForm.$setDirty();
                 }, function() {});
             };
 

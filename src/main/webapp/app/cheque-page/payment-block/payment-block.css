@@ -44,7 +44,7 @@
     }
 
     payment-block .payment-lines {
-        min-height: 7rem;
+        min-height: 0.5rem;
     }
 
     payment-block .sum {
@@ -53,6 +53,11 @@
 
     payment-block md-input-container.estimatedCost {
         margin-top: 40px;
+        margin-bottom: 0;
+    }
+
+    payment-block md-checkbox {
+        margin-bottom: 0;
     }
 
 }
