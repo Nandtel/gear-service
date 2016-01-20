@@ -1,6 +1,6 @@
 package com.gearservice.model.cheque;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OptimisticLock;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class Balance {
     private int estimatedCost;
     private boolean paidStatus;
 
+    @OptimisticLock(excluded=false)
     @OneToMany(mappedBy = "balance", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments;
 

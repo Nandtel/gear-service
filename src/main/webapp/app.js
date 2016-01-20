@@ -98,6 +98,12 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                                 });
                             }
 
+                            if(response.data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
+                                var warning = $injector.get('warning');
+                                warning.showAlertOptimisticLockingException();
+                                return $q.reject(response);
+                            }
+
                             return $q.reject(response);
                         }
                     };

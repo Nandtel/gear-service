@@ -1,5 +1,6 @@
 package com.gearservice.model.exchangeRate;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import javax.persistence.Entity;
@@ -44,6 +45,7 @@ public class ExchangeRate {
     private static String[] parseWebSite(String link, String tag) {
         try {
             return Jsoup.connect(link)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
                     .cookie("realauth", "SvBD85dINu3")
                     .get()
                     .select(tag)

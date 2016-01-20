@@ -27,10 +27,6 @@ public class DiagnosticService {
     @Modifying
     @Transactional
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
-//        System.out.println(diagnostic);
-//        Cheque cheque = chequeRepository.findOne(chequeID);
-//        cheque.getDiagnostics().add(diagnostic.withDateTime().withCheque(cheque));
-//        chequeRepository.save(cheque);
         diagnosticRepository.save(diagnostic.withDateTime());
     }
 

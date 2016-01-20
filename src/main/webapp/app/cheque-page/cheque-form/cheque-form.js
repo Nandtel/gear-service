@@ -19,6 +19,7 @@ angular.module("mainModule")
                         if(success) {
                             $scope.chequeForm.$setPristine();
                             $scope.chequeForm.$setUntouched();
+                            cheque.getChequeBalanceFromServer($rootScope.cheque.id);
                         }
                     });
             };
@@ -44,7 +45,6 @@ angular.module("mainModule")
             };
 
             $scope.printCheque = function() {
-                $scope.syncCheque();
                 window.print();
             };
 
