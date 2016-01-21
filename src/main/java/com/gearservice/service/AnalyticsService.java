@@ -23,6 +23,15 @@ import java.util.function.ToDoubleFunction;
 
 import static java.util.stream.Collectors.groupingBy;
 
+/**
+ * Class AnalyticsService is service, that handle analytical controller.
+ * Use @Autowired for connect to necessary repositories
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Service
 public class AnalyticsService {
 
@@ -54,6 +63,16 @@ public class AnalyticsService {
                 return currency.multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
             };
 
+    /**
+     * Method createRow creates row in excel document
+     * @param chequeID is cheque id
+     * @param receiptDate is receipt date
+     * @param returnedToClientDate is returned to client date
+     * @param brandName is brand name
+     * @param fullname of customer
+     * @param income of row
+     * @param profit of row
+     */
     private static void createRow(Long chequeID, LocalDate receiptDate, LocalDate returnedToClientDate,
                                   String brandName, String fullname, double income, double profit) {
         Row row1 = sheet.createRow(rowID++);
@@ -77,8 +96,16 @@ public class AnalyticsService {
         cell17.setCellStyle(rubleStyle);
     }
 
+    /**
+     * Method resetRowId reset caret of current row in excel document
+     */
     private static void resetRowId() {rowID = 1;}
 
+    /**
+     * Method getExcelFile creates excel document with Apache POI, that contains necessary analytics
+     * @param analyticsPreferences of users request
+     * @return array of bytes, that contains excel document with analytics inside
+     */
     @Transactional(readOnly = true)
     public byte[] getExcelFile(AnalyticsPreferences analyticsPreferences) throws Exception {
         FileInputStream excel = new FileInputStream(new File("analytics.xlsx"));

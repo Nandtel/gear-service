@@ -26,6 +26,15 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
+/**
+ * Class ChequeService is service, that handle ChequeController
+ * Use @Autowired for connect to necessary repositories and entity manager
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Service
 public class ChequeService {
 
@@ -38,18 +47,7 @@ public class ChequeService {
     @Autowired EntityManager em;
 
     /**
-     * Method getCheques call by client-side and return all cheques from database
-     * Native query use for create partial object of Cheque � ChequeMin, that has only necessary for client-side fields
-     * Call with value "/cheques" and request method GET
-     * @return list of all cheques, that database has
-     */
-    public List<Cheque> getMinChequesList() {
-        return chequeRepository.findAll();
-    }
-
-    /**
-     * Method saveCheque call by client-side with data for cheque.class
-     * Call with value "/cheque" and request method POST
+     * Method synchronizeCheque save cheque to DB and return it to frontend
      * @param cheque is data for Cheque.class, that was create on client-side
      * @return Cheque, that added
      */
@@ -70,21 +68,16 @@ public class ChequeService {
     }
 
     /**
-     * Method getCheque call by client-side, when it needs in one cheque for represent
-     * Call with value of request "/cheques/{chequeID}" and request method GET
+     * Method getCheque get cheque from DB by id
      * @param chequeID is ID of cheque in database, that client-side wants
      * @return Cheque, that client-side was request
      */
     @Transactional(readOnly = true)
-    public Cheque getCheque(@PathVariable Long chequeID) {
-        return chequeRepository.findById(chequeID);
-    }
+    public Cheque getCheque(@PathVariable Long chequeID) {return chequeRepository.findById(chequeID);}
 
     /**
-     * Method deleteCheque call by client-side, when it needs to delete one cheque
-     * Call with value of request "/cheques/{chequeID}" and request method DELETE
+     * Method deleteCheque remove cheque from DB by id
      * @param chequeID is ID of cheque in database, that client-side wants to delete
-     * @return redirect to main page
      */
     @Modifying
     @Transactional
@@ -93,16 +86,32 @@ public class ChequeService {
         photoRepository.deleteByChequeId(chequeID.toString());
     }
 
+    /**
+     * Method attentionCheques return list of cheque,
+     * that wasn't returned to client and wasn't close and hasn't diagnostic comment
+     * Use for engineers
+     * @return list of cheque filtered by special rules
+     */
     @Transactional(readOnly = true)
     public List<Cheque> attentionCheques() {
         return chequeRepository.findByReturnedToClientStatusFalseAndReadyStatusFalseAndDiagnosticsIsNull();
     }
 
+    /**
+     * Method attentionChequesByDelay return list of cheque, that has delay in diagnostic
+     * Use for engineers
+     * @return list of cheque, that has delay in diagnostic
+     */
     @Transactional(readOnly = true)
     public List<Cheque> attentionChequesByDelay() {
         return chequeRepository.findWithDelay(OffsetDateTime.now().minusDays(7).toString());
     }
 
+    /**
+     * Method getMinChequesList return list of cheque by request without some field for size optimization
+     * @param request by which should be returned list of cheques
+     * @return list of cheque by request without some field for size optimization
+     */
     @Transactional(readOnly = true)
     public List<Cheque> getMinChequesList(RequestPreferences request) {
 
@@ -126,6 +135,10 @@ public class ChequeService {
         );
     }
 
+    /**
+     * Method readFromExcelToDB read from excel files to DB
+     * @throws Exception
+     */
     public void readFromExcelToDB() throws Exception {
 
         FileInputStream excel = new FileInputStream(new File("read.xlsx"));
@@ -307,6 +320,11 @@ public class ChequeService {
         excel.close();
     }
 
+    /**
+     * Method getOffsetDateTime
+     * @param date that should be converted
+     * @return converted OffsetDateTime of null
+     */
     private static OffsetDateTime getOffsetDateTime(Date date) {
         if (date != null)
             return OffsetDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
@@ -314,27 +332,27 @@ public class ChequeService {
             return null;
     }
 
-    private static String getString(Cell cell) {
-        if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
-            return cell.getStringCellValue().trim();
-        } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-            return String.valueOf(cell.getNumericCellValue()).trim();
-        }
-        return null;
-    }
-
-    public static String getCell(Cell cell) {
-
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_NUMERIC:
-                System.out.print(cell.getNumericCellValue() + "\t\t");
-                break;
-            case Cell.CELL_TYPE_STRING:
-                System.out.print(cell.getStringCellValue() + "\t\t");
-                break;
-        }
-
-        return null;
-    }
+//    private static String getString(Cell cell) {
+//        if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+//            return cell.getStringCellValue().trim();
+//        } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+//            return String.valueOf(cell.getNumericCellValue()).trim();
+//        }
+//        return null;
+//    }
+//
+//    public static String getCell(Cell cell) {
+//
+//        switch (cell.getCellType()) {
+//            case Cell.CELL_TYPE_NUMERIC:
+//                System.out.print(cell.getNumericCellValue() + "\t\t");
+//                break;
+//            case Cell.CELL_TYPE_STRING:
+//                System.out.print(cell.getStringCellValue() + "\t\t");
+//                break;
+//        }
+//
+//        return null;
+//    }
 
 }

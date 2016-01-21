@@ -21,6 +21,15 @@ import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Class ApplicationService is service, that handle ApplicationController.
+ * Use @Autowired for connect to necessary repositories
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Service
 public class ApplicationService {
 
@@ -32,6 +41,11 @@ public class ApplicationService {
     @Autowired NoteRepository noteRepository;
     @Autowired ComponentRepository componentRepository;
 
+    /**
+     * Method getAutocompleteData return autocomplete data for request item name
+     * @param itemName for autocomplete
+     * @return List of autocomplete data(String or User)
+     */
     @Transactional(readOnly = true)
     public List<?> getAutocompleteData(String itemName) {
         switch (itemName) {
@@ -52,10 +66,8 @@ public class ApplicationService {
     public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
     /**
-     * Method addCheques call by client-side, when it needs to fill database few sample cheques
-     * Call with value of request "/add" and in default request method GET
-     * Should send in response OK status, if code works correct
-     * @return redirect to main page
+     * Method makeSample fill DB with sample data
+     * Only for testing
      */
     @Modifying
     @Transactional

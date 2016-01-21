@@ -27,6 +27,14 @@ public class NoteController {
 
     @Autowired NoteService noteService;
 
+    /**
+     * Method addNote call by client-side, when it needs to add new note comment to cheque
+     * Call with value of request "/api/cheques/{chequeID}/notes" and request method POST
+     * Should send in response OK status, if code works correct
+     * @param chequeID is ID of cheque in database, in that client-side wants add a note comment
+     * @param note is data for Note.class, that was create on client-side
+     * @param principal is user, that request this action
+     */
     @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note, Principal principal) {
@@ -34,6 +42,14 @@ public class NoteController {
         logger.info("User " + principal.getName().toUpperCase() + " has added note to cheque №" + chequeID);
     }
 
+    /**
+     * Method deleteNote call by client-side, when it needs to delete note comment in cheque
+     * Call with value of request "/api/cheques/{chequeID}/notes/{noteID}" and request method DELETE
+     * Should send in response OK status, if code works correct
+     * @param chequeID is ID of cheque in database, in that client-side wants add a note comment
+     * @param noteID is ID of note in database
+     * @param principal is user, that request this action
+     */
     @RequestMapping(value = "/api/cheques/{chequeID}/notes/{noteID}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID, Principal principal) {

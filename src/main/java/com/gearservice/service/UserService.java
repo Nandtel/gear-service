@@ -17,20 +17,49 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * Class UserService is service, that handle UserController
+ * Use @Autowired for connect to necessary repositories
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Service
 public class UserService implements UserDetailsService {
 
     @Autowired UserRepository userRepository;
 
+    /**
+     * Method passwordEncoder return new BCrypt password encoder
+     * @return new BCrypt password encoder
+     */
     public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
+    /**
+     * Method loadUserByUsername load user by username
+     * @param username by that user should be loaded
+     * @return UserDetails for current user
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findOne(username);
         if(user == null) throw new UsernameNotFoundException("No user found for username '" + username +"'.");
         return new UserDetailsImpl(user);
     }
+
+    /**
+     * Method getUserList return list of users
+     * @return list of users
+     */
     public List<User> getUserList() {return userRepository.findAll();}
+
+    /**
+     * Method saveUser save new user to DB
+     * @param user that should be saved to DB
+     */
     public void saveUser(User user) {
 
         if (userRepository.exists(user.getUsername())) {
@@ -66,7 +95,6 @@ public class UserService implements UserDetailsService {
         @Override public boolean isEnabled() {return super.isEnabled();}
         @Override public Set<Authority> getAuthorities() {return super.getAuthorities();}
     }
-
 
     public Map<String, String> getUsernameFullnameMap() {
         return userRepository.findAll()
