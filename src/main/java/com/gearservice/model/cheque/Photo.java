@@ -5,6 +5,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
+/**
+ * Model class for Photo mongo's entity.
+ * Store data and bytes of photo in mongoDB.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 public class Photo {
 
     @Id

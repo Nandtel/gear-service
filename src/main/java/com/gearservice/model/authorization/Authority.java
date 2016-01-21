@@ -7,6 +7,15 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class Authority is model Entity, that store in database and consists authority of user data.
+ * Has many-to-many relationship with User entity.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Entity
 public class Authority implements GrantedAuthority {
 
@@ -19,10 +28,13 @@ public class Authority implements GrantedAuthority {
 
     public Authority() {}
 
-    public Authority(String authority) {
-        this.authority = authority;
-    }
+    public Authority(String authority) {this.authority = authority;}
 
+    /**
+     * Method withUsername handle current Authority entity filling it with username and return this edited object
+     * @param username is User's entity in many-to-many relationship
+     * @return this Authority object after editing
+     */
     public Authority withUsername(User username) {
         this.users.add(username);
         return this;

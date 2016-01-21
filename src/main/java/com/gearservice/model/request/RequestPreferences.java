@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.OffsetDateTime;
 
+/**
+ * Class RequestPreferences is model Entity, that not store in database
+ * and consists request of frontend to return a cheques by the request's parameters
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 public class RequestPreferences {
 
     private Long id;

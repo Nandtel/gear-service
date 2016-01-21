@@ -16,10 +16,11 @@ import java.time.OffsetDateTime;
  * Class Diagnostic is model Entity, that store in database and consists diagnostic data.
  * It is affiliated class in many-to-one bidirectional relationship with Cheque owner.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 21.01.2016
  */
+
 @Entity
 public class Diagnostic {
 
@@ -74,6 +75,11 @@ public class Diagnostic {
         return this;
     }
 
+    /**
+     * Method withUser handle current Diagnostic object filling it with user-owner and return this edited object
+     * @param user is owner entity in bidirectional one-to-many relationship
+     * @return this Diagnostic object after editing
+     */
     public Diagnostic withUser(User user) {
         this.user = user;
         return this;

@@ -6,6 +6,16 @@ import com.gearservice.model.exchangeRate.ExchangeRate;
 
 import javax.persistence.*;
 
+/**
+ * Model class for Payment entity.
+ * Store discrete payment in balance entity.
+ * Has relations with parent entity - balance, with exchange_rate entity and with creator.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Entity
 public class Payment {
 

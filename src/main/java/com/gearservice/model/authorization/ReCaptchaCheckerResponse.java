@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * Class ReCaptchaCheckerResponse is model Entity, that not store in database
+ * and consists answer of google's reCaptcha checker.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 public class ReCaptchaCheckerResponse {
     @JsonProperty
     private Boolean success;

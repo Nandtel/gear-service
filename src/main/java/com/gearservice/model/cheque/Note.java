@@ -15,10 +15,11 @@ import java.time.OffsetDateTime;
  * Class Note is model Entity, that store in database and consists note data.
  * It is affiliated class in many-to-one bidirectional relationship with Cheque owner.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 21.01.2016
  */
+
 @Entity
 public class Note {
 
@@ -74,6 +75,11 @@ public class Note {
         return this;
     }
 
+    /**
+     * Method withUser handle current Note object filling it with user-owner and return this edited object
+     * @param user is owner entity in bidirectional one-to-many relationship
+     * @return this Note object after editing
+     */
     public Note withUser(User user) {
         this.user = user;
         return this;

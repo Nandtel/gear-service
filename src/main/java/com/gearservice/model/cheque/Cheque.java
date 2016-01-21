@@ -15,12 +15,12 @@ import java.util.Set;
 /**
  * Class Cheque is model Entity, that consists all main data and bidirectional relationship with affiliated classes
  * for storing in database.
- * It has few date-field: introduced, guarantee, ready and issued � that handled with special serializer and json pattern.
- * It has few bidirectional one-to-many relationship: kits, diagnostics and notes.
+ * It has few date-field: introduced, guarantee, ready and issued, that handled with special serializer and json pattern.
+ * It has few bidirectional one-to-many relationship: components, diagnostics and notes.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 21.01.2016
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -139,6 +139,12 @@ public class Cheque {
         return this;
     }
 
+    /**
+     * Method withDiagnosticUser handle current Cheque object filling it with diagnostic's user-owner
+     * and return this edited object
+     * @param user is owner entity in diagnostic's bidirectional one-to-many relationship
+     * @return this Diagnostic object after editing
+     */
     public Cheque withDiagnosticUser(User user) {
         this.setDiagnostics(SampleDataService.getSetConsistFrom(
                 o -> new Diagnostic()
@@ -148,6 +154,12 @@ public class Cheque {
         return this;
     }
 
+    /**
+     * Method withNoteUser handle current Cheque object filling it with note's user-owner
+     * and return this edited object
+     * @param user is owner entity in note's bidirectional one-to-many relationship
+     * @return this Diagnostic object after editing
+     */
     public Cheque withNoteUser(User user) {
         this.setNotes(SampleDataService.getSetConsistFrom(
                 o -> new Note()

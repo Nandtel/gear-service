@@ -1,6 +1,5 @@
 package com.gearservice.model.exchangeRate;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import javax.persistence.Entity;
@@ -8,6 +7,15 @@ import javax.persistence.Id;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+/**
+ * Class ExchangeRate is model Entity, that store in database and consists exchange rate data.
+ * Used for currency conversion.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
 
 @Entity
 public class ExchangeRate {
@@ -22,9 +30,19 @@ public class ExchangeRate {
 
     public ExchangeRate() {
         this.addDate = LocalDate.now().toString();
+        this.usd = new BigDecimal("1");
+        this.uah = new BigDecimal("1");
+        this.eur = new BigDecimal("1");
         this.rub = new BigDecimal("1");
     }
 
+    /**
+     * Method getFromServer handle current ExchangeRate entity filling it with exchange rates of USD, EUR, UAH
+     * and return this edited object
+     * @param link to website, which publishes exchange rates
+     * @param tag which contains exchange rate data
+     * @return this ExchangeRate object after editing
+     */
     public ExchangeRate getFromServer(String link, String tag) {
         String[] elements = parseWebSite(link, tag);
 
@@ -42,6 +60,12 @@ public class ExchangeRate {
         return this;
     }
 
+    /**
+     * Method parseWebSite parse website with JSoup
+     * @param link to site, which publishes exchange rates
+     * @param tag which contains exchange rate data
+     * @return array of strings, which contains currency rates
+     */
     private static String[] parseWebSite(String link, String tag) {
         try {
             return Jsoup.connect(link)
@@ -58,6 +82,12 @@ public class ExchangeRate {
         return null;
     }
 
+    /**
+     * Method average find average of two BigDecimals
+     * @param first BigDecimal
+     * @param second BigDecimal
+     * @return BigDecimal, which contains an average of input values
+     */
     private static BigDecimal average(BigDecimal first, BigDecimal second) {
         BigDecimal two = new BigDecimal("2");
         return first.add(second).divide(two, 2, BigDecimal.ROUND_HALF_UP);

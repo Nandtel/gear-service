@@ -5,6 +5,14 @@ import org.hibernate.annotations.OptimisticLock;
 import javax.persistence.*;
 import java.util.Set;
 
+
+/**
+ * Model class for Balance entity.
+ * Has generated id, version field for hibernate optimistic locking,
+ * child's payments entities, that not excluded from optimistic's locking handling
+ * and relation with cheque - parent entity
+ */
+
 @Entity
 @NamedEntityGraph(name = "balance.full", attributeNodes = {
         @NamedAttributeNode("payments")

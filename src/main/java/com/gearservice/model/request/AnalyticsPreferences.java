@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
+/**
+ * Class AnalyticsPreferences is model Entity, that not store in database
+ * and consists request of frontend to make an analytical report.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 public class AnalyticsPreferences {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")

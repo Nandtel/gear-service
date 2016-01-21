@@ -6,6 +6,15 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class User is model Entity, that store in database and consists user's data.
+ * Has many-to-many relationship with Authority entity.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @Entity
 public class User {
 
