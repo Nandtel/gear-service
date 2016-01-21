@@ -13,6 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * Class PhotoController is controller, that handle requests of photos.
+ * Use @Autowired for connect to necessary services
+ * Use RequestMapping for handle request from the client-side
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @RestController
 public class PhotoController {
 
@@ -20,8 +30,8 @@ public class PhotoController {
 
     @Autowired PhotoService photoService;
 
-    @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/api/upload-image", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
     public void uploadImage(@RequestParam("file") MultipartFile photo,
                             @RequestParam("chequeID") Long chequeID,
                             @RequestParam("username") String username,

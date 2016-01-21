@@ -8,6 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Class ExchangeRateController is controller, that handle requests of exchange rates.
+ * Use @Autowired for connect to necessary services
+ * Use RequestMapping for handle request from the client-side
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
+ */
+
 @RestController
 public class ExchangeRateController {
 

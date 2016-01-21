@@ -11,6 +11,10 @@ import java.util.Set;
  * Has generated id, version field for hibernate optimistic locking,
  * child's payments entities, that not excluded from optimistic's locking handling
  * and relation with cheque - parent entity
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 21.01.2016
  */
 
 @Entity

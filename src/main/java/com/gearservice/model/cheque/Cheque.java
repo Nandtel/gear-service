@@ -22,6 +22,7 @@ import java.util.Set;
  * @author Dmitry
  * @since 21.01.2016
  */
+
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NamedEntityGraphs({

@@ -1,41 +1,22 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.authorization.Authority;
-import com.gearservice.model.authorization.User;
-import com.gearservice.model.cheque.*;
-import com.gearservice.model.exchangeRate.ExchangeRate;
-import com.gearservice.model.repositories.*;
 import com.gearservice.service.ApplicationService;
-import com.gearservice.service.SampleDataService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
-import java.security.Principal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.IntStream;
-
-import static java.util.Arrays.asList;
 
 /**
- * Class Application is controller, that handles all request from client-side
- * Use @Autowired for connect to necessary repositories and Entity manager
+ * Class ApplicationController is controller, that handle main requests.
+ * Use @Autowired for connect to necessary services
  * Use RequestMapping for handle request from the client-side
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 21.01.2016
  */
+
 @RestController
 public class ApplicationController {
 

@@ -12,6 +12,7 @@ import javax.persistence.*;
  * @author Dmitry
  * @since 21.01.2016
  */
+
 @Entity
 public class Component {
 

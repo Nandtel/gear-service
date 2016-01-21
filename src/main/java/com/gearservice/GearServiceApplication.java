@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Class GearServiceApplication is main, configurable class of application.
- * It handles by Spring Boot.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 21.01.2016
  */
+
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableCaching
