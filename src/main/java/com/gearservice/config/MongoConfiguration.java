@@ -1,5 +1,13 @@
 package com.gearservice.config;
 
+/**
+ * Class MongoConfiguration is configuration
+ * Config for mongoDB, take parameters from application.properties.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
 
 import com.gearservice.config.converter.OffsetDateTimeToStringConverter;
 import com.gearservice.config.converter.StringToOffsetDateTimeConverter;

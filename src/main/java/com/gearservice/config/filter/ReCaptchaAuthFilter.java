@@ -15,6 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Class ReCaptchaAuthFilter is configuration
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 public class ReCaptchaAuthFilter extends GenericFilterBean {
 
     private ReCaptchaProperties reCaptchaProperties;
@@ -23,6 +31,11 @@ public class ReCaptchaAuthFilter extends GenericFilterBean {
         this.reCaptchaProperties = reCaptchaProperties;
     }
 
+    /**
+     * Method checkCaptcha checks Google ReCaptcha answer
+     * @param key for Google ReCaptcha answer
+     * @return Google ReCaptcha answer
+     */
     private ReCaptchaCheckerResponse checkCaptcha(String key) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("secret", reCaptchaProperties.getSecretKey());
@@ -30,9 +43,16 @@ public class ReCaptchaAuthFilter extends GenericFilterBean {
 
         return new RestTemplate()
                 .postForObject(reCaptchaProperties.getSiteVerify(), map, ReCaptchaCheckerResponse.class);
-
     }
 
+    /**
+     * Method doFilter is overrated method of Filter, that handle answer of Google RaCaptcha server
+     * @param req is servlet request
+     * @param res is servlet response
+     * @param chain of spring security's set of chains
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest request = (HttpServletRequest) req;

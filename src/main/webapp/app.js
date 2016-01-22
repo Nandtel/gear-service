@@ -1,9 +1,9 @@
 /**
  * This file contains mainModule with injecting dependencies, routing and configuration.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 22.01.2016
  */
 angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
     'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'ngFileUpload', 'vcRecaptcha',

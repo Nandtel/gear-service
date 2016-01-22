@@ -4,6 +4,15 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.time.OffsetDateTime;
 
+/**
+ * Class OffsetDateTimePersistenceConverter is configuration for converter between OffsetDateTime and String
+ * Used for converting between Java 8 OffsetDateTime and JSON String
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 @Converter(autoApply = true)
 public class OffsetDateTimePersistenceConverter implements AttributeConverter<OffsetDateTime, String> {
 

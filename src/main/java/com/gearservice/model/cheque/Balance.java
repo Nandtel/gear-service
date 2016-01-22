@@ -5,7 +5,6 @@ import org.hibernate.annotations.OptimisticLock;
 import javax.persistence.*;
 import java.util.Set;
 
-
 /**
  * Model class for Balance entity.
  * Has generated id, version field for hibernate optimistic locking,

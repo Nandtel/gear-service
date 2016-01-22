@@ -2,6 +2,15 @@ package com.gearservice.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * Class ReCaptchaProperties is configuration
+ * Gets parameters from application.properties for ReCaptcha configuration
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 @ConfigurationProperties(prefix = "recaptcha")
 public class ReCaptchaProperties {
 

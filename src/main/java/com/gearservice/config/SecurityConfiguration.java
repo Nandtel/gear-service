@@ -45,6 +45,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 
+/**
+ * Class SecurityConfiguration is configuration
+ * Config for Spring Security
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 @Configuration
 @EnableWebSecurity
 @EnableConfigurationProperties(ReCaptchaProperties.class)
@@ -54,6 +63,12 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired private UserService userDetailsService;
     @Autowired private ReCaptchaProperties reCaptchaProperties;
 
+    /**
+     * Method configureGlobal configures base params.
+     * Add overrated userDetailsService, new BCrypt password encoder, new query for searching users
+     * @param auth is AuthenticationManagerBuilder for config object
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -65,11 +80,20 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "SELECT username, role FROM authority WHERE username=?");
     }
 
+    /**
+     * Method passwordEncoder creates new BCrypt password encoder
+     * @return new BCrypt password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Method configure is main config class for http security
+     * @param http is HttpSecurity for configuring http security
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -106,6 +130,9 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class);
     }
 
+    /**
+     * Method RedirectAuthenticationEntryPoint is entry point for correct handling error with unauthorized exception
+     */
     private class RedirectAuthenticationEntryPoint implements AuthenticationEntryPoint {
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
@@ -114,6 +141,10 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
     }
 
+    /**
+     * Method csrfHeaderFilter creates filter for correct csrf security
+     * @return OncePerRequestFilter for correct csrf security
+     */
     private Filter csrfHeaderFilter() {
         return new OncePerRequestFilter() {
             @Override
@@ -134,6 +165,10 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         };
     }
 
+    /**
+     * Method csrfTokenRepository creates repository for csrf security token
+     * @return repository for csrf security token
+     */
     private CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
         repository.setHeaderName("X-XSRF-TOKEN");

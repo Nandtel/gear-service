@@ -7,6 +7,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
+/**
+ * Class ErrorConfiguration is configuration
+ * If page fire not found error return redirect to "/" path
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 @Configuration
 class ErrorConfiguration {
 
