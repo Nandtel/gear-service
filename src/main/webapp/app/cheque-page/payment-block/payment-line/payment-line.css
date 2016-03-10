@@ -19,4 +19,8 @@
     payment-line .text-bottom-margin {
         margin-bottom: 0;
     }
+
+    payment-line md-select-value span:first-child {
+        max-width: 150px;
+    }
 }

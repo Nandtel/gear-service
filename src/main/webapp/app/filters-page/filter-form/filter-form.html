@@ -15,19 +15,19 @@
         <md-content class="dates-field" layout="row" layout-align="space-around end" flex>
 
             <md-content layout="column" layout-align="end center">
-                <date-picker ng-model="filter.introducedFrom" md-placeholder="'IntroducedFrom'"></date-picker>
+                <date-picker ng-model="$root.filter.introducedFrom" md-placeholder="'IntroducedFrom'"></date-picker>
             </md-content>
 
             <md-content layout="column" layout-align="end center">
-                <date-picker ng-model="filter.introducedTo" md-placeholder="'IntroducedTo'"></date-picker>
+                <date-picker ng-model="$root.filter.introducedTo" md-placeholder="'IntroducedTo'"></date-picker>
             </md-content>
 
             <md-content layout="column" layout-align="end center">
-                <date-picker ng-model="filter.returnedToClientFrom" md-placeholder="'returnedToClientFrom'"></date-picker>
+                <date-picker ng-model="$root.filter.returnedToClientFrom" md-placeholder="'returnedToClientFrom'"></date-picker>
             </md-content>
 
             <md-content layout="column" layout-align="end center">
-                <date-picker ng-model="filter.returnedToClientTo" md-placeholder="'returnedToClientTo'"></date-picker>
+                <date-picker ng-model="$root.filter.returnedToClientTo" md-placeholder="'returnedToClientTo'"></date-picker>
             </md-content>
 
         </md-content>
@@ -36,15 +36,15 @@
 
             <md-input-container flex="10">
                 <label translate>Id</label>
-                <input ng-model="filter.id">
+                <input ng-model="$root.filter.id">
             </md-input-container>
 
             <md-autocomplete flex="90"
-                             md-search-text="filter.customerName"
+                             md-search-text="$root.filter.customerName"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.customers | filter: filter.customerName"
+                             md-items="item in $root.autocomplete.customers | filter: $root.filter.customerName"
                              md-item-text="item"
                              md-floating-label="{{'Customer' | translate}}"
                              md-autofocus="false"
@@ -60,11 +60,11 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="40"
-                             md-search-text="filter.productName"
+                             md-search-text="$root.filter.productName"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.products | filter: filter.productName"
+                             md-items="item in $root.autocomplete.products | filter: $root.filter.productName"
                              md-item-text="item"
                              md-floating-label="{{'Name of Product' | translate}}"
                              md-autofocus="false"
@@ -76,11 +76,11 @@
             </md-autocomplete>
 
             <md-autocomplete flex="30"
-                             md-search-text="filter.model"
+                             md-search-text="$root.filter.model"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.models | filter: filter.model"
+                             md-items="item in $root.autocomplete.models | filter: $root.filter.model"
                              md-item-text="item"
                              md-floating-label="{{'Model' | translate}}"
                              md-autofocus="false"
@@ -92,11 +92,11 @@
             </md-autocomplete>
 
             <md-autocomplete flex="30"
-                             md-search-text="filter.serialNumber"
+                             md-search-text="$root.filter.serialNumber"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.serials | filter: filter.serialNumber"
+                             md-items="item in $root.autocomplete.serials | filter: $root.filter.serialNumber"
                              md-item-text="item"
                              md-floating-label="{{'Serial Number' | translate}}"
                              md-autofocus="false"
@@ -112,11 +112,11 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="100"
-                             md-search-text="filter.representativeName"
+                             md-search-text="$root.filter.representativeName"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.representatives | filter: filter.representativeName"
+                             md-items="item in $root.autocomplete.representatives | filter: $root.filter.representativeName"
                              md-item-text="item"
                              md-floating-label="{{'Purchaser' | translate}}"
                              md-autofocus="false"
@@ -132,11 +132,11 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.secretary"
+                             md-search-text="$root.filter.secretary"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.secretaries | filter: filter.secretary"
+                             md-items="item in $root.autocomplete.secretaries | filter: $root.filter.secretary"
                              md-item-text="item"
                              md-floating-label="{{'Inspector' | translate}}"
                              md-autofocus="false"
@@ -148,11 +148,11 @@
             </md-autocomplete>
 
             <md-autocomplete flex="50"
-                             md-search-text="filter.engineer"
+                             md-search-text="$root.filter.engineer"
                              md-no-cache="true"
                              md-min-length="1"
                              md-search-text-change=""
-                             md-items="item in $root.autocomplete.engineers | filter: filter.engineer"
+                             md-items="item in $root.autocomplete.engineers | filter: $root.filter.engineer"
                              md-item-text="item"
                              md-floating-label="{{'master' | translate}}"
                              md-autofocus="false"
@@ -167,22 +167,22 @@
 
         <md-content layout-padding layout="row" layout-align="center start" class="text-field">
 
-            <md-select ng-model="filter.warrantyStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.warrantyStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
                 <md-option value="true">{{'Has guarantee' | translate}}</md-option>
                 <md-option value="false">{{'Has no guarantee' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.readyStatus" placeholder="{{'Ready' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.readyStatus" placeholder="{{'Ready' | translate}}" flex="25">
                 <md-option value="true">{{'Ready' | translate}}</md-option>
                 <md-option value="false">{{'Not ready' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.returnedToClientStatus" placeholder="{{'Issued' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.returnedToClientStatus" placeholder="{{'Issued' | translate}}" flex="25">
                 <md-option value="true">{{'Issued' | translate}}</md-option>
                 <md-option value="false">{{'Not issued' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="filter.paidStatus" placeholder="{{'paid' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.paidStatus" placeholder="{{'paid' | translate}}" flex="25">
                 <md-option value="true">{{'paid' | translate}}</md-option>
                 <md-option value="false">{{'not paid' | translate}}</md-option>
             </md-select>

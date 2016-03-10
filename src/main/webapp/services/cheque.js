@@ -9,6 +9,7 @@ angular.module('mainModule')
             $rootScope.chequeList = [];
             $rootScope.balance = {payments: []};
             $rootScope.photoList = [];
+            $rootScope.filter = {};
 
             return {
                 createNewCheque: function() {

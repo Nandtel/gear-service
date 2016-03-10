@@ -27,6 +27,10 @@ body div.md-dialog-container md-dialog p {
     line-height: 1.2rem;
 }
 
+button.md-button {
+    padding: 0;
+}
+
 
 .content-block:first-child {
     margin-top: 1rem;

@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('FilterForm', ['$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q', 'cheque', 'autocomplete',
-        function ($scope, $http, $timeout, $mdDialog, gettextCatalog, $q, cheque, autocomplete) {
+    .controller('FilterForm', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q', 'cheque', 'autocomplete',
+        function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $q, cheque, autocomplete) {
             $scope.filterForm = {};
             $scope.getAutocompleteData = autocomplete.getDataFromServer;
 
@@ -9,12 +9,13 @@ angular.module("mainModule")
              * It adds to filter data from cleanFilter and makes filterForm pristine
              */
             $scope.resetFilter = function() {
-                $scope.filter = angular.copy({});
+                $rootScope.filter = angular.copy({});
                 $scope.filterForm.$setPristine();
             };
 
             $scope.sendFilterPreferences = function() {
-                cheque.getChequeListFromServer($scope.filter);
+                $rootScope.tableFilter.page = 1;
+                cheque.getChequeListFromServer($rootScope.filter);
             };
         }
     ])
