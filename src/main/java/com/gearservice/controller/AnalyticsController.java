@@ -22,7 +22,7 @@ public class AnalyticsController {
 
     @RequestMapping(value = "/api/analytics", method = RequestMethod.POST,
             produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    public byte[] getAnalytics(@RequestBody AnalyticsPreferences analyticsPreferences) throws Exception {
+    public byte[] getAnalytics(@RequestBody AnalyticsPreferences analyticsPreferences) {
         return analyticsService.getExcelFile(analyticsPreferences);
     }
 

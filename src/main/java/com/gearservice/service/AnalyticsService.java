@@ -107,10 +107,21 @@ public class AnalyticsService {
      * @return array of bytes, that contains excel document with analytics inside
      */
     @Transactional(readOnly = true)
-    public byte[] getExcelFile(AnalyticsPreferences analyticsPreferences) throws Exception {
-        FileInputStream excel = new FileInputStream(new File("analytics.xlsx"));
+    public byte[] getExcelFile(AnalyticsPreferences analyticsPreferences) {
+        FileInputStream excel = null;
+        XSSFWorkbook wb = null;
 
-        XSSFWorkbook wb = new XSSFWorkbook(excel);
+        try {
+            excel = new FileInputStream(new File("analytics.xlsx"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            wb = new XSSFWorkbook(excel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         sheet = wb.getSheetAt(0);
 
         rubleStyle = wb.createCellStyle();
@@ -166,9 +177,14 @@ public class AnalyticsService {
         resetRowId();
 
         ByteArrayOutputStream file = new ByteArrayOutputStream();
-        wb.write(file);
-        file.close();
-        wb.close();
+
+        try {
+            wb.write(file);
+            file.close();
+            wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return file.toByteArray();
     }

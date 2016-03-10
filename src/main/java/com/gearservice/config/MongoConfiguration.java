@@ -47,9 +47,7 @@ class MongoConfiguration extends AbstractMongoConfiguration {
     }
 
     @Override
-    public String getDatabaseName() {
-        return Optional.ofNullable(properties.getDatabase()).orElse("test");
-    }
+    public String getDatabaseName() {return Optional.ofNullable(properties.getDatabase()).orElse("test");}
 
     @Override
     @Bean
