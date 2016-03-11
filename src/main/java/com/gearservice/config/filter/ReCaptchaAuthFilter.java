@@ -36,10 +36,11 @@ public class ReCaptchaAuthFilter extends GenericFilterBean {
      * @param key for Google ReCaptcha answer
      * @return Google ReCaptcha answer
      */
-    private ReCaptchaCheckerResponse checkCaptcha(String key) {
+    private ReCaptchaCheckerResponse checkCaptcha(String key, String ip) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("secret", reCaptchaProperties.getSecretKey());
         map.add("response", key);
+        map.add("remoteip", ip);
 
         return new RestTemplate()
                 .postForObject(reCaptchaProperties.getSiteVerify(), map, ReCaptchaCheckerResponse.class);
@@ -59,6 +60,7 @@ public class ReCaptchaAuthFilter extends GenericFilterBean {
         final HttpServletResponse response = (HttpServletResponse) res;
         String authorization = request.getHeader("Authorization");
         String reCaptcha = request.getHeader("ReCaptcha");
+        String ip = request.getRemoteAddr();
 
         if (authorization == null || !authorization.startsWith("Basic ") || !reCaptchaProperties.isEnabled()) {
             chain.doFilter(request, response);
@@ -70,7 +72,7 @@ public class ReCaptchaAuthFilter extends GenericFilterBean {
             return;
         }
 
-        if (!checkCaptcha(reCaptcha).getSuccess()) {
+        if (!checkCaptcha(reCaptcha, ip).getSuccess()) {
             response.setStatus(401);
             return;
         }
