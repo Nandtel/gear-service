@@ -35,8 +35,6 @@ public class ExchangeRateService {
     public ExchangeRate getCurrencyRates() {
         String now = LocalDate.now().toString();
 
-        System.out.println(exchangeRateRepository.exists(now));
-
         if(!exchangeRateRepository.exists(now))
             return getExchangeRateFromServer();
         else
@@ -77,7 +75,6 @@ public class ExchangeRateService {
             e.printStackTrace();
             exchangeRate = new ExchangeRate();
         }
-        System.out.println(exchangeRate);
         exchangeRateRepository.save(exchangeRate);
         return exchangeRateRepository.findOne(LocalDate.now().toString());
     }

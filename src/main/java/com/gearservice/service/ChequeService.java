@@ -126,6 +126,7 @@ public class ChequeService {
                 request.getModel(),
                 request.getSerialNumber(),
                 request.getRepresentativeName(),
+                request.getPhoneNumber(),
                 request.getSecretary(),
                 request.getEngineer(),
                 request.getWarrantyStatus(),

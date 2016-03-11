@@ -111,7 +111,7 @@
 
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
-            <md-autocomplete flex="100"
+            <md-autocomplete flex="70"
                              md-search-text="$root.filter.representativeName"
                              md-no-cache="true"
                              md-min-length="1"
@@ -124,6 +124,22 @@
                              ng-click="getAutocompleteData('representatives')">
                 <md-item-template>
                     <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{item}} </span>
+                </md-item-template>
+            </md-autocomplete>
+
+            <md-autocomplete flex="30"
+                             md-search-text="$root.filter.phoneNumber"
+                             md-no-cache="true"
+                             md-min-length="1"
+                             md-search-text-change=""
+                             md-items="item in $root.autocomplete.phoneNumbers | filter: $root.filter.phoneNumber"
+                             md-item-text="item"
+                             md-floating-label="{{'Phone' | translate}}"
+                             md-autofocus="false"
+                             md-autoselect="true"
+                             ng-click="getAutocompleteData('phoneNumbers')">
+                <md-item-template>
+                    <span md-highlight-text="filter.phoneNumber" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 

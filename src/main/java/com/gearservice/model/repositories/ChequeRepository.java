@@ -72,6 +72,10 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     @Query(value = "SELECT DISTINCT email FROM cheque", nativeQuery = true)
     List<String> listOfEmails();
 
+    @Cacheable("phoneNumbers")
+    @Query(value = "SELECT DISTINCT phone_number FROM cheque", nativeQuery = true)
+    List<String> listOfPhoneNumbers();
+
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT c FROM Cheque c, Balance b, User e, User s " +
             "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
@@ -85,6 +89,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "AND (c.modelName LIKE %:modelName% OR :modelName IS NULL) " +
             "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
             "AND (c.representativeName LIKE %:representativeName% OR :representativeName IS NULL) " +
+            "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
             "AND (s.fullname LIKE %:secretary% OR :secretary IS NULL) " +
             "AND (e.fullname LIKE %:engineer% OR :engineer IS NULL) " +
             "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
@@ -102,6 +107,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             @Param("modelName") String model,
             @Param("serialNumber") String serialNumber,
             @Param("representativeName") String representativeName,
+            @Param("phoneNumber") String phoneNumber,
             @Param("secretary") String secretary,
             @Param("engineer") String engineer,
             @Param("warrantyStatus") Boolean warrantyStatus,

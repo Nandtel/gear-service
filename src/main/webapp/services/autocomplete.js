@@ -12,7 +12,8 @@ angular.module('mainModule')
                 components: [],
                 secretaries: [],
                 engineers: [],
-                users: []
+                users: [],
+                phoneNumbers: []
             };
 
             return {

@@ -31,6 +31,7 @@ public class RequestPreferences {
     private String representativeName;
     private String secretary;
     private String engineer;
+    private String phoneNumber;
     private Boolean warrantyStatus;
     private Boolean readyStatus;
     private Boolean returnedToClientStatus;
@@ -68,4 +69,6 @@ public class RequestPreferences {
     public void setReturnedToClientStatus(Boolean returnedToClientStatus) {this.returnedToClientStatus = returnedToClientStatus;}
     public Boolean getPaidStatus() {return paidStatus;}
     public void setPaidStatus(Boolean paidStatus) {this.paidStatus = paidStatus;}
+    public String getPhoneNumber() {return phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 }

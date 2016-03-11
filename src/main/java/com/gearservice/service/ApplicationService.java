@@ -59,6 +59,7 @@ public class ApplicationService {
             case "secretaries": return userRepository.listOfSecretaries();
             case "engineers": return userRepository.listOfEngineers();
             case "users": return userRepository.findAll();
+            case "phoneNumbers": return chequeRepository.listOfPhoneNumbers();
             default: throw new IllegalArgumentException();
         }
     }
