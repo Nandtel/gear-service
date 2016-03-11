@@ -1,6 +1,6 @@
 <md-content class="comment-form">
 
-    <form name="form" ng-submit="saveComment()" layout="column" layout-align="center center" layout-padding
+    <form name="commentsForm" ng-submit="saveComment()" layout="column" layout-align="center center" layout-padding
             ng-show="title === 'notes' || title === 'diagnostics' && security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">
 
         <md-input-container>

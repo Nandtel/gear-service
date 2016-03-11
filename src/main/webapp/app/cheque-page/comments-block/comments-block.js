@@ -16,8 +16,8 @@ angular.module("mainModule")
                 $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
                     .success(function() {
                         $scope.comment.text = undefined;
-                        $scope.form.$setPristine();
-                        $scope.form.$setUntouched();
+                        $scope.commentsForm.$setPristine();
+                        $scope.commentsForm.$setUntouched();
                         cheque.getChequeFromServer($scope.cheque.id);
                     });
             };
@@ -59,6 +59,10 @@ angular.module("mainModule")
                 else
                     $scope.bottomButton = 'show more';
             };
+
+            $scope.$watch('commentsForm.$dirty', function (newValue, oldValue) {
+                $scope.$parent.formDirty.comments = newValue;
+            });
 
             $scope.security = security;
         }

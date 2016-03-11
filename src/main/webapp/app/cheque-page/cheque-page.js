@@ -8,7 +8,7 @@
 angular.module("mainModule")
     .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'cheque', 'warning', '$state',
         function ($rootScope, $scope, $stateParams, $http, cheque, warning, $state) {
-            $scope.formDirty = {payment: false, cheque: false};
+            $scope.formDirty = {payment: false, cheque: false, comments: false};
             $scope.hasID = !!$scope.chequeID;
 
             if ($scope.hasID) {
@@ -29,13 +29,12 @@ angular.module("mainModule")
             });
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
                 if((fromState.name === 'cheque.edit' || fromState.name === 'cheque.create')
-                    && ($scope.formDirty.cheque || $scope.formDirty.payment)) {
+                    && ($scope.formDirty.cheque || $scope.formDirty.payment || $scope.formDirty.comments)) {
                     event.preventDefault();
 
                     warning.showConfirmUnsavedChanges().then(function() {
-                        $scope.formDirty = {payment: false, cheque: false};
+                        $scope.formDirty = {payment: false, cheque: false, comments: false};
                         $state.go(toState);
                     }, function() {});
                 }
