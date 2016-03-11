@@ -19,14 +19,14 @@
         </div>
     </md-toolbar>
 
-    <md-content class="dates-field" layout="row" layout-align="space-around start" flex>
+    <md-content class="dates-field" layout="row" layout-align="center start" flex>
 
-        <md-content layout="column" layout-align="center start">
+        <md-content layout="column" layout-align="center start" style="width: 27%">
             <p class="with-date">{{ 'Introduced' | translate}}</p>
             <date-time-picker ng-model="cheque.receiptDate" ng-disabled="disableChequeForm"></date-time-picker>
         </md-content>
 
-        <md-content layout="column" layout-align="center start">
+        <md-content layout="column" layout-align="center start" style="width: 19%">
             <md-checkbox ng-model="cheque.warrantyStatus"
                          class="md-primary with-date"
                          ng-disabled="disableChequeForm">
@@ -36,7 +36,7 @@
                          ng-disabled="!cheque.warrantyStatus || disableChequeForm"></date-picker>
         </md-content>
 
-        <md-content layout="column" layout-align="center start" ng-show="hasID">
+        <md-content layout="column" layout-align="center start" ng-show="hasID" style="width: 19%">
             <md-checkbox ng-model="cheque.readyStatus"
                          ng-change="currentDateIfEmpty('readyDate')"
                          class="md-primary with-date">
@@ -46,7 +46,7 @@
                          ng-disabled="!cheque.readyStatus"></date-picker>
         </md-content>
 
-        <md-content layout="column" layout-align="center start" ng-show="hasID">
+        <md-content layout="column" layout-align="center start" ng-show="hasID" style="width: 19%">
             <md-checkbox ng-model="cheque.returnedToClientStatus"
                          ng-change="currentDateIfEmpty('returnedToClientDate')"
                          class="md-primary with-date"
@@ -55,6 +55,14 @@
             </md-checkbox>
             <date-picker ng-model="cheque.returnedToClientDate"
                          ng-disabled="!cheque.returnedToClientStatus || disableChequeForm"></date-picker>
+        </md-content>
+
+        <md-content layout="column" layout-align="center start" ng-show="hasID" style="width: 16%">
+            <md-checkbox ng-model="cheque.actVisualInspection"
+                         class="md-primary with-date without-repair"
+                         ng-disabled="disableChequeForm">
+                <p>{{ 'withoutRepair' | translate}}</p>
+            </md-checkbox>
         </md-content>
 
     </md-content>

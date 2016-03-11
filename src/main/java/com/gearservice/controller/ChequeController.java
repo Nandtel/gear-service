@@ -65,5 +65,4 @@ public class ChequeController {
 //    @ResponseStatus(value = HttpStatus.OK)
 //    public void readFromExcelToDB() throws Exception {chequeService.readFromExcelToDB();}
 
-
 }

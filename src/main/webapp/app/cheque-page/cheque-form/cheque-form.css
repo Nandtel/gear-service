@@ -8,11 +8,11 @@
     }
 
     cheque-form md-checkbox.with-date {
-        margin: 1rem 0 .3rem 1.5rem;
+        margin: 1rem 0 .3rem .8rem;
     }
 
     cheque-form md-content.dates-field md-content p.with-date {
-        margin: 1rem 0 .3rem 1.5rem;
+        margin: 1rem 0 .3rem .8rem;
     }
 
     cheque-form .left-margin {
@@ -37,6 +37,14 @@
 
     cheque-form md-content.dates-field md-checkbox .md-label {
         margin-left: 50px;
+    }
+
+    cheque-form md-content.dates-field md-checkbox.without-repair .md-label {
+        margin-left: 30px;
+    }
+
+    cheque-form md-checkbox.without-repair {
+        margin: 1rem 0 .8rem .8rem;
     }
 
     cheque-form .simple-input>label {
