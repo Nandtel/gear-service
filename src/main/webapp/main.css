@@ -27,7 +27,7 @@ body div.md-dialog-container md-dialog p {
     line-height: 1.2rem;
 }
 
-button.md-button {
+.layout-padding button.md-button {
     padding: 0;
 }
 

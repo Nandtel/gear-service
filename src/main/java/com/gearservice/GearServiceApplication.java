@@ -41,15 +41,15 @@ public class GearServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        if (!userRepository.exists("admin")) {
-//            Authority administrator = new Authority("ROLE_ADMIN");
-//            User admin = new User();
-//            admin.setUsername("admin");
-//            admin.setPassword(new BCryptPasswordEncoder().encode("b"));
-//            admin.setFullname("admin");
-//            admin.setEnabled(true);
-//            admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
-//            userRepository.save(admin);
-//        }
+        if (!userRepository.exists("admin")) {
+            Authority administrator = new Authority("ROLE_ADMIN");
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(new BCryptPasswordEncoder().encode("b"));
+            admin.setFullname("admin");
+            admin.setEnabled(true);
+            admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
+            userRepository.save(admin);
+        }
     }
 }

@@ -136,8 +136,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private class RedirectAuthenticationEntryPoint implements AuthenticationEntryPoint {
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-//            response.sendRedirect("/");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+//            response.sendRedirect("/");
         }
     }
 

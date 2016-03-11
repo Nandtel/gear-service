@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class ExchangeRateService {
     @Transactional
     public ExchangeRate getCurrencyRates() {
         String now = LocalDate.now().toString();
+
+        System.out.println(exchangeRateRepository.exists(now));
 
         if(!exchangeRateRepository.exists(now))
             return getExchangeRateFromServer();
@@ -67,7 +70,15 @@ public class ExchangeRateService {
      * @return exchange currency rates from website
      */
     private ExchangeRate getExchangeRateFromServer() {
-        exchangeRateRepository.save(new ExchangeRate().getFromServer("http://minfindnr.ru/", "li#text-12 font"));
+        ExchangeRate exchangeRate;
+        try {
+            exchangeRate = new ExchangeRate().getFromServer("http://minfindnr.ru/", "li#text-12 font");
+        } catch (IOException e) {
+            e.printStackTrace();
+            exchangeRate = new ExchangeRate();
+        }
+        System.out.println(exchangeRate);
+        exchangeRateRepository.save(exchangeRate);
         return exchangeRateRepository.findOne(LocalDate.now().toString());
     }
 }

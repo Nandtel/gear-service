@@ -43,7 +43,7 @@ public class ExchangeRate {
      * @param tag which contains exchange rate data
      * @return this ExchangeRate object after editing
      */
-    public ExchangeRate getFromServer(String link, String tag) {
+    public ExchangeRate getFromServer(String link, String tag) throws IOException {
         String[] elements = parseWebSite(link, tag);
 
         for(int i = 0; i < elements.length;) {
@@ -66,8 +66,7 @@ public class ExchangeRate {
      * @param tag which contains exchange rate data
      * @return array of strings, which contains currency rates
      */
-    private static String[] parseWebSite(String link, String tag) {
-        try {
+    private static String[] parseWebSite(String link, String tag) throws IOException {
             return Jsoup.connect(link)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
                     .cookie("realauth", "SvBD85dINu3")
@@ -75,11 +74,6 @@ public class ExchangeRate {
                     .select(tag)
                     .text()
                     .split(" ");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     /**
