@@ -70,8 +70,6 @@ public class ApplicationService {
      * Method makeSample fill DB with sample data
      * Only for testing
      */
-    @Modifying
-    @Transactional
     public void makeSample() {
         Authority engineer = new Authority("ROLE_ENGINEER");
         Authority secretary = new Authority("ROLE_SECRETARY");

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Interface DiagnosticRepository
  *
@@ -16,4 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @see <a href="http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation">more</a>
  */
 
-public interface DiagnosticRepository extends JpaRepository<Diagnostic, Long> {}
+public interface DiagnosticRepository extends JpaRepository<Diagnostic, Long> {
+
+    List<Diagnostic> findByChequeId(Long chequeID);
+
+}

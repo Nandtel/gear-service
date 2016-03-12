@@ -98,7 +98,7 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                                 });
                             }
 
-                            if(response.data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
+                            if(response.data === "org.hibernate.StaleObjectStateException") {
                                 var warning = $injector.get('warning');
                                 warning.showAlertOptimisticLockingException();
                                 return $q.reject(response);

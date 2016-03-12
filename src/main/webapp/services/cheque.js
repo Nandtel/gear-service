@@ -20,21 +20,18 @@ angular.module('mainModule')
                     $rootScope.balance = {payments: []};
                     $rootScope.photoList = [];
                 },
-
                 getChequeListFromServer: function(filterPreferences) {
                     $http.post('/api/cheques/list', filterPreferences)
                         .success(function(data) {
                             $rootScope.chequeList = data;
                         });
                 },
-
                 getChequeFromServer: function(chequeID) {
                     $http.get('/api/cheques/' + chequeID)
                         .success(function(data) {
                             $rootScope.cheque = data;
                         });
                 },
-
                 deleteChequeFromServer: function(chequeID) {
                     $http.delete('/api/cheques/' + chequeID)
                         .success(function() {
@@ -47,7 +44,6 @@ angular.module('mainModule')
                             );
                         });
                 },
-
                 syncChequeWithServer: function(cheque) {
                     var deferred = $q.defer();
                     $http.post('/api/cheques', cheque)
@@ -71,8 +67,18 @@ angular.module('mainModule')
 
                     return deferred.promise;
                 },
-
-
+                getDiagnosticsFromServer: function(chequeID) {
+                    $http.get('/api/cheques/' + chequeID + '/diagnostics')
+                        .then(function(response) {
+                            $rootScope.cheque.diagnostics = response.data;
+                        })
+                },
+                getNotesFromServer: function(chequeID) {
+                    $http.get('/api/cheques/' + chequeID + '/notes')
+                        .then(function(response) {
+                            $rootScope.cheque.notes = response.data;
+                        })
+                },
                 getChequeBalanceFromServer: function(chequeID) {
                     $http.get('/api/balance/cheque/' + chequeID)
                         .success(function(balance) {
@@ -103,18 +109,15 @@ angular.module('mainModule')
 
                     return deferred.promise;
                 },
-
                 getPhotoListFromServer: function(chequeID) {
                     $http.get('/api/photo/cheque/' + chequeID)
                         .success(function(data) {
                             $rootScope.photoList = data;
                         })
                 },
-
                 deletePhotoFromServer: function(photoID) {
                     $http.delete('api/photo/' + photoID);
                 },
-
                 addToChequeCurrentDateIfEmpty: function(name) {
                     if ($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[name] == undefined)
                         $rootScope.cheque[name] = moment().format("YYYY-MM-DDTHH:mm:ssZZ");

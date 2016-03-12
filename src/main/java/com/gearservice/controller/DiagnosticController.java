@@ -9,15 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Class DiagnosticController is controller, that handle requests of diagnostics
  * Use @Autowired for connect to necessary services
  * Use RequestMapping for handle request from the client-side
  *
- * @version 1.1
+ * @version 1.2
  * @author Dmitry
- * @since 21.01.2016
+ * @since 12.03.2016
  */
 
 @RestController
@@ -55,6 +56,11 @@ public class DiagnosticController {
     public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID, Principal principal) {
         diagnosticService.deleteDiagnostic(chequeID, diagnosticID);
         logger.info("User " + principal.getName().toUpperCase() + " has removed diagnostic from cheque №" + chequeID);
+    }
+
+    @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics", method = RequestMethod.GET)
+    public List<Diagnostic> getDiagnostics(@PathVariable Long chequeID) {
+        return diagnosticService.getDiagnostics(chequeID);
     }
 
 }

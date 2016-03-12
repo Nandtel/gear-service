@@ -1,7 +1,7 @@
 <md-content class="comment-form">
 
     <form name="commentsForm" ng-submit="saveComment()" layout="column" layout-align="center center" layout-padding
-            ng-show="title === 'notes' || title === 'diagnostics' && security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">
+            ng-show="type === 'notes' || type === 'diagnostics' && security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">
 
         <md-input-container>
             <textarea ng-model="comment.text" rows="2" aria-label="commentText" required></textarea>
@@ -21,7 +21,7 @@
 
     <md-list class="comments-list">
         <md-list-item class="md-3-line"
-                      ng-repeat="comment in cheque[title] | orderBy: '-date' | limitTo: limit">
+                      ng-repeat="comment in cheque[type] | orderBy: '-date' | limitTo: limit">
 
             <md-content layout="row" flex>
                 <md-content class="md-list-item-text" flex>

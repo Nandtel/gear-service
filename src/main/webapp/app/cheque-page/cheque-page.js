@@ -1,9 +1,9 @@
 /**
  * Controller EditController handles request from edit.html template.
  *
- * @version 1.0
+ * @version 1.1
  * @author Dmitry
- * @since 04.09.2015
+ * @since 12.03.2015
  */
 angular.module("mainModule")
     .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'cheque', 'warning', '$state',
@@ -14,7 +14,7 @@ angular.module("mainModule")
             if ($scope.hasID) {
                 cheque.getChequeFromServer($scope.chequeID);
                 cheque.getChequeBalanceFromServer($scope.chequeID);
-                cheque.getPhotoListFromServer($scope.chequeID);
+                //cheque.getPhotoListFromServer($scope.chequeID);
             } else
                 cheque.createNewCheque();
 

@@ -1,5 +1,6 @@
 package com.gearservice.controller;
 
+import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.cheque.Note;
 import com.gearservice.service.NoteService;
 import org.slf4j.Logger;
@@ -9,15 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Class NoteController is controller, that handle requests of notes.
  * Use @Autowired for connect to necessary services
  * Use RequestMapping for handle request from the client-side
  *
- * @version 1.1
+ * @version 1.2
  * @author Dmitry
- * @since 21.01.2016
+ * @since 12.03.2016
  */
 
 @RestController
@@ -55,6 +57,11 @@ public class NoteController {
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID, Principal principal) {
         noteService.deleteNote(chequeID, noteID);
         logger.info("User " + principal.getName().toUpperCase() + " has removed note from cheque №" + chequeID);
+    }
+
+    @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.GET)
+    public List<Note> getNotes(@PathVariable Long chequeID) {
+        return noteService.getNotes(chequeID);
     }
 
 }

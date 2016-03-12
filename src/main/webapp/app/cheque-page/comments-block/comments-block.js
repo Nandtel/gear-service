@@ -13,12 +13,18 @@ angular.module("mainModule")
             $scope.saveComment = function() {
                 $scope.comment.user = $rootScope.user.principal;
                 $scope.comment.cheque = $scope.cheque;
-                $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.title, $scope.comment)
+                $http.post('/api/cheques/' + $scope.cheque.id + '/' + $scope.type, $scope.comment)
                     .success(function() {
                         $scope.comment.text = undefined;
                         $scope.commentsForm.$setPristine();
                         $scope.commentsForm.$setUntouched();
-                        cheque.getChequeFromServer($scope.cheque.id);
+
+                        if($scope.type === 'diagnostics')
+                            cheque.getDiagnosticsFromServer($scope.cheque.id);
+
+                        if($scope.type === 'notes')
+                            cheque.getNotesFromServer($scope.cheque.id);
+
                     });
             };
 
@@ -29,9 +35,13 @@ angular.module("mainModule")
             $scope.deleteComment = function(commentID, event) {
                 warning.showConfirmDeleteComment(event).then(function() {
 
-                    $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.title + '/' + commentID)
+                    $http.delete('/api/cheques/' + $scope.cheque.id + '/'+ $scope.type + '/' + commentID)
                         .success(function() {
-                            cheque.getChequeFromServer($scope.cheque.id);
+                            if($scope.type === 'diagnostics')
+                                cheque.getDiagnosticsFromServer($scope.cheque.id);
+
+                            if($scope.type === 'notes')
+                                cheque.getNotesFromServer($scope.cheque.id);
                         });
 
                 }, function() {});
@@ -39,12 +49,12 @@ angular.module("mainModule")
             };
 
             $scope.addedLesserThanElem = function() {
-                if(!!$scope.cheque[$scope.title])
-                    return $scope.add < $scope.cheque[$scope.title].length;
+                if(!!$scope.cheque[$scope.type])
+                    return $scope.add < $scope.cheque[$scope.type].length;
             };
 
             var limitLesserThanElem = function() {
-                return $scope.limit < $scope.cheque[$scope.title].length;
+                return $scope.limit < $scope.cheque[$scope.type].length;
             };
 
             $scope.limitComments = function() {
@@ -73,7 +83,7 @@ angular.module("mainModule")
             controller: 'CommentsBlock',
             scope: {
                 cheque: '=ngModel',
-                title: '=title'
+                type: '=type'
             },
             require: 'ngModel',
             templateUrl: 'app/cheque-page/comments-block/comments-block.html'

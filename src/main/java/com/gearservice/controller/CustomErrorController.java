@@ -11,12 +11,8 @@ public class CustomErrorController implements ErrorController {
     private static final String PATH = "/error";
 
     @RequestMapping(value = PATH)
-    ModelAndView error() {
-        return new ModelAndView("forward:/");
-    }
+    ModelAndView error() {return new ModelAndView("forward:/");}
 
     @Override
-    public String getErrorPath() {
-        return PATH;
-    }
+    public String getErrorPath() {return PATH;}
 }

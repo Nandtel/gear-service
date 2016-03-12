@@ -32,7 +32,7 @@ public class Balance {
     private int estimatedCost;
     private boolean paidStatus;
 
-    @OptimisticLock(excluded=false)
+    @OptimisticLock(excluded = false)
     @OneToMany(mappedBy = "balance", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments;
 

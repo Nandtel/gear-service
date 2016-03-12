@@ -1,6 +1,7 @@
 package com.gearservice.controller;
 
 import com.gearservice.service.ApplicationService;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,4 @@ public class ApplicationController {
 
     @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
     public List<?> autocompleteData(@PathVariable String itemName) {return applicationService.getAutocompleteData(itemName);}
-
 }

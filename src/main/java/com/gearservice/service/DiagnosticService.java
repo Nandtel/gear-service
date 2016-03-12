@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 /**
  * Class DiagnosticService is service, that handle DiagnosticController.
  * Use @Autowired for connect to necessary repositories
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class DiagnosticService {
 
     @Autowired DiagnosticRepository diagnosticRepository;
-    @Autowired ChequeRepository chequeRepository;
 
     /**
      * Method addDiagnostic add diagnostic to DB with current DateTime
@@ -32,7 +33,7 @@ public class DiagnosticService {
      */
     @Modifying
     @Transactional
-    public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic) {
+    public void addDiagnostic(Long chequeID, Diagnostic diagnostic) {
         diagnosticRepository.save(diagnostic.withDateTime());
     }
 
@@ -43,8 +44,13 @@ public class DiagnosticService {
      */
     @Modifying
     @Transactional
-    public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID) {
+    public void deleteDiagnostic(Long chequeID, Long diagnosticID) {
         diagnosticRepository.delete(diagnosticID);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Diagnostic> getDiagnostics(Long chequeID) {
+        return diagnosticRepository.findByChequeId(chequeID);
     }
 
 }

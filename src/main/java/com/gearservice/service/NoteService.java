@@ -1,5 +1,6 @@
 package com.gearservice.service;
 
+import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.cheque.Note;
 import com.gearservice.model.repositories.ChequeRepository;
 import com.gearservice.model.repositories.NoteRepository;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * Class NoteService is service, that handle NoteController
@@ -23,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class NoteService {
 
     @Autowired NoteRepository noteRepository;
-    @Autowired ChequeRepository chequeRepository;
 
     /**
      * Method addNote add note to DB with current DateTime
@@ -44,5 +46,10 @@ public class NoteService {
     @Modifying
     @Transactional
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {noteRepository.delete(noteID);}
+
+    @Transactional(readOnly = true)
+    public List<Note> getNotes(Long chequeID) {
+        return noteRepository.findByChequeId(chequeID);
+    }
 
 }
