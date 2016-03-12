@@ -36,6 +36,7 @@ public class RequestPreferences {
     private Boolean readyStatus;
     private Boolean returnedToClientStatus;
     private Boolean paidStatus;
+    private Boolean withoutRepair;
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
@@ -71,4 +72,6 @@ public class RequestPreferences {
     public void setPaidStatus(Boolean paidStatus) {this.paidStatus = paidStatus;}
     public String getPhoneNumber() {return phoneNumber;}
     public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public Boolean getWithoutRepair() {return withoutRepair;}
+    public void setWithoutRepair(Boolean withoutRepair) {this.withoutRepair = withoutRepair;}
 }

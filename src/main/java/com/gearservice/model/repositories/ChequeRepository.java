@@ -95,7 +95,8 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
             "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
             "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
-            "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) ")
+            "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) " +
+            "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ")
     List<Cheque> findByRequest(
             @Param("id") Long id,
             @Param("introducedFrom") OffsetDateTime introducedFrom,
@@ -113,5 +114,6 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             @Param("warrantyStatus") Boolean warrantyStatus,
             @Param("readyStatus") Boolean readyStatus,
             @Param("returnedToClientStatus") Boolean returnedToClientStatus,
-            @Param("paidStatus") Boolean paidStatus);
+            @Param("paidStatus") Boolean paidStatus,
+            @Param("withoutRepair") Boolean withoutRepair);
 }

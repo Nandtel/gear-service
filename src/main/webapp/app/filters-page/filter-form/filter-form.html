@@ -183,24 +183,29 @@
 
         <md-content layout-padding layout="row" layout-align="center start" class="text-field">
 
-            <md-select ng-model="$root.filter.warrantyStatus" placeholder="{{'Guarantee' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.warrantyStatus" placeholder="{{'Guarantee' | translate}}" flex="20">
                 <md-option value="true">{{'Has guarantee' | translate}}</md-option>
                 <md-option value="false">{{'Has no guarantee' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="$root.filter.readyStatus" placeholder="{{'Ready' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.readyStatus" placeholder="{{'Ready' | translate}}" flex="20>
                 <md-option value="true">{{'Ready' | translate}}</md-option>
                 <md-option value="false">{{'Not ready' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="$root.filter.returnedToClientStatus" placeholder="{{'Issued' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.returnedToClientStatus" placeholder="{{'Issued' | translate}}" flex="20">
                 <md-option value="true">{{'Issued' | translate}}</md-option>
                 <md-option value="false">{{'Not issued' | translate}}</md-option>
             </md-select>
 
-            <md-select ng-model="$root.filter.paidStatus" placeholder="{{'paid' | translate}}" flex="25">
+            <md-select ng-model="$root.filter.paidStatus" placeholder="{{'paid' | translate}}" flex="20">
                 <md-option value="true">{{'paid' | translate}}</md-option>
                 <md-option value="false">{{'not paid' | translate}}</md-option>
+            </md-select>
+
+            <md-select ng-model="$root.filter.withoutRepair" placeholder="{{'withoutRepair' | translate}}" flex="20">
+                <md-option value="true">{{'withoutRepair' | translate}}</md-option>
+                <md-option value="false">{{'withRepair' | translate}}</md-option>
             </md-select>
 
         </md-content>

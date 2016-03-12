@@ -132,7 +132,8 @@ public class ChequeService {
                 request.getWarrantyStatus(),
                 request.getReadyStatus(),
                 request.getReturnedToClientStatus(),
-                request.getPaidStatus()
+                request.getPaidStatus(),
+                request.getWithoutRepair()
         );
     }
 

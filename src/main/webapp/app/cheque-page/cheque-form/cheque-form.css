@@ -51,4 +51,16 @@
         margin-left: 8px;
     }
 
+    cheque-form .width19 {
+        width: 19%;
+    }
+
+    cheque-form .width16 {
+        width: 16%;
+    }
+
+    cheque-form .width27 {
+        width: 27%;
+    }
+
 }
