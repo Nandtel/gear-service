@@ -1,8 +1,8 @@
 angular.module("mainModule")
     .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope',
-        'warning', '$document', 'cheque', 'autocomplete',
+        'warning', '$document', 'cheque', 'autocomplete', '$timeout',
         function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document,
-                 cheque, autocomplete) {
+                 cheque, autocomplete, $timeout) {
 
             $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
             $scope.security = security;
@@ -48,9 +48,13 @@ angular.module("mainModule")
                 window.print();
             };
 
-            $scope.$watch('chequeForm.$dirty', function (newValue, oldValue) {
-                $scope.$parent.formDirty.cheque = newValue;
-            });
+            $timeout(function() {
+                $scope.chequeForm.$setPristine();
+                $scope.$watch('chequeForm.$dirty', function (newValue, oldValue) {
+                    $scope.$parent.formDirty.cheque = newValue;
+                });
+            }, 1000);
+
         }
     ])
     .directive('chequeForm', [function() {

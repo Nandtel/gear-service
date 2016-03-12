@@ -58,11 +58,8 @@ angular.module('mainModule')
                                     .hideDelay(700)
                             );
                         })
-                        .error(function(data) {
+                        .error(function() {
                             deferred.resolve(false);
-                            if(data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
-                                warning.showAlertOptimisticLockingException();
-                            }
                         });
 
                     return deferred.promise;

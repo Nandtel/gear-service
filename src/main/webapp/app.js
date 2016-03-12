@@ -83,6 +83,13 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                 ['$q', '$injector', function($q, $injector) {
                     return {
                         responseError: function (response) {
+
+                            if(response.data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {
+                                var warning = $injector.get('warning');
+                                warning.showAlertOptimisticLockingException();
+                                return $q.reject(response);
+                            }
+
                             if(response.status === -1) {
                                 var warning = $injector.get('warning');
                                 warning.showServerConnectionLostException();
@@ -96,12 +103,6 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                                 return deferred.promise.then(function () {
                                     return $http(response.config);
                                 });
-                            }
-
-                            if(response.data === "org.hibernate.StaleObjectStateException") {
-                                var warning = $injector.get('warning');
-                                warning.showAlertOptimisticLockingException();
-                                return $q.reject(response);
                             }
 
                             return $q.reject(response);

@@ -99,8 +99,6 @@ angular.module('mainModule')
                     return $mdDialog.show(alertSerConnLost);
 
                 }
-
-
             };
 
             return warning;
