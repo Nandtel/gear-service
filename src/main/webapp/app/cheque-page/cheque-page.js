@@ -14,7 +14,7 @@ angular.module("mainModule")
             if ($scope.hasID) {
                 cheque.getChequeFromServer($scope.chequeID);
                 cheque.getChequeBalanceFromServer($scope.chequeID);
-                //cheque.getPhotoListFromServer($scope.chequeID);
+                cheque.getPhotoListFromServer($scope.chequeID);
             } else
                 cheque.createNewCheque();
 

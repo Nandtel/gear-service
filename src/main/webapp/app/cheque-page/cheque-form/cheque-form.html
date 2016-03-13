@@ -131,10 +131,24 @@
             </md-item-template>
         </md-autocomplete>
 
-        <md-input-container flex="30" class="simple-input">
-            <label translate>Serial Number</label>
-            <input ng-model="cheque.serialNumber" required ng-disabled="disableChequeForm">
-        </md-input-container>
+        <md-autocomplete flex="30"
+                         md-search-text="cheque.serialNumber"
+                         md-no-cache="true"
+                         md-min-length="1"
+                         md-search-text-change=""
+                         md-items="item in $root.autocomplete.serials | filter: cheque.serialNumber"
+                         md-item-text="item"
+                         md-floating-label="{{'Serial Number' | translate}}"
+                         md-autofocus="false"
+                         md-autoselect="true"
+                         ng-disabled="disableChequeForm"
+                         ng-click="getAutocompleteData('serials')"
+                         required>
+            <md-item-template>
+                <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{item}} </span>
+            </md-item-template>
+        </md-autocomplete>
+
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
