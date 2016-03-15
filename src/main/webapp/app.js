@@ -75,8 +75,6 @@ angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment
                     data: {'selectedTab': 5}
                 });
 
-            $urlRouterProvider.otherwise('/filter');
-
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             $httpProvider.interceptors.push(
