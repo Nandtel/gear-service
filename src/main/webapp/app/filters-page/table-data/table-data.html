@@ -6,51 +6,55 @@
         </h2>
     </md-toolbar>
 
-    <md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>
-
-    <md-data-table-container>
-        <table md-data-table id="table">
-            <thead md-order="$root.tableFilter.order" md-trigger="onOrderChange">
-            <tr>
-                <th name="{{'Id'| translate}}" order-by="id"></th>
-                <th name="{{'Customer'| translate}}" order-by="customerName"></th>
-                <th name="{{'Introduced'| translate}}" order-by="receiptDate"></th>
-                <th name="{{'Name of Product'| translate}}" order-by="productName"></th>
-                <th name="{{'Model'| translate}}" order-by="modelName"></th>
-                <th name="{{'Serial Number'| translate}}" order-by="serialNumber"></th>
-                <th name="{{'Purchaser'| translate}}" order-by="representativeName"></th>
-                <th name="{{'Inspector'| translate}}" order-by="secretary.fullname"></th>
-                <th name="{{'master'| translate}}" order-by="engineer.fullname"></th>
-                <th name="{{'Guarantee'| translate}}" order-by="warrantyDate"></th>
-                <th name="{{'Ready'| translate}}" order-by="readyDate"></th>
-                <th name="{{'Issued'| translate}}" order-by="returnedToClientDate"></th>
+    <md-table-container>
+        <table md-table id="table">
+            <thead md-head md-order="$root.tableFilter.order" md-on-reorder="onOrderChange">
+            <tr md-row>
+                <th md-column md-order-by="id">{{'Id'| translate}}</th>
+                <th md-column md-order-by="customerName">{{'Customer'| translate}}</th>
+                <th md-column md-order-by="receiptDate">{{'Introduced'| translate}}</th>
+                <th md-column md-order-by="productName">{{'Name of Product'| translate}}</th>
+                <th md-column md-order-by="modelName">{{'Model'| translate}}</th>
+                <th md-column md-order-by="serialNumber">{{'Serial Number'| translate}}</th>
+                <th md-column md-order-by="representativeName">{{'Purchaser'| translate}}</th>
+                <th md-column md-order-by="secretary.fullname">{{'Inspector'| translate}}</th>
+                <th md-column md-order-by="engineer.fullname">{{'master'| translate}}</th>
+                <th md-column md-order-by="warrantyDate">{{'Guarantee'| translate}}</th>
+                <th md-column md-order-by="readyDate">{{'Ready'| translate}}</th>
+                <th md-column md-order-by="returnedToClientDate">{{'Issued'| translate}}</th>
 
             </tr>
             </thead>
-            <tbody md-auto-select>
-            <tr ng-repeat="cheque in $root.chequeList
+            <tbody md-body>
+            <tr md-row class="cheque" ng-repeat="cheque in $root.chequeList
 				| orderBy: $root.tableFilter.order
 				| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
                 ng-click="open($event, cheque.id)" ui-sref="cheque.edit({chequeId:cheque.id})">
-                <td>{{cheque.id}}</td>
-                <td>{{cheque.customerName}}</td>
-                <td>{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</td>
-                <td>{{cheque.productName}}</td>
-                <td>{{cheque.modelName}}</td>
-                <td>{{cheque.serialNumber}}</td>
-                <td>{{cheque.representativeName}}</td>
-                <td>{{cheque.secretary.fullname}}</td>
-                <td>{{cheque.engineer.fullname}}</td>
-                <td>{{cheque.warrantyDate | amDateFormat:'DD.MM.YYYY'}}</td>
-                <td>{{cheque.readyDate | amDateFormat:'DD.MM.YYYY'}}</td>
-                <td>{{cheque.returnedToClientDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td md-cell>{{cheque.id}}</td>
+                <td md-cell>{{cheque.customerName}}</td>
+                <td md-cell>{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td md-cell>{{cheque.productName}}</td>
+                <td md-cell>{{cheque.modelName}}</td>
+                <td md-cell>{{cheque.serialNumber}}</td>
+                <td md-cell>{{cheque.representativeName}}</td>
+                <td md-cell>{{cheque.secretary.fullname}}</td>
+                <td md-cell>{{cheque.engineer.fullname}}</td>
+                <td md-cell>{{cheque.warrantyDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td md-cell>{{cheque.readyDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td md-cell>{{cheque.returnedToClientDate | amDateFormat:'DD.MM.YYYY'}}</td>
             </tr>
             </tbody>
         </table>
-    </md-data-table-container>
+    </md-table-container>
 
-    <md-data-table-toolbar layout-align="center center">
-        <md-data-table-pagination md-label="label" md-row-select="[15, 20, 30, 40, 50]" md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page" md-total="{{$root.chequeList.length}}" md-trigger="onPageChange"></md-data-table-pagination>
-    </md-data-table-toolbar>
+    <md-table-pagination
+                         md-label="{{label}}"
+                         md-options="[15, 20, 30, 40, 50]"
+                         md-limit="$root.tableFilter.limit"
+                         md-page="$root.tableFilter.page"
+                         md-total="{{$root.chequeList.length}}"
+                         md-on-paginate="onPageChange"
+                         md-boundary-links>
+    </md-table-pagination>
 
 </section>

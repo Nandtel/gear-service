@@ -17,7 +17,7 @@
     "angular-gettext": "~2.1.0",
     "angular-loading-bar": "~0.8.0",
     "angular-material": "~1.0.6",
-    "angular-material-data-table": "0.8.14",
+    "angular-material-data-table": "0.9.14",
     "angular-ui-router": "~0.2.15",
     "angular-ui-utils": "bower",
     "moment": "~2.10.3",

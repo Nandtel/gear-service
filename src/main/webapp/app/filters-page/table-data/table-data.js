@@ -3,7 +3,8 @@ angular.module("mainModule")
         function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $state)  {
 
             $scope.label = {
-                text: gettextCatalog.getString('Rows per page:'),
+                page: "Страница",
+                rowsPerPage: gettextCatalog.getString('Rows per page:'),
                 of: gettextCatalog.getString('of')
             };
 

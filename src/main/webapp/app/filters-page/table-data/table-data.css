@@ -25,4 +25,23 @@
     table-data tr {
         outline: none;
     }
+
+    table-data table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2),
+    table-data table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2) {
+        padding: 0 12px 0 0;
+    }
+
+    table-data table tr.cheque {
+        cursor: pointer;
+    }
+
+    table-data table tr.cheque:hover {
+        background: #f2f2f2;
+    }
+
+    table-data .md-table-pagination {
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
 }
