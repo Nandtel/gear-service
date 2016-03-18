@@ -13,20 +13,20 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.5.0-RC6",
-    "angular-gettext": "~2.1.0",
-    "angular-loading-bar": "~0.8.0",
+    "angular": "~1.5.1",
+    "angular-gettext": "~2.2.1",
+    "angular-loading-bar": "~0.9.0",
     "angular-material": "~1.0.6",
     "angular-material-data-table": "0.9.14",
-    "angular-ui-router": "~0.2.15",
+    "angular-ui-router": "~0.2.18",
     "angular-ui-utils": "bower",
-    "moment": "~2.10.3",
-    "angular-cache": "4.4.2",
-    "angular-recaptcha": "~2.2.5",
-    "angular-moment": "1.0.0-beta.3",
-    "angular-scroll": "1.0.0",
-    "ng-file-upload": "10.0.2",
-    "angular-file-saver": "~1.0.1"
+    "moment": "~2.10.6",
+    "angular-cache": "~4.5.0",
+    "angular-recaptcha": "~2.5.0",
+    "angular-moment": "~0.10.3",
+    "angular-scroll": "~1.0.0",
+    "ng-file-upload": "~12.0.4",
+    "angular-file-saver": "~1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"
