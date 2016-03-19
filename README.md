@@ -15,7 +15,7 @@ Server-side:
 - other server-side dependencies you can see in build.gradle in root of project
 
 Client-side:
-- Angular JS 1.5.0-RC6
+- Angular JS 1.5.1
 - Angular-Material (UI components)
 - Moment JS
 - Google ReCaptcha
