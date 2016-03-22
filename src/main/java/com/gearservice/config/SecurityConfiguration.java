@@ -85,9 +85,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @return new BCrypt password encoder
      */
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
     /**
      * Method configure is main config class for http security
@@ -137,7 +135,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-//            response.sendRedirect("/");
         }
     }
 

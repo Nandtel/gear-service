@@ -26,9 +26,7 @@ public class CustomErrorController extends AbstractErrorController {
     }
 
     @RequestMapping(produces = "text/html")
-    public ModelAndView errorHtml() {
-        return new ModelAndView("forward:/");
-    }
+    public ModelAndView errorHtml() {return new ModelAndView("forward:/");}
 
     @RequestMapping
     @ResponseBody
@@ -38,7 +36,7 @@ public class CustomErrorController extends AbstractErrorController {
         return new ResponseEntity<>(body, status);
     }
 
-    protected boolean isIncludeStackTrace(HttpServletRequest request, MediaType produces) {
+    private boolean isIncludeStackTrace(HttpServletRequest request, MediaType produces) {
         ErrorProperties.IncludeStacktrace include = getErrorProperties().getIncludeStacktrace();
         if (include == ErrorProperties.IncludeStacktrace.ALWAYS) {
             return true;
@@ -52,7 +50,5 @@ public class CustomErrorController extends AbstractErrorController {
     @Override
     public String getErrorPath() {return this.errorProperties.getPath();}
 
-    protected ErrorProperties getErrorProperties() {
-        return this.errorProperties;
-    }
+    private ErrorProperties getErrorProperties() {return this.errorProperties;}
 }
