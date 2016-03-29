@@ -3,7 +3,7 @@
 
 Demo CRM application. Gear Service is compact and easy-to-use solution to collect sales. Presents opportunities to work with customers through interaction with checks: easy and dynamic sorting on client-side by angularJS, safe and quick storing data in reliable databases, analytics need to find bottlenecks in pipeline.
 
-# Technologies
+## Technologies
 Server-side:
 - Java 8 (Stream API, Lambdas, new Date and Time)
 - Spring Boot 1.3.3 (Spring Framework, Spring Security, Spring Data, Spring Web)
@@ -27,7 +27,7 @@ Client-side:
 - Karma unit-test runner
 - other client-side dependencies you can see in bower.json for bower and package.json for npm in root of project  
 
-# Demo
+## Demo
 Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
 Wait a few seconds until the Heroku initializes app. 
 
@@ -41,5 +41,5 @@ Available following users for login:
 - login: 'engin', pass: 'pass' with engineer restrictions
 - login: 'secret', pass: 'pass' with secretary restrictions
 
-# License
+## License
 The MIT License (MIT)
