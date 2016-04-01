@@ -12,7 +12,7 @@ Server-side:
 - JSoup html parser
 - Apache POI (Java API for Microsoft Documents)
 - Guava Cache
-- other server-side dependencies you can see in build.gradle in root of project
+- other server-side dependencies you can see in [build.gradle](build.gradle)
 
 Client-side:
 - Angular JS 1.5.1
@@ -25,7 +25,7 @@ Client-side:
 - Jasmine framework for testing code
 - Protractor E2E-test framework
 - Karma unit-test runner
-- other client-side dependencies you can see in bower.json for bower and package.json for npm in root of project  
+- other client-side dependencies you can see in bower.json for bower and [package.json](package.json)
 
 ## Demo
 Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
