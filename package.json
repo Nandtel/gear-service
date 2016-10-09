@@ -1,5 +1,5 @@
 {
-  "name": "example-project",
+  "name": "gear-service",
   "version": "0.1.0",
   "devDependencies": {
     "angular-mocks": "^1.4.4",
