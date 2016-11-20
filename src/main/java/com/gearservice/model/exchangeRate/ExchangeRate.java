@@ -46,17 +46,10 @@ public class ExchangeRate {
     public ExchangeRate getFromServer(String link, String tag) throws IOException {
         String[] elements = parseWebSite(link, tag);
 
-        for(int i = 0; i < elements.length;) {
-            switch (elements[i++]) {
-                case "USD":
-                    this.setUsd(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
-                case "UAH":
-                    this.setUah(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
-                case "EUR":
-                    this.setEur(average(new BigDecimal(elements[i++]), new BigDecimal(elements[++i]))); break;
-            }
-            i++;
-        }
+        this.setUsd(new BigDecimal(elements[2]));
+        this.setEur(new BigDecimal(elements[5]));
+        this.setUah(new BigDecimal(elements[8]));
+
         return this;
     }
 
@@ -74,17 +67,6 @@ public class ExchangeRate {
                     .select(tag)
                     .text()
                     .split(" ");
-    }
-
-    /**
-     * Method average find average of two BigDecimals
-     * @param first BigDecimal
-     * @param second BigDecimal
-     * @return BigDecimal, which contains an average of input values
-     */
-    private static BigDecimal average(BigDecimal first, BigDecimal second) {
-        BigDecimal two = new BigDecimal("2");
-        return first.add(second).divide(two, 2, BigDecimal.ROUND_HALF_UP);
     }
 
     public String getAddDate() {return addDate;}
