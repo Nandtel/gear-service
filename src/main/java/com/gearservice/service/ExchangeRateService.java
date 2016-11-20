@@ -70,7 +70,7 @@ public class ExchangeRateService {
     private ExchangeRate getExchangeRateFromServer() {
         ExchangeRate exchangeRate;
         try {
-            exchangeRate = new ExchangeRate().getFromServer("http://minfindnr.ru/", "li#text-12 font");
+            exchangeRate = new ExchangeRate().getFromServer("http://minfindnr.ru/", "div#kurs");
         } catch (IOException e) {
             e.printStackTrace();
             exchangeRate = new ExchangeRate();
