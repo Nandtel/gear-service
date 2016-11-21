@@ -115,11 +115,9 @@ angular.module('mainModule')
                 deletePhotoFromServer: function(photoID) {
                     $http.delete('api/photo/' + photoID);
                 },
-                addToChequeCurrentDateIfEmpty: function(name) {
-                    if ($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[name] == undefined)
+                addToChequeCurrentDateIfEmpty: function(name, field) {
+                    if ($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[field] === true)
                         $rootScope.cheque[name] = moment().format("YYYY-MM-DDTHH:mm:ssZZ");
-                    else
-                        $rootScope.cheque[name] = undefined;
                 }
             }
 
