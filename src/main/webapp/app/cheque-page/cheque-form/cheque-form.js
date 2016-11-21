@@ -44,6 +44,23 @@ angular.module("mainModule")
                 return {'name': name};
             };
 
+            $scope.syncWithReadyStatus = function () {
+                var withoutRepair = $scope.cheque.withoutRepair;
+
+                $scope.cheque.readyStatus = withoutRepair;
+
+                if(withoutRepair === true)
+                    $scope.currentDateIfEmpty('readyDate', 'readyStatus');
+            };
+
+            $scope.syncWithWithoutRepairStatus = function () {
+                var readyStatus = $scope.cheque.readyStatus;
+                var withoutRepair = $scope.cheque.withoutRepair;
+
+                if(readyStatus === false && withoutRepair === true)
+                    $scope.cheque.withoutRepair = readyStatus;
+            };
+
             $scope.printCheque = function() {
                 window.print();
             };
