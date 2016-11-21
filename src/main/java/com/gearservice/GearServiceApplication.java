@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -26,7 +28,7 @@ import static java.util.Arrays.asList;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableCaching
-public class GearServiceApplication implements CommandLineRunner {
+public class GearServiceApplication {
 
     @Autowired UserRepository userRepository;
     @Autowired ExchangeRateRepository exchangeRateRepository;
@@ -39,17 +41,20 @@ public class GearServiceApplication implements CommandLineRunner {
 
     public static void main(String[] args) {SpringApplication.run(GearServiceApplication.class, args);}
 
-    @Override
-    public void run(String... args) throws Exception {
-//        if (!userRepository.exists("admin")) {
-//            Authority administrator = new Authority("ROLE_ADMIN");
-//            User admin = new User();
-//            admin.setUsername("admin");
-//            admin.setPassword(new BCryptPasswordEncoder().encode("b"));
-//            admin.setFullname("admin");
-//            admin.setEnabled(true);
-//            admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
-//            userRepository.save(admin);
-//        }
+    @Bean
+    @Profile("dev")
+    CommandLineRunner init() {
+        return args -> {
+            if (!userRepository.exists("admin")) {
+                Authority administrator = new Authority("ROLE_ADMIN");
+                User admin = new User();
+                admin.setUsername("admin");
+                admin.setPassword(new BCryptPasswordEncoder().encode("b"));
+                admin.setFullname("admin");
+                admin.setEnabled(true);
+                admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
+                userRepository.save(admin);
+            }
+        };
     }
 }
