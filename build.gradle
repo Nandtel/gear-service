@@ -48,7 +48,7 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.3"
     compile "org.apache.poi:poi-ooxml:3.13"
     compile "org.springframework:spring-context-support:4.2.3.RELEASE"
-    compile "com.google.guava:guava:19.0-rc2"
+    compile "com.google.guava:guava:20.0"
     runtime "mysql:mysql-connector-java:5.1.36"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"

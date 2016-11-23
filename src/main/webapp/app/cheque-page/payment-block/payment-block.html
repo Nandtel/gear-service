@@ -6,8 +6,8 @@
                          ng-disabled="!security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY'])
                          || !hasAtLeastOnePayment()">
                 <h2>
-                    <span ng-hide="balance.paidStatus" translate>not paid</span>
-                    <span ng-show="balance.paidStatus" translate>paid</span>
+                    <span ng-hide="balance.paidStatus" translate>Not Paid</span>
+                    <span ng-show="balance.paidStatus" translate>Is Paid</span>
                 </h2>
             </md-checkbox>
 
