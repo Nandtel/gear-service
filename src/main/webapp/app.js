@@ -5,7 +5,7 @@
  * @author Dmitry
  * @since 22.01.2016
  */
-angular.module("mainModule", ['gettext', 'ui.utils', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
+angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMaterial', 'md.data.table',
     'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'ngFileUpload', 'vcRecaptcha',
     'ngFileSaver'])
     .value('duScrollDuration', 3000)
