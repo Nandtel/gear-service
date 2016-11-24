@@ -41,15 +41,14 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-rest"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-security"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1"
-    compile "net.sourceforge.nekohtml:nekohtml:1.9.15"
-    compile "org.jsoup:jsoup:1.8.3"
-    compile "org.mongodb:mongo-java-driver:3.1.0"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.3"
-    compile "org.apache.poi:poi-ooxml:3.13"
-    compile "org.springframework:spring-context-support:4.2.3.RELEASE"
-    compile "com.google.guava:guava:20.0"
-    runtime "mysql:mysql-connector-java:5.1.36"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.4"
+    compile "net.sourceforge.nekohtml:nekohtml:1.9.21"
+    compile "org.jsoup:jsoup:1.10.1"
+    compile "org.mongodb:mongo-java-driver:3.3.0"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.8.5"
+    compile "org.apache.poi:poi-ooxml:3.15"
+    compile "org.springframework:spring-context-support:4.3.4.RELEASE"
+    runtime "mysql:mysql-connector-java:5.1.40"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"
     testCompile "org.springframework.boot:spring-boot-starter-test"
@@ -57,3 +56,9 @@ dependencies {
 
 task bootRunDev << { bootRun { systemProperty "spring.profiles.active", "dev" } }
 bootRunDev.finalizedBy bootRun
+
+//allprojects {
+//    tasks.withType(JavaCompile) {
+//        options.compilerArgs << "-Xlint:deprecation"
+//    }
+//}
