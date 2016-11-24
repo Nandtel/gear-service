@@ -23,8 +23,5 @@
     "karma-coverage": "^0.5.0",
     "karma-jasmine": "^0.3.6",
     "load-grunt-tasks": "^3.2.0"
-  },
-  "dependencies": {
-    "time-grunt": "^1.2.1"
   }
 }
