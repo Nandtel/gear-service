@@ -37,7 +37,7 @@ public class ChequeController {
     @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)
     public Cheque synchronizeCheque(@RequestBody Cheque cheque, Principal principal) {
         Cheque chequeAfterSync = chequeService.synchronizeCheque(cheque);
-        logger.info("User " + principal.getName().toUpperCase() + " has synchronized cheque №" + chequeAfterSync.getId());
+        logger.info("User " + principal.getName().toUpperCase() + " has synchronized cheque " + chequeAfterSync.getId());
         return chequeAfterSync;
     }
 
@@ -48,7 +48,7 @@ public class ChequeController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCheque(@PathVariable Long chequeID, Principal principal) {
         chequeService.deleteCheque(chequeID);
-        logger.info("User " + principal.getName().toUpperCase() + " has removed cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has removed cheque " + chequeID);
     }
 
     @RequestMapping(value = "/api/attention", method = RequestMethod.GET)

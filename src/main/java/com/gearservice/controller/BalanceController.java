@@ -36,7 +36,7 @@ public class BalanceController {
     @ResponseStatus(value = HttpStatus.OK)
     public Balance synchronizeBalanceOfCheque(@PathVariable Long chequeID, @RequestBody Balance balance, Principal principal) {
         Balance balanceAfterSync = balanceService.synchronizeBalanceOfCheque(chequeID, balance);
-        logger.info("User " + principal.getName().toUpperCase() + " has synchronized balance from cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has synchronized balance from cheque " + chequeID);
         return balanceAfterSync;
     }
 

@@ -40,7 +40,7 @@ public class DiagnosticController {
     @ResponseStatus(value = HttpStatus.OK)
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic, Principal principal) {
         diagnosticService.addDiagnostic(chequeID, diagnostic);
-        logger.info("User " + principal.getName().toUpperCase() + " has added diagnostic to cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has added diagnostic to cheque " + chequeID);
     }
 
     /**
@@ -55,7 +55,7 @@ public class DiagnosticController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteDiagnostic(@PathVariable Long chequeID, @PathVariable Long diagnosticID, Principal principal) {
         diagnosticService.deleteDiagnostic(chequeID, diagnosticID);
-        logger.info("User " + principal.getName().toUpperCase() + " has removed diagnostic from cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has removed diagnostic from cheque " + chequeID);
     }
 
     @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics", method = RequestMethod.GET)
