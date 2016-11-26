@@ -75,15 +75,13 @@ gulp.task('css-concat', function () {
 
 gulp.task('template-concat', function () {
     return gulp.src([
-        webAppDir + 'app/**/*.html',
-        webAppDir + 'directives/**/*.html'
+        webAppDir + '/**/*.html'
     ])
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(templateCache({
             module:'templates',
             standalone: true,
-            filename: "templates.min.js",
-            root: 'app/'
+            filename: "templates.min.js"
         }))
         .pipe(gulp.dest(staticDir + 'javascript/'));
 });
