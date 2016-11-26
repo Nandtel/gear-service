@@ -79,6 +79,7 @@ gulp.task('template-concat', function () {
         webAppDir + 'app/**/*.html',
         webAppDir + 'directives/**/*.html'
     ])
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(templateCache({
             module:'templates',
             standalone: true,
