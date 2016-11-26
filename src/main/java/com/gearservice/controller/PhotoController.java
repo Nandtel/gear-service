@@ -37,7 +37,7 @@ public class PhotoController {
                             @RequestParam("username") String username,
                             Principal principal) {
         photoService.uploadImage(photo, chequeID, username);
-        logger.info("User " + principal.getName().toUpperCase() + " has added photo to cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has added photo to cheque " + chequeID);
     }
 
     @RequestMapping(value = "/api/photo/{photoID}", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class PhotoController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePhotoByID(@PathVariable Long chequeID, @PathVariable String photoID, Principal principal) {
         photoService.deletePhotoByID(photoID);
-        logger.info("User " + principal.getName().toUpperCase() + " has removed  photo from cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has removed  photo from cheque " + chequeID);
     }
 
     @RequestMapping(value = "/api/photo/cheque/{chequeID}", method = RequestMethod.GET)

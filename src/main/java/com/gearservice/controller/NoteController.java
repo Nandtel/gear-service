@@ -41,7 +41,7 @@ public class NoteController {
     @ResponseStatus(value = HttpStatus.OK)
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note, Principal principal) {
         noteService.addNote(chequeID, note);
-        logger.info("User " + principal.getName().toUpperCase() + " has added note to cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has added note to cheque " + chequeID);
     }
 
     /**
@@ -56,7 +56,7 @@ public class NoteController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID, Principal principal) {
         noteService.deleteNote(chequeID, noteID);
-        logger.info("User " + principal.getName().toUpperCase() + " has removed note from cheque №" + chequeID);
+        logger.info("User " + principal.getName().toUpperCase() + " has removed note from cheque " + chequeID);
     }
 
     @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.GET)
