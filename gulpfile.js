@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const newer = require('gulp-newer');
-const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify');
 const templateCache = require('gulp-angular-templatecache');
 const htmlmin = require('gulp-htmlmin');
