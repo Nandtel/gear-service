@@ -29,6 +29,7 @@
         <md-content layout="column" layout-align="center start" class="width19">
             <md-checkbox ng-model="cheque.warrantyStatus"
                          class="md-primary with-date"
+                         ng-change="cleanDateIfOff('warrantyDate', 'warrantyStatus')"
                          ng-disabled="disableChequeForm">
                 <p>{{ 'Warranty' | translate}}</p>
             </md-checkbox>
