@@ -8,6 +8,7 @@ angular.module("mainModule")
             $scope.security = security;
             $scope.getAutocompleteData = autocomplete.getDataFromServer;
             $scope.currentDateIfEmpty = cheque.addToChequeCurrentDateIfEmpty;
+            $scope.cleanDateIfOff = cheque.cleanDateIfOff;
 
             /**
              * Method modifyCheque modify current cheque and then send request to server-side
@@ -45,12 +46,8 @@ angular.module("mainModule")
             };
 
             $scope.syncWithReadyStatus = function () {
-                var withoutRepair = $scope.cheque.withoutRepair;
-
-                $scope.cheque.readyStatus = withoutRepair;
-
-                if(withoutRepair === true)
-                    $scope.currentDateIfEmpty('readyDate', 'readyStatus');
+                $scope.cheque.readyStatus = $scope.cheque.withoutRepair;
+                $scope.currentDateIfEmpty('readyDate', 'readyStatus');
             };
 
             $scope.syncWithWithoutRepairStatus = function () {

@@ -120,6 +120,12 @@ angular.module('mainModule')
                 addToChequeCurrentDateIfEmpty: function(name, field) {
                     if ($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[field] === true)
                         $rootScope.cheque[name] = moment().format("YYYY-MM-DDTHH:mm:ssZZ");
+                    else
+                        $rootScope.cheque[name] = undefined;
+                },
+                cleanDateIfOff: function (name, field) {
+                    if (!($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[field] === true))
+                        $rootScope.cheque[name] = undefined;
                 }
             }
 

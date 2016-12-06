@@ -82,13 +82,13 @@ public class Cheque {
     @Convert(converter = OffsetDateTimePersistenceConverter.class)
     private OffsetDateTime returnedToClientDate;
 
-    private boolean withoutRepair;
     private boolean actNotWarranty;
     private boolean actVisualInspection;
 
     private boolean warrantyStatus;
     private boolean readyStatus;
     private boolean returnedToClientStatus;
+    private boolean withoutRepair;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cheque_id", referencedColumnName = "id")
@@ -118,6 +118,10 @@ public class Cheque {
      * @return this Cheque object after editing
      */
     public Cheque withRandomData() {
+        this.setWarrantyStatus(true);
+        this.setReadyStatus(true);
+        this.setReturnedToClientStatus(true);
+        this.setWithoutRepair(true);
         this.setCustomerName(SampleDataService.getRandomName());
         this.setProductName(SampleDataService.getRandomProduct());
         this.setRepairPeriod(SampleDataService.getRepairPeriod());
