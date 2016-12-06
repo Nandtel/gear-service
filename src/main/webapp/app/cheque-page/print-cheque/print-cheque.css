@@ -20,6 +20,10 @@
         display:initial;
     }
 
+    table.printing-table {
+        background: white;
+    }
+
     print-cheque table {
         width: 100%;
         border-collapse: collapse;
