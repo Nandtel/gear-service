@@ -6,6 +6,8 @@ import com.gearservice.service.ChequeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +32,8 @@ public class ChequeController {
     @Autowired ChequeService chequeService;
 
     @RequestMapping(value = "/api/cheques/list", method = RequestMethod.POST)
-    public List<Cheque> getMinChequesList(@RequestBody RequestPreferences request) {
-        return chequeService.getMinChequesList(request);
+    public Page<Cheque> getMinChequesList(@RequestBody RequestPreferences request, Pageable pageable) {
+        return chequeService.getMinChequesList(request, pageable);
     }
 
     @RequestMapping(value = "/api/cheques", method = RequestMethod.POST)

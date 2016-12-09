@@ -4,8 +4,8 @@
   "dependencies": {
     "angular": "~1.5.9",
     "angular-material": "~1.1.1",
-    "angular-animate": "^1.5.9",
-    "angular-aria": "^1.5.9",
+    "angular-animate": "~1.5.9",
+    "angular-aria": "~1.5.9",
     "angular-cache": "~4.6.0",
     "angular-file-saver": "~1.1.2",
     "angular-gettext": "~2.2.1",

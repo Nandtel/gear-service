@@ -1,6 +1,6 @@
 angular.module("mainModule")
-    .controller('TableData', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$state',
-        function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $state)  {
+    .controller('TableData', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$state', 'cheque',
+        function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $state, cheque)  {
 
             $scope.label = {
                 page: "Страница",
@@ -8,15 +8,8 @@ angular.module("mainModule")
                 of: gettextCatalog.getString('of')
             };
 
-            /**
-             * Method necessary for md-data-table
-             */
-            $scope.onPageChange = function() {};
-
-            /**
-             * Method necessary for md-data-table
-             */
-            $scope.onOrderChange = function() {};
+            $scope.mdOnPaginate = cheque.getChequeListFromServer;
+            $scope.mdOnReorder = cheque.getChequeListFromServer;
 
             $scope.open = function($event, chequeID) {
                 if ($event.which === 2 || ($event.which === 1 && ($event.metaKey || $event.ctrlKey))) {

@@ -2,6 +2,8 @@ package com.gearservice.model.repositories;
 
 import com.gearservice.model.cheque.Cheque;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
@@ -77,27 +79,27 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     List<String> listOfPhoneNumbers();
 
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT c FROM Cheque c, Balance b, User e, User s " +
-            "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
-            "AND (c.id = :id OR :id IS NULL) " +
-            "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
-            "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
-            "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
-            "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
-            "AND (c.customerName LIKE %:customerName% OR :customerName IS NULL) " +
-            "AND (c.productName LIKE %:productName% OR :productName IS NULL) " +
-            "AND (c.modelName LIKE %:modelName% OR :modelName IS NULL) " +
-            "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
-            "AND (c.representativeName LIKE %:representativeName% OR :representativeName IS NULL) " +
-            "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
-            "AND (s.fullname LIKE %:secretary% OR :secretary IS NULL) " +
-            "AND (e.fullname LIKE %:engineer% OR :engineer IS NULL) " +
-            "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
-            "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
-            "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
-            "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) " +
-            "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ")
-    List<Cheque> findByRequest(
+    @Query(value = "SELECT c FROM Cheque c, Balance b, User e, User s " +
+                    "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
+                    "AND (c.id = :id OR :id IS NULL) " +
+                    "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
+                    "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
+                    "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
+                    "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
+                    "AND (c.customerName LIKE %:customerName% OR :customerName IS NULL) " +
+                    "AND (c.productName LIKE %:productName% OR :productName IS NULL) " +
+                    "AND (c.modelName LIKE %:modelName% OR :modelName IS NULL) " +
+                    "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
+                    "AND (c.representativeName LIKE %:representativeName% OR :representativeName IS NULL) " +
+                    "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
+                    "AND (s.fullname LIKE %:secretary% OR :secretary IS NULL) " +
+                    "AND (e.fullname LIKE %:engineer% OR :engineer IS NULL) " +
+                    "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
+                    "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
+                    "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
+                    "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) " +
+                    "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ")
+    Page<Cheque> findByRequest(
             @Param("id") Long id,
             @Param("introducedFrom") OffsetDateTime introducedFrom,
             @Param("introducedTo") OffsetDateTime introducedTo,
@@ -115,5 +117,6 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             @Param("readyStatus") Boolean readyStatus,
             @Param("returnedToClientStatus") Boolean returnedToClientStatus,
             @Param("paidStatus") Boolean paidStatus,
-            @Param("withoutRepair") Boolean withoutRepair);
+            @Param("withoutRepair") Boolean withoutRepair,
+            Pageable pageable);
 }

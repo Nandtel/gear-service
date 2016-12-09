@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,7 +115,7 @@ public class ChequeService {
      * @return list of cheque by request without some field for size optimization
      */
     @Transactional(readOnly = true)
-    public List<Cheque> getMinChequesList(RequestPreferences request) {
+    public Page<Cheque> getMinChequesList(RequestPreferences request, Pageable pageable) {
 
         return chequeRepository.findByRequest(
                 request.getId(),
@@ -133,7 +135,8 @@ public class ChequeService {
                 request.getReadyStatus(),
                 request.getReturnedToClientStatus(),
                 request.getPaidStatus(),
-                request.getWithoutRepair()
+                request.getWithoutRepair(),
+                pageable
         );
     }
 

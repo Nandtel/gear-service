@@ -12,6 +12,19 @@ angular.module('mainModule')
             $rootScope.filter = {
                 customerName: null, engineer: null, model: null, phoneNumber: null,
                 productName: null, representativeName: null, secretary: null, serialNumber: null};
+            $rootScope.currentFilter = {};
+            $rootScope.page = {};
+
+            function getSortWithReplacementMinusToDesc(sort) {
+                if(sort.indexOf('-') !== -1) {
+                    sort = sort.substr(1);
+                    sort += ',desc';
+                }
+                else
+                    sort += ',asc';
+
+                return sort;
+            }
 
             return {
                 createNewCheque: function() {
@@ -22,10 +35,16 @@ angular.module('mainModule')
                     $rootScope.balance = {payments: []};
                     $rootScope.photoList = [];
                 },
-                getChequeListFromServer: function(filterPreferences) {
-                    $http.post('/api/cheques/list', filterPreferences)
+                getChequeListFromServer: function() {
+                    var tableFilter = {
+                        page: $rootScope.tableFilter.page - 1,
+                        size: $rootScope.tableFilter.size,
+                        sort: getSortWithReplacementMinusToDesc($rootScope.tableFilter.sort)
+                    };
+
+                    $http.post('/api/cheques/list', $rootScope.currentFilter, {params: tableFilter})
                         .success(function(data) {
-                            $rootScope.chequeList = data;
+                            $rootScope.page = data;
                         });
                 },
                 getChequeFromServer: function(chequeID) {
