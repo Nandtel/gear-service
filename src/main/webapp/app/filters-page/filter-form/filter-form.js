@@ -15,7 +15,8 @@ angular.module("mainModule")
 
             $scope.sendFilterPreferences = function() {
                 $rootScope.tableFilter.page = 1;
-                cheque.getChequeListFromServer($rootScope.filter);
+                $rootScope.currentFilter = angular.copy($rootScope.filter);
+                cheque.getChequeListFromServer();
             };
         }
     ])

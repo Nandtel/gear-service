@@ -1,3 +1,6 @@
+### Folders with built resources
+**/resources/**/*.min.*
+
 ### Gradle template
 .gradle
 build/

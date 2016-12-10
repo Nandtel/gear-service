@@ -6,16 +6,16 @@ Demo CRM application. Gear Service is compact and easy-to-use solution to collec
 ## Technologies
 Server-side:
 - Java 8 (Stream API, Lambdas, new Date and Time)
-- Spring Boot 1.3.3 (Spring Framework, Spring Security, Spring Data, Spring Web)
+- Spring Boot 1.4.2 (Spring Framework, Spring Security, Spring Data, Spring Web)
 - MySQL (main DB), MongoDB (secondary DB for blobs), PostgreSQL (DB for heroku), H2 (DB for tests)
 - Gradle build tool
 - JSoup html parser
 - Apache POI (Java API for Microsoft Documents)
-- Guava Cache
+- Caffeine Cache
 - other server-side dependencies you can see in [build.gradle](build.gradle)
 
 Client-side:
-- Angular JS 1.5.1
+- Angular JS 1.5.8
 - Angular-Material (UI components)
 - Moment JS
 - Google ReCaptcha

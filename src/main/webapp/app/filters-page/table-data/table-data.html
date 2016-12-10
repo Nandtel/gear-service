@@ -8,7 +8,7 @@
 
     <md-table-container>
         <table md-table id="table">
-            <thead md-head md-order="$root.tableFilter.order" md-on-reorder="onOrderChange">
+            <thead md-head md-order="$root.tableFilter.sort" md-on-reorder="mdOnReorder">
             <tr md-row>
                 <th md-column md-order-by="id">{{'Id'| translate}}</th>
                 <th md-column md-order-by="customerName">{{'Customer'| translate}}</th>
@@ -26,9 +26,7 @@
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row class="cheque" ng-repeat="cheque in $root.chequeList
-				| orderBy: $root.tableFilter.order
-				| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
+            <tr md-row class="cheque" ng-repeat="cheque in $root.page.content"
                 ng-click="open($event, cheque.id)" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td md-cell>{{cheque.id}}</td>
                 <td md-cell>{{cheque.customerName}}</td>
@@ -50,10 +48,10 @@
     <md-table-pagination
                          md-label="{{label}}"
                          md-options="[15, 20, 30, 40, 50]"
-                         md-limit="$root.tableFilter.limit"
+                         md-limit="$root.tableFilter.size"
                          md-page="$root.tableFilter.page"
-                         md-total="{{$root.chequeList.length}}"
-                         md-on-paginate="onPageChange"
+                         md-total="{{$root.page.totalElements}}"
+                         md-on-paginate="mdOnPaginate"
                          md-boundary-links>
     </md-table-pagination>
 

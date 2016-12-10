@@ -3,6 +3,7 @@ import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
 import com.gearservice.model.repositories.*;
 import com.gearservice.service.AnalyticsService;
+import com.gearservice.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,13 +32,7 @@ import static java.util.Arrays.asList;
 public class GearServiceApplication {
 
     @Autowired UserRepository userRepository;
-    @Autowired ExchangeRateRepository exchangeRateRepository;
-    @Autowired ChequeRepository chequeRepository;
-    @Autowired PaymentRepository paymentRepository;
-    @Autowired BalanceRepository balanceRepository;
-    @Autowired DiagnosticRepository diagnosticRepository;
-    @Autowired NoteRepository noteRepository;
-    @Autowired AnalyticsService analyticsService;
+    @Autowired ApplicationService applicationService;
 
     public static void main(String[] args) {SpringApplication.run(GearServiceApplication.class, args);}
 
@@ -55,6 +50,8 @@ public class GearServiceApplication {
                 admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
                 userRepository.save(admin);
             }
+
+            applicationService.makeSample();
         };
     }
 }
