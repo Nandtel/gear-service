@@ -6,7 +6,6 @@ angular.module('mainModule')
                 repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
                 components: [], notes: [], diagnostics: [], balance: {paidStatus: false},
                 secretary: $rootScope.user.principal, engineer: $rootScope.user.principal};
-            $rootScope.chequeList = [];
             $rootScope.balance = {payments: []};
             $rootScope.photoList = [];
             $rootScope.filter = {
