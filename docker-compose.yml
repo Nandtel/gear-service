@@ -1,0 +1,21 @@
+mysql:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=123456
+    - MYSQL_DATABASE=steamservice
+  command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
+
+mongo:
+  image: mongo
+
+app:
+  image: openjdk:8-jdk-alpine
+  ports:
+    - "443:443"
+  links:
+    - mysql
+    - mongo
+  volumes:
+    - ./ssl:/ssl
+    - ./build/libs:/app
+  command: java -jar ./app/gs.jar --spring.profiles.active=dev
