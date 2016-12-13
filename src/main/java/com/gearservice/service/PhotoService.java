@@ -1,16 +1,14 @@
 package com.gearservice.service;
 
 import com.gearservice.model.cheque.Photo;
-import com.gearservice.model.repositories.PhotoRepository;
+import com.gearservice.repositories.mongo.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;

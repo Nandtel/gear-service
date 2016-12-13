@@ -18,4 +18,4 @@ app:
   volumes:
     - ./ssl:/ssl
     - ./build/libs:/app
-  command: java -jar ./app/gs.jar --spring.profiles.active=dev
+  command: java -jar ./app/gs.jar --spring.profiles.active=docker

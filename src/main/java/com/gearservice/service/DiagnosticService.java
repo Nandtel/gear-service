@@ -1,14 +1,11 @@
 package com.gearservice.service;
 
 import com.gearservice.model.cheque.Diagnostic;
-import com.gearservice.model.repositories.ChequeRepository;
-import com.gearservice.model.repositories.DiagnosticRepository;
+import com.gearservice.repositories.jpa.DiagnosticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

@@ -1,13 +1,9 @@
 package com.gearservice.service;
 
-import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
-import com.gearservice.model.repositories.*;
+import com.gearservice.repositories.jpa.*;
+import com.gearservice.repositories.mongo.PhotoRepository;
 import com.gearservice.model.request.RequestPreferences;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,15 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityManager;
-import java.io.File;
-import java.io.FileInputStream;
-import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.*;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.*;
 
 /**
  * Class ChequeService is service, that handle ChequeController
@@ -40,12 +29,18 @@ import static java.util.stream.Collectors.*;
 @Service
 public class ChequeService {
 
-    @Autowired ChequeRepository chequeRepository;
-    @Autowired DiagnosticRepository diagnosticRepository;
-    @Autowired NoteRepository noteRepository;
-    @Autowired PhotoRepository photoRepository;
-    @Autowired UserRepository userRepository;
-    @Autowired PaymentRepository paymentRepository;
+    @Autowired
+    ChequeRepository chequeRepository;
+    @Autowired
+    DiagnosticRepository diagnosticRepository;
+    @Autowired
+    NoteRepository noteRepository;
+    @Autowired
+    PhotoRepository photoRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PaymentRepository paymentRepository;
     @Autowired EntityManager em;
 
     /**

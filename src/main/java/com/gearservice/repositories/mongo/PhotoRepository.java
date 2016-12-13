@@ -1,6 +1,7 @@
-package com.gearservice.model.repositories;
+package com.gearservice.repositories.mongo;
 
 import com.gearservice.model.cheque.Photo;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

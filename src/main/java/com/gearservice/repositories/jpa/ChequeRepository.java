@@ -1,4 +1,4 @@
-package com.gearservice.model.repositories;
+package com.gearservice.repositories.jpa;
 
 import com.gearservice.model.cheque.Cheque;
 import org.springframework.cache.annotation.Cacheable;
@@ -6,14 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 

@@ -1,10 +1,7 @@
-package com.gearservice.model.repositories;
+package com.gearservice.repositories.jpa;
 
 import com.gearservice.model.cheque.Diagnostic;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

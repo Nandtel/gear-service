@@ -1,9 +1,7 @@
 package com.gearservice.service;
 
-import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.cheque.Note;
-import com.gearservice.model.repositories.ChequeRepository;
-import com.gearservice.model.repositories.NoteRepository;
+import com.gearservice.repositories.jpa.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
