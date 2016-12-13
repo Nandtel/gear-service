@@ -1,14 +1,5 @@
 package com.gearservice.config;
 
-/**
- * Class MongoConfiguration is configuration
- * Config for mongoDB, take parameters from application.properties.
- *
- * @version 1.1
- * @author Dmitry
- * @since 22.01.2016
- */
-
 import com.gearservice.config.converter.OffsetDateTimeToStringConverter;
 import com.gearservice.config.converter.StringToOffsetDateTimeConverter;
 import com.mongodb.Mongo;
@@ -16,7 +7,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -26,14 +16,22 @@ import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static java.util.Collections.singletonList;
 
+/**
+ * Class MongoConfiguration is configuration
+ * Config for mongoDB, take parameters from application.properties.
+ *
+ * @version 1.1
+ * @author Dmitry
+ * @since 22.01.2016
+ */
+
 @Configuration
 @EnableConfigurationProperties(MongoProperties.class)
-@EnableMongoRepositories(basePackages = {"com.gearservice.model.repositories"})
+@EnableMongoRepositories(basePackages = {"com.gearservice.repositories.mongo"})
 class MongoConfiguration extends AbstractMongoConfiguration {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -64,8 +62,6 @@ class MongoConfiguration extends AbstractMongoConfiguration {
         } else {
             return new MongoClient(singletonList(new ServerAddress(host, port)));
         }
-
-
 
     }
 }

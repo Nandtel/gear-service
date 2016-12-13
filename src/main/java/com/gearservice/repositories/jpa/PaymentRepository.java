@@ -1,9 +1,8 @@
-package com.gearservice.model.repositories;
+package com.gearservice.repositories.jpa;
 
 import com.gearservice.model.cheque.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**

@@ -4,9 +4,8 @@ import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
 import com.gearservice.model.exchangeRate.ExchangeRate;
-import com.gearservice.model.repositories.*;
+import com.gearservice.repositories.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,12 +33,17 @@ import static java.util.Arrays.asList;
 public class ApplicationService {
 
     @Autowired UserRepository userRepository;
-    @Autowired ExchangeRateRepository exchangeRateRepository;
-    @Autowired ChequeRepository chequeRepository;
-    @Autowired BalanceRepository balanceRepository;
-    @Autowired DiagnosticRepository diagnosticRepository;
+    @Autowired
+    ExchangeRateRepository exchangeRateRepository;
+    @Autowired
+    ChequeRepository chequeRepository;
+    @Autowired
+    BalanceRepository balanceRepository;
+    @Autowired
+    DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
-    @Autowired ComponentRepository componentRepository;
+    @Autowired
+    ComponentRepository componentRepository;
 
     /**
      * Method getAutocompleteData return autocomplete data for request item name

@@ -1,4 +1,4 @@
-package com.gearservice.model.repositories;
+package com.gearservice.repositories.jpa;
 
 import com.gearservice.model.authorization.User;
 import org.springframework.cache.annotation.Cacheable;

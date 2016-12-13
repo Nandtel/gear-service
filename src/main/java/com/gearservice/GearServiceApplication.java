@@ -1,8 +1,7 @@
 package com.gearservice;
 import com.gearservice.model.authorization.Authority;
 import com.gearservice.model.authorization.User;
-import com.gearservice.model.repositories.*;
-import com.gearservice.service.AnalyticsService;
+import com.gearservice.repositories.jpa.UserRepository;
 import com.gearservice.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -29,6 +29,7 @@ import static java.util.Arrays.asList;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableCaching
+@EnableJpaRepositories(basePackages = {"com.gearservice.repositories.jpa"})
 public class GearServiceApplication {
 
     @Autowired UserRepository userRepository;
@@ -37,7 +38,7 @@ public class GearServiceApplication {
     public static void main(String[] args) {SpringApplication.run(GearServiceApplication.class, args);}
 
     @Bean
-    @Profile("dev")
+    @Profile({"dev", "docker"})
     CommandLineRunner init() {
         return args -> {
             if (!userRepository.exists("admin")) {

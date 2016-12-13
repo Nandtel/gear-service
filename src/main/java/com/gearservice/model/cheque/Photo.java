@@ -1,6 +1,7 @@
 package com.gearservice.model.cheque;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -13,7 +14,7 @@ import java.time.OffsetDateTime;
  * @author Dmitry
  * @since 21.01.2016
  */
-
+@Document
 public class Photo {
 
     @Id

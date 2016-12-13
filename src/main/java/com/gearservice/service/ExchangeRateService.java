@@ -1,7 +1,7 @@
 package com.gearservice.service;
 
 import com.gearservice.model.exchangeRate.ExchangeRate;
-import com.gearservice.model.repositories.ExchangeRateRepository;
+import com.gearservice.repositories.jpa.ExchangeRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;

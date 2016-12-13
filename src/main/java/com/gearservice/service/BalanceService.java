@@ -2,8 +2,8 @@ package com.gearservice.service;
 
 import com.gearservice.model.cheque.Balance;
 import com.gearservice.model.cheque.Cheque;
-import com.gearservice.model.repositories.BalanceRepository;
-import com.gearservice.model.repositories.ChequeRepository;
+import com.gearservice.repositories.jpa.BalanceRepository;
+import com.gearservice.repositories.jpa.ChequeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
