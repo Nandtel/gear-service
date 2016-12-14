@@ -1,6 +1,6 @@
 angular.module('mainModule')
-    .factory('cheque', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog',
-        function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog) {
+    .factory('cheque', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog', '_',
+        function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
 
             $rootScope.cheque = {
                 repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
@@ -41,7 +41,10 @@ angular.module('mainModule')
                         sort: getSortWithReplacementMinusToDesc($rootScope.tableFilter.sort)
                     };
 
-                    $http.post('/api/cheques/list', $rootScope.currentFilter, {params: tableFilter})
+                    var currentFilter = _.omitBy($rootScope.currentFilter, _.isEmpty);
+                    console.log(currentFilter);
+
+                    $http.post('/api/cheques/list', currentFilter, {params: tableFilter})
                         .success(function(data) {
                             $rootScope.page = data;
                         });
