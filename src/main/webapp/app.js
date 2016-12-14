@@ -9,6 +9,7 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
     'angular-loading-bar', 'templates', 'angular-cache', 'duScroll', 'ngFileUpload', 'vcRecaptcha',
     'ngFileSaver'])
     .value('duScrollDuration', 3000)
+    .constant('_', window._)
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
             $locationProvider.html5Mode(true);

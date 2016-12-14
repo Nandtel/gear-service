@@ -10,6 +10,7 @@ const staticDir = 'src/main/resources/static/';
 const webAppDir = 'src/main/webapp/';
 
 const jslib = [
+    'node_modules/lodash/lodash.min.js',
     'node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js',
     'node_modules/angular/angular.min.js',
     'node_modules/angular-animate/angular-animate.min.js',
