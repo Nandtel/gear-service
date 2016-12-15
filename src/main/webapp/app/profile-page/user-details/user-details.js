@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('UserDetails', ['$scope', '$http', 'currencyRatesService',
-        function ($scope, $http, currencyRatesService) {
+    .controller('UserDetails', function ($scope, $http, currencyRatesService) {
 
             $scope.saveUser = function() {
                 $http.post('/api/user', $scope.user)
@@ -14,7 +13,7 @@ angular.module("mainModule")
             };
 
         }
-    ])
+    )
     .directive('userDetails', function() {
         return {
             restrict: 'E',

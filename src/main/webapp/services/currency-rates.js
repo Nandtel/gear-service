@@ -1,6 +1,5 @@
 angular.module('mainModule')
-    .service('currencyRatesService', ['CacheFactory', '$http', '$q', '$rootScope',
-        function(CacheFactory, $http, $q, $rootScope) {
+    .service('currencyRatesService', function(CacheFactory, $http, $q, $rootScope) {
             var currencyRatesCache;
 
             if(!CacheFactory.get('currencyRatesCache')) {
@@ -44,4 +43,4 @@ angular.module('mainModule')
                 }
             }
         }
-    ]);
+    );

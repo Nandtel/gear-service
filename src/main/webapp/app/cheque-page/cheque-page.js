@@ -6,7 +6,7 @@
  * @since 12.03.2015
  */
 angular.module("mainModule")
-    .controller("ChequePage", ['$rootScope', '$scope', '$stateParams', '$http', 'cheque', 'warning', '$state',
+    .controller("ChequePage",
         function ($rootScope, $scope, $stateParams, $http, cheque, warning, $state) {
             $scope.formDirty = {payment: false, cheque: false, comments: false};
             $scope.hasID = !!$scope.chequeID;
@@ -41,7 +41,7 @@ angular.module("mainModule")
             });
 
         }
-    ])
+    )
     .directive('chequePage', function() {
         return {
             restrict: 'E',

@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('ChequeForm', ['$scope', '$http', 'gettextCatalog', '$mdToast', '$state', 'security', '$rootScope',
-        'warning', '$document', 'cheque', 'autocomplete', '$timeout',
+    .controller('ChequeForm',
         function($scope, $http, gettextCatalog, $mdToast, $state, security, $rootScope, warning, $document,
                  cheque, autocomplete, $timeout) {
 
@@ -70,7 +69,7 @@ angular.module("mainModule")
             }, 1000);
 
         }
-    ])
+    )
     .directive('chequeForm', [function() {
         return {
             restrict: 'E',

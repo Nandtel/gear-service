@@ -9,7 +9,7 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .filter("filterByID", [function() {
+    .filter("filterByID", function() {
         return function (items, id) {
 
             if(id == null || id == "")
@@ -24,4 +24,4 @@ angular.module("mainModule")
 
             return result;
         }
-    }]);
+    });

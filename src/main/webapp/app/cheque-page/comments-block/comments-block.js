@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('CommentsBlock', ['$scope', '$http', '$document', '$rootScope', 'security', 'warning', 'cheque',
+    .controller('CommentsBlock',
         function($scope, $http, $document, $rootScope, security, warning, cheque) {
             $scope.comment = undefined;
             $scope.add = 3;
@@ -76,7 +76,7 @@ angular.module("mainModule")
 
             $scope.security = security;
         }
-    ])
+    )
     .directive('commentsBlock', [function() {
         return {
             restrict: 'E',

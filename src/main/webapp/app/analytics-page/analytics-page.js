@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('AnalyticsPage', ['$scope', '$http', 'FileSaver', 'Blob',
-        function ($scope, $http, FileSaver, Blob) {
+    .controller('AnalyticsPage', function ($scope, $http, FileSaver, Blob) {
 
             $scope.columns = ['engineers', 'brands'];
             $scope.rows = ['date', 'cheques'];
@@ -18,7 +17,7 @@ angular.module("mainModule")
                     });
             };
         }
-    ])
+    )
     .directive('analyticsPage', function() {
         return {
             restrict: 'E',

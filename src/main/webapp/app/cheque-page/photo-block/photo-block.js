@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('PhotoBlock', ['$scope', 'Upload', '$http', '$state', '$location', '$rootScope', 'warning', 'cheque', '$window', 'security',
+    .controller('PhotoBlock',
         function($scope, Upload, $http, $state, $location, $rootScope, warning, cheque, $window, security) {
             $scope.security = security;
 
@@ -47,7 +47,7 @@ angular.module("mainModule")
                 }
             };
         }
-    ])
+    )
     .directive('photoBlock', [function() {
         return {
             restrict: 'E',

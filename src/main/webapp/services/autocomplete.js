@@ -1,6 +1,5 @@
 angular.module('mainModule')
-    .factory('autocomplete', ['$rootScope', '$http',
-        function($rootScope, $http) {
+    .factory('autocomplete', function($rootScope, $http) {
 
             $rootScope.autocomplete = {
                 customers: [],
@@ -25,4 +24,4 @@ angular.module('mainModule')
                 }
             }
 
-        }]);
+        });

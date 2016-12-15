@@ -8,8 +8,7 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .controller("Header", ['$scope', 'currencyRatesService', '$mdToast', '$rootScope', 'auth', 'gettextCatalog', 'security',
-        function ($scope, currencyRatesService, $mdToast, $rootScope, auth, gettextCatalog, security) {
+    .controller("Header", function ($scope, currencyRatesService, $mdToast, $rootScope, auth, gettextCatalog, security) {
 
             currencyRatesService.getCurrencyRate();
 
@@ -38,7 +37,7 @@ angular.module("mainModule")
 
             $scope.logout = auth.logout;
         }
-    ])
+    )
     .directive('header', function() {
         return {
             restrict: 'E',

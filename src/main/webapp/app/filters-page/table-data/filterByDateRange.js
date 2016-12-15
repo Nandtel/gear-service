@@ -10,7 +10,7 @@
  * @since 04.09.2015
  */
 angular.module("mainModule")
-    .filter("filterByDateRange", [function() {
+    .filter("filterByDateRange", function() {
         return function (items, from, to) {
 
             if(from == null && to == null)
@@ -29,4 +29,4 @@ angular.module("mainModule")
 
             return result;
         }
-    }]);
+    });

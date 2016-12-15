@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('ProfilePage', ['$scope', '$http', 'currencyRatesService',
-        function ($scope, $http, currencyRatesService) {
+    .controller('ProfilePage', function ($scope, $http, currencyRatesService) {
             var sampleUser =
             {username: 'Name', fullname: 'FullName', enabled: true, authorities: [{authority:'ROLE_ENGINEER'}]};
 
@@ -26,7 +25,7 @@ angular.module("mainModule")
 
             $scope.getUsers();
         }
-    ])
+    )
     .directive('profilePage', function() {
         return {
             restrict: 'E',

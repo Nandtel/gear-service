@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('TableData', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$state', 'cheque',
+    .controller('TableData',
         function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $state, cheque)  {
 
             $scope.label = {
@@ -17,7 +17,7 @@ angular.module("mainModule")
                 }
             };
 
-    }])
+    })
     .directive('tableData', function() {
         return {
             restrict: 'E',
