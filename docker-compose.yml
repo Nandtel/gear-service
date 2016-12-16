@@ -15,7 +15,7 @@ services:
     ports:
       - "443:443"
     environment:
-        - SPRING_PROFILE=docker
+      - SPRING_PROFILE=docker
     depends_on:
       - mysql
       - mongo
