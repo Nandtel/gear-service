@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('DatePicker', ['$scope', function($scope) {
+    .controller('DatePicker', function($scope) {
 
         $scope.$watch("date", function (newValue, oldValue) {
             if(newValue == undefined) {
@@ -14,7 +14,7 @@ angular.module("mainModule")
                 $scope.date = moment(newValue).format("YYYY-MM-DDTHH:mm:ssZZ");
             }
         });
-    }])
+    })
     .directive('datePicker', function() {
         return {
             restrict: 'E',

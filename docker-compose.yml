@@ -1,23 +1,25 @@
-mysql:
-  image: mysql
-  environment:
-    - MYSQL_ROOT_PASSWORD=123456
-    - MYSQL_DATABASE=steamservice
-  command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+version: '2'
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=steamservice
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
-mongo:
-  image: mongo
+  mongo:
+    image: mongo
 
-app:
-  build: .
-  ports:
-    - "443:443"
-  environment:
+  app:
+    build: .
+    ports:
+      - "443:443"
+    environment:
       - SPRING_PROFILE=docker
-  links:
-    - mysql
-    - mongo
-  volumes:
-    - ./config:/config
-    - ./build/libs:/app
-  command: ./config/wait-for-it.sh mysql:3306 -- java -jar ./app/gs.jar
+    depends_on:
+      - mysql
+      - mongo
+    volumes:
+      - ./config:/config
+      - ./build/libs:/app
+    command: ./config/wait-for-it.sh mysql:3306 -t 300 -s -- java -jar ./app/gs.jar

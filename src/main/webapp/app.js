@@ -10,8 +10,7 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
     'ngFileSaver'])
     .value('duScrollDuration', 3000)
     .constant('_', window._)
-    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
-        function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+    .config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
             $locationProvider.html5Mode(true);
 
             $stateProvider
@@ -20,15 +19,14 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                     url: "/cheques",
                     views: {
                         "header": {
-                            controller:
-                                ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
+                            controller: function($rootScope, $scope, $state) {
                                     $scope.selectedTab = $state.current.data.selectedTab;
 
                                     $rootScope.$on('$stateChangeSuccess',
                                         function(event, toState, toParams, fromState, fromParams) {
                                             $scope.selectedTab = toState.data.selectedTab;
                                         });
-                                }],
+                                },
                             template: '<header selected-tab="selectedTab"></header>'
                         },
                         "content": {
@@ -43,10 +41,9 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                 })
                 .state('cheque.edit', {
                     url: "^/cheque/{chequeId:[0-9]{1,10}}",
-                    controller:
-                        ['$scope', '$stateParams', function($scope, $stateParams) {
+                    controller: function($scope, $stateParams) {
                             $scope.chequeID = $stateParams.chequeId;
-                        }],
+                        },
                     template: '<cheque-page cheque-id="chequeID"></cheque-page>',
                     data: {'selectedTab': 1}
                 })
@@ -79,7 +76,7 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             $httpProvider.interceptors.push(
-                ['$q', '$injector', function($q, $injector) {
+                function($q, $injector) {
                     return {
                         responseError: function (response) {
 
@@ -107,10 +104,10 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                             return $q.reject(response);
                         }
                     };
-                }]
+                }
             );
-    }])
-    .config(['$mdThemingProvider', function($mdThemingProvider){
+    })
+    .config(function($mdThemingProvider){
             $mdThemingProvider
                 .theme('default')
                 .primaryPalette('grey', {'default':'900'})
@@ -125,13 +122,12 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                 .primaryPalette('grey', {'default':'50'})
                 .accentPalette('blue-grey', {'default':'50'})
                 .dark();
-    }])
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    })
+    .config(function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 100;
-    }])
-    .config(['$mdDateLocaleProvider',
-        function($mdDateLocaleProvider) {
+    })
+    .config(function($mdDateLocaleProvider) {
             $mdDateLocaleProvider.months = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
             $mdDateLocaleProvider.shortMonths = 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_');
             $mdDateLocaleProvider.days = 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_');
@@ -147,13 +143,12 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                 var m = moment(dateString, 'DD.MM.YYYY', true);
                 return m.isValid() ? m.toDate() : new Date(NaN);
             };
-    }])
-    .run(['gettextCatalog', 'amMoment', 'auth', 'security', 'autocomplete', '$rootScope',
-        function(gettextCatalog, amMoment, auth, security, autocomplete, $rootScope){
+    })
+    .run(function(gettextCatalog, amMoment, auth, security, autocomplete, $rootScope){
             auth.init();
             security.init();
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
             autocomplete.getDataFromServer('users');
             $rootScope.tableFilter = {sort: '-id', size: 15, page: 1};
-    }]);
+    });

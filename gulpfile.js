@@ -5,6 +5,7 @@ const uglify = require('gulp-uglify');
 const templateCache = require('gulp-angular-templatecache');
 const htmlmin = require('gulp-htmlmin');
 const cleanCSS = require('gulp-clean-css');
+const ngAnnotate = require('gulp-ng-annotate');
 
 const staticDir = 'src/main/resources/static/';
 const webAppDir = 'src/main/webapp/';
@@ -62,6 +63,7 @@ gulp.task('app-concat', function () {
     ])
         .pipe(newer(staticDir + 'javascript/application.min.js'))
         .pipe(concat('application.min.js'))
+        .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest(staticDir + 'javascript/'))
 });

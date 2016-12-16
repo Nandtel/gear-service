@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller("Dashboard", ['$scope', '$stateParams', '$http',
-        function ($scope, $stateParams, $http) {
+    .controller("Dashboard", function ($scope, $stateParams, $http) {
 
             $http.get('/api/attention')
                 .success(function(data) {
@@ -13,7 +12,7 @@ angular.module("mainModule")
                 });
 
         }
-    ])
+    )
     .directive('dashboard', function() {
         return {
             restrict: 'E',

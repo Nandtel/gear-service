@@ -1,6 +1,5 @@
 angular.module('mainModule')
-    .factory('warning', ['$rootScope', '$http', '$state', '$mdDialog', 'gettextCatalog',
-        function($rootScope, $http, $state, $mdDialog, gettextCatalog) {
+    .factory('warning', function($rootScope, $http, $state, $mdDialog, gettextCatalog) {
 
             var warning = {
 
@@ -102,4 +101,4 @@ angular.module('mainModule')
             };
 
             return warning;
-        }]);
+        });

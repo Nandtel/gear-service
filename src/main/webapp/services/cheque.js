@@ -1,6 +1,5 @@
 angular.module('mainModule')
-    .factory('cheque', ['$rootScope', '$http', '$state', '$q', 'warning', '$mdToast', 'gettextCatalog', '_',
-        function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
+    .factory('cheque', function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
 
             $rootScope.cheque = {
                 repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
@@ -150,4 +149,4 @@ angular.module('mainModule')
                 }
             }
 
-        }]);
+        });

@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('CurrencyRateDay', ['$scope', '$http',
-        function ($scope, $http) {
+    .controller('CurrencyRateDay', function ($scope, $http) {
 
             $scope.sendRate = function() {
                 $http.post('/api/currency-rate', $scope.rate)
@@ -10,7 +9,7 @@ angular.module("mainModule")
             };
 
         }
-    ])
+    )
     .directive('currencyRateDay', function() {
         return {
             restrict: 'E',

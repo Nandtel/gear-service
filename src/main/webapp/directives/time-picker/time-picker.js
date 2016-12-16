@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('TimePicker', ['$scope', function($scope) {
+    .controller('TimePicker', function($scope) {
 
         $scope.$watch("time", function (newValue, oldValue) {
             if(newValue == undefined) {
@@ -23,7 +23,7 @@ angular.module("mainModule")
             }
         });
 
-    }])
+    })
     .directive('timePicker', function() {
         return {
             restrict: 'E',

@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('PaymentBlock', ['$rootScope', '$scope', 'currencyRatesService', 'security', 'warning', '$http', '$mdToast', 'gettextCatalog', 'cheque', '$state',
+    .controller('PaymentBlock',
         function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, cheque, $state) {
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
@@ -70,7 +70,7 @@ angular.module("mainModule")
             });
 
         }
-    ])
+    )
     .directive('paymentBlock', [function() {
         return {
             restrict: 'E',

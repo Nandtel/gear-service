@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller('PaymentLine', ['$scope', '$http', 'security',
-        function($scope, $http, security) {
+    .controller('PaymentLine', function($scope, $http, security) {
 
             $scope.$watch('payment.type', function(newValue, oldValue) {
                 $scope.hasPrepayment = newValue === 'prepayment';
@@ -31,7 +30,7 @@ angular.module("mainModule")
             $scope.security = security;
 
         }
-    ])
+    )
     .directive('paymentLine', [function() {
         return {
             restrict: 'E',

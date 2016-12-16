@@ -1,6 +1,5 @@
 angular.module('mainModule')
-    .service('security', ['$rootScope', '$http', '$location', '$state',
-        function($rootScope, $http, $location, $state) {
+    .service('security', function($rootScope, $http, $location, $state) {
 
             return {
 
@@ -42,4 +41,4 @@ angular.module('mainModule')
                 }
 
             };
-        }]);
+        });

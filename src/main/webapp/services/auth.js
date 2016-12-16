@@ -1,6 +1,5 @@
 angular.module('mainModule')
-	.factory('auth', ['$rootScope', '$http', '$state', '$q',
-		function($rootScope, $http, $state, $q) {
+	.factory('auth', function($rootScope, $http, $state, $q) {
 
 			$rootScope.user = {};
 
@@ -62,4 +61,4 @@ angular.module('mainModule')
 			};
 
 		return auth;
-	}]);
+	});

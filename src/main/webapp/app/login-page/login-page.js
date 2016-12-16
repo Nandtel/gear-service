@@ -1,6 +1,5 @@
 angular.module("mainModule")
-    .controller("LoginPage", ['$scope', '$rootScope', 'auth', '$mdToast', 'vcRecaptchaService', 'autocomplete',
-        function($scope, $rootScope, auth, $mdToast, vcRecaptchaService, autocomplete) {
+    .controller("LoginPage", function($scope, $rootScope, auth, $mdToast, vcRecaptchaService, autocomplete) {
             $scope.credentials = {};
             $scope.response = null;
             $scope.widgetId = null;
@@ -54,7 +53,7 @@ angular.module("mainModule")
                 $scope.response = null;
             };
 
-        }])
+        })
     .directive('loginPage', function() {
         return {
             restrict: 'E',

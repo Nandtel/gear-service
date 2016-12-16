@@ -1,5 +1,5 @@
 angular.module("mainModule")
-    .controller('DateTimePicker', ['$scope', function($scope) {
+    .controller('DateTimePicker', function($scope) {
 
         $scope.$watch("datetime", function (newValue, oldValue) {
             if(newValue == undefined) {
@@ -28,7 +28,7 @@ angular.module("mainModule")
             }
         });
 
-    }])
+    })
     .directive('dateTimePicker', function() {
         return {
             restrict: 'E',
