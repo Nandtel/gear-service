@@ -20,8 +20,8 @@ Client-side:
 - Moment JS
 - Google ReCaptcha
 - HTML5, CSS3
-- Npm JS, Bower JS package managers
-- Grunt JS task runner
+- Npm JS package managers
+- Gulp JS task runner
 - Jasmine framework for testing code
 - Protractor E2E-test framework
 - Karma unit-test runner
