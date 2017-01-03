@@ -26,6 +26,7 @@ angular.module('mainModule')
 
             return {
                 createNewCheque: function() {
+                    $http.get('/api/test');
                     $rootScope.cheque = {
                         repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
                         components: [], notes: [], diagnostics: [], balance: {paidStatus: false},
