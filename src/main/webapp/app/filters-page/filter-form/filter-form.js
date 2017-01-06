@@ -2,7 +2,7 @@ angular.module("mainModule")
     .controller('FilterForm', ['$rootScope', '$scope', '$http', '$timeout', '$mdDialog', 'gettextCatalog', '$q', 'cheque', 'autocomplete',
         function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $q, cheque, autocomplete) {
             $scope.filterForm = {};
-            $scope.getAutocompleteData = autocomplete.getDataFromServer;
+            $scope.getAutocompleteData = autocomplete.getAutocompleteData;
 
             /**
              * Method resetFilter add to filter necessary data for right displaying

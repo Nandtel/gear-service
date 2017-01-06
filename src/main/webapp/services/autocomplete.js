@@ -1,26 +1,26 @@
 angular.module('mainModule')
-    .factory('autocomplete', function($rootScope, $http) {
-
-            $rootScope.autocomplete = {
-                customers: [],
-                products: [],
-                models: [],
-                serials: [],
-                representatives: [],
-                emails: [],
-                components: [],
-                secretaries: [],
-                engineers: [],
-                users: [],
-                phoneNumbers: []
-            };
+    .factory('autocomplete', function($rootScope, $http, $q) {
 
             return {
-                getDataFromServer: function(itemName) {
-                    $http.get('/api/autocomplete/' + itemName)
+                getUsers: function() {
+                    var deferred = $q.defer();
+
+                    $http.get('/api/users')
                         .success(function(data) {
-                            $rootScope.autocomplete[itemName] = data;
+                            deferred.resolve(data);
                         });
+
+                    return deferred.promise;
+                },
+                getAutocompleteData: function (itemName, searchText) {
+                    var deferred = $q.defer();
+
+                    $http.get('/api/autocomplete/' + itemName + '/' + searchText)
+                        .success(function (data) {
+                            deferred.resolve(data);
+                        });
+
+                    return deferred.promise;
                 }
             }
 

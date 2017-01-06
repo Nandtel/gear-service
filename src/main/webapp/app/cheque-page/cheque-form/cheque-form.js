@@ -5,9 +5,19 @@ angular.module("mainModule")
 
             $scope.disableChequeForm = !security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_SECRETARY']);
             $scope.security = security;
-            $scope.getAutocompleteData = autocomplete.getDataFromServer;
+            $scope.getAutocompleteData = autocomplete.getAutocompleteData;
             $scope.currentDateIfEmpty = cheque.addToChequeCurrentDateIfEmpty;
             $scope.cleanDateIfOff = cheque.cleanDateIfOff;
+            $scope.users = [];
+
+            $scope.getUsers = function() {
+                autocomplete.getUsers()
+                    .then(function(data) {
+                        $scope.users = data;
+                    });
+            };
+
+            $scope.getUsers();
 
             /**
              * Method modifyCheque modify current cheque and then send request to server-side

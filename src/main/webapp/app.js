@@ -155,6 +155,5 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
             security.init();
             gettextCatalog.setCurrentLanguage('ru');
             amMoment.changeLocale('ru');
-            autocomplete.getDataFromServer('users');
             $rootScope.tableFilter = {sort: '-id', size: 15, page: 1};
     });

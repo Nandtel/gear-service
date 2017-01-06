@@ -40,16 +40,15 @@
             </md-input-container>
 
             <md-autocomplete flex="90"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.customerName"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.customers | filter: $root.filter.customerName"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('customers', $root.filter.customerName)"
                              md-item-text="item"
                              md-floating-label="{{'Customer' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('customers')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.customerName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -60,48 +59,45 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="40"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.productName"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.products | filter: $root.filter.productName"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('products', $root.filter.productName)"
                              md-item-text="item"
                              md-floating-label="{{'Name of Product' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('products')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.productName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="30"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.model"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.models | filter: $root.filter.model"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('models', $root.filter.model)"
                              md-item-text="item"
                              md-floating-label="{{'Model' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('models')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.model" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="30"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.serialNumber"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.serials | filter: $root.filter.serialNumber"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('serials', $root.filter.serialNumber)"
                              md-item-text="item"
                              md-floating-label="{{'Serial Number' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('serials')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.serialNumber" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -112,32 +108,30 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="70"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.representativeName"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.representatives | filter: $root.filter.representativeName"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('representatives', $root.filter.representativeName)"
                              md-item-text="item"
                              md-floating-label="{{'Purchaser' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('representatives')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.representativeName" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="30"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.phoneNumber"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.phoneNumbers | filter: $root.filter.phoneNumber"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('phoneNumbers', $root.filter.phoneNumber)"
                              md-item-text="item"
                              md-floating-label="{{'Phone' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('phoneNumbers')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.phoneNumber" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
@@ -148,32 +142,30 @@
         <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
             <md-autocomplete flex="50"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.secretary"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.secretaries | filter: $root.filter.secretary"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('secretaries', $root.filter.secretary)"
                              md-item-text="item"
                              md-floating-label="{{'Inspector' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('secretaries')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.secretary" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>
             </md-autocomplete>
 
             <md-autocomplete flex="50"
+                             ng-model-options="{debounce:500}"
                              md-search-text="$root.filter.engineer"
                              md-no-cache="true"
-                             md-min-length="1"
-                             md-search-text-change=""
-                             md-items="item in $root.autocomplete.engineers | filter: $root.filter.engineer"
+                             md-min-length="2"
+                             md-items="item in getAutocompleteData('engineers', $root.filter.engineer)"
                              md-item-text="item"
                              md-floating-label="{{'master' | translate}}"
                              md-autofocus="false"
-                             md-autoselect="true"
-                             ng-click="getAutocompleteData('engineers')">
+                             md-autoselect="true">
                 <md-item-template>
                     <span md-highlight-text="filter.engineer" md-highlight-flags="^i"> {{item}} </span>
                 </md-item-template>

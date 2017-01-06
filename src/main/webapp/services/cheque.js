@@ -42,7 +42,6 @@ angular.module('mainModule')
                     };
 
                     var currentFilter = _.omitBy($rootScope.currentFilter, _.isEmpty);
-                    console.log(currentFilter);
 
                     $http.post('/api/cheques/list', currentFilter, {params: tableFilter})
                         .success(function(data) {
