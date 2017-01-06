@@ -92,7 +92,7 @@ gulp.task('template-concat', function () {
 gulp.task('default', ['source-concat', 'design-concat', 'app-concat', 'css-concat', 'template-concat']);
 
 gulp.task('watch', function() {
-    gulp.watch(webAppDir + '**/*.ts', ['typescript-compile']);
-    gulp.watch(webAppDir + '**/*.html', ['html-replace']);
-    gulp.watch(webAppDir + '**/*.scss', ['css-replace']);
+    gulp.watch(webAppDir + '**/*.js', ['app-concat']);
+    gulp.watch(webAppDir + '**/*.html', ['template-concat']);
+    gulp.watch(webAppDir + '**/*.css', ['css-concat']);
 });
