@@ -12,7 +12,7 @@
     "angular-material": "~1.1.1",
     "angular-material-data-table": "0.10.9",
     "angular-moment": "~1.0.0",
-    "angular-recaptcha": "~3.0.1",
+    "angular-recaptcha": "~3.2.0",
     "angular-scroll": "~1.0.0",
     "angular-ui-router": "~0.3.2",
     "lodash": "^4.17.2",
