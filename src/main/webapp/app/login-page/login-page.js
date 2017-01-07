@@ -13,7 +13,6 @@ angular.module("mainModule")
                 auth.authenticate($scope.credentials, $scope.response)
                     .then(function(authenticated) {
                         if (authenticated) {
-                            autocomplete.getDataFromServer('users');
                             $mdToast.show(
                                 $mdToast.simple()
                                     .content("Login succeeded")

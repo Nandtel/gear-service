@@ -40,6 +40,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-rest"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-starter-cache"
+    compile "com.github.ben-manes.caffeine:caffeine"
     compile "org.springframework.boot:spring-boot-devtools"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.4"
     compile "net.sourceforge.nekohtml:nekohtml:1.9.21"

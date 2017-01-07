@@ -11,11 +11,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
@@ -33,17 +36,12 @@ import static java.util.Arrays.asList;
 public class ApplicationService {
 
     @Autowired UserRepository userRepository;
-    @Autowired
-    ExchangeRateRepository exchangeRateRepository;
-    @Autowired
-    ChequeRepository chequeRepository;
-    @Autowired
-    BalanceRepository balanceRepository;
-    @Autowired
-    DiagnosticRepository diagnosticRepository;
+    @Autowired ExchangeRateRepository exchangeRateRepository;
+    @Autowired ChequeRepository chequeRepository;
+    @Autowired BalanceRepository balanceRepository;
+    @Autowired DiagnosticRepository diagnosticRepository;
     @Autowired NoteRepository noteRepository;
-    @Autowired
-    ComponentRepository componentRepository;
+    @Autowired ComponentRepository componentRepository;
 
     /**
      * Method getAutocompleteData return autocomplete data for request item name
@@ -51,21 +49,25 @@ public class ApplicationService {
      * @return List of autocomplete data(String or User)
      */
     @Transactional(readOnly = true)
-    public List<?> getAutocompleteData(String itemName) {
+    public List<String> getAutocompleteData(String itemName, String searchText) {
+        List<String> items = new ArrayList<>();
+
         switch (itemName) {
-            case "customers": return chequeRepository.listOfCustomerNames();
-            case "products": return chequeRepository.listOfProductNames();
-            case "models": return chequeRepository.listOfModelNames();
-            case "serials": return chequeRepository.listOfSerialNumbers();
-            case "representatives": return chequeRepository.listOfRepresentativeNames();
-            case "emails": return chequeRepository.listOfEmails();
-            case "components": return componentRepository.listOfComponentNames();
-            case "secretaries": return userRepository.listOfSecretaries();
-            case "engineers": return userRepository.listOfEngineers();
-            case "users": return userRepository.findAll();
-            case "phoneNumbers": return chequeRepository.listOfPhoneNumbers();
-            default: throw new IllegalArgumentException();
+            case "customers": items = chequeRepository.listOfCustomerNames(); break;
+            case "products": items = chequeRepository.listOfProductNames(); break;
+            case "models": items = chequeRepository.listOfModelNames(); break;
+            case "serials": items = chequeRepository.listOfSerialNumbers(); break;
+            case "representatives": items = chequeRepository.listOfRepresentativeNames(); break;
+            case "emails": items = chequeRepository.listOfEmails(); break;
+            case "components": items = componentRepository.listOfComponentNames(); break;
+            case "secretaries": items = userRepository.listOfSecretaries(); break;
+            case "engineers": items = userRepository.listOfEngineers(); break;
+            case "phoneNumbers": items = chequeRepository.listOfPhoneNumbers(); break;
         }
+
+        return items.stream()
+                .filter(item -> item.toLowerCase().startsWith(searchText.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}

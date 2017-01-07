@@ -39,6 +39,7 @@ public class ApplicationController {
     @ResponseStatus(value = HttpStatus.OK)
     public void test() {}
 
-    @RequestMapping(value = "/api/autocomplete/{itemName}", method = RequestMethod.GET)
-    public List<?> autocompleteData(@PathVariable String itemName) {return applicationService.getAutocompleteData(itemName);}
+    @RequestMapping(value = "/api/autocomplete/{itemName}/{searchText}", method = RequestMethod.GET)
+    public List<String> autocompleteData(@PathVariable("itemName") String itemName, @PathVariable("searchText") String searchText) {
+        return applicationService.getAutocompleteData(itemName, searchText);}
 }
