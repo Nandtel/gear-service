@@ -1,6 +1,5 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.cheque.Diagnostic;
 import com.gearservice.model.cheque.Note;
 import com.gearservice.service.NoteService;
 import org.slf4j.Logger;
