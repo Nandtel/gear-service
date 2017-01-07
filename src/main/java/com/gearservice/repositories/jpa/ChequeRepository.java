@@ -81,14 +81,14 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
                     "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
                     "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
                     "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
-                    "AND (c.customerName LIKE %:customerName% OR :customerName IS NULL) " +
-                    "AND (c.productName LIKE %:productName% OR :productName IS NULL) " +
-                    "AND (c.modelName LIKE %:modelName% OR :modelName IS NULL) " +
-                    "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
-                    "AND (c.representativeName LIKE %:representativeName% OR :representativeName IS NULL) " +
+                    "AND (lower(c.customerName) LIKE concat('%', lower(:customerName), '%') OR :customerName IS NULL) " +
+                    "AND (lower(c.productName) LIKE concat('%', lower(:productName), '%') OR :productName IS NULL) " +
+                    "AND (lower(c.modelName) LIKE concat('%', lower(:modelName), '%') OR :modelName IS NULL) " +
+                    "AND (lower(c.representativeName) LIKE concat('%', lower(:representativeName), '%') OR :representativeName IS NULL) " +
+                    "AND (lower(s.fullname) LIKE concat('%', lower(:secretary), '%') OR :secretary IS NULL) " +
+                    "AND (lower(e.fullname) LIKE concat('%', lower(:engineer), '%') OR :engineer IS NULL) " +
                     "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
-                    "AND (s.fullname LIKE %:secretary% OR :secretary IS NULL) " +
-                    "AND (e.fullname LIKE %:engineer% OR :engineer IS NULL) " +
+                    "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
                     "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
                     "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
                     "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
