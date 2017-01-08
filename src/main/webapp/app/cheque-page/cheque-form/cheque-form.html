@@ -1,4 +1,4 @@
-<form name="chequeForm" ng-submit="syncCheque()" novalidate autocomplete="off" class="md-whiteframe-z1" ng-show="!!cheque">
+<form name="chequeForm" novalidate autocomplete="off" class="md-whiteframe-z1" ng-show="!!cheque">
 
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -262,7 +262,7 @@
     </md-content>
 
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
-        <md-button class="md-raised md-primary" type="submit" ng-disabled="chequeForm.$invalid">
+        <md-button ng-click="syncCheque()" class="md-raised md-primary" type="button" ng-disabled="chequeForm.$invalid">
             <span translate>Modify Check</span>
         </md-button>
     </md-content>
