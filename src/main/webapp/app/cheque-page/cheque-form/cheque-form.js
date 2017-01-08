@@ -68,7 +68,8 @@ angular.module("mainModule")
             };
 
             $scope.printCheque = function() {
-                window.print();
+                $scope.printable = true;
+                $timeout(function() {window.print();}, 0);
             };
 
             $timeout(function() {
@@ -86,7 +87,8 @@ angular.module("mainModule")
             controller: 'ChequeForm',
             scope: {
                 cheque: '=ngModel',
-                hasID: '=hasId'
+                hasID: '=hasId',
+                printable: '=printable'
             },
             require: ['ngModel', 'hasId'],
             templateUrl: 'app/cheque-page/cheque-form/cheque-form.html'
