@@ -1,6 +1,6 @@
 <section layout="column" layout-align="center center" flex>
 
-    <cheque-form ng-model="cheque" has-id="hasID" class="content-block"></cheque-form>
+    <cheque-form ng-model="cheque" has-id="hasID" printable="printable" class="content-block"></cheque-form>
 
     <md-content ng-show="hasID" class="content-block md-whiteframe-z1 comments-block">
         <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
@@ -23,7 +23,7 @@
 
 </section>
 
-<section class="print-only" ng-show="hasID">
+<section class="print-only" ng-if="hasID && printable">
     <print-cheque ng-model="cheque" specialization="'office'"></print-cheque>
     <print-cheque ng-model="cheque" specialization="'tech'"></print-cheque>
     <print-cheque ng-model="cheque" specialization="'client'"></print-cheque>

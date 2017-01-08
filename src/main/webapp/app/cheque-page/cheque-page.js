@@ -10,6 +10,7 @@ angular.module("mainModule")
         function ($rootScope, $scope, $stateParams, $http, cheque, warning, $state) {
             $scope.formDirty = {payment: false, cheque: false, comments: false};
             $scope.hasID = !!$scope.chequeID;
+            $scope.printable = false;
 
             if ($scope.hasID) {
                 cheque.getChequeFromServer($scope.chequeID);
