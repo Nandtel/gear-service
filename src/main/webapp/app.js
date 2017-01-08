@@ -76,7 +76,7 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             $httpProvider.interceptors.push(
-                function($q, $injector) {
+                function($q, $injector, $rootScope, _) {
                     return {
                         responseError: function (response) {
 
@@ -93,6 +93,12 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                                 return deferred.promise.then(function () {
                                     return $http(response.config);
                                 });
+                            }
+
+                            if(response.status === 401 && !_.isEmpty($rootScope.user)) {
+                                var warning = $injector.get('warning');
+                                warning.showServerSessionExpired();
+                                return $q.reject(response);
                             }
 
                             if(response.data.exception === "org.springframework.orm.ObjectOptimisticLockingFailureException") {

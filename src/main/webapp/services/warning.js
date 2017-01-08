@@ -97,6 +97,19 @@ angular.module('mainModule')
 
                     return $mdDialog.show(alertSerConnLost);
 
+                },
+
+                showServerSessionExpired: function() {
+
+                    var alertSerConnLost = $mdDialog.alert()
+                        .clickOutsideToClose(false)
+                        .title(gettextCatalog.getString('server session expired title'))
+                        .textContent(gettextCatalog.getString('server session expired content'))
+                        .ariaLabel('server session expired')
+                        .ok(gettextCatalog.getString('ok'));
+
+                    return $mdDialog.show(alertSerConnLost);
+
                 }
             };
 
