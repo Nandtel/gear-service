@@ -66,7 +66,7 @@ public class ApplicationService {
         }
 
         return items.stream()
-                .filter(item -> item.toLowerCase().startsWith(searchText.toLowerCase()))
+                .filter(item -> item.toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
