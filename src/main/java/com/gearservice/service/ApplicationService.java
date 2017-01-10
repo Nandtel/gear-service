@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -66,6 +67,7 @@ public class ApplicationService {
         }
 
         return items.stream()
+                .filter(Objects::nonNull)
                 .filter(item -> item.toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
