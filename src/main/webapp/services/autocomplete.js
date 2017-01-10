@@ -13,6 +13,10 @@ angular.module('mainModule')
                     return deferred.promise;
                 },
                 getAutocompleteData: function (itemName, searchText) {
+                    var isFormDirty = typeof arguments[2] !== 'undefined'  ? arguments[2] : true;
+
+                    if(!isFormDirty) return [];
+
                     var deferred = $q.defer();
 
                     $http.get('/api/autocomplete/' + itemName + '/' + searchText)
