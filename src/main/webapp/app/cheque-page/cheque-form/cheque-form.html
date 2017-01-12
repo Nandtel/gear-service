@@ -74,7 +74,7 @@
         <input ng-model="cheque.customerName" required hidden>
         <md-autocomplete flex="75" class="md-icon-float"
                          ng-model-options="{debounce:500}"
-                         md-input-name="cust" required
+                         md-input-name="customerName" required
                          md-search-text="cheque.customerName"
                          md-no-cache="true"
                          md-min-length="2"
@@ -101,6 +101,7 @@
         <md-autocomplete flex="40"
                          ng-model-options="{debounce:500}"
                          md-search-text="cheque.productName"
+                         md-input-name="productName"
                          md-no-cache="true"
                          md-min-length="2"
                          md-items="item in getAutocompleteData('products', cheque.productName, chequeForm.$dirty)"
@@ -119,6 +120,7 @@
         <md-autocomplete flex="30"
                          ng-model-options="{debounce:500}"
                          md-search-text="cheque.modelName"
+                         md-input-name="modelName"
                          md-no-cache="true"
                          md-min-length="2"
                          md-items="item in getAutocompleteData('models', cheque.modelName, chequeForm.$dirty)"
@@ -136,6 +138,7 @@
         <md-autocomplete flex="30"
                          ng-model-options="{debounce:500}"
                          md-search-text="cheque.serialNumber"
+                         md-input-name="serialNumber"
                          md-no-cache="true"
                          md-min-length="2"
                          md-search-text-change=""
@@ -172,6 +175,7 @@
         <md-autocomplete flex="30" class="md-icon-float"
                          ng-model-options="{debounce:500}"
                          md-search-text="cheque.representativeName"
+                         md-input-name="representativeName"
                          md-no-cache="true"
                          md-min-length="2"
                          md-items="item in getAutocompleteData('representatives', cheque.representativeName, chequeForm.$dirty)"
@@ -199,6 +203,7 @@
         <md-autocomplete flex="30" class="md-icon-float"
                          ng-model-options="{debounce:500}"
                          md-search-text="cheque.email"
+                         md-input-name="email"
                          md-no-cache="true"
                          md-min-length="2"
                          md-items="item in getAutocompleteData('emails', cheque.email, chequeForm.$dirty)"
@@ -220,6 +225,7 @@
             <label>{{'master' | translate}}</label>
             <md-select ng-model="cheque.engineer"
                        md-on-open="getUsers()"
+                       name="engineer"
                        placeholder="{{'master' | translate}}"
                        ng-disabled="disableChequeForm"
                        ng-model-options="{trackBy: '$value.username'}">
@@ -231,6 +237,7 @@
             <label>{{'Inspector' | translate}}</label>
             <md-select ng-model="cheque.secretary"
                        md-on-open="getUsers()"
+                       name="secretary"
                        placeholder="{{'Inspector' | translate}}"
                        ng-disabled="disableChequeForm"
                        ng-model-options="{trackBy: '$value.username'}">
