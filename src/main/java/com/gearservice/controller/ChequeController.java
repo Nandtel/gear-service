@@ -28,7 +28,7 @@ import java.util.List;
 public class ChequeController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChequeController.class);
-    final ChequeService chequeService;
+    private final ChequeService chequeService;
 
     @Autowired
     public ChequeController(ChequeService chequeService) {
