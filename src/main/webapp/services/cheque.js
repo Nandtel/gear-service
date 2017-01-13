@@ -1,10 +1,7 @@
 angular.module('mainModule')
     .factory('cheque', function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
 
-            $rootScope.cheque = {
-                repairPeriod: 99, receiptDate: moment().format("YYYY-MM-DDTHH:mm:ssZZ"),
-                components: [], notes: [], diagnostics: [], balance: {paidStatus: false},
-                secretary: $rootScope.user.principal, engineer: $rootScope.user.principal};
+            $rootScope.cheque = {};
             $rootScope.balance = {payments: []};
             $rootScope.photoList = [];
             $rootScope.filter = {

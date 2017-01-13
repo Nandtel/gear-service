@@ -36,13 +36,24 @@ import static java.util.Arrays.asList;
 @Service
 public class ApplicationService {
 
-    @Autowired UserRepository userRepository;
-    @Autowired ExchangeRateRepository exchangeRateRepository;
-    @Autowired ChequeRepository chequeRepository;
-    @Autowired BalanceRepository balanceRepository;
-    @Autowired DiagnosticRepository diagnosticRepository;
-    @Autowired NoteRepository noteRepository;
-    @Autowired ComponentRepository componentRepository;
+    private final UserRepository userRepository;
+    private final ExchangeRateRepository exchangeRateRepository;
+    private final ChequeRepository chequeRepository;
+    private final BalanceRepository balanceRepository;
+    private final DiagnosticRepository diagnosticRepository;
+    private final NoteRepository noteRepository;
+    private final ComponentRepository componentRepository;
+
+    @Autowired
+    public ApplicationService(UserRepository userRepository, ExchangeRateRepository exchangeRateRepository, ChequeRepository chequeRepository, BalanceRepository balanceRepository, DiagnosticRepository diagnosticRepository, NoteRepository noteRepository, ComponentRepository componentRepository) {
+        this.userRepository = userRepository;
+        this.exchangeRateRepository = exchangeRateRepository;
+        this.chequeRepository = chequeRepository;
+        this.balanceRepository = balanceRepository;
+        this.diagnosticRepository = diagnosticRepository;
+        this.noteRepository = noteRepository;
+        this.componentRepository = componentRepository;
+    }
 
     /**
      * Method getAutocompleteData return autocomplete data for request item name

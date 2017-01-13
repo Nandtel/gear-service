@@ -28,8 +28,12 @@ import java.util.List;
 public class ChequeController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChequeController.class);
+    private final ChequeService chequeService;
 
-    @Autowired ChequeService chequeService;
+    @Autowired
+    public ChequeController(ChequeService chequeService) {
+        this.chequeService = chequeService;
+    }
 
     @RequestMapping(value = "/api/cheques/list", method = RequestMethod.POST)
     public Page<Cheque> getMinChequesList(@RequestBody RequestPreferences request, Pageable pageable) {

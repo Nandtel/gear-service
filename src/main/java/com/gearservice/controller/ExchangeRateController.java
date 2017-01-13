@@ -21,8 +21,12 @@ import java.util.List;
 @RestController
 public class ExchangeRateController {
 
+    private final ExchangeRateService exchangeRateService;
+
     @Autowired
-    ExchangeRateService exchangeRateService;
+    public ExchangeRateController(ExchangeRateService exchangeRateService) {
+        this.exchangeRateService = exchangeRateService;
+    }
 
     @RequestMapping(value = "/api/currency-rate", method = RequestMethod.GET)
     public ExchangeRate getExchangeRate() {return exchangeRateService.getCurrencyRates();}

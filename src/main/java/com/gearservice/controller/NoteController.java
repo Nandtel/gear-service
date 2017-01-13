@@ -25,8 +25,12 @@ import java.util.List;
 public class NoteController {
 
     private static final Logger logger = LoggerFactory.getLogger(NoteController.class);
+    private final NoteService noteService;
 
-    @Autowired NoteService noteService;
+    @Autowired
+    public NoteController(NoteService noteService) {
+        this.noteService = noteService;
+    }
 
     /**
      * Method addNote call by client-side, when it needs to add new note comment to cheque

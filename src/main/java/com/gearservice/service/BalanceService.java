@@ -21,8 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BalanceService {
 
-    @Autowired BalanceRepository balanceRepository;
-    @Autowired ChequeRepository chequeRepository;
+    private final BalanceRepository balanceRepository;
+    private final ChequeRepository chequeRepository;
+
+    @Autowired
+    public BalanceService(BalanceRepository balanceRepository, ChequeRepository chequeRepository) {
+        this.balanceRepository = balanceRepository;
+        this.chequeRepository = chequeRepository;
+    }
 
     /**
      * Method getBalanceOfCheque return balance of cheque
