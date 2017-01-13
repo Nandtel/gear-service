@@ -23,7 +23,12 @@ import java.util.List;
 @Service
 public class ExchangeRateService {
 
-    @Autowired ExchangeRateRepository exchangeRateRepository;
+    private final ExchangeRateRepository exchangeRateRepository;
+
+    @Autowired
+    public ExchangeRateService(ExchangeRateRepository exchangeRateRepository) {
+        this.exchangeRateRepository = exchangeRateRepository;
+    }
 
     /**
      * Method getCurrencyRates

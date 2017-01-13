@@ -23,7 +23,12 @@ import java.util.List;
 @Service
 public class NoteService {
 
-    @Autowired NoteRepository noteRepository;
+    private final NoteRepository noteRepository;
+
+    @Autowired
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     /**
      * Method addNote add note to DB with current DateTime

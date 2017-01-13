@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AnalyticsController {
 
-    @Autowired AnalyticsService analyticsService;
+    private final AnalyticsService analyticsService;
+
+    @Autowired
+    public AnalyticsController(AnalyticsService analyticsService) {
+        this.analyticsService = analyticsService;
+    }
 
     @RequestMapping(value = "/api/analytics", method = RequestMethod.POST,
             produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

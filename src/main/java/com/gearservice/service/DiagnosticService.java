@@ -21,7 +21,12 @@ import java.util.List;
 @Service
 public class DiagnosticService {
 
-    @Autowired DiagnosticRepository diagnosticRepository;
+    private final DiagnosticRepository diagnosticRepository;
+
+    @Autowired
+    public DiagnosticService(DiagnosticRepository diagnosticRepository) {
+        this.diagnosticRepository = diagnosticRepository;
+    }
 
     /**
      * Method addDiagnostic add diagnostic to DB with current DateTime

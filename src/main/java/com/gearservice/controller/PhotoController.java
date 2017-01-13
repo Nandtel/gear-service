@@ -27,8 +27,12 @@ import java.util.List;
 public class PhotoController {
 
     private static final Logger logger = LoggerFactory.getLogger(PhotoController.class);
+    private final PhotoService photoService;
 
-    @Autowired PhotoService photoService;
+    @Autowired
+    public PhotoController(PhotoService photoService) {
+        this.photoService = photoService;
+    }
 
     @RequestMapping(value = "/api/upload-image", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)

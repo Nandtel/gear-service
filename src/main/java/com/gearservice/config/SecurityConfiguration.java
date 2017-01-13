@@ -47,9 +47,16 @@ import java.io.IOException;
 @EnableConfigurationProperties(ReCaptchaProperties.class)
 class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired private DataSource dataSource;
-    @Autowired private UserService userDetailsService;
-    @Autowired private ReCaptchaProperties reCaptchaProperties;
+    private final DataSource dataSource;
+    private final UserService userDetailsService;
+    private final ReCaptchaProperties reCaptchaProperties;
+
+    @Autowired
+    public SecurityConfiguration(DataSource dataSource, UserService userDetailsService, ReCaptchaProperties reCaptchaProperties) {
+        this.dataSource = dataSource;
+        this.userDetailsService = userDetailsService;
+        this.reCaptchaProperties = reCaptchaProperties;
+    }
 
     /**
      * Method configureGlobal configures base params.

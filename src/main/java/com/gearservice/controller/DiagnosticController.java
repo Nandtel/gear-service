@@ -26,7 +26,12 @@ public class DiagnosticController {
 
     private static final Logger logger = LoggerFactory.getLogger(DiagnosticController.class);
 
-    @Autowired DiagnosticService diagnosticService;
+    private final DiagnosticService diagnosticService;
+
+    @Autowired
+    public DiagnosticController(DiagnosticService diagnosticService) {
+        this.diagnosticService = diagnosticService;
+    }
 
     /**
      * Method addDiagnostic call by client-side, when it needs to add new diagnostic comment to cheque

@@ -24,8 +24,12 @@ import java.security.Principal;
 public class BalanceController {
 
     private static final Logger logger = LoggerFactory.getLogger(BalanceController.class);
+    private final BalanceService balanceService;
 
-    @Autowired BalanceService balanceService;
+    @Autowired
+    public BalanceController(BalanceService balanceService) {
+        this.balanceService = balanceService;
+    }
 
     @RequestMapping(value = "/api/balance/cheque/{chequeID}", method = RequestMethod.GET)
     public Balance getBalanceOfCheque(@PathVariable Long chequeID) {

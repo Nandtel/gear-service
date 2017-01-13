@@ -28,8 +28,14 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class PhotoService {
 
-    @Autowired PhotoRepository photoRepository;
-    @Autowired UserService userService;
+    private final PhotoRepository photoRepository;
+    private final UserService userService;
+
+    @Autowired
+    public PhotoService(PhotoRepository photoRepository, UserService userService) {
+        this.photoRepository = photoRepository;
+        this.userService = userService;
+    }
 
     /**
      * Method replaceFullnameToActual replace name of user from login to fullname

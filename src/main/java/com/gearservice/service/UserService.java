@@ -29,7 +29,12 @@ import static java.util.stream.Collectors.toMap;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method passwordEncoder return new BCrypt password encoder

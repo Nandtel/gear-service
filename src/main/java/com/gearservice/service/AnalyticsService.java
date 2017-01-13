@@ -35,8 +35,8 @@ import static java.util.stream.Collectors.groupingBy;
 @Service
 public class AnalyticsService {
 
-    @Autowired PaymentRepository paymentRepository;
-    @Autowired ExchangeRateRepository exchangeRateRepository;
+    private final PaymentRepository paymentRepository;
+    private final ExchangeRateRepository exchangeRateRepository;
 
     private static XSSFSheet sheet;
     private static CellStyle rubleStyle;
@@ -62,6 +62,12 @@ public class AnalyticsService {
 
                 return currency.multiply(BigDecimal.valueOf(payment.getCost())).doubleValue();
             };
+
+    @Autowired
+    public AnalyticsService(PaymentRepository paymentRepository, ExchangeRateRepository exchangeRateRepository) {
+        this.paymentRepository = paymentRepository;
+        this.exchangeRateRepository = exchangeRateRepository;
+    }
 
     /**
      * Method createRow creates row in excel document

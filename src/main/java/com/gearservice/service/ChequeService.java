@@ -29,19 +29,22 @@ import java.util.*;
 @Service
 public class ChequeService {
 
+    private final ChequeRepository chequeRepository;
+    private final DiagnosticRepository diagnosticRepository;
+    private final NoteRepository noteRepository;
+    private final PhotoRepository photoRepository;
+    private final UserRepository userRepository;
+    private final PaymentRepository paymentRepository;
+
     @Autowired
-    ChequeRepository chequeRepository;
-    @Autowired
-    DiagnosticRepository diagnosticRepository;
-    @Autowired
-    NoteRepository noteRepository;
-    @Autowired
-    PhotoRepository photoRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    PaymentRepository paymentRepository;
-    @Autowired EntityManager em;
+    public ChequeService(ChequeRepository chequeRepository, DiagnosticRepository diagnosticRepository, NoteRepository noteRepository, PhotoRepository photoRepository, UserRepository userRepository, PaymentRepository paymentRepository) {
+        this.chequeRepository = chequeRepository;
+        this.diagnosticRepository = diagnosticRepository;
+        this.noteRepository = noteRepository;
+        this.photoRepository = photoRepository;
+        this.userRepository = userRepository;
+        this.paymentRepository = paymentRepository;
+    }
 
     /**
      * Method synchronizeCheque save cheque to DB and return it to frontend

@@ -22,7 +22,12 @@ import java.util.List;
 @RestController
 public class ApplicationController {
 
-    @Autowired ApplicationService applicationService;
+    private final ApplicationService applicationService;
+
+    @Autowired
+    public ApplicationController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
 //    // Match everything without a suffix (so not a static resource)
 //    @RequestMapping(value = "/{[path:[^\\.]*}")
