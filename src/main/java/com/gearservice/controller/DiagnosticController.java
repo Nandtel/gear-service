@@ -44,7 +44,7 @@ public class DiagnosticController {
     @RequestMapping(value = "/api/cheques/{chequeID}/diagnostics", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addDiagnostic(@PathVariable Long chequeID, @RequestBody Diagnostic diagnostic, Principal principal) {
-        diagnosticService.addDiagnostic(chequeID, diagnostic);
+        diagnosticService.addDiagnostic(diagnostic);
         logger.info("User " + principal.getName().toUpperCase() + " has added diagnostic to cheque " + chequeID);
     }
 
