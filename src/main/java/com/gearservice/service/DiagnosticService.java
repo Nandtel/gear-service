@@ -30,12 +30,11 @@ public class DiagnosticService {
 
     /**
      * Method addDiagnostic add diagnostic to DB with current DateTime
-     * @param chequeID is ID of cheque in database, in that client-side wants add a diagnostic comment
      * @param diagnostic is data for Diagnostic.class, that was create on client-side
      */
     @Modifying
     @Transactional
-    public void addDiagnostic(Long chequeID, Diagnostic diagnostic) {
+    public void addDiagnostic(Diagnostic diagnostic) {
         diagnosticRepository.save(diagnostic.withDateTime());
     }
 

@@ -43,7 +43,7 @@ public class NoteController {
     @RequestMapping(value = "/api/cheques/{chequeID}/notes", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addNote(@PathVariable Long chequeID, @RequestBody Note note, Principal principal) {
-        noteService.addNote(chequeID, note);
+        noteService.addNote(note);
         logger.info("User " + principal.getName().toUpperCase() + " has added note to cheque " + chequeID);
     }
 

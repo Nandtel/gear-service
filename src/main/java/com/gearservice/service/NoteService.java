@@ -32,12 +32,11 @@ public class NoteService {
 
     /**
      * Method addNote add note to DB with current DateTime
-     * @param chequeID is ID of cheque in database, in that client-side wants add a note comment
      * @param note is data for Note.class, that was create on client-side
      */
     @Modifying
     @Transactional
-    public void addNote(@PathVariable Long chequeID, @RequestBody Note note) {
+    public void addNote(Note note) {
         noteRepository.save(note.withDateTime());
     }
 
@@ -48,7 +47,7 @@ public class NoteService {
      */
     @Modifying
     @Transactional
-    public void deleteNote(@PathVariable Long chequeID, @PathVariable Long noteID) {noteRepository.delete(noteID);}
+    public void deleteNote(Long chequeID, Long noteID) {noteRepository.delete(noteID);}
 
     @Transactional(readOnly = true)
     public List<Note> getNotes(Long chequeID) {
