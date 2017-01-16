@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
@@ -120,7 +121,9 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .csrfTokenRepository(csrfTokenRepository())
                 .and()
                 .addFilterAfter(csrfHeaderFilter(), SessionManagementFilter.class)
-                .addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class);
+                .addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class)
+                .headers().contentSecurityPolicy("default-src https: 'self'; object-src 'none'; script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:")
+                .and().addHeaderWriter(new StaticHeadersWriter("Referrer-Policy", "same-origin"));
     }
 
     /**
@@ -149,6 +152,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     if (cookie == null || token != null && !token.equals(cookie.getValue())) {
                         cookie = new Cookie("XSRF-TOKEN", token);
                         cookie.setPath("/");
+                        cookie.setSecure(true);
                         response.addCookie(cookie);
                     }
                 }
