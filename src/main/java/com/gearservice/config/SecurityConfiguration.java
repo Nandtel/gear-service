@@ -99,7 +99,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .useSecureCookie(true)
                     .tokenValiditySeconds(25000)
                 .and().authorizeRequests()
-                    .antMatchers("/index.html", "/", "/login", "/javascript/**", "/fonts/**", "/stylesheets/**", "/images/**", "/api/currency-rate", "/favicon.ico")
+                    .antMatchers("/index.html", "/", "/login", "/javascript/**", "/fonts/**",
+                            "/stylesheets/**", "/images/**", "/api/currency-rate", "/favicon.ico")
                     .permitAll()
                     .antMatchers(HttpMethod.GET, "/attention").hasAnyAuthority("ROLE_ADMIN", "ROLE_ENGINEER", "ROLE_BOSS")
                     .antMatchers(HttpMethod.GET, "/delay").hasAnyAuthority("ROLE_ADMIN", "ROLE_ENGINEER", "ROLE_BOSS")
@@ -122,7 +123,11 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterAfter(csrfHeaderFilter(), SessionManagementFilter.class)
                 .addFilterBefore(new ReCaptchaAuthFilter(reCaptchaProperties), BasicAuthenticationFilter.class)
-                .headers().contentSecurityPolicy("default-src https: 'self'; object-src 'none'; script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:")
+                .headers().contentSecurityPolicy("default-src https: 'self'; " +
+                    "object-src 'none'; " +
+                    "script-src 'self' https://www.google.com https://www.gstatic.com; " +
+                    "style-src 'self' 'unsafe-inline'; " +
+                    "img-src 'self' data:")
                 .and().addHeaderWriter(new StaticHeadersWriter("Referrer-Policy", "same-origin"));
     }
 

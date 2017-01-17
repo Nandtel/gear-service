@@ -44,7 +44,8 @@ public class ApplicationController {
     @ResponseStatus(value = HttpStatus.OK)
     public void test() {}
 
-    @RequestMapping(value = "/api/autocomplete/{itemName}/{searchText}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/autocomplete/{itemName}/{searchText:.+}", method = RequestMethod.GET)
     public List<String> autocompleteData(@PathVariable("itemName") String itemName, @PathVariable("searchText") String searchText) {
+        System.out.println(searchText);
         return applicationService.getAutocompleteData(itemName, searchText);}
 }
