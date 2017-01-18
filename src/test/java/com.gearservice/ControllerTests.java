@@ -1,4 +1,4 @@
-package unit;
+package com.gearservice;
 
 import com.gearservice.GearServiceApplication;
 import com.gearservice.controller.AnalyticsController;
