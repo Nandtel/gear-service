@@ -9,7 +9,9 @@
 
 exports.config = {
     // Spec patterns are relative to the location of this config.
-    specs: ['test/client/e2e/**/*.js'],
+    // specs: ['src/test/todo-spec.js'],
+    specs: ['src/test/javascript/e2e/**/*.js'],
+    seleniumAddress: 'http://localhost:4444/wd/hub',
 
     // Patterns to exclude.
     //exclude: [],
@@ -18,14 +20,14 @@ exports.config = {
     // parameter, all suites will run. If run with --suite=smoke or
     // --suite=smoke,full only the patterns matched by the specified suites will
     // run.
-    suites: {
-        filter: 'test/client/e2e/filters/*.js',
-        header: 'test/client/e2e/header/*.js',
-        create: 'test/client/e2e/create/*.js',
-        edit: 'test/client/e2e/edit/edit.js',
-        datetimepicker: 'test/client/e2e/datetimepicker/*.js',
-        full: 'test/client/e2e/**/*.js'
-    },
+    // suites: {
+    //     filter: 'test/client/e2e/filters/*.js',
+    //     header: 'test/client/e2e/header/*.js',
+    //     create: 'test/client/e2e/create/*.js',
+    //     edit: 'test/client/e2e/edit/edit.js',
+    //     datetimepicker: 'test/client/e2e/datetimepicker/*.js',
+    //     full: 'test/client/e2e/**/*.js'
+    // },
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
@@ -73,7 +75,7 @@ exports.config = {
     //
     // A base URL for your application under test. Calls to protractor.get()
     // with relative paths will be prepended with this.
-    baseUrl: 'http://localhost:9000',
+    baseUrl: 'https://localhost',
 
     // CSS Selector for the element housing the angular app - this defaults to
     // body, but is necessary if ng-app is on a descendant of <body>.
@@ -94,14 +96,14 @@ exports.config = {
     // You can specify a file containing code to run by setting onPrepare to
     // the filename string.
     onPrepare: function() {
-        //if no sample data in table - add it
-        browser.get('/#/filter');
+        browser.get('/login');
+        browser.executeScript("arguments[0].setAttribute('style', 'zoom:100%')", element(by.css('body')));
+        browser.driver.manage().window().maximize();
         browser.waitForAngular();
-        element.all(by.repeater('cheque in filteredCheques').column('cheque.introduced')).count().then(function(size) {
-            if(size <= 2)
-                browser.get('/sample');
-            browser.waitForAngular();
-        })
+        element(by.id('username')).sendKeys('admin');
+        element(by.id('password')).sendKeys('b' + protractor.Key.ENTER);
+        browser.waitForAngular();
+
     },
 
     // ---------------------------------------------------------------------------
