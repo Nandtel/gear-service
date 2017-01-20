@@ -10,6 +10,7 @@ import com.gearservice.service.SampleDataService;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -118,9 +119,15 @@ public class Cheque {
      * @return this Cheque object after editing
      */
     public Cheque withRandomData() {
-        this.setWarrantyStatus(true);
-        this.setReadyStatus(true);
-        this.setReturnedToClientStatus(true);
+        final Random random = new Random();
+
+        final Boolean warrantyStatus = random.nextBoolean();
+        final Boolean readyStatus = random.nextBoolean();
+        final Boolean returnedToClientStatus = random.nextBoolean();
+
+        this.setWarrantyStatus(warrantyStatus);
+        this.setReadyStatus(readyStatus);
+        this.setReturnedToClientStatus(returnedToClientStatus);
         this.setWithoutRepair(true);
         this.setCustomerName(SampleDataService.getRandomName());
         this.setProductName(SampleDataService.getRandomProduct());
@@ -137,9 +144,9 @@ public class Cheque {
 
         this.setComponents(SampleDataService.getSetConsistFrom(o -> new Component().withRandomData()));
 
-        this.setWarrantyDate(SampleDataService.getRandomDate());
-        this.setReadyDate(SampleDataService.getRandomDate());
-        this.setReturnedToClientDate(SampleDataService.getRandomDate());
+        this.setWarrantyDate(warrantyStatus ? SampleDataService.getRandomDate() : null);
+        this.setReadyDate(readyStatus ? SampleDataService.getRandomDate() : null);
+        this.setReturnedToClientDate(returnedToClientStatus ? SampleDataService.getRandomDate() : null);
 
         return this;
     }
