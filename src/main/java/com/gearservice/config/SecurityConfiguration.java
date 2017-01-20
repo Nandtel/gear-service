@@ -127,7 +127,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "object-src 'none'; " +
                     "script-src 'self' https://www.google.com https://www.gstatic.com; " +
                     "style-src 'self' 'unsafe-inline'; " +
-                    "img-src 'self' data:")
+                    "img-src 'self' data:; " +
+                    "connect-src 'self' ws://127.0.0.1:35729")
                 .and().addHeaderWriter(new StaticHeadersWriter("Referrer-Policy", "same-origin"));
     }
 
