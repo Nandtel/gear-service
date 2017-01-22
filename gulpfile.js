@@ -8,7 +8,7 @@ const cleanCSS = require('gulp-clean-css');
 const ngAnnotate = require('gulp-ng-annotate');
 
 const staticDir = 'src/main/resources/static/';
-const webAppDir = 'src/main/webapp/';
+const webAppDir = 'src/main/javascript/';
 
 const jslib = [
     'node_modules/lodash/lodash.min.js',
