@@ -6,7 +6,7 @@ Demo CRM application. Gear Service is compact and easy-to-use solution to collec
 ## Technologies
 Server-side:
 - Java 8 (Stream API, Lambdas, new Date and Time)
-- Spring Boot 1.4.2 (Spring Framework, Spring Security, Spring Data, Spring Web)
+- Spring Boot 1.4.4 (Spring Framework, Spring Security, Spring Data, Spring Web)
 - MySQL (main DB), MongoDB (secondary DB for blobs), PostgreSQL (DB for heroku), H2 (DB for tests)
 - Gradle build tool
 - JSoup html parser
