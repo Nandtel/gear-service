@@ -1,7 +1,7 @@
 # GearService
 [![Build Status](https://travis-ci.org/Nandtel/gear-service.svg?branch=master)](https://travis-ci.org/Nandtel/GearService)
 
-Demo CRM application. Gear Service is compact and easy-to-use solution to collect sales. Presents opportunities to work with customers through interaction with checks: easy and dynamic sorting on client-side by angularJS, safe and quick storing data in reliable databases, analytics need to find bottlenecks in pipeline.
+This is my own "in production" application, which is works for a little service company and they are even find it helpfull, to my surprise. This code may be interesting to you only as example of my brutal attempts to realize my vision of good application based on Spring Boot and AngularJS.
 
 ## Technologies
 Server-side:
