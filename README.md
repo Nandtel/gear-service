@@ -30,6 +30,7 @@ Client-side:
 ## Demo
 Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
 Wait a few seconds until the Heroku initializes app. 
+The demo isn't updated from repository, so it's always outdated.
 
 For Heroku app was rewritten:
 - Migrated from MySQL to PostgreSQL
