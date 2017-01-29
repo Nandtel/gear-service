@@ -50,6 +50,7 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.8.5"
     compile "org.apache.poi:poi-ooxml:3.15"
     compile "org.springframework:spring-context-support:4.3.4.RELEASE"
+    compile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.50.0"
     runtime "mysql:mysql-connector-java:5.1.40"
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4-1201-jdbc41"
