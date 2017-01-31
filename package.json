@@ -1,6 +1,9 @@
 {
   "name": "gear-service",
   "version": "0.1.0",
+  "scripts": {
+    "postinstall": "gulp"
+  },
   "dependencies": {
     "angular": "~1.5.9",
     "angular-animate": "~1.5.9",
@@ -9,7 +12,7 @@
     "angular-file-saver": "~1.1.2",
     "angular-gettext": "~2.2.1",
     "angular-loading-bar": "~0.9.0",
-    "angular-material": "~1.1.1",
+    "angular-material": "~1.1.2",
     "angular-material-data-table": "0.10.9",
     "angular-moment": "~1.0.0",
     "angular-recaptcha": "~3.2.0",
@@ -17,9 +20,7 @@
     "angular-ui-router": "~0.3.2",
     "lodash": "^4.17.2",
     "moment": "~2.17.0",
-    "ng-file-upload": "~12.2.13"
-  },
-  "devDependencies": {
+    "ng-file-upload": "~12.2.13",
     "gulp": "^3.9.1",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-angular-templatecache": "^2.0.0",
@@ -33,5 +34,6 @@
     "karma": "^1.3.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2"
-  }
+  },
+  "devDependencies": {}
 }

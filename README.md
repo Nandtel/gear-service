@@ -29,7 +29,7 @@ Client-side:
 
 ## Demo
 Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
-Wait a few seconds until the Heroku initializes app. 
+Wait a few seconds until the Heroku initializes app. <br />
 The demo isn't updated from repository, so it's always outdated.
 
 For Heroku app was rewritten:
