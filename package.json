@@ -1,6 +1,9 @@
 {
   "name": "gear-service",
   "version": "0.1.0",
+  "scripts": {
+    "postinstall": "gulp"
+  },
   "dependencies": {
     "angular": "~1.5.9",
     "angular-animate": "~1.5.9",
