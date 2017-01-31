@@ -38,7 +38,7 @@ public class GearServiceApplication {
     public static void main(String[] args) {SpringApplication.run(GearServiceApplication.class, args);}
 
     @Bean
-    @Profile({"dev", "docker"})
+    @Profile({"dev", "docker", "heroku"})
     CommandLineRunner init() {
         return args -> {
             if (!userRepository.exists("admin")) {
