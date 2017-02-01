@@ -1,7 +1,7 @@
 # GearService
 [![Build Status](https://travis-ci.org/Nandtel/gear-service.svg?branch=master)](https://travis-ci.org/Nandtel/GearService)
 
-This is my own "in production" application, which is works for a little service company and, to my surprise, they're even find it helpfull. This code may be interesting to you only as example of my brutal attempts to realize my vision of good application based on Spring Boot and AngularJS.
+This is my own "in production" application, which is works for a small service company and, to my surprise, they're even find it helpfull. This code may be interesting to you only as example of my brutal attempts to realize my vision of good application based on Spring Boot and AngularJS.
 
 ## Technologies
 Server-side:
