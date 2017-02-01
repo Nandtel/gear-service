@@ -1,13 +1,13 @@
 # GearService
 [![Build Status](https://travis-ci.org/Nandtel/gear-service.svg?branch=master)](https://travis-ci.org/Nandtel/GearService)
 
-This is my own "in production" application, which is works for a little service company and, to my surprise, they're even find it helpfull. This code may be interesting to you only as example of my brutal attempts to realize my vision of good application based on Spring Boot and AngularJS.
+This is my own "in production" application, which is works for a small service company and, to my surprise, they're even find it helpfull. This code may be interesting to you only as example of my brutal attempts to realize my vision of good application based on Spring Boot and AngularJS.
 
 ## Technologies
 Server-side:
 - Java 8 (Stream API, Lambdas, new Date and Time)
 - Spring Boot 1.4.4 (Spring Framework, Spring Security, Spring Data, Spring Web)
-- MySQL (main DB), MongoDB (secondary DB for blobs), PostgreSQL (DB for heroku), H2 (DB for tests)
+- MySQL (main DB), MongoDB (secondary DB for blobs), H2 (DB for tests)
 - Gradle build tool
 - JSoup html parser
 - Apache POI (Java API for Microsoft Documents)
@@ -15,7 +15,7 @@ Server-side:
 - other server-side dependencies you can see in [build.gradle](build.gradle)
 
 Client-side:
-- Angular JS 1.5.8
+- Angular JS 1.5.11
 - Angular-Material (UI components)
 - Moment JS
 - Google ReCaptcha
@@ -29,18 +29,13 @@ Client-side:
 
 ## Demo
 Сonvenient demo at Heroku: https://gearservice.herokuapp.com <br />
-Wait a few seconds until the Heroku initializes app. <br />
-The demo isn't updated from repository, so it's always outdated.
+Wait a few seconds until the Heroku initializes app.
 
 For Heroku app was rewritten:
-- Migrated from MySQL to PostgreSQL
-- Disabled Mongo, all blobs store in PostgreSQL
 - Disabled Google reCaptcha
 
 Available following users for login:
-- login: 'admin', pass: 'pass' with administrator role
-- login: 'engin', pass: 'pass' with engineer restrictions
-- login: 'secret', pass: 'pass' with secretary restrictions
+- login: 'admin', pass: 'b' with administrator role
 
 ## License
 The MIT License (MIT)
