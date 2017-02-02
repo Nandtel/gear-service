@@ -96,68 +96,20 @@ public class ApplicationService {
         Authority boss = new Authority("ROLE_BOSS");
 
         User admin = new User();
-        admin.setUsername("parinov_a");
-        admin.setPassword(passwordEncoder().encode("hren"));
-        admin.setFullname("Паринов А.А.");
+        admin.setUsername("sirouga");
+        admin.setPassword(passwordEncoder().encode("12345"));
+        admin.setFullname("Калинюк С.В.");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
         userRepository.save(admin);
 
-        User kosoy = new User();
-        kosoy.setUsername("kositsky_a");
-        kosoy.setPassword(passwordEncoder().encode("hren"));
-        kosoy.setFullname("Косицкий А.В.");
-        kosoy.setEnabled(true);
-        kosoy.setAuthorities(new HashSet<>(asList(engineer.withUsername(kosoy))));
-        userRepository.save(kosoy);
-
-        User novik = new User();
-        novik.setUsername("novik_m");
-        novik.setPassword(passwordEncoder().encode("hren"));
-        novik.setFullname("Новик М.С.");
-        novik.setEnabled(false);
-        novik.setAuthorities(new HashSet<>(asList(engineer.withUsername(novik))));
-        userRepository.save(novik);
-
-        User levchenko = new User();
-        levchenko.setUsername("levchenko_d");
-        levchenko.setPassword(passwordEncoder().encode("hren"));
-        levchenko.setFullname("Левченко Д.А.");
-        levchenko.setEnabled(false);
-        levchenko.setAuthorities(new HashSet<>(asList(engineer.withUsername(levchenko))));
-        userRepository.save(levchenko);
-
-        User nechesa = new User();
-        nechesa.setUsername("nechesa_e");
-        nechesa.setPassword(passwordEncoder().encode("hren"));
-        nechesa.setFullname("Нечеса Е.М.");
-        nechesa.setEnabled(false);
-        nechesa.setAuthorities(new HashSet<>(asList(engineer.withUsername(nechesa))));
-        userRepository.save(nechesa);
-
-        User valikozz = new User();
-        valikozz.setUsername("alexeev_v");
-        valikozz.setPassword(passwordEncoder().encode("hren"));
-        valikozz.setFullname("Алексеев В.Ю.");
-        valikozz.setEnabled(true);
-        valikozz.setAuthorities(new HashSet<>(asList(engineer.withUsername(valikozz))));
-        userRepository.save(valikozz);
-
         User svetka = new User();
-        svetka.setUsername("moroz_s");
-        svetka.setPassword(passwordEncoder().encode("hren"));
-        svetka.setFullname("Мороз С.В.");
+        svetka.setUsername("svetik");
+        svetka.setPassword(passwordEncoder().encode("12345"));
+        svetka.setFullname("Светик С.В.");
         svetka.setEnabled(true);
         svetka.setAuthorities(new HashSet<>(asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
-
-        User yanka = new User();
-        yanka.setUsername("rudenko_y");
-        yanka.setPassword(passwordEncoder().encode("hren"));
-        yanka.setFullname("Руденко-Алексеева Я.А.");
-        yanka.setEnabled(true);
-        yanka.setAuthorities(new HashSet<>(asList(boss.withUsername(yanka))));
-        userRepository.save(yanka);
 
         ExchangeRate yesterday = new ExchangeRate();
         yesterday.setAddDate(LocalDate.now().minusDays(1).toString());
@@ -180,27 +132,6 @@ public class ApplicationService {
         dayBeforeYesterday.setUah(new BigDecimal("10"));
         exchangeRateRepository.save(dayBeforeYesterday);
 
-        ExchangeRate yesterday1 = new ExchangeRate();
-        yesterday1.setAddDate(LocalDate.now().plusDays(1).toString());
-        yesterday1.setEur(new BigDecimal("70"));
-        yesterday1.setUsd(new BigDecimal("70"));
-        yesterday1.setUah(new BigDecimal("70"));
-        exchangeRateRepository.save(yesterday1);
-
-        ExchangeRate tomorrow1 = new ExchangeRate();
-        tomorrow1.setAddDate(LocalDate.now().plusDays(2).toString());
-        tomorrow1.setEur(new BigDecimal("100"));
-        tomorrow1.setUsd(new BigDecimal("100"));
-        tomorrow1.setUah(new BigDecimal("100"));
-        exchangeRateRepository.save(tomorrow1);
-
-        ExchangeRate dayBeforeYesterday1 = new ExchangeRate();
-        dayBeforeYesterday1.setAddDate(LocalDate.now().plusDays(3).toString());
-        dayBeforeYesterday1.setEur(new BigDecimal("10"));
-        dayBeforeYesterday1.setUsd(new BigDecimal("10"));
-        dayBeforeYesterday1.setUah(new BigDecimal("10"));
-        exchangeRateRepository.save(dayBeforeYesterday1);
-
         OffsetDateTime now = OffsetDateTime.now();
 
         IntStream.range(0, 40).parallel()
@@ -220,7 +151,7 @@ public class ApplicationService {
                     repair.setCurrency("usd");
                     repair.setExchangeRate(yesterday);
                     repair.setType("repair");
-                    repair.setUser(kosoy);
+                    repair.setUser(admin);
 
                     Payment zip = new Payment();
                     zip.setCost(1);
@@ -234,7 +165,7 @@ public class ApplicationService {
                     repair2.setCurrency("rub");
                     repair2.setExchangeRate(dayBeforeYesterday);
                     repair2.setType("repair");
-                    repair2.setUser(kosoy);
+                    repair2.setUser(admin);
 
                     Payment prepayment = new Payment();
                     prepayment.setCost(1);
