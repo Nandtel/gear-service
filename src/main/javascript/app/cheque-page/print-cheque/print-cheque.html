@@ -9,19 +9,19 @@
     <tr class="narrowly">
         <td>
             <div class="text">
-                <img ng-show="spec.client" src="/images/logo.png">
+                <img ng-if="spec.client" src="/images/logo.png">
                 <div class="date-field text">Дата приема:
                     <span class="date">{{cheque.receiptDate | amDateFormat:'DD.MM.YYYY'}}</span>
-                    <span class="time" ng-show="spec.tech">{{cheque.receiptDate | amDateFormat:'HH:mm:ss'}}</span>
+                    <span class="time" ng-if="spec.tech">{{cheque.receiptDate | amDateFormat:'HH:mm:ss'}}</span>
                 </div>
-                <div ng-show="!!cheque.warrantyStatus" class="text">
+                <div ng-if="!!cheque.warrantyStatus" class="text">
                     Дата продажи: <span class="date">{{cheque.warrantyDate | amDateFormat:'DD.MM.YYYY'}}</span>
                 </div>
                 <div>
-                    <div ng-show="!!cheque.warrantyStatus" class="text">
+                    <div ng-if="!!cheque.warrantyStatus" class="text">
                         Принято для подтверждения гарантийного статуса: {{cheque.customerName}}
                     </div>
-                    <div ng-hide="!!cheque.warrantyStatus" class="text">
+                    <div ng-if="!!!cheque.warrantyStatus" class="text">
                         Принято на диагностику: {{cheque.customerName}}
                     </div>
                 </div>
@@ -29,7 +29,7 @@
         </td>
         <td class="center bold">Расписка: <span class="border bold cheque-number">№ {{cheque.id}}</span></td>
         <td class="center">
-            <div ng-show="spec.client">
+            <div ng-if="spec.client">
                 <div class="bold">Телефон:</div>
                 <div>062-213-00-43,</div>
                 <div>099-39-60-573,</div>
@@ -63,11 +63,11 @@
 
     <tr>
         <td class="border" colspan="2">Комплект: {{getComponents()}}</td>
-        <td class="border right" ng-show="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">{{$root.balance.estimatedCost}} руб.</span></td>
-        <td class="border right" ng-hide="!!cheque.warrantyStatus"><span ng-show="$root.balance.estimatedCost > 0">Ориентировочная стоимость: {{$root.balance.estimatedCost}} руб.</span></td>
+        <td class="border right" ng-if="!!cheque.warrantyStatus"><span ng-if="$root.balance.estimatedCost > 0">{{$root.balance.estimatedCost}} руб.</span></td>
+        <td class="border right" ng-if="!!!cheque.warrantyStatus"><span ng-if="$root.balance.estimatedCost > 0">Ориентировочная стоимость: {{$root.balance.estimatedCost}} руб.</span></td>
     </tr>
 
-    <tr class="narrowly" ng-show="spec.office || spec.client">
+    <tr class="narrowly" ng-if="spec.office || spec.client">
         <td colspan="3">
             <div class="text">
                 <div>Окончательная сумма ремонта согласовывается после диагностики, срок диагностики в теченнии 3-х рабочих дней</div>
@@ -78,7 +78,7 @@
         </td>
     </tr>
 
-    <tr ng-show="spec.office">
+    <tr ng-if="spec.office">
         <td class="grey border">Мастер</td>
         <td class="border" colspan="2">{{cheque.engineer.fullname}}</td>
     </tr>
@@ -93,23 +93,23 @@
         <td class="border" colspan="2">{{cheque.representativeName}}</td>
     </tr>
 
-    <tr ng-show="spec.office || spec.tech">
+    <tr ng-if="spec.office || spec.tech">
         <td class="grey border">Контактная информация</td>
         <td class="border" colspan="2">{{cheque.phoneNumber}} {{cheque.email}}</td>
     </tr>
 
-    <tr ng-show="spec.office || spec.tech">
+    <tr ng-if="spec.office || spec.tech">
         <td class="grey border">Адрес</td>
         <td class="border" colspan="2">{{cheque.address}}</td>
     </tr>
 
-    <tr ng-show="spec.client">
+    <tr ng-if="spec.client">
         <td class="grey border" colspan="3">
             Внимание! Для получения оборудования необходимо произвести оплату стоимости ремонта (работ), иметь при себе расписку.
         </td>
     </tr>
 
-    <tr ng-show="spec.client">
+    <tr ng-if="spec.client">
         <td colspan="3" class="sign">
             Получено из ремонта: "___________" _____________________________________ 20_______г. _____________________(Подпись)
         </td>
