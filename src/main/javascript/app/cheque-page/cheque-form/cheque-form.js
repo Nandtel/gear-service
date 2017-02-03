@@ -69,7 +69,7 @@ angular.module("mainModule")
 
             $scope.printCheque = function() {
                 $scope.printable = true;
-                $timeout(function() {window.print();}, 50);
+                $timeout(function() {window.print();}, 500);
             };
 
             $timeout(function() {
