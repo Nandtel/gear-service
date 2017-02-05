@@ -129,7 +129,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "style-src 'self' 'unsafe-inline'; " +
                     "img-src 'self' data:; " +
                     "connect-src 'self' ws://127.0.0.1:35729")
-                .and().addHeaderWriter(new StaticHeadersWriter("Referrer-Policy", "origin"));
+                .and().addHeaderWriter(new StaticHeadersWriter("Referrer-Policy", "no-referrer-when-downgrade"));
     }
 
     /**
