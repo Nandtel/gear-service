@@ -43,12 +43,12 @@ public class AnalyticsService {
     private static CellStyle dateStyle;
     private static int rowID = 1;
 
-    private static Function<Payment, Cheque> getPaymentsByCheque = payment -> payment.getBalance().getCheque();
-    private static Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
-    private static Predicate<Payment> getPaymentProfit = payment -> payment.getType().equalsIgnoreCase("repair");
-    private static Predicate<Payment> getPaymentWithPositivePaidStatus = payment -> payment.getBalance().getPaidStatus();
+    private static final Function<Payment, Cheque> getPaymentsByCheque = payment -> payment.getBalance().getCheque();
+    private static final Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
+    private static final Predicate<Payment> getPaymentProfit = payment -> payment.getType().equalsIgnoreCase("repair");
+    private static final Predicate<Payment> getPaymentWithPositivePaidStatus = payment -> payment.getBalance().getPaidStatus();
 
-    private static ToDoubleFunction<Payment> getCostInRub =
+    private static final ToDoubleFunction<Payment> getCostInRub =
             payment -> {
                 BigDecimal currency;
 
@@ -161,6 +161,10 @@ public class AnalyticsService {
                     List<Payment> payments = userListEntry.getValue();
                     Cheque cheque = payments.get(0).getBalance().getCheque();
 
+                    if (Objects.isNull(cheque.getReturnedToClientDate())) {
+                        return;
+                    }
+
                     double income = payments.stream()
                             .filter(getPaymentIncome)
                             .mapToDouble(getCostInRub)
@@ -178,6 +182,7 @@ public class AnalyticsService {
                             user.getFullname(),
                             income,
                             profit);
+
                 });
 
         resetRowId();

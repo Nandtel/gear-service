@@ -14,6 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * Class CustomErrorController is controller, that handle requests of cheques.
+ * Use RequestMapping for handle request from the client-side
+ * Class for forwarding to root, when error received
+ *
+ * @version 1.2
+ * @author Dmitry, Alexander
+ * @since 07.02.2017
+ */
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class CustomErrorController extends AbstractErrorController {
