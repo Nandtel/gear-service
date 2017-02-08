@@ -1,3 +1,10 @@
+/**
+ * This file contains factory auth to handle authentication methods.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
 	.factory('auth', function($rootScope, $http, $state, $q) {
 

@@ -1,3 +1,10 @@
+/**
+ * This file contains factory warning to handle warning notifications.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
     .factory('warning', function($rootScope, $http, $state, $mdDialog, gettextCatalog) {
 

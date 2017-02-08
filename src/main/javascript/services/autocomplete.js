@@ -1,3 +1,10 @@
+/**
+ * This file contains factory autocomplete to handle autocomplete methods.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
     .factory('autocomplete', function($rootScope, $http, $q) {
 
