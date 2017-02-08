@@ -1,3 +1,10 @@
+/**
+ * This file contains factory security to handle requests with permissions.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
     .service('security', function($rootScope, $http, $location, $state) {
 

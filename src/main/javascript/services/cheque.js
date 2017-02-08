@@ -1,3 +1,10 @@
+/**
+ * This file contains factory cheque to handle operations with cheque.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
     .factory('cheque', function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
 

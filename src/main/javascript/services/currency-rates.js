@@ -1,3 +1,10 @@
+/**
+ * This file contains factory currencyRatesService to handle operations with currency rates.
+ *
+ * @version 1.0
+ * @author Dmitry
+ * @since 08.02.2017
+ */
 angular.module('mainModule')
     .service('currencyRatesService', function(CacheFactory, $http, $q, $rootScope) {
             var currencyRatesCache;
