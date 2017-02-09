@@ -39,9 +39,25 @@
         background: #f2f2f2;
     }
 
+    table-data table tr.cheque.recent:hover {
+        background: #FFF9C4;
+    }
+
+    table-data table tr.cheque.delay:hover {
+        background: #FFE0B2;
+    }
+
     table-data .md-table-pagination {
         -webkit-justify-content: center;
         -ms-flex-pack: center;
         justify-content: center;
+    }
+
+    table-data .recent {
+        background: #FFFDE7;
+    }
+
+    table-data .delay {
+        background: #FFF3E0;
     }
 }

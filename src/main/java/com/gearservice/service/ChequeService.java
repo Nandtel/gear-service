@@ -5,6 +5,7 @@ import com.gearservice.repositories.jpa.*;
 import com.gearservice.repositories.mongo.PhotoRepository;
 import com.gearservice.model.request.RequestPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -135,7 +136,23 @@ public class ChequeService {
                 request.getPaidStatus(),
                 request.getWithoutRepair(),
                 pageable
-        );
+        ).map(source -> {
+            Boolean emptyDiagnostics = source.getDiagnostics().isEmpty();
+            Boolean hasDelay = emptyDiagnostics || source.getDiagnostics().stream()
+                    .map(Diagnostic::getDate)
+                    .max(OffsetDateTime::compareTo)
+                    .filter(date -> date.isBefore(OffsetDateTime.now().minusDays(30)))
+                    .isPresent();
+
+            if(emptyDiagnostics)
+                source.withRecencyStatus(true);
+
+            if(!source.isReadyStatus() && hasDelay)
+                source.withDelayStatus(true);
+
+            source.setDiagnostics(null);
+            return source;
+        });
     }
 
 //    /**

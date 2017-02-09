@@ -51,6 +51,12 @@ public class Cheque {
     @Version
     private Long version;
 
+    @Transient @JsonProperty
+    private Boolean chequeRecencyStatus = false;
+
+    @Transient @JsonProperty
+    private Boolean chequeDelayStatus = false;
+
     private int repairPeriod;
     private String customerName;
     private String productName;
@@ -180,6 +186,16 @@ public class Cheque {
         return this;
     }
 
+    public Cheque withRecencyStatus(Boolean status) {
+        this.setChequeRecencyStatus(status);
+        return this;
+    }
+
+    public Cheque withDelayStatus(Boolean status) {
+        this.setChequeDelayStatus(status);
+        return this;
+    }
+
     public void setId(Long id) {this.id = id;}
     public Long getId() {return id;}
     public Long getVersion() {return version;}
@@ -238,4 +254,9 @@ public class Cheque {
     public void setSecretary(User secretary) {this.secretary = secretary;}
     public Balance getBalance() {return balance;}
     public void setBalance(Balance balance) {this.balance = balance;}
+
+    public Boolean getChequeRecencyStatus() {return chequeRecencyStatus;}
+    public void setChequeRecencyStatus(Boolean chequeRecencyStatus) {this.chequeRecencyStatus = chequeRecencyStatus;}
+    public Boolean getChequeDelayStatus() {return chequeDelayStatus;}
+    public void setChequeDelayStatus(Boolean chequeDelayStatus) {this.chequeDelayStatus = chequeDelayStatus;}
 }
