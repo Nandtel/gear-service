@@ -138,7 +138,7 @@ public class ChequeService {
                 pageable
         ).map(source -> {
             Boolean emptyDiagnostics = source.getDiagnostics().isEmpty();
-            Boolean hasDelay = emptyDiagnostics || source.getDiagnostics().stream()
+            Boolean hasDelay = !emptyDiagnostics && source.getDiagnostics().stream()
                     .map(Diagnostic::getDate)
                     .max(OffsetDateTime::compareTo)
                     .filter(date -> date.isBefore(OffsetDateTime.now().minusDays(30)))
