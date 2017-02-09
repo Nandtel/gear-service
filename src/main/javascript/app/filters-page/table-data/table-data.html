@@ -26,7 +26,7 @@
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row class="cheque" ng-repeat="cheque in $root.page.content"
+            <tr md-row class="cheque" ng-repeat="cheque in $root.page.content" ng-class="{recent: cheque.chequeRecencyStatus, delay: cheque.chequeDelayStatus}"
                 ng-click="open($event, cheque.id)" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td md-cell>{{cheque.id}}</td>
                 <td md-cell>{{cheque.customerName}}</td>
