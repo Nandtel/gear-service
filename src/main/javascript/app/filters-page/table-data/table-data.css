@@ -40,11 +40,11 @@
     }
 
     table-data table tr.cheque.recent:hover {
-        background: #FFF9C4;
+        background: #CFD8DC;
     }
 
     table-data table tr.cheque.delay:hover {
-        background: #FFE0B2;
+        background: #B2EBF2;
     }
 
     table-data .md-table-pagination {
@@ -54,10 +54,10 @@
     }
 
     table-data .recent {
-        background: #FFFDE7;
+        background: #ECEFF1;
     }
 
     table-data .delay {
-        background: #FFF3E0;
+        background: #E0F7FA;
     }
 }

@@ -22,11 +22,12 @@
                 <th md-column md-order-by="warrantyDate">{{'Guarantee'| translate}}</th>
                 <th md-column md-order-by="readyDate">{{'Ready'| translate}}</th>
                 <th md-column md-order-by="returnedToClientDate">{{'Issued'| translate}}</th>
+                <th md-column md-order-by="actVisualInspection"></th>
 
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row class="cheque" ng-repeat="cheque in $root.page.content" ng-class="{recent: cheque.chequeRecencyStatus, delay: cheque.chequeDelayStatus}"
+            <tr md-row class="cheque" ng-repeat="cheque in $root.page.content"
                 ng-click="open($event, cheque.id)" ui-sref="cheque.edit({chequeId:cheque.id})">
                 <td md-cell>{{cheque.id}}</td>
                 <td md-cell>{{cheque.customerName}}</td>
@@ -40,6 +41,11 @@
                 <td md-cell>{{cheque.warrantyDate | amDateFormat:'DD.MM.YYYY'}}</td>
                 <td md-cell>{{cheque.readyDate | amDateFormat:'DD.MM.YYYY'}}</td>
                 <td md-cell>{{cheque.returnedToClientDate | amDateFormat:'DD.MM.YYYY'}}</td>
+                <td md-cell style="text-align:center; ">
+                    <md-icon ng-if="cheque.actVisualInspection" md-font-set="material-icons">shopping_cart</md-icon>
+                    <md-icon ng-if="cheque.chequeRecencyStatus" md-font-set="material-icons">visibility</md-icon>
+                    <md-icon ng-if="cheque.chequeDelayStatus" md-font-set="material-icons">error</md-icon>
+                </td>
             </tr>
             </tbody>
         </table>
