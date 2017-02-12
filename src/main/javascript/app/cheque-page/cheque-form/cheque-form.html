@@ -267,10 +267,14 @@
         </md-chips>
     </md-content>
 
-    <md-content layout-padding layout="row" layout-sm="column" layout-align="center center">
+    <md-content layout-padding layout="row" layout-sm="column" layout-align="space-between center">
+        <span style="visibility: hidden"></span>
         <md-button ng-click="syncCheque()" class="md-raised md-primary" type="button" ng-disabled="chequeForm.$invalid">
             <span translate>Modify Check</span>
         </md-button>
+        <md-checkbox ng-model="cheque.actVisualInspection" class="md-primary without-margin">
+            <md-icon md-font-set="material-icons">shopping_cart</md-icon>
+        </md-checkbox>
     </md-content>
 
 </form>
