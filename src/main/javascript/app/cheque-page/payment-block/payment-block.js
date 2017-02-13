@@ -26,7 +26,7 @@ angular.module("mainModule")
 
                 currencyRatesService.refreshCurrencyRate();
                 $scope.balance.payments.push(
-                    {cost: 0,
+                    {cost: 0, type: 'repair',
                         currency: 'rub',
                         exchangeRate: $rootScope.currencyRates,
                         user: $rootScope.user.principal});

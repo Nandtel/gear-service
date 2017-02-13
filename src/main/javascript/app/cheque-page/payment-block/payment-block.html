@@ -22,7 +22,7 @@
     <md-content layout-align="center start" class="payment-lines">
 
         <md-list class="comments-list">
-            <md-list-item class="md-3-line" ng-repeat="payment in balance.payments | orderBy: 'id'">
+            <md-list-item class="md-3-line" ng-repeat="payment in balance.payments | orderBy: '-id'">
 
                 <md-content layout="row" layout-align="start center" flex>
                     <payment-line payment="payment" paid="balance.paidStatus" flex="95"></payment-line>
