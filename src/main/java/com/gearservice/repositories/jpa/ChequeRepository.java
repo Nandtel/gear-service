@@ -23,7 +23,28 @@ import java.util.List;
  */
 public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
-    @EntityGraph(value = "cheque.full", type = EntityGraph.EntityGraphType.LOAD)
+    String searchQuery =  "SELECT c FROM Cheque c, Balance b, User e, User s " +
+            "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
+            "AND (c.id = :id OR :id IS NULL) " +
+            "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
+            "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
+            "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
+            "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
+            "AND (lower(c.customerName) LIKE concat('%', lower(:customerName), '%') OR :customerName IS NULL) " +
+            "AND (lower(c.productName) LIKE concat('%', lower(:productName), '%') OR :productName IS NULL) " +
+            "AND (lower(c.modelName) LIKE concat('%', lower(:modelName), '%') OR :modelName IS NULL) " +
+            "AND (lower(c.representativeName) LIKE concat('%', lower(:representativeName), '%') OR :representativeName IS NULL) " +
+            "AND (lower(s.fullname) LIKE concat('%', lower(:secretary), '%') OR :secretary IS NULL) " +
+            "AND (lower(e.fullname) LIKE concat('%', lower(:engineer), '%') OR :engineer IS NULL) " +
+            "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
+            "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
+            "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
+            "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
+            "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
+            "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) " +
+            "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ";
+
+    @EntityGraph(value = "cheque.open", type = EntityGraph.EntityGraphType.LOAD)
     Cheque findById(Long id);
 
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
@@ -74,26 +95,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
     List<String> listOfPhoneNumbers();
 
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
-    @Query(value = "SELECT c FROM Cheque c, Balance b, User e, User s " +
-                    "WHERE c.id = b.cheque AND c.engineer = e.username AND c.secretary = s.username " +
-                    "AND (c.id = :id OR :id IS NULL) " +
-                    "AND (c.receiptDate >= :introducedFrom OR :introducedFrom IS NULL) " +
-                    "AND (c.receiptDate <= :introducedTo OR :introducedTo IS NULL) " +
-                    "AND (c.returnedToClientDate >= :returnedToClientFrom OR :returnedToClientFrom IS NULL) " +
-                    "AND (c.returnedToClientDate <= :returnedToClientTo OR :returnedToClientTo IS NULL) " +
-                    "AND (lower(c.customerName) LIKE concat('%', lower(:customerName), '%') OR :customerName IS NULL) " +
-                    "AND (lower(c.productName) LIKE concat('%', lower(:productName), '%') OR :productName IS NULL) " +
-                    "AND (lower(c.modelName) LIKE concat('%', lower(:modelName), '%') OR :modelName IS NULL) " +
-                    "AND (lower(c.representativeName) LIKE concat('%', lower(:representativeName), '%') OR :representativeName IS NULL) " +
-                    "AND (lower(s.fullname) LIKE concat('%', lower(:secretary), '%') OR :secretary IS NULL) " +
-                    "AND (lower(e.fullname) LIKE concat('%', lower(:engineer), '%') OR :engineer IS NULL) " +
-                    "AND (c.phoneNumber LIKE %:phoneNumber% OR :phoneNumber IS NULL) " +
-                    "AND (c.serialNumber LIKE %:serialNumber% OR :serialNumber IS NULL) " +
-                    "AND (c.warrantyStatus = :warrantyStatus OR :warrantyStatus IS NULL) " +
-                    "AND (c.readyStatus = :readyStatus OR :readyStatus IS NULL) " +
-                    "AND (c.returnedToClientStatus = :returnedToClientStatus OR :returnedToClientStatus IS NULL) " +
-                    "AND (b.paidStatus = :paidStatus OR :paidStatus IS NULL) " +
-                    "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ")
+    @Query(value = searchQuery)
     Page<Cheque> findByRequest(
             @Param("id") Long id,
             @Param("introducedFrom") OffsetDateTime introducedFrom,
@@ -114,4 +116,26 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             @Param("paidStatus") Boolean paidStatus,
             @Param("withoutRepair") Boolean withoutRepair,
             Pageable pageable);
+
+    @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
+    @Query(value = searchQuery)
+    List<Cheque> findByRequest(
+            @Param("id") Long id,
+            @Param("introducedFrom") OffsetDateTime introducedFrom,
+            @Param("introducedTo") OffsetDateTime introducedTo,
+            @Param("returnedToClientFrom") OffsetDateTime returnedToClientFrom,
+            @Param("returnedToClientTo") OffsetDateTime returnedToClientTo,
+            @Param("customerName") String customerName,
+            @Param("productName") String productName,
+            @Param("modelName") String model,
+            @Param("serialNumber") String serialNumber,
+            @Param("representativeName") String representativeName,
+            @Param("phoneNumber") String phoneNumber,
+            @Param("secretary") String secretary,
+            @Param("engineer") String engineer,
+            @Param("warrantyStatus") Boolean warrantyStatus,
+            @Param("readyStatus") Boolean readyStatus,
+            @Param("returnedToClientStatus") Boolean returnedToClientStatus,
+            @Param("paidStatus") Boolean paidStatus,
+            @Param("withoutRepair") Boolean withoutRepair);
 }

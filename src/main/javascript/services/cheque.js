@@ -6,7 +6,7 @@
  * @since 08.02.2017
  */
 angular.module('mainModule')
-    .factory('cheque', function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _) {
+    .factory('cheque', function($rootScope, $http, $state, $q, warning, $mdToast, gettextCatalog, _, FileSaver) {
 
             $rootScope.cheque = {};
             $rootScope.balance = {payments: []};
@@ -150,6 +150,16 @@ angular.module('mainModule')
                 cleanDateIfOff: function (name, field) {
                     if (!($rootScope.cheque.hasOwnProperty(name) && $rootScope.cheque[field] === true))
                         $rootScope.cheque[name] = undefined;
+                },
+                getExcelAnalytics: function() {
+                    var currentFilter = _.omitBy($rootScope.currentFilter, _.isEmpty);
+
+                    $http.post('/api/analytics', currentFilter, {responseType: 'blob'})
+                        .success(function(data) {
+                            var analytics = new Blob([data],
+                                {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+                            FileSaver.saveAs(analytics, 'analytics.xlsx');
+                        });
                 }
             }
 

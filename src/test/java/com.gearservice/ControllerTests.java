@@ -1,12 +1,10 @@
 package com.gearservice;
 
-import com.gearservice.GearServiceApplication;
 import com.gearservice.controller.AnalyticsController;
 import com.gearservice.model.request.AnalyticsPreferences;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

@@ -28,6 +28,12 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NamedEntityGraphs({
         @NamedEntityGraph(name = "cheque.full", attributeNodes = {
+                @NamedAttributeNode("balance"),
+                @NamedAttributeNode("engineer"),
+                @NamedAttributeNode("secretary")
+
+        }),
+        @NamedEntityGraph(name = "cheque.open", attributeNodes = {
                 @NamedAttributeNode("components"),
                 @NamedAttributeNode("diagnostics"),
                 @NamedAttributeNode("notes")

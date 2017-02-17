@@ -1,6 +1,7 @@
 package com.gearservice.controller;
 
 import com.gearservice.model.request.AnalyticsPreferences;
+import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.service.AnalyticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,16 @@ public class AnalyticsController {
         this.analyticsService = analyticsService;
     }
 
-    @RequestMapping(value = "/api/analytics", method = RequestMethod.POST,
+    @RequestMapping(value = "/api/analytics1", method = RequestMethod.POST,
             produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     public byte[] getAnalytics(@RequestBody AnalyticsPreferences analyticsPreferences) {
         return analyticsService.getExcelFile(analyticsPreferences);
+    }
+
+    @RequestMapping(value = "/api/analytics", method = RequestMethod.POST,
+            produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    public byte[] getAnalytics(@RequestBody RequestPreferences request) {
+        return analyticsService.getExcelFile(request);
     }
 
 }
