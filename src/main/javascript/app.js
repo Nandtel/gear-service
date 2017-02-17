@@ -57,11 +57,6 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
                     template: '<dashboard></dashboard>',
                     data: {'selectedTab': 2, 'access':['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER']}
                 })
-                .state('cheque.analytics', {
-                    url: "^/analytics",
-                    template: '<analytics-page></analytics-page>',
-                    data: {'selectedTab': 3, 'access':['ROLE_ADMIN', 'ROLE_BOSS']}
-                })
                 .state('cheque.profile', {
                     url: "^/profile",
                     template: '<profile-page></profile-page>',
