@@ -47,10 +47,7 @@ public class AnalyticsService {
     private static CellStyle dateStyle;
     private static int rowID = 1;
 
-    private static final Function<Payment, Cheque> getPaymentsByCheque = payment -> payment.getBalance().getCheque();
     private static final Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
-    private static final Predicate<Payment> getPaymentProfit = payment -> payment.getType().equalsIgnoreCase("repair");
-    private static final Predicate<Payment> getPaymentWithPositivePaidStatus = payment -> payment.getBalance().getPaidStatus();
 
     private static final ToDoubleFunction<Payment> getCostInRub =
             payment -> {
@@ -75,136 +72,15 @@ public class AnalyticsService {
     }
 
     /**
-     * Method createRow creates row in excel document
-     * @param chequeID is cheque id
-     * @param receiptDate is receipt date
-     * @param returnedToClientDate is returned to client date
-     * @param brandName is brand name
-     * @param fullname of customer
-     * @param income of row
-     * @param profit of row
-     */
-    private static void createRow(Long chequeID, LocalDate receiptDate, LocalDate returnedToClientDate,
-                                  String brandName, String fullname, double income, double profit) {
-        Row row1 = sheet.createRow(rowID++);
-        Cell cell11 = row1.createCell(0);
-        cell11.setCellValue(chequeID);
-        Cell cell12 = row1.createCell(1);
-        cell12.setCellValue(Date.from(receiptDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        cell12.setCellStyle(dateStyle);
-        Cell cell13 = row1.createCell(2);
-        cell13.setCellValue(Date.from(returnedToClientDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        cell13.setCellStyle(dateStyle);
-        Cell cell14 = row1.createCell(3);
-        cell14.setCellValue(brandName);
-        Cell cell15 = row1.createCell(4);
-        cell15.setCellValue(fullname);
-        Cell cell16 = row1.createCell(5);
-        cell16.setCellStyle(rubleStyle);
-        cell16.setCellValue(income);
-        Cell cell17 = row1.createCell(6);
-        cell17.setCellValue(profit);
-        cell17.setCellStyle(rubleStyle);
-    }
-
-    /**
      * Method resetRowId reset caret of current row in excel document
      */
     private static void resetRowId() {rowID = 1;}
 
     /**
      * Method getExcelFile creates excel document with Apache POI, that contains necessary analytics
-     * @param analyticsPreferences of users request
+     * @param request represents preferences sent by user
      * @return array of bytes, that contains excel document with analytics inside
      */
-    @Transactional(readOnly = true)
-    public byte[] getExcelFile(AnalyticsPreferences analyticsPreferences) {
-        FileInputStream excel = null;
-        XSSFWorkbook wb = null;
-
-        try {
-            excel = new FileInputStream(new File("analytics.xlsx"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            wb = new XSSFWorkbook(excel);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        sheet = wb.getSheetAt(0);
-
-        rubleStyle = wb.createCellStyle();
-        DataFormat df = wb.createDataFormat();
-        rubleStyle.setDataFormat(df.getFormat("\u20BD#,#0.00"));
-
-        dateStyle = wb.createCellStyle();
-        CreationHelper createHelper = wb.getCreationHelper();
-        dateStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd.mm.yyyy"));
-
-        String findFrom =
-                Optional.ofNullable(analyticsPreferences.getFindFrom())
-                        .orElse(LocalDate.parse(exchangeRateRepository.findMaximumDistantDate())).toString();
-
-        String findTo =
-                Optional.ofNullable(analyticsPreferences.getFindTo())
-                        .orElse(LocalDate.now()).toString();
-
-        Map<Cheque, Map<User, List<Payment>>> map = paymentRepository.findByExchangeRateAddDateBetween(findFrom, findTo)
-                .stream()
-                .filter(getPaymentWithPositivePaidStatus)
-                .filter(getPaymentIncome)
-                .collect(groupingBy(getPaymentsByCheque, groupingBy(Payment::getUser)));
-
-        map.entrySet()
-                .stream()
-                .map(Map.Entry::getValue)
-                .flatMap(userListMap -> userListMap.entrySet().stream())
-                .forEach(userListEntry -> {
-                    User user = userListEntry.getKey();
-                    List<Payment> payments = userListEntry.getValue();
-                    Cheque cheque = payments.get(0).getBalance().getCheque();
-
-                    if (Objects.isNull(cheque.getReturnedToClientDate())) {
-                        return;
-                    }
-
-                    double income = payments.stream()
-                            .filter(getPaymentIncome)
-                            .mapToDouble(getCostInRub)
-                            .sum();
-
-                    double profit = payments.stream()
-                            .filter(getPaymentProfit)
-                            .mapToDouble(getCostInRub)
-                            .sum();
-
-                    createRow(cheque.getId(),
-                            cheque.getReceiptDate().toLocalDate(),
-                            cheque.getReturnedToClientDate().toLocalDate(),
-                            cheque.getModelName().split("\\.")[0],
-                            user.getFullname(),
-                            income,
-                            profit);
-
-                });
-
-        resetRowId();
-
-        ByteArrayOutputStream file = new ByteArrayOutputStream();
-
-        try {
-            wb.write(file);
-            file.close();
-            wb.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return file.toByteArray();
-    }
-
     @Transactional(readOnly = true)
     public byte[] getExcelFile(RequestPreferences request) {
         XSSFWorkbook wb = new XSSFWorkbook();

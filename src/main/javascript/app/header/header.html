@@ -4,11 +4,7 @@
         <md-tabs md-selected="selectedTab" class="at-right" md-dynamic-height md-border-bottom flex="45">
             <md-tab ui-sref="cheque.filter" id="filters" ng-disabled="!authenticated()">{{'Filters' | translate}}</md-tab>
             <md-tab ui-sref="cheque.create" ng-disabled="!authenticated()">{{'cheque' | translate}}</md-tab>
-            <md-tab ui-sref="cheque.dashboard" ng-disabled="!authenticated()"
-                    ng-if="security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS', 'ROLE_ENGINEER'])">{{'tasks' | translate}}</md-tab>
-            <md-tab ui-sref="cheque.analytics" ng-disabled="!authenticated()"
-                    ng-if="security.hasAnyRole(['ROLE_ADMIN', 'ROLE_BOSS'])">{{'analytics' | translate}}</md-tab>
-            <md-tab ui-sref="cheque.profile" ng-if="security.hasRole('ROLE_ADMIN')">Управление</md-tab>
+            <md-tab ui-sref="cheque.profile" ng-if="security.hasRole('ROLE_ADMIN')">{{'administration' | translate}}</md-tab>
             <!--<md-tab ng-if="!authenticated()">{{'login' | translate}}</md-tab>-->
         </md-tabs>
 
