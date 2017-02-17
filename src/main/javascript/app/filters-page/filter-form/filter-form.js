@@ -3,6 +3,7 @@ angular.module("mainModule")
         function ($rootScope, $scope, $http, $timeout, $mdDialog, gettextCatalog, $q, cheque, autocomplete) {
             $scope.filterForm = {};
             $scope.getAutocompleteData = autocomplete.getAutocompleteData;
+            $scope.getExcelAnalytics = cheque.getExcelAnalytics;
 
             /**
              * Method resetFilter add to filter necessary data for right displaying
