@@ -1,29 +1,27 @@
 package com.gearservice.service;
 
-import com.gearservice.model.authorization.User;
 import com.gearservice.model.cheque.*;
-import com.gearservice.model.request.AnalyticsPreferences;
 import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.repositories.jpa.ChequeRepository;
 import com.gearservice.repositories.jpa.ExchangeRateRepository;
 import com.gearservice.repositories.jpa.PaymentRepository;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.function.ToDoubleFunction;
 
-import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -47,11 +45,12 @@ public class AnalyticsService {
     private static CellStyle dateStyle;
     private static int rowID = 1;
 
-    private static final Predicate<Payment> getPaymentIncome = payment -> !payment.getType().equalsIgnoreCase("prepayment");
-
     private static final ToDoubleFunction<Payment> getCostInRub =
             payment -> {
                 BigDecimal currency;
+
+                if (payment.getType() == null || payment.getType().equalsIgnoreCase("prepayment"))
+                    return 0.0d;
 
                 switch(payment.getCurrency()) {
                     case "rub": currency = payment.getExchangeRate().getRub(); break;
@@ -112,6 +111,8 @@ public class AnalyticsService {
                 request.getPaidStatus(),
                 request.getWithoutRepair()
         )
+                .stream()
+                .sorted(Comparator.comparingLong(Cheque::getId))
                 .forEach(AnalyticsService::createRow);
 
         resetRowId();
@@ -198,10 +199,14 @@ public class AnalyticsService {
         cell.setCellValue(cheque.getSerialNumber());
 
         cell = row.createCell(7);
-        cell.setCellValue(cheque.getDefect());
+        if (cheque.getDefect() != null) {
+            cell.setCellValue(cheque.getDefect());
+        }
 
         cell = row.createCell(8);
-        cell.setCellValue(cheque.getSpecialNotes());
+        if (cheque.getSpecialNotes() !=  null) {
+            cell.setCellValue(cheque.getSpecialNotes());
+        }
 
         cell = row.createCell(9);
         if(!cheque.getComponents().isEmpty()) {
@@ -209,16 +214,24 @@ public class AnalyticsService {
         }
 
         cell = row.createCell(10);
-        cell.setCellValue(cheque.getRepresentativeName());
+        if (cheque.getRepresentativeName() != null) {
+            cell.setCellValue(cheque.getRepresentativeName());
+        }
 
         cell = row.createCell(11);
-        cell.setCellValue(cheque.getPhoneNumber());
+        if (cheque.getPhoneNumber() != null) {
+            cell.setCellValue(cheque.getPhoneNumber());
+        }
 
         cell = row.createCell(12);
-        cell.setCellValue(cheque.getAddress());
+        if (cheque.getAddress() != null) {
+            cell.setCellValue(cheque.getAddress());
+        }
 
         cell = row.createCell(13);
-        cell.setCellValue(cheque.getEmail());
+        if (cheque.getEmail() != null) {
+            cell.setCellValue(cheque.getEmail());
+        }
 
         cell = row.createCell(14);
         cell.setCellValue(cheque.getSecretary().getFullname());
@@ -227,23 +240,26 @@ public class AnalyticsService {
         cell.setCellValue(cheque.getEngineer().getFullname());
 
         cell = row.createCell(16);
-        if(cheque.getWarrantyDate() != null ) {
+        if(cheque.getWarrantyDate() != null) {
             cell.setCellValue(new Date(cheque.getWarrantyDate().toInstant().toEpochMilli()));
             cell.setCellStyle(dateStyle);
         }
         cell.setCellStyle(dateStyle);
 
         cell = row.createCell(17);
-        cell.setCellValue(cheque.getBalance().getEstimatedCost());
+        if (cheque.getBalance().getEstimatedCost() != 0) {
+            cell.setCellValue(cheque.getBalance().getEstimatedCost());
+        }
 
         cell = row.createCell(18);
-        cell.setCellValue(cheque
-                .getBalance()
-                .getPayments()
-                .stream()
-                .filter(getPaymentIncome)
-                .mapToDouble(getCostInRub)
-                .sum());
+        if(!cheque.getBalance().getPayments().isEmpty()) {
+            cell.setCellValue(cheque
+                    .getBalance()
+                    .getPayments()
+                    .stream()
+                    .mapToDouble(getCostInRub)
+                    .sum());
+        }
 
         cell = row.createCell(19);
         cell.setCellValue(cheque.getBalance().getPaidStatus() ? "Оплачен" : "Не оплачен");
@@ -259,7 +275,7 @@ public class AnalyticsService {
         }
 
         cell = row.createCell(22);
-        cell.setCellValue(cheque.isActVisualInspection() ? "Шоп" : "Барбершоп");
+        cell.setCellValue(cheque.isActVisualInspection() ? "Да" : "Нет");
 
         cell = row.createCell(23);
         cell.setCellValue(cheque.getRepairPeriod());
