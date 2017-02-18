@@ -1,5 +1,20 @@
 angular.module("mainModule")
-    .controller('PaymentLine', function($scope, $http, security) {
+    .controller('PaymentLine', function($scope, security, autocomplete) {
+
+            $scope.hasPrepayment = false;
+            $scope.types = [ 'repair' , 'zip', 'deliver', 'prepayment'];
+            $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
+            $scope.security = security;
+            $scope.users = [];
+
+            $scope.getUsers = function() {
+                autocomplete.getUsers()
+                    .then(function(data) {
+                        $scope.users = data;
+                    });
+            };
+
+            $scope.getUsers();
 
             $scope.$watch('payment.type', function(newValue, oldValue) {
                 $scope.hasPrepayment = newValue === 'prepayment';
@@ -16,19 +31,6 @@ angular.module("mainModule")
                 return $scope.payment.cost *
                     $scope.payment.exchangeRate[$scope.payment.currency] / $scope.payment.exchangeRate[currency];
             };
-
-            $scope.loadUsers = function() {
-                $http.get('/api/users')
-                    .success(function(data) {
-                        $scope.users = data;
-                    });
-            };
-
-            $scope.hasPrepayment = false;
-            $scope.types = [ 'repair' , 'zip', 'deliver', 'prepayment'];
-            $scope.currencies = ['eur', 'uah', 'usd', 'rub'];
-            $scope.security = security;
-
         }
     )
     .directive('paymentLine', [function() {

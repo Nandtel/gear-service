@@ -14,8 +14,11 @@
 
     <md-input-container flex="20" class="select-bottom-margin">
         <label>{{'master' | translate}}</label>
-        <md-select ng-model="payment.user" md-on-open="loadUsers()" placeholder="{{'master' | translate}}" ng-disabled="paymentLineDisabled">
-            <md-option ng-value="payment.user">{{payment.user.fullname}}</md-option>
+        <md-select ng-model="payment.user"
+                   md-on-open="loadUsers()"
+                   placeholder="{{'master' | translate}}"
+                   ng-model-options="{trackBy: '$value.username'}"
+                   ng-disabled="paymentLineDisabled">
             <md-option ng-value="user" ng-repeat="user in users">{{user.fullname}}</md-option>
         </md-select>
     </md-input-container>
