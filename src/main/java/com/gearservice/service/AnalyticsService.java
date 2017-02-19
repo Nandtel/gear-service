@@ -281,7 +281,7 @@ public class AnalyticsService {
         cell.setCellValue(cheque.getRepairPeriod());
 
         cell = row.createCell(24);
-        cell.setCellValue(cheque.isReadyStatus() ? "Готов" : cheque.isWithoutRepair() ? "Без ремонта" : "Не готов");
+        cell.setCellValue(cheque.isWithoutRepair() ? "Без ремонта" : cheque.isReadyStatus() ? "Готов" : "Не готов");
 
         cell = row.createCell(25);
         if(cheque.getReadyDate() != null ) {
