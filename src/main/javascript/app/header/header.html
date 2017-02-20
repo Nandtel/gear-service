@@ -1,11 +1,10 @@
 <md-content md-theme="header" layout="column" layout-align="space-between stretch" ng-show="authenticated()" class="toolbar">
 
     <md-content layout="row" layout-align="space-between end">
-        <md-tabs md-selected="selectedTab" class="at-right" md-dynamic-height md-border-bottom flex="45">
-            <md-tab ui-sref="cheque.filter" id="filters" ng-disabled="!authenticated()">{{'Filters' | translate}}</md-tab>
+        <md-tabs md-selected="selectedTab" md-dynamic-height md-border-bottom flex="50">
+            <md-tab ui-sref="cheque.filter" ng-disabled="!authenticated()">{{'Filters' | translate}}</md-tab>
             <md-tab ui-sref="cheque.create" ng-disabled="!authenticated()">{{'cheque' | translate}}</md-tab>
             <md-tab ui-sref="cheque.profile" ng-if="security.hasRole('ROLE_ADMIN')">{{'administration' | translate}}</md-tab>
-            <!--<md-tab ng-if="!authenticated()">{{'login' | translate}}</md-tab>-->
         </md-tabs>
 
         <md-content layout-align="center end" flex="30">
@@ -20,7 +19,7 @@
 
         </md-content>
 
-        <md-content layout-padding layout="row" layout-align="end end" flex="25" class="login-panel">
+        <md-content layout-padding layout="row" layout-align="end end" flex="20" class="login-panel">
             <span>{{profileName()}}</span>
             <md-button type="button" ng-if="authenticated()" ng-click="logout()" class="md-icon-button logout">
                 <md-icon md-font-set="material-icons" aria-label="exit_to_app">exit_to_app</md-icon>

@@ -60,6 +60,10 @@
         color: rgba(255, 255, 255, 0.8);
     }
 
+    header md-tab-item {
+        max-width: none !important;
+    }
+
 }
 
 @media all {

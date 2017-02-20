@@ -1,10 +1,11 @@
 angular.module("mainModule")
     .controller('CommentsBlock',
-        function($scope, $http, $document, $rootScope, security, warning, cheque) {
+        function($scope, $http, $document, $rootScope, security, warning, cheque, $timeout) {
             $scope.comment = undefined;
             $scope.add = 3;
             $scope.limit = 3;
             $scope.bottomButton = 'show more';
+            $scope.security = security;
 
             /**
              * Method saveComment create new comment object and send it to server-side and then set status of this
@@ -70,11 +71,12 @@ angular.module("mainModule")
                     $scope.bottomButton = 'show more';
             };
 
-            $scope.$watch('commentsForm.$dirty', function (newValue, oldValue) {
-                $scope.$parent.formDirty.comments = newValue;
-            });
-
-            $scope.security = security;
+            $timeout(function() {
+                $scope.commentsForm.$setPristine();
+                $scope.$watch('commentsForm.$dirty', function (newValue, oldValue) {
+                    $scope.$parent.formDirty.comments = newValue;
+                });
+            }, 1000);
         }
     )
     .directive('commentsBlock', [function() {
