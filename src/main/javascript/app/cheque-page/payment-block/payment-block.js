@@ -1,6 +1,6 @@
 angular.module("mainModule")
     .controller('PaymentBlock',
-        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, cheque, $state) {
+        function($rootScope, $scope, currencyRatesService, security, warning, $http, $mdToast, gettextCatalog, cheque, $state, $timeout) {
             $scope.hasPrepayment = false;
             $scope.balance = {payments: []};
 
@@ -59,9 +59,12 @@ angular.module("mainModule")
                 return sum;
             };
 
-            $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
-                $scope.$parent.formDirty.payment = newValue;
-            });
+            $timeout(function() {
+                $scope.paymentForm.$setPristine();
+                $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
+                    $scope.$parent.formDirty.payment = newValue;
+                });
+            }, 1000);
 
             $rootScope.$watch('balance', function (newValue, oldValue) {
                 if(newValue !== undefined) {
