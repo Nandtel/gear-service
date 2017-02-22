@@ -59,18 +59,24 @@ angular.module("mainModule")
                 return sum;
             };
 
-            $timeout(function() {
-                $scope.paymentForm.$setPristine();
-                $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
-                    $scope.$parent.formDirty.payment = newValue;
-                });
-            }, 1000);
-
             $rootScope.$watch('balance', function (newValue, oldValue) {
                 if(newValue !== undefined) {
                     $scope.balance = newValue;
                 }
+
+                $timeout(function() {
+                    if($scope.paymentForm != null) {
+                        $scope.paymentForm.$setPristine();
+                        $scope.paymentForm.$setUntouched();
+                    }
+                }, 500);
             });
+
+            $timeout(function() {
+                $scope.$watch('paymentForm.$dirty', function (newValue, oldValue) {
+                    $scope.$parent.formDirty.payment = newValue;
+                });
+            }, 1000);
 
         }
     )
