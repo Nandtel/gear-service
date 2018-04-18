@@ -46,9 +46,9 @@ public class ExchangeRate {
     public ExchangeRate getFromServer(String link, String tag) throws IOException {
         String[] elements = parseWebSite(link, tag);
 
-        this.setUsd(new BigDecimal(elements[2]));
-        this.setEur(new BigDecimal(elements[5]));
-        this.setUah(new BigDecimal(elements[8]));
+        this.setUsd(new BigDecimal(elements[0]));
+        this.setEur(new BigDecimal(elements[1]));
+        this.setUah(new BigDecimal(elements[2]));
 
         return this;
     }
@@ -62,7 +62,6 @@ public class ExchangeRate {
     private static String[] parseWebSite(String link, String tag) throws IOException {
             return Jsoup.connect(link)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
-                    .cookie("realauth", "SvBD85dINu3")
                     .get()
                     .select(tag)
                     .text()

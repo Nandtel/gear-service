@@ -75,8 +75,11 @@ public class ExchangeRateService {
     private ExchangeRate getExchangeRateFromServer() {
         ExchangeRate exchangeRate;
         try {
-            exchangeRate = new ExchangeRate().getFromServer("https://minfindnr.ru/", "div#kurs");
-        } catch (IOException e) {
+            exchangeRate = new ExchangeRate().getFromServer(
+                    "https://crb-dnr.ru/",
+                    "div.pane-exchange-rates div.views-field tr.odd td:nth-child(2)"
+            );
+        } catch (Exception e) {
             e.printStackTrace();
             exchangeRate = new ExchangeRate();
         }
