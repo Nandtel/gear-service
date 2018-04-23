@@ -20,8 +20,3 @@ matrix:
 
 allow_failures:
   - env: JDK='Oracle JDK 10'
-
-script:
-  - echo PATH = ${PATH}
-  - echo JAVA_HOME = ${JAVA_HOME}
-  - java -version
