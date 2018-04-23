@@ -15,8 +15,6 @@ cache:
 
 matrix:
   include:
-    - env: JDK='Oracle JDK 10'
-      jdk: oraclejdk10
     - env: JDK='OpenJDK 10'
       install: . ./install-jdk.sh -F 10 -L GPL
 
