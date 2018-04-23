@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -89,7 +90,7 @@ public class PhotoService {
      * @return photo's array of bytes as response entity
      */
     public ResponseEntity<byte[]> getPhotoByID(String photoID) {
-        Photo photo = photoRepository.findOne(photoID);
+        Photo photo = photoRepository.findById(photoID).orElseThrow(EntityNotFoundException::new);
 
         return ResponseEntity
                 .ok()
@@ -102,6 +103,6 @@ public class PhotoService {
      * Method deletePhotoByID delete photo by id from DB
      * @param photoID is id photo, that should be removed
      */
-    public void deletePhotoByID(String photoID) {photoRepository.delete(photoID);}
+    public void deletePhotoByID(String photoID) {photoRepository.deleteById(photoID);}
 
 }

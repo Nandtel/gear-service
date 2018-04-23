@@ -47,7 +47,7 @@ public class NoteService {
      */
     @Modifying
     @Transactional
-    public void deleteNote(Long chequeID, Long noteID) {noteRepository.delete(noteID);}
+    public void deleteNote(Long chequeID, Long noteID) {noteRepository.deleteById(noteID);}
 
     @Transactional(readOnly = true)
     public List<Note> getNotes(Long chequeID) {

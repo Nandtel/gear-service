@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import java.time.OffsetDateTime;
 import java.util.*;
 
@@ -55,7 +56,7 @@ public class ChequeService {
     @Modifying
     @Transactional
     public Cheque synchronizeCheque(@RequestBody Cheque cheque) {
-        Long ID = cheque.getId();
+        var ID = cheque.getId();
 
         if(cheque.getBalance().getCheque() == null)
             cheque.getBalance().setCheque(cheque);
@@ -65,7 +66,7 @@ public class ChequeService {
         if(ID == null)
             return chequeRepository.findFirstByOrderByIdDesc();
         else
-            return chequeRepository.findOne(ID);
+            return chequeRepository.findById(ID).orElseThrow(EntityNotFoundException::new);
     }
 
     /**
@@ -74,7 +75,9 @@ public class ChequeService {
      * @return Cheque, that client-side was request
      */
     @Transactional(readOnly = true)
-    public Cheque getCheque(@PathVariable Long chequeID) {return chequeRepository.findById(chequeID);}
+    public Cheque getCheque(@PathVariable Long chequeID) {
+        return chequeRepository.findById(chequeID).orElseThrow(EntityNotFoundException::new);
+    }
 
     /**
      * Method deleteCheque remove cheque from DB by id
@@ -83,7 +86,7 @@ public class ChequeService {
     @Modifying
     @Transactional
     public void deleteCheque(@PathVariable Long chequeID) {
-        chequeRepository.delete(chequeID);
+        chequeRepository.deleteById(chequeID);
         photoRepository.deleteByChequeId(chequeID.toString());
     }
 

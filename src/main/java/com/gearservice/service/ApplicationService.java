@@ -184,13 +184,13 @@ public class ApplicationService {
                     cheque.setBalance(balance);
                     balanceRepository.save(balance);
 
-                    diagnosticRepository.save(SampleDataService.getSetConsistFrom(
+                    diagnosticRepository.saveAll(SampleDataService.getSetConsistFrom(
                             o -> new Diagnostic()
                                     .withRandomData()
                                     .withUser(admin)
                                     .withCheque(cheque)));
 
-                    noteRepository.save(SampleDataService.getSetConsistFrom(
+                    noteRepository.saveAll(SampleDataService.getSetConsistFrom(
                             o -> new Note()
                                     .withRandomData()
                                     .withUser(admin)

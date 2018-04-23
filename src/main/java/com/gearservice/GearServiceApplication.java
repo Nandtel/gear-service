@@ -41,7 +41,7 @@ public class GearServiceApplication {
     @Profile({"dev", "docker", "heroku"})
     CommandLineRunner init() {
         return args -> {
-            if (!userRepository.exists("admin")) {
+            if (!userRepository.existsById("admin")) {
                 Authority administrator = new Authority("ROLE_ADMIN");
                 User admin = new User();
                 admin.setUsername("admin");

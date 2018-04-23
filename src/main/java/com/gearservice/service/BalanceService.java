@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+
 /**
  * Class BalanceService is service, that handle BalanceController.
  * Use @Autowired for connect to necessary repositories
@@ -47,11 +50,10 @@ public class BalanceService {
     @Modifying
     @Transactional
     public Balance synchronizeBalanceOfCheque(Long chequeID, Balance balance) {
-
-        Cheque cheque = chequeRepository.findOne(chequeID);
+        Cheque cheque = chequeRepository.findById(chequeID).orElseThrow(EntityNotFoundException::new);
 
         if (balance.getPayments() != null)
-            balance.getPayments().stream().forEach(payment -> payment.setBalance(balance));
+            balance.getPayments().forEach(payment -> payment.setBalance(balance));
 
         balance.setCheque(cheque);
         balanceRepository.save(balance);

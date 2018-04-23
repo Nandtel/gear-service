@@ -1,9 +1,10 @@
+sudo: false
+dist: trusty
 language: java
-jdk:
-  - oraclejdk8
 
 before_install:
   - chmod +x gradlew
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -11,3 +12,18 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+matrix:
+  include:
+    - env: JDK='Oracle JDK 10'
+      jdk: oraclejdk10
+    - env: JDK='OpenJDK 10'
+      install: . ./install-jdk.sh -F 10 -L GPL
+
+allow_failures:
+  - env: JDK='Oracle JDK 10'
+
+script:
+  - echo PATH = ${PATH}
+  - echo JAVA_HOME = ${JAVA_HOME}
+  - java -version

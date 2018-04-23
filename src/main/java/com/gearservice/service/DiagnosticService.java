@@ -46,7 +46,7 @@ public class DiagnosticService {
     @Modifying
     @Transactional
     public void deleteDiagnostic(Long chequeID, Long diagnosticID) {
-        diagnosticRepository.delete(diagnosticID);
+        diagnosticRepository.deleteById(diagnosticID);
     }
 
     @Transactional(readOnly = true)

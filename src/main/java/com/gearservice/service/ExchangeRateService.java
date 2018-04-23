@@ -40,10 +40,10 @@ public class ExchangeRateService {
     public ExchangeRate getCurrencyRates() {
         String now = LocalDate.now().toString();
 
-        if(!exchangeRateRepository.exists(now))
+        if(!exchangeRateRepository.existsById(now))
             return getExchangeRateFromServer();
         else
-            return exchangeRateRepository.findOne(now);
+            return exchangeRateRepository.getOne(now);
     }
 
     /**
@@ -84,6 +84,6 @@ public class ExchangeRateService {
             exchangeRate = new ExchangeRate();
         }
         exchangeRateRepository.save(exchangeRate);
-        return exchangeRateRepository.findOne(LocalDate.now().toString());
+        return exchangeRateRepository.getOne(LocalDate.now().toString());
     }
 }
