@@ -1,8 +1,6 @@
 sudo: false
 dist: trusty
 language: java
-jdk:
-  - oraclejdk10
 
 before_install:
   - chmod +x gradlew
