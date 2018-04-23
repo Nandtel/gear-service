@@ -1,8 +1,8 @@
 package com.gearservice.config;
 
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -20,12 +20,13 @@ import org.springframework.http.HttpStatus;
 class ErrorConfiguration {
 
     @Bean
-    public EmbeddedServletContainerCustomizer notFoundCustomizer(){return new NotFoundIndexTemplate();}
+    public WebServerFactoryCustomizer notFoundCustomizer(){return new NotFoundIndexTemplate();}
 
-    private static class NotFoundIndexTemplate implements EmbeddedServletContainerCustomizer {
+    private static class NotFoundIndexTemplate implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
+
         @Override
-        public void customize(ConfigurableEmbeddedServletContainer container) {
-            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/"));
+        public void customize(TomcatServletWebServerFactory factory) {
+            factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/"));
         }
     }
 

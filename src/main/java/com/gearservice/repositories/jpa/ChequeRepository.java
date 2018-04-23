@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface ChequeRepository
@@ -45,7 +46,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
             "AND (c.withoutRepair = :withoutRepair OR :withoutRepair IS NULL) ";
 
     @EntityGraph(value = "cheque.open", type = EntityGraph.EntityGraphType.LOAD)
-    Cheque findById(Long id);
+    Optional<Cheque> findById(Long id);
 
     @EntityGraph(value = "cheque.preview", type = EntityGraph.EntityGraphType.LOAD)
     @Override
@@ -53,7 +54,7 @@ public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
     @EntityGraph(value = "cheque.general", type = EntityGraph.EntityGraphType.LOAD)
     @Override
-    Cheque findOne(Long id);
+    Cheque getOne(Long id);
 
     @Query(value = "SELECT * FROM cheque c LEFT JOIN balance b ON b.cheque_id = c.id " +
             "WHERE b.paid_status = FALSE AND c.id IN ( " +

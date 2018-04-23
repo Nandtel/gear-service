@@ -50,8 +50,8 @@ public class UserService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findOne(username);
-        if(user == null) throw new UsernameNotFoundException("No user found for username '" + username +"'.");
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException("No user found for username '" + username +"'."));
         return new UserDetailsImpl(user);
     }
 
@@ -67,15 +67,18 @@ public class UserService implements UserDetailsService {
      */
     public void saveUser(User user) {
 
-        if (userRepository.exists(user.getUsername())) {
+        if (userRepository.existsById(user.getUsername())) {
 
-            User userFromDB = userRepository.findOne(user.getUsername());
+            User userFromDB = userRepository.findById(user.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("No user found for username '" + user.getUsername() +"'."));
 
             if (user.getNewPassword() == null) {
                 user.setPassword(userFromDB.getPassword());
             }
             else if (user.getAdminPassword() != null &&
-                    passwordEncoder().matches(user.getAdminPassword(), userRepository.findOne("parinov_a").getPassword())) {
+                    passwordEncoder().matches(user.getAdminPassword(), userRepository.findById("parinov_a")
+                            .map(User::getPassword)
+                            .orElseThrow(() -> new UsernameNotFoundException("No user found for username '" + user.getUsername() +"'.")))) {
                 String password = user.getNewPassword();
                 user.setPassword(passwordEncoder().encode(password));
             }
