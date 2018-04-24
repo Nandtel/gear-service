@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ExchangeRateService {
         if(!exchangeRateRepository.existsById(now))
             return getExchangeRateFromServer();
         else
-            return exchangeRateRepository.getOne(now);
+            return exchangeRateRepository.findById(now).orElseThrow(EntityNotFoundException::new);
     }
 
     /**
@@ -84,6 +85,6 @@ public class ExchangeRateService {
             exchangeRate = new ExchangeRate();
         }
         exchangeRateRepository.save(exchangeRate);
-        return exchangeRateRepository.getOne(LocalDate.now().toString());
+        return exchangeRateRepository.findById(LocalDate.now().toString()).orElseThrow(EntityNotFoundException::new);
     }
 }
