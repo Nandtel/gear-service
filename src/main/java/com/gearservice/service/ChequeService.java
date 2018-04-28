@@ -1,11 +1,11 @@
 package com.gearservice.service;
 
-import com.gearservice.model.cheque.*;
+import com.gearservice.model.cheque.Cheque;
+import com.gearservice.model.cheque.Diagnostic;
+import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.repositories.jpa.*;
 import com.gearservice.repositories.mongo.PhotoRepository;
-import com.gearservice.model.request.RequestPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,10 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.List;
 
 /**
  * Class ChequeService is service, that handle ChequeController

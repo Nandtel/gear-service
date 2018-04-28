@@ -45,7 +45,7 @@ dependencies {
     compile 'javax.xml.bind:jaxb-api:2.3.0'
     runtime 'org.springframework.boot:spring-boot-devtools'
     runtime 'org.mongodb:mongo-java-driver:3.6.3'
-    runtime 'mysql:mysql-connector-java:5.1.46'
+    runtime 'mysql:mysql-connector-java:8.0.11'
     runtime 'com.h2database:h2'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
