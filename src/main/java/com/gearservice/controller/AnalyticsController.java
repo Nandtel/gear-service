@@ -1,10 +1,12 @@
 package com.gearservice.controller;
 
-import com.gearservice.model.request.AnalyticsPreferences;
 import com.gearservice.model.request.RequestPreferences;
 import com.gearservice.service.AnalyticsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Class AnalyticsController is controller, that handle analytical requests.
